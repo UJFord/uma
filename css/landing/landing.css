@@ -1,5 +1,5 @@
 /* fonts */
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;600&family=Pacifico&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;600;800&family=Pacifico&display=swap');
 
 *{
     margin: 0;
@@ -18,8 +18,8 @@ body{
     font-weight: 400;
     font-size: 18px;
     width: 100%;
-    /* min-width: 820px; */
-    /* max-width: 3000px; */
+    min-width: 900px;
+    max-width: 3000px;
     /* height: 2000px; */
     color: #000;
 }
@@ -190,7 +190,7 @@ a{
 
         /* left */
         #plink-column-left{
-            flex: 2;
+            flex: 3;
             padding: 20px;
             display: flex;
                 flex-direction: column;
@@ -232,6 +232,9 @@ a{
                         z-index: 1;
                         padding: 10px 0 10px 20px;
                         flex: 4;
+                        display: flex;
+                            justify-content: center;
+                            flex-direction: column;
                     }
                         .plink-gentitle{
                             border-bottom: #c9cc03 1px solid;
@@ -245,7 +248,7 @@ a{
                         } */
                     /* arrow */
                     .arrow-container{
-                        /* border: cyan soli d 1px; */
+                        /* border: cyan solid 1px; */
                         color: #ffffff;
                         z-index: 1;
                         flex: 1;
@@ -291,5 +294,192 @@ a{
         #plink-column-right{
             flex: 1;
             /* background-color: #ddd; */
-            padding: 10px;
+            padding: 20px 40px 20px 0px;
+            display: flex;
+                /* justify-content: center; */
+                align-items: center;
+                flex-direction: column;
         }
+
+            /* all child */
+            .right-column-element, .right-column-element-other{
+                background: #F1F4F8;
+                margin: 30px 60px 30px 0;
+                min-width: 200px;
+                width: 90%;
+                max-width: 800px;
+            }
+
+            /* search on site */
+            #search-site-container{
+                display: flex;
+                    flex-direction: row;
+                    justify-content: center;
+                    align-items: center;
+                    aspect-ratio: 4 / 1;
+                max-height: 150px;
+            }
+                /* in-container */
+                #search-site-in-container{
+                    width: 80%;
+                    background: #fff;
+                    border: #CFE0FD 1px solid;
+                        border-radius: 5px;
+                    margin: 40px 20px;
+                    overflow: hidden;
+                    display: flex;
+                        justify-content: center;
+                    max-height: 100px;
+                }
+                    /* bar */
+                    #search-site-in-container input {
+                        /* border: 1px red solid; */
+                        width: 80%;
+                        border: 0;
+                        padding: 5%;
+                        font-size: 20px;
+                        font-weight: 300;
+                    }
+                        /* remove focus border */
+                        #search-site-in-container input:focus{
+                            outline: none;
+                        }
+                    /* icon */
+                    #search-icon{
+                        background: #49A760;
+                        border-radius: 5px;
+                        margin: 1%;
+                        width: 20%;
+                        aspect-ratio: 1/1;
+                        display: flex;
+                            justify-content: center;
+                            align-items: center;
+                    }
+
+            .right-column-element-other{
+                padding: 20px;
+            }
+                .right-column-element-other h4{
+                    font-size: 25px;
+                    font-weight: 800;
+                }
+                .right-column-element-other hr{
+                    width: 15%;
+                    height: 3px;
+                    border: none; 
+                    background-color: #49A760;
+                    margin: 10px 0;
+                }
+            
+            /* tags */
+            /* #tags-container{
+                
+            } */
+                /* list */
+                #tags-list{
+                    display: flex;
+                        flex-flow: row wrap;
+                }
+                    /* items */
+                    .tag-list-item{
+                        margin: 5px;
+                        background: #fff;
+                        padding: 5px 10px;
+                        border-radius: 20px; 
+                    }
+                    
+            /* follow us */
+            /* #follow-us-container{
+                
+            } */
+                /* list */
+                #social-list{
+                    display: flex;
+                    flex-flow: row wrap;
+                }
+                    /* items */
+                    .social-list-item{
+                        /* flex: 1; */
+                        /* aspect-ratio: 1/1; */
+                        /* width: 1px; */
+                        margin: 10px;
+                        background: #fff;
+                        /* padding: 5px 10px; */
+                    }
+                    
+footer{
+    position: relative;
+    background: #1F4E3D;
+    display: flex;
+    padding-bottom: 80px;
+    width: 100%;
+        min-width: 900px;
+        max-width: 3000px;
+    color: #fff;
+    font-size: 14px;
+}
+    .foot-item{
+        flex: 1;
+        margin: 30px 20px 0 20px;
+    }
+
+    /* logo */
+    #foot-logo{
+        border-right: #9D9D9D 3px solid;
+        flex: 2;
+        padding: 0 40px;
+    }
+
+        /* footicon */
+        #foot-icon{
+            background-image: url("../../img/logo/travis-logo-white.svg");
+                background-size: cover;
+                background-position: center;
+            width: 150px;
+            aspect-ratio: 16/9;
+        }
+
+    .foot-item h3{
+        color: #F7C35F;
+        margin-bottom: 10px;
+        font-size: 18px;
+    }
+        .foot-item li{
+            margin-bottom: 5px;
+        }
+
+    /* foot updates */
+    .foot-item h6{
+        color: #F7C35F;
+        margin-bottom: 3px;
+    }
+        #foot-updates li{
+            margin-bottom: 10px;
+        }
+
+    /* contacts */
+    #foot-contact i{
+        margin-right: 10px;
+    }
+
+    /* copyright */
+    #copyright{
+        margin: 0;
+        position: absolute;
+        background: #1A4133;
+        bottom: 0;
+        left: 0;
+        width: 80%;
+        border-radius: 0 30px 0 0;
+        padding: 20px 10px 20px 60px;
+        display: flex;
+            justify-content: space-between;
+            flex-direction: row;
+    }
+        #copyright div{
+            flex: 1;
+        }
+        #copyright a{
+            flex: 0 0 10%;
+        }
+
