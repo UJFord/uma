@@ -179,7 +179,10 @@ a{
         }
         /* lower */
         #lowerbrush{
-            display: none;
+            top: 20px;
+            left: 100%;
+            transform: translate(-100%, -100%) rotate(180deg);
+            padding: 10px;
         }
 
     /* columns */
@@ -410,18 +413,36 @@ a{
 footer{
     position: relative;
     background: #1F4E3D;
+        background-image: url('../../img/bg/footer-bg.png'), url('../../img/bg/leaf\ .png');
+        background-repeat: no-repeat, no-repeat;
+        background-position: left, right bottom;
+        background-size: 50% 100%, 300px 300px;
     display: flex;
-    padding-bottom: 80px;
+    padding: 20px 100px 80px 100px;
     width: 100%;
         min-width: 900px;
         max-width: 3000px;
     color: #fff;
     font-size: 14px;
 }
+    /* put gradient */
+    footer::before{
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: linear-gradient(to top right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.5));
+    }
+
     .foot-item{
         flex: 1;
         margin: 30px 20px 0 20px;
     }
+        .foot-item, #copyright{
+            z-index: 1;
+        }
 
     /* logo */
     #foot-logo{
@@ -471,7 +492,7 @@ footer{
         left: 0;
         width: 80%;
         border-radius: 0 30px 0 0;
-        padding: 20px 10px 20px 60px;
+        padding: 20px 10px 20px 160px;
         display: flex;
             justify-content: space-between;
             flex-direction: row;
