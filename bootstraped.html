@@ -32,7 +32,7 @@
     </head>
     <body>
         <!-- Navbar -->
-        <nav class="navbar navbar-expand-lg bg-success navbar-dark">
+        <nav class="navbar sticky-top navbar-expand-lg bg-success navbar-dark">
             <div class="container">
                 <a href="#" class="navbar-brand">
                     <img
@@ -519,13 +519,12 @@
         <footer
             class="text-white pt-5"
             style="
-                background: rgb(15, 15, 15);
-                background: linear-gradient(
-                    200deg,
-                    rgba(15, 15, 15, 1) 0%,
-                    rgba(22, 43, 35, 1) 9%,
-                    rgba(31, 78, 61, 1) 100%
-                );
+                background: #1f4e3d;
+                background-image: url('../../img/bg/footer-bg.png'),
+                    url('../../img/bg/leaf\ .png');
+                background-repeat: no-repeat, no-repeat;
+                background-position: left bottom, right bottom;
+                background-size: 500px 250px, 300px 300px;
             "
         >
             <div class="container">
@@ -630,15 +629,27 @@
                         </ul>
                     </div>
                 </div>
-            </div>
 
-            <div
-                class="text-center p-3 col-md-10 col-lg-8"
-                style="background: #245a46; border-top-right-radius: 30px"
-            >
-                <p class="mb-0">
-                    Copyright © 2022 Travis. All rights reserved.
-                </p>
+                <div
+                    class="text-center py-3 px-5 row rounded-top-5"
+                    style="background: #1A4133"
+                >
+                    <a
+                        href="#"
+                        class="order-md-3 p-2 col-0 col-md-2 col-lg-1 link-light link-offset-3 link-underline-light link-underline-opacity-2-light"
+                        >Terms</a
+                    >
+                    <a
+                        href="#"
+                        class="order-md-2 p-2 col-0 col-md-2 col-lg-1 link-light link-offset-3 link-underline-light link-underline-opacity-2-light"
+                        >Support</a
+                    >
+                    <div
+                        class="order-md-1 p-2 col-12 col-md-8 col-lg-10 text-md-start"
+                    >
+                        Copyright © 2023 Travis. All rights reserved.
+                    </div>
+                </div>
             </div>
         </footer>
 
