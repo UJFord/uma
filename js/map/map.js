@@ -1,6 +1,28 @@
-var map = L.map('map').setView([51.505, -0.09], 13);
+var map = L.map("map").setView([5.9267, 124.9948], 11);
 
-L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
     maxZoom: 19,
-    attribution: '© OpenStreetMap'
+    minZoom: 0,
+    attribution: "© OpenStreetMap",
 }).addTo(map);
+
+
+/* Map Zoom Control Positioning */
+    function addControlPlaceholders(map) {
+        var corners = map._controlCorners,
+            l = 'leaflet-',
+            container = map._controlContainer;
+
+        function createCorner(vSide, hSide) {
+            var className = l + vSide + ' ' + l + hSide;
+
+            corners[vSide + hSide] = L.DomUtil.create('div', className, container);
+        }
+
+        createCorner('verticalcenter', 'left');
+        createCorner('verticalcenter', 'right');
+    }
+    addControlPlaceholders(map);
+
+    // Change the position of the Zoom Control to a newly created placeholder.
+    map.zoomControl.setPosition('verticalcenterright');
