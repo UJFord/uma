@@ -26,3 +26,10 @@ L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
 
     // Change the position of the Zoom Control to a newly created placeholder.
     map.zoomControl.setPosition('verticalcenterright');
+
+
+// Tags overflow
+$('.toggle').click(function(){
+    $('.nav').toggleClass("justify-content-end");
+    $('.toggle').toggleClass("text-light");
+});

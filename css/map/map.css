@@ -6,7 +6,6 @@
 
 body {
     background: #807f7f;
-    min-width: 100;
     min-height: 100dvh;
     position: relative;
 }
@@ -15,6 +14,24 @@ body {
 body *:not(body) {
     z-index: 1;
 }
+
+/* Search */
+    /* menu search */
+    #list_search:hover{
+        -webkit-text-stroke: 1px; 
+    }
+
+    /* map search */
+    #map_search{
+        /* border: 1px red solid; */
+        min-width: 400px;
+    }
+/* TAGS */
+#search-tags{
+    max-height: 38px;
+    max-width: 400px;
+}
+    
 
 /* Map */
 #map {
@@ -26,6 +43,7 @@ body *:not(body) {
     left: 0;
     z-index: 0;
 }
+
 
 /* Map Zoom Control Positioning */
 .leaflet-verticalcenter {
