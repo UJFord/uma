@@ -1,42 +1,47 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
 }
 
 body {
-    background: #807f7f;
-    min-width: 100;
-    min-height: 100dvh;
-    position: relative;
+	background: #807f7f;
+	min-width: 100;
+	min-height: 100dvh;
+	position: relative;
 }
 
 /* to raise everythin above the map */
 body *:not(body) {
-    z-index: 1;
+	z-index: 1;
+}
+
+/* SEARCH */
+#search-map {
+	min-width: 350px;
 }
 
 /* Map */
 #map {
-    min-height: 100dvh;
-    min-width: 100dvw;
-    border: 1px red solid;
-    position: absolute;
+	min-height: 100dvh;
+	min-width: 100dvw;
+	border: 1px red solid;
+	position: absolute;
     top: 0;
-    left: 0;
-    z-index: 0;
+	left: 0;
+	z-index: 0;
 }
 
 /* Map Zoom Control Positioning */
 .leaflet-verticalcenter {
-    position: absolute;
-    z-index: 1000;
-    pointer-events: none;
-    bottom: 0%; /* possible because the placeholder's parent is the map */
-    transform: translateY(-50%); /* using the CSS3 Transform technique */
-    padding-top: 10px;
+	position: absolute;
+	z-index: 1000;
+	pointer-events: none;
+	bottom: 0%; /* possible because the placeholder's parent is the map */
+	transform: translateY(-50%); /* using the CSS3 Transform technique */
+	padding-top: 10px;
 }
 
 .leaflet-verticalcenter .leaflet-control {
-    margin-bottom: 10px;
+	margin-bottom: 10px;
 }
