@@ -1,0 +1,13 @@
+.carousel-image {
+    height: 120vw;
+    max-height: 400px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.nav-link-image {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
