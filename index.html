@@ -37,7 +37,7 @@
                 <!-- search -->
                 <div id="nav-search" class="p-2 rounded-pill w-auto">
                     <i class="bi bi-search m-2"></i>
-                    <input type="text" placeholder="Searc Uma">
+                    <input type="text" placeholder="Search Uma">
                 </div>
 
                 <button
@@ -69,7 +69,7 @@
         </nav>
 
         <!-- Showcase -->
-        <section class="" style="max-height: 500px">
+        <section id="main-showcase" class="position-relative">
             <div
                 id="carouselExampleCaptions"
                 class="carousel slide h-10"
@@ -105,7 +105,7 @@
                                 background-image: url('https://images.unsplash.com/photo-1593480092626-cd38b2fc2e10?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1149&q=80');
                             "
                         ></div>
-                        <div class="carousel-caption d-none d-md-block">
+                        <div class="carousel-caption d-none d-md-block text-start">
                             <h5>Harvesting Excellence, One Crop at a Time</h5>
                             <p>
                                 We strive for agricultural excellence, nurturing each crop with care and dedication.
@@ -117,9 +117,10 @@
                             class="carousel-image"
                             style="
                                 background-image: url('https://images.unsplash.com/photo-1609553868429-3d75802809d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1176&q=80');
+                                
                             "
                         ></div>
-                        <div class="carousel-caption d-none d-md-block">
+                        <div class="carousel-caption d-none d-md-block text-start">
                             <h5>Rooted in Tradition, Growing for the Future</h5>
                             <p>
                                 Our farming heritage fuels our commitment to sustainable growth and innovation.
@@ -133,7 +134,7 @@
                                 background-image: url('https://images.unsplash.com/photo-1660903014788-8339c3120915?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1330&q=80');
                             "
                         ></div>
-                        <div class="carousel-caption d-none d-md-block">
+                        <div class="carousel-caption d-none d-md-block text-start">
                             <h5>Where Agriculture Meets Innovation</h5>
                             <p>
                                 We blend the time-honored practices of agriculture with cutting-edge innovations to optimize crop production.
@@ -166,10 +167,13 @@
                     <span class="visually-hidden">Next</span>
                 </button>
             </div>
+
+            <!-- brush -->
+            <div class="brush position-absolute bottom-0 end-0 w-100"></div>
         </section>
 
         <!-- Navigation Cards -->
-        <section class="my-5">
+        <section id="nav-cards" class="my-5">
             <div class="container">
                 <div class="row">
                     <!-- nav cards -->

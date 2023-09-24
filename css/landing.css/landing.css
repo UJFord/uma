@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;700&family=Pacifico&display=swap');
+
 * {
 	margin: 0;
 	padding: 0;
@@ -6,6 +8,8 @@
 
 body {
 	font-size: 16px;
+	font-family: 'Manrope', sans-serif;
+	background: #ffffdd;
 }
 
 /* nav */
@@ -41,14 +45,43 @@ body {
 	outline: none;
 }
 
+/* showcase */
+#main-showcase{
+	max-height: 500px
+}
 /* carousel */
 .carousel-image {
+	
+	filter: brightness(75%);
 	height: 120vw;
 	max-height: 400px;
+	background-blend-mode: multiply;
 	background-size: cover;
 	background-position: center;
 	background-repeat: no-repeat;
 }
+/* caption */
+.carousel-caption h5{
+	font-size: 3em;
+	color: #ffd68a;
+	font-family: 'Pacifico', cursive;
+}
+
+/* brush */
+.brush{
+	height: 20px;
+	background-image: url('../../img/bg/colored\ brush.png');
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+}
+
+/* NAV CARDS */
+#nav-cards{
+	/* background: #ffffdd; */
+}
+
+
 
 .nav-link-image {
 	background-size: cover;
