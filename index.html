@@ -1,653 +1,572 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
-            rel="stylesheet"
-            integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
-            crossorigin="anonymous"
-        />
-        <link
-            rel="stylesheet"
-            href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css"
-        />
-        <!-- cutom css -->
-        <link rel="stylesheet" href="css/landing.css/landing.css">
-        <!-- favicon -->
-        <link rel="shortcut icon" href="img/logo/Uma logo.svg" type="image/x-icon">
-        <title>Uma | Homepage</title>
-        
-    </head>
-    <body>
-        <!-- Navbar -->
-        <nav id="nav" class="navbar sticky-top navbar-expand-lg bg-success navbar-dark">
-            <div class="container">
-                <a href="#" class="navbar-brand">
-                    <img
-                        src="img/logo/Uma logo.svg"
-                        class="me-2"
-                        height="54"
-                        alt="MDB Logo"
-                        loading="lazy"
-                    />
-                </a>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+			crossorigin="anonymous"
+		/>
+		<link
+			rel="stylesheet"
+			href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css"
+		/>
+		<!-- cutom css -->
+		<link rel="stylesheet" href="css/landing.css/landing.css" />
+		<!-- favicon -->
+		<link
+			rel="shortcut icon"
+			href="img/logo/Uma logo.svg"
+			type="image/x-icon"
+		/>
+		<title>Uma | Homepage</title>
+	</head>
+	<body>
+		<!-- Navbar -->
+		<nav
+			id="nav"
+			class="navbar sticky-top navbar-expand-lg bg-success navbar-dark"
+		>
+			<div class="container">
+				<a href="#" class="navbar-brand">
+					<img
+						src="img/logo/Uma logo.svg"
+						class="me-2"
+						height="54"
+						alt="MDB Logo"
+						loading="lazy"
+					/>
+				</a>
 
-                <!-- search -->
-                <div id="nav-search" class="p-2 rounded-pill w-auto">
-                    <i class="bi bi-search m-2"></i>
-                    <input type="text" placeholder="Search Uma">
-                </div>
+				<!-- search -->
+				<div id="nav-search" class="p-2 rounded-pill w-auto">
+					<i class="bi bi-search m-2"></i>
+					<input type="text" placeholder="Search Uma" />
+				</div>
 
-                <button
-                    class="navbar-toggler"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#navmenu"
-                >
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+				<button
+					class="navbar-toggler"
+					type="button"
+					data-bs-toggle="collapse"
+					data-bs-target="#navmenu"
+				>
+					<span class="navbar-toggler-icon"></span>
+				</button>
 
-                <div class="collapse navbar-collapse" id="navmenu">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">Sarangani</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">People</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">Practices</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">Sources</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+				<div class="collapse navbar-collapse" id="navmenu">
+					<ul class="navbar-nav ms-auto">
+						<li class="nav-item">
+							<a href="#" class="nav-link">Sarangani</a>
+						</li>
+						<li class="nav-item">
+							<a href="#" class="nav-link">People</a>
+						</li>
+						<li class="nav-item">
+							<a href="#" class="nav-link">Practices</a>
+						</li>
+						<li class="nav-item">
+							<a href="#" class="nav-link">Sources</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
 
-        <!-- Showcase -->
-        <section id="main-showcase" class="position-relative">
-            <div
-                id="carouselExampleCaptions"
-                class="carousel slide h-10"
-                data-bs-ride="carousel"
-            >
-                <div class="carousel-indicators">
-                    <button
-                        type="button"
-                        data-bs-target="#carouselExampleCaptions"
-                        data-bs-slide-to="0"
-                        class="active"
-                        aria-current="true"
-                        aria-label="Slide 1"
-                    ></button>
-                    <button
-                        type="button"
-                        data-bs-target="#carouselExampleCaptions"
-                        data-bs-slide-to="1"
-                        aria-label="Slide 2"
-                    ></button>
-                    <button
-                        type="button"
-                        data-bs-target="#carouselExampleCaptions"
-                        data-bs-slide-to="2"
-                        aria-label="Slide 3"
-                    ></button>
-                </div>
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <div
-                            class="carousel-image"
-                            style="
-                                background-image: url('https://images.unsplash.com/photo-1593480092626-cd38b2fc2e10?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1149&q=80');
-                            "
-                        ></div>
-                        <div class="carousel-caption d-none d-md-block text-start">
-                            <h5>Harvesting Excellence, One Crop at a Time</h5>
-                            <p>
-                                We strive for agricultural excellence, nurturing each crop with care and dedication.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div
-                            class="carousel-image"
-                            style="
-                                background-image: url('https://images.unsplash.com/photo-1609553868429-3d75802809d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1176&q=80');
-                                
-                            "
-                        ></div>
-                        <div class="carousel-caption d-none d-md-block text-start">
-                            <h5>Rooted in Tradition, Growing for the Future</h5>
-                            <p>
-                                Our farming heritage fuels our commitment to sustainable growth and innovation.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div
-                            class="carousel-image"
-                            style="
-                                background-image: url('https://images.unsplash.com/photo-1660903014788-8339c3120915?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1330&q=80');
-                            "
-                        ></div>
-                        <div class="carousel-caption d-none d-md-block text-start">
-                            <h5>Where Agriculture Meets Innovation</h5>
-                            <p>
-                                We blend the time-honored practices of agriculture with cutting-edge innovations to optimize crop production.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <button
-                    class="carousel-control-prev"
-                    type="button"
-                    data-bs-target="#carouselExampleCaptions"
-                    data-bs-slide="prev"
-                >
-                    <span
-                        class="carousel-control-prev-icon"
-                        aria-hidden="true"
-                    ></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button
-                    class="carousel-control-next"
-                    type="button"
-                    data-bs-target="#carouselExampleCaptions"
-                    data-bs-slide="next"
-                >
-                    <span
-                        class="carousel-control-next-icon"
-                        aria-hidden="true"
-                    ></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
-            </div>
+		<!-- Showcase -->
+		<section id="main-showcase" class="position-relative">
+			<div
+				id="carouselExampleCaptions"
+				class="carousel slide h-10"
+				data-bs-ride="carousel"
+			>
+				<div class="carousel-indicators">
+					<button
+						type="button"
+						data-bs-target="#carouselExampleCaptions"
+						data-bs-slide-to="0"
+						class="active"
+						aria-current="true"
+						aria-label="Slide 1"
+					></button>
+					<button
+						type="button"
+						data-bs-target="#carouselExampleCaptions"
+						data-bs-slide-to="1"
+						aria-label="Slide 2"
+					></button>
+					<button
+						type="button"
+						data-bs-target="#carouselExampleCaptions"
+						data-bs-slide-to="2"
+						aria-label="Slide 3"
+					></button>
+				</div>
+				<div class="carousel-inner">
+					<div class="carousel-item active">
+						<div
+							class="carousel-image"
+							style="
+								background-image: url('https://images.unsplash.com/photo-1593480092626-cd38b2fc2e10?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1149&q=80');
+							"
+						></div>
+						<div
+							class="carousel-caption d-none d-md-block text-start"
+						>
+							<h5>Harvesting Excellence, One Crop at a Time</h5>
+							<p>
+								We strive for agricultural excellence, nurturing
+								each crop with care and dedication.
+							</p>
+						</div>
+					</div>
+					<div class="carousel-item">
+						<div
+							class="carousel-image"
+							style="
+								background-image: url('https://images.unsplash.com/photo-1609553868429-3d75802809d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1176&q=80');
+							"
+						></div>
+						<div
+							class="carousel-caption d-none d-md-block text-start"
+						>
+							<h5>Rooted in Tradition, Growing for the Future</h5>
+							<p>
+								Our farming heritage fuels our commitment to
+								sustainable growth and innovation.
+							</p>
+						</div>
+					</div>
+					<div class="carousel-item">
+						<div
+							class="carousel-image"
+							style="
+								background-image: url('https://images.unsplash.com/photo-1660903014788-8339c3120915?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1330&q=80');
+							"
+						></div>
+						<div
+							class="carousel-caption d-none d-md-block text-start"
+						>
+							<h5>Where Traditional Agriculture Meets Innovation</h5>
+							<p>
+								We blend the time-honored practices of
+								agriculture with cutting-edge innovations to
+								optimize crop production.
+							</p>
+						</div>
+					</div>
+				</div>
+				<button
+					class="carousel-control-prev"
+					type="button"
+					data-bs-target="#carouselExampleCaptions"
+					data-bs-slide="prev"
+				>
+					<span
+						class="carousel-control-prev-icon"
+						aria-hidden="true"
+					></span>
+					<span class="visually-hidden">Previous</span>
+				</button>
+				<button
+					class="carousel-control-next"
+					type="button"
+					data-bs-target="#carouselExampleCaptions"
+					data-bs-slide="next"
+				>
+					<span
+						class="carousel-control-next-icon"
+						aria-hidden="true"
+					></span>
+					<span class="visually-hidden">Next</span>
+				</button>
+			</div>
 
-            <!-- brush -->
-            <div class="brush position-absolute bottom-0 end-0 w-100"></div>
-        </section>
+			<!-- brush -->
+			<div class="brush position-absolute bottom-0 end-0 w-100"></div>
+		</section>
 
-        <!-- Navigation Cards -->
-        <section id="nav-cards" class="my-5">
-            <div class="container">
-                <div class="row">
-                    <!-- nav cards -->
-                    <div
-                        class="col col-lg-8 d-flex flex-column align-items-center"
-                    >
-                        <div
-                            class="card my-2 overflow-hidden"
-                            style="max-width: 540px"
-                        >
-                            <div class="row g-0">
-                                <div
-                                    class="col-sm-4 nav-link-image"
-                                    style="
-                                        background-image: url('https://images.unsplash.com/photo-1534132927252-b55bbafba352?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80');
-                                    "
-                                ></div>
-                                <div class="col-sm-8">
-                                    <div class="card-body d-flex flex-column">
-                                        <h5 class="card-title">Crops</h5>
-                                        <p class="card-text">
-                                            This is a wider card with supporting
-                                            text below as a natural lead-in to
-                                            additional content. This content is
-                                            a little bit longer.
-                                        </p>
-                                        <button
-                                            class="btn btn-secondary w-auto align-self-end"
-                                        >
-                                            <a
-                                                href="#"
-                                                class="link-light link-offset-2 link-underline link-underline-opacity-0"
-                                                >Check More
-                                                <i class="bi bi-arrow-up-right">
-                                                </i>
-                                            </a>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+		<!-- Navigation Cards -->
+		<section id="nav-cards" class="my-5">
+			<div class="container">
+				<div class="row">
+					<!-- nav cards -->
+					<div
+						class="col col-lg-8 d-flex flex-column align-items-center"
+					>
+						<a id="plink-crop" class="plink-container">
+							<!-- text -->
+							<div class="plink-text">
+								<h6 class="plink-gentitle">Crops</h6>
+								<h5 class="plink-subtitle">
+									Traditional Crops
+								</h5>
+							</div>
+							<!-- arrow -->
+							<div class="arrow-container">
+								<i class="bi bi-arrow-right-short"></i>
+							</div>
+						</a>
 
-                        <div
-                            class="card my-2 overflow-hidden"
-                            style="max-width: 540px"
-                        >
-                            <div class="row g-0">
-                                <div
-                                    class="col-sm-4 nav-link-image"
-                                    style="
-                                        background-image: url('img/bg/sarangani\ bg.png');
-                                    "
-                                ></div>
-                                <div class="col-sm-8">
-                                    <div class="card-body d-flex flex-column">
-                                        <h5 class="card-title">Map</h5>
-                                        <p class="card-text">
-                                            This is a wider card with supporting
-                                            text below as a natural lead-in to
-                                            additional content. This content is
-                                            a little bit longer.
-                                        </p>
-                                        <button
-                                            class="btn btn-secondary w-auto align-self-end"
-                                        >
-                                            <a
-                                                href="html/map.html"
-                                                class="link-light link-offset-2 link-underline link-underline-opacity-0"
-                                                >Check More
-                                                <i class="bi bi-arrow-up-right">
-                                                </i>
-                                            </a>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+						<!-- map -->
+						<a id="plink-map" class="plink-container">
+							<!-- text -->
+							<div class="plink-text">
+								<h6 class="plink-gentitle">Map</h6>
+								<h5 class="plink-subtitle">
+									Sarangani Traditional Crops Map
+								</h5>
+							</div>
+							<!-- arrow -->
+							<div class="arrow-container">
+								<i class="bi bi-arrow-right-short"></i>
+							</div>
+						</a>
 
-                        <div
-                            class="card my-2 overflow-hidden"
-                            style="max-width: 540px"
-                        >
-                            <div class="row g-0">
-                                <div
-                                    class="col-sm-4 nav-link-image"
-                                    style="
-                                        background-image: url('https://images.unsplash.com/photo-1609554259885-d5a52e01e83d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1176&q=80');
-                                    "
-                                ></div>
-                                <div class="col-sm-8">
-                                    <div class="card-body d-flex flex-column">
-                                        <h5 class="card-title">Farms</h5>
-                                        <p class="card-text">
-                                            This is a wider card with supporting
-                                            text below as a natural lead-in to
-                                            additional content. This content is
-                                            a little bit longer.
-                                        </p>
-                                        <button
-                                            class="btn btn-secondary w-auto align-self-end"
-                                        >
-                                            <a
-                                                href="#"
-                                                class="link-light link-offset-2 link-underline link-underline-opacity-0"
-                                                >Check More
-                                                <i class="bi bi-arrow-up-right">
-                                                </i>
-                                            </a>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+						<!-- tribe -->
+						<a id="plink-tribe" class="plink-container">
+							<!-- text -->
+							<div class="plink-text">
+								<h6 class="plink-gentitle">Tribes</h6>
+								<h5 class="plink-subtitle">
+									Traditional Crop Farming Tribes
+								</h5>
+							</div>
+							<!-- arrow -->
+							<div class="arrow-container">
+								<i class="bi bi-arrow-right-short"></i>
+							</div>
+						</a>
+					</div>
 
-                        <div
-                            class="card my-2 overflow-hidden"
-                            style="max-width: 540px"
-                        >
-                            <div class="row g-0">
-                                <div
-                                    class="col-sm-4 nav-link-image"
-                                    style="
-                                        background-image: url('https://images.unsplash.com/photo-1652585437758-483608991368?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80');
-                                    "
-                                ></div>
-                                <div class="col-sm-8">
-                                    <div class="card-body d-flex flex-column">
-                                        <h5 class="card-title">Tribes</h5>
-                                        <p class="card-text">
-                                            This is a wider card with supporting
-                                            text below as a natural lead-in to
-                                            additional content. This content is
-                                            a little bit longer.
-                                        </p>
-                                        <button
-                                            class="btn btn-secondary w-auto align-self-end"
-                                        >
-                                            <a
-                                                href="#"
-                                                class="link-light link-offset-2 link-underline link-underline-opacity-0"
-                                                >Check More
-                                                <i class="bi bi-arrow-up-right">
-                                                </i>
-                                            </a>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+					<div class="col col-lg-4 d-none d-lg-block">
+						<div class="container my-2">
+							<!-- Search On Site -->
+							<div
+								class="w-100 input-group d-flex justify-content-center mb-3 py-4 px-3"
+							>
+								<div class="form-outline">
+									<input
+										type="search"
+										id="form1"
+										class="form-control"
+										placeholder="Search on Site"
+									/>
+								</div>
+								<button type="button" class="btn btn-success">
+									<i class="bi bi-search"></i>
+								</button>
+							</div>
 
-                    <div class="col col-lg-4 d-none d-lg-block">
-                        <div class="container my-2">
-                            <!-- Search On Site -->
-                            <div
-                                class="w-100 input-group d-flex justify-content-center mb-3 py-4 px-3"
-                            >
-                                <div class="form-outline">
-                                    <input
-                                        type="search"
-                                        id="form1"
-                                        class="form-control"
-                                        placeholder="Search on Site"
-                                    />
-                                </div>
-                                <button type="button" class="btn btn-success">
-                                    <i class="bi bi-search"></i>
-                                </button>
-                            </div>
+							<!-- Tags -->
+							<div
+								class="row py-4 px-3 mb-3"
+								style="background-color: #f1f4f8"
+							>
+								<div class="">
+									<h4
+										class="w-25 border-bottom border-success border-2 py-2"
+									>
+										Tags
+									</h4>
+									<ul
+										class="list-group d-flex flex-row row grid gap-2 p-2"
+									>
+										<li
+											class="list-group-item col col-auto border border-0 rounded-pill"
+										>
+											<a
+												href=""
+												class="link-dark link-underline-opacity-0"
+												>trv</a
+											>
+										</li>
+										<li
+											class="list-group-item col col-auto border border-0 rounded-pill"
+										>
+											<a
+												href=""
+												class="link-dark link-underline-opacity-0"
+												>alabel</a
+											>
+										</li>
+										<li
+											class="list-group-item col col-auto border border-0 rounded-pill"
+										>
+											<a
+												href=""
+												class="link-dark link-underline-opacity-0"
+												>malgas</a
+											>
+										</li>
+										<li
+											class="list-group-item col col-auto border border-0 rounded-pill"
+										>
+											<a
+												href=""
+												class="link-dark link-underline-opacity-0"
+												>moradu</a
+											>
+										</li>
+										<li
+											class="list-group-item col col-auto border border-0 rounded-pill"
+										>
+											<a
+												href=""
+												class="link-dark link-underline-opacity-0"
+												>sarangani</a
+											>
+										</li>
+										<li
+											class="list-group-item col col-auto border border-0 rounded-pill"
+										>
+											<a
+												href=""
+												class="link-dark link-underline-opacity-0"
+												>malapatan</a
+											>
+										</li>
+										<li
+											class="list-group-item col col-auto border border-0 rounded-pill"
+										>
+											<a
+												href=""
+												class="link-dark link-underline-opacity-0"
+												>upland rice</a
+											>
+										</li>
+									</ul>
+								</div>
+							</div>
 
-                            <!-- Tags -->
-                            <div
-                                class="row py-4 px-3 mb-3"
-                                style="background-color: #f1f4f8"
-                            >
-                                <div class="">
-                                    <h4
-                                        class="w-25 border-bottom border-success border-2 py-2"
-                                    >
-                                        Tags
-                                    </h4>
-                                    <ul
-                                        class="list-group d-flex flex-row row grid gap-2 p-2"
-                                    >
-                                        <li
-                                            class="list-group-item col col-auto border border-0 rounded-pill"
-                                        >
-                                            <a
-                                                href=""
-                                                class="link-dark link-underline-opacity-0"
-                                                >trv</a
-                                            >
-                                        </li>
-                                        <li
-                                            class="list-group-item col col-auto border border-0 rounded-pill"
-                                        >
-                                            <a
-                                                href=""
-                                                class="link-dark link-underline-opacity-0"
-                                                >alabel</a
-                                            >
-                                        </li>
-                                        <li
-                                            class="list-group-item col col-auto border border-0 rounded-pill"
-                                        >
-                                            <a
-                                                href=""
-                                                class="link-dark link-underline-opacity-0"
-                                                >malgas</a
-                                            >
-                                        </li>
-                                        <li
-                                            class="list-group-item col col-auto border border-0 rounded-pill"
-                                        >
-                                            <a
-                                                href=""
-                                                class="link-dark link-underline-opacity-0"
-                                                >moradu</a
-                                            >
-                                        </li>
-                                        <li
-                                            class="list-group-item col col-auto border border-0 rounded-pill"
-                                        >
-                                            <a
-                                                href=""
-                                                class="link-dark link-underline-opacity-0"
-                                                >sarangani</a
-                                            >
-                                        </li>
-                                        <li
-                                            class="list-group-item col col-auto border border-0 rounded-pill"
-                                        >
-                                            <a
-                                                href=""
-                                                class="link-dark link-underline-opacity-0"
-                                                >malapatan</a
-                                            >
-                                        </li>
-                                        <li
-                                            class="list-group-item col col-auto border border-0 rounded-pill"
-                                        >
-                                            <a
-                                                href=""
-                                                class="link-dark link-underline-opacity-0"
-                                                >upland rice</a
-                                            >
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
+							<!-- Socials -->
+							<div
+								class="row py-4 px-3"
+								style="background-color: #f1f4f8"
+							>
+								<div class="">
+									<h4
+										class="w-25 border-bottom border-success border-2 py-2"
+									>
+										Socials
+									</h4>
+									<ul
+										class="list-group d-flex flex-row row grid gap-2 p-2"
+									>
+										<li
+											class="list-group-item col col-auto border border-0 rounded-circle py-0 px-2 bg-transparent"
+										>
+											<a
+												href=""
+												class="link-dark link-underline-opacity-0"
+												><i
+													class="bi bi-facebook"
+													style="font-size: 25px"
+												></i
+											></a>
+										</li>
+										<li
+											class="list-group-item col col-auto border border-0 rounded-circle py-0 px-2 bg-transparent"
+										>
+											<a
+												href=""
+												class="link-dark link-underline-opacity-0"
+												><i
+													class="bi bi-github"
+													style="font-size: 25px"
+												></i
+											></a>
+										</li>
+										<li
+											class="list-group-item col col-auto border border-0 rounded-circle py-0 px-2 bg-transparent"
+										>
+											<a
+												href=""
+												class="link-dark link-underline-opacity-0"
+												><i
+													class="bi bi-instagram"
+													style="font-size: 25px"
+												></i
+											></a>
+										</li>
+										<li
+											class="list-group-item col col-auto border border-0 rounded-circle py-0 px-2 bg-transparent"
+										>
+											<a
+												href=""
+												class="link-dark link-underline-opacity-0"
+												><i
+													class="bi bi-twitter"
+													style="font-size: 25px"
+												></i
+											></a>
+										</li>
+										<li
+											class="list-group-item col col-auto border border-0 rounded-circle py-0 px-2 bg-transparent"
+										>
+											<a
+												href=""
+												class="link-dark link-underline-opacity-0"
+												><i
+													class="bi bi-youtube"
+													style="font-size: 25px"
+												></i
+											></a>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
 
-                            <!-- Socials -->
-                            <div
-                                class="row py-4 px-3"
-                                style="background-color: #f1f4f8"
-                            >
-                                <div class="">
-                                    <h4
-                                        class="w-25 border-bottom border-success border-2 py-2"
-                                    >
-                                        Socials
-                                    </h4>
-                                    <ul
-                                        class="list-group d-flex flex-row row grid gap-2 p-2"
-                                    >
-                                        <li
-                                            class="list-group-item col col-auto border border-0 rounded-circle py-0 px-2 bg-transparent"
-                                        >
-                                            <a
-                                                href=""
-                                                class="link-dark link-underline-opacity-0"
-                                                ><i
-                                                    class="bi bi-facebook"
-                                                    style="font-size: 25px"
-                                                ></i
-                                            ></a>
-                                        </li>
-                                        <li
-                                            class="list-group-item col col-auto border border-0 rounded-circle py-0 px-2 bg-transparent"
-                                        >
-                                            <a
-                                                href=""
-                                                class="link-dark link-underline-opacity-0"
-                                                ><i
-                                                    class="bi bi-github"
-                                                    style="font-size: 25px"
-                                                ></i
-                                            ></a>
-                                        </li>
-                                        <li
-                                            class="list-group-item col col-auto border border-0 rounded-circle py-0 px-2 bg-transparent"
-                                        >
-                                            <a
-                                                href=""
-                                                class="link-dark link-underline-opacity-0"
-                                                ><i
-                                                    class="bi bi-instagram"
-                                                    style="font-size: 25px"
-                                                ></i
-                                            ></a>
-                                        </li>
-                                        <li
-                                            class="list-group-item col col-auto border border-0 rounded-circle py-0 px-2 bg-transparent"
-                                        >
-                                            <a
-                                                href=""
-                                                class="link-dark link-underline-opacity-0"
-                                                ><i
-                                                    class="bi bi-twitter"
-                                                    style="font-size: 25px"
-                                                ></i
-                                            ></a>
-                                        </li>
-                                        <li
-                                            class="list-group-item col col-auto border border-0 rounded-circle py-0 px-2 bg-transparent"
-                                        >
-                                            <a
-                                                href=""
-                                                class="link-dark link-underline-opacity-0"
-                                                ><i
-                                                    class="bi bi-youtube"
-                                                    style="font-size: 25px"
-                                                ></i
-                                            ></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+		<!-- Footer -->
+		<footer
+			class="text-white pt-5"
+			style="
+				background: #1f4e3d;
+				background-image: url('../../img/bg/footer-bg.png'),
+					url('../../img/bg/leaf\ .png');
+				background-repeat: no-repeat, no-repeat;
+				background-position: left bottom, right bottom;
+				background-size: 500px 250px, 300px 300px;
+			"
+		>
+			<div class="container">
+				<div class="row">
+					<div class="col-md-5 mb-3">
+						<div
+							style="
+								background-image: url('img/logo/travis-logo-white.svg');
+								background-repeat: no-repeat;
+								background-size: cover;
+								background-position: center;
+								aspect-ratio: 16 / 9;
+								height: 75px;
+							"
+						></div>
+						<p>
+							Discover the wisdom of generations past and the
+							power of modern data on our Traditional Crop
+							Information System website. Bridging heritage and
+							innovation to cultivate a sustainable future for
+							agriculture.
+						</p>
+					</div>
+					<div class="col-md-2 mb-2">
+						<h4>More</h4>
+						<ul class="list-unstyled">
+							<li>
+								<a
+									href="#"
+									class="text-white link-underline link-underline-opacity-0"
+									>About Project Travis</a
+								>
+							</li>
+							<li>
+								<a
+									href="#"
+									class="text-white link-underline link-underline-opacity-0"
+									>About Us</a
+								>
+							</li>
+							<li>
+								<a
+									href="#"
+									class="text-white link-underline link-underline-opacity-0"
+									>Contact Us</a
+								>
+							</li>
+							<li>
+								<a
+									href="#"
+									class="text-white link-underline link-underline-opacity-0"
+									>Sitemap</a
+								>
+							</li>
+							<li>
+								<a
+									href="#"
+									class="text-white link-underline link-underline-opacity-0"
+									>Travis for Staffs</a
+								>
+							</li>
+						</ul>
+					</div>
+					<div class="col-md-3 mb-2">
+						<h4>Updates</h4>
+						<ul class="list-unstyled">
+							<li>
+								<a
+									href="#"
+									class="text-white link-underline link-underline-opacity-0"
+									><h6>22 Jan, 2022</h6>
+									Meant widow equal an share least part.</a
+								>
+							</li>
+							<li>
+								<a
+									href="#"
+									class="text-white link-underline link-underline-opacity-0"
+									><h6>15 Jan, 2022</h6>
+									Rice kuan kuan.</a
+								>
+							</li>
+						</ul>
+					</div>
+					<div class="col-md-2 mb-2">
+						<h4 class="">Contact</h4>
+						<ul class="list-unstyled">
+							<li>
+								<a
+									href="#"
+									class="text-white link-underline link-underline-opacity-0"
+									><i class="bi bi-envelope"></i>
+									email@email.com</a
+								>
+							</li>
+							<li>
+								<a
+									href="#"
+									class="text-white link-underline link-underline-opacity-0"
+									><i class="bi bi-telephone"></i>
+									+631234567890</a
+								>
+							</li>
+						</ul>
+					</div>
+				</div>
 
-        <!-- Footer -->
-        <footer
-            class="text-white pt-5"
-            style="
-                background: #1f4e3d;
-                background-image: url('../../img/bg/footer-bg.png'),
-                    url('../../img/bg/leaf\ .png');
-                background-repeat: no-repeat, no-repeat;
-                background-position: left bottom, right bottom;
-                background-size: 500px 250px, 300px 300px;
-            "
-        >
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-5 mb-3">
-                        <div
-                            style="
-                                background-image: url('img/logo/travis-logo-white.svg');
-                                background-repeat: no-repeat;
-                                background-size: cover;
-                                background-position: center;
-                                aspect-ratio: 16 / 9;
-                                height: 75px;
-                            "
-                        ></div>
-                        <p>
-                            Discover the wisdom of generations past and the power of modern data on our Traditional Crop Information System website. Bridging heritage and innovation to cultivate a sustainable future for agriculture.
-                        </p>
-                    </div>
-                    <div class="col-md-2 mb-2">
-                        <h4>More</h4>
-                        <ul class="list-unstyled">
-                            <li>
-                                <a
-                                    href="#"
-                                    class="text-white link-underline link-underline-opacity-0"
-                                    >About Project Travis</a
-                                >
-                            </li>
-                            <li>
-                                <a
-                                    href="#"
-                                    class="text-white link-underline link-underline-opacity-0"
-                                    >About Us</a
-                                >
-                            </li>
-                            <li>
-                                <a
-                                    href="#"
-                                    class="text-white link-underline link-underline-opacity-0"
-                                    >Contact Us</a
-                                >
-                            </li>
-                            <li>
-                                <a
-                                    href="#"
-                                    class="text-white link-underline link-underline-opacity-0"
-                                    >Sitemap</a
-                                >
-                            </li>
-                            <li>
-                                <a
-                                    href="#"
-                                    class="text-white link-underline link-underline-opacity-0"
-                                    >Travis for Staffs</a
-                                >
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-md-3 mb-2">
-                        <h4>Updates</h4>
-                        <ul class="list-unstyled">
-                            <li>
-                                <a
-                                    href="#"
-                                    class="text-white link-underline link-underline-opacity-0"
-                                    ><h6>22 Jan, 2022</h6>
-                                    Meant widow equal an share least part.</a
-                                >
-                            </li>
-                            <li>
-                                <a
-                                    href="#"
-                                    class="text-white link-underline link-underline-opacity-0"
-                                    ><h6>15 Jan, 2022</h6>
-                                    Rice kuan kuan.</a
-                                >
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-md-2 mb-2">
-                        <h4 class="">Contact</h4>
-                        <ul class="list-unstyled">
-                            <li>
-                                <a
-                                    href="#"
-                                    class="text-white link-underline link-underline-opacity-0"
-                                    ><i class="bi bi-envelope"></i>
-                                    email@email.com</a
-                                >
-                            </li>
-                            <li>
-                                <a
-                                    href="#"
-                                    class="text-white link-underline link-underline-opacity-0"
-                                    ><i class="bi bi-telephone"></i>
-                                    +631234567890</a
-                                >
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+				<div
+					class="text-center py-3 px-5 row rounded-top-5"
+					style="background: #1a4133"
+				>
+					<a
+						href="#"
+						class="order-md-3 p-2 col-0 col-md-2 col-lg-1 link-light link-offset-3 link-underline-light link-underline-opacity-2-light"
+						>Terms</a
+					>
+					<a
+						href="#"
+						class="order-md-2 p-2 col-0 col-md-2 col-lg-1 link-light link-offset-3 link-underline-light link-underline-opacity-2-light"
+						>Support</a
+					>
+					<div
+						class="order-md-1 p-2 col-12 col-md-8 col-lg-10 text-md-start"
+					>
+						Copyright © 2023 Travis. All rights reserved.
+					</div>
+				</div>
+			</div>
+		</footer>
 
-                <div
-                    class="text-center py-3 px-5 row rounded-top-5"
-                    style="background: #1a4133"
-                >
-                    <a
-                        href="#"
-                        class="order-md-3 p-2 col-0 col-md-2 col-lg-1 link-light link-offset-3 link-underline-light link-underline-opacity-2-light"
-                        >Terms</a
-                    >
-                    <a
-                        href="#"
-                        class="order-md-2 p-2 col-0 col-md-2 col-lg-1 link-light link-offset-3 link-underline-light link-underline-opacity-2-light"
-                        >Support</a
-                    >
-                    <div
-                        class="order-md-1 p-2 col-12 col-md-8 col-lg-10 text-md-start"
-                    >
-                        Copyright © 2023 Travis. All rights reserved.
-                    </div>
-                </div>
-            </div>
-        </footer>
-
-        <script
-            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
-            crossorigin="anonymous"
-        ></script>
-    </body>
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+			crossorigin="anonymous"
+		></script>
+	</body>
 </html>
