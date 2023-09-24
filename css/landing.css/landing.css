@@ -30,42 +30,42 @@ body {
 :root {
 	--searchTextColor: rgb(231, 231, 231);
 }
-#nav-search input {
-	background: none;
-	border: none;
-	color: var(--searchTextColor);
-}
-#nav-search i {
-	color: var(--searchTextColor);
-}
-#nav-search input::placeholder {
-	color: var(--searchTextColor);
-}
-#nav-search input:focus {
-	outline: none;
-}
+	#nav-search input {
+		background: none;
+		border: none;
+		color: var(--searchTextColor);
+	}
+		#nav-search i {
+			color: var(--searchTextColor);
+		}
+		#nav-search input::placeholder {
+			color: var(--searchTextColor);
+		}
+		#nav-search input:focus {
+			outline: none;
+		}
 
 /* showcase */
 #main-showcase{
 	max-height: 500px
 }
-/* carousel */
-.carousel-image {
-	
-	filter: brightness(65%);
-	height: 120vw;
-	max-height: 400px;
-	background-blend-mode: multiply;
-	background-size: cover;
-	background-position: center;
-	background-repeat: no-repeat;
-}
-/* caption */
-.carousel-caption h5{
-	font-size: 3em;
-	color: #ffc861;
-	font-family: 'Pacifico', cursive;
-}
+	/* carousel */
+	.carousel-image {
+		
+		filter: brightness(65%);
+		height: 120vw;
+		max-height: 400px;
+		background-blend-mode: multiply;
+		background-size: cover;
+		background-position: center;
+		background-repeat: no-repeat;
+	}
+		/* caption */
+		.carousel-caption h5{
+			font-size: 3em;
+			color: #ffc861;
+			font-family: 'Pacifico', cursive;
+		}
 
 /* brush */
 .brush{
@@ -87,10 +87,8 @@ body {
 /* PAGE LINKS */
 /* page links */
 .plink-container{
-	margin: 10px;
-	width: 60%;
-		min-width: 500px;
 	flex: 2;
+	padding: 10px;
 	border-radius: 15px;
 	overflow: hidden;
 	position: relative;
@@ -99,9 +97,43 @@ body {
 		align-items: flex-end;
 		flex-direction: row;
 		flex-wrap: wrap;
-	font-size: 20px;
+	font-size: 16px;
 	text-decoration: none;
+	background-size: cover;
+	background-position: center;
+	
+	animation: plinkOut 0.5s ease-out 0s 1 forwards;
 }
+	/* plink on active */
+	.plink-container:active{
+		border: 5px #A2C579 solid;
+	}
+	/* plink on hover */
+	.plink-container:hover{
+		animation: plinkIn 0.5s ease-out 0s 1 forwards;
+	}
+		@keyframes plinkIn {
+			0% {
+				background-size: 150%;
+			}
+		
+			100% {
+				background-size: 200%;
+			}
+		}
+		@keyframes plinkOut {
+			0% {
+				background-size: 200%;
+			}
+			100% {
+				background-size: 150%;
+			}
+		}
+
+			/* double card */
+			#double-card .plink-container{
+				aspect-ratio: 1/1;
+			}
 
 		.plink-container::before{
 			content: '';
@@ -112,6 +144,8 @@ body {
 			height: 100%;
 			background-image: linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.2));
 		}
+
+
 
 		/* text */
 		.plink-text{
@@ -126,15 +160,15 @@ body {
 				flex-direction: column;
 		}
 			.plink-gentitle{
-				border-bottom: #c9cc03 1px solid;
+				border-bottom: #ffc861 1px solid;
 				width: 40%;
-				font: 20px;
+				font-size: 0.8rem;
 				font-family: 'Pacifico', cursive;
 					color: #D7D7D7;
 			}
-			/* .plink-subtitle{
-				
-			} */
+			.plink-subtitle{
+				font-size: 1rem;
+			}
 		/* arrow */
 		.arrow-container{
 			/* border: cyan solid 1px; */
@@ -145,8 +179,33 @@ body {
 			display: flex;
 				justify-content: center;
 				align-items: center;
-			transform: rotate(-45deg);
+			
+			animation: arrowDown 0.5s ease-out 0s 1 forwards;
 		}
+			/* animation */
+			.plink-container:hover .arrow-container{
+				animation: arrowUp 0.5s ease-out 0s 1 forwards;
+			}
+			.plink-container:hover .arrow-container:hover{
+				animation: arrowDown 0.5s ease-out 0s 1 forwards;
+			}
+				@keyframes arrowUp {
+					0% {
+						transform: rotate(0deg);
+					}
+				
+					100% {
+						transform: rotate(-45deg);
+					}
+				}
+				@keyframes arrowDown {
+					0% {
+						transform: rotate(-45deg);
+					}
+					100% {
+						transform: rotate(0deg);
+					}
+				}
 
 	/* crop */
 	#plink-crop{
@@ -157,21 +216,89 @@ body {
 			background-size: 32% 100% , 37% 100% , 32% 100%;
 			background-repeat: no-repeat;
 			background-position: left, center, right;
+
+		animation: plinkCropOut 0.5s ease-out 0s 1 forwards;
 	}
+		#plink-crop:hover{
+			animation: plinkCropIn 0.5s ease-out 0s 1 forwards;
+		}
+			@keyframes plinkCropIn {
+				0% {
+					background-size: 32% 100% , 37% 100% , 32% 100%;
+				}
+			
+				100% {
+					background-position: -25%, center, 125%;
+					background-size: 40% 125% , 52% 125% , 40% 125%;
+				}
+			}
+			@keyframes plinkCropOut {
+				0% {
+					background-position: -25%, center, 125%;
+					background-size: 40% 125% , 52% 125% , 40% 125%;
+				}
+				100% {
+					background-size: 32% 100% , 37% 100% , 32% 100%;
+				}
+			}
 
 
 
 	/* map */
 	#plink-map{
 		background-image: url('../../img/bg/sarangani\ bg.png');
-		background-size: cover;
-		background-position: center;
 	}
 
 
 	/* tribe */
 	#plink-tribe{
 		background-image: url('https://images.pexels.com/photos/15092353/pexels-photo-15092353/free-photo-of-farmer-and-carabao-on-rice-field.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
-		background-size: cover;
-		background-position: center;
 	}
+
+	/* farm */
+	#plink-farm{
+		background-image: url('https://images.pexels.com/photos/2516406/pexels-photo-2516406.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+	}
+
+	/* TAGS AND SOCIALS*/
+	/* tags */
+	#landing-tags{
+		background-color: #fff;
+	}
+		/* titles */
+		#landing-tags h4, 
+		#landing-socials h4{
+			border-bottom: 3px #004b4f solid;
+			font-size: 1.3rem;
+		}
+		/* links */
+		#landing-tags a{
+			background-color: #004b4f;
+			border: 2px #004b4f solid;
+			text-decoration: none;
+			color: #ecebeb;
+			font-size: 0.8rem;
+		}
+			#landing-tags a:hover{
+				background-color: #d7d7d7;
+				border: 2px #004b4f solid;
+				color: #004b4f;
+				cursor: pointer;
+			}
+			#landing-tags a:active{
+				background: #fff;
+			}
+	/* socials */
+	#landing-socials a{
+		color: #004b4f;
+    }
+		#landing-socials i{
+			font-size: 1.5rem;
+			cursor: pointer;
+		}
+			#landing-socials i:hover{
+				color: #A2C579;
+			}
+			#landing-socials i:active{
+				color: #d7d7d7;
+			}
