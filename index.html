@@ -1,219 +1,533 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="img/logo/favicon.svg">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+			crossorigin="anonymous"
+		/>
+		<link
+			rel="stylesheet"
+			href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css"
+		/>
+		<!-- cutom css -->
+		<link rel="stylesheet" href="css/landing.css/landing.css" />
+		<!-- favicon -->
+		<link
+			rel="shortcut icon"
+			href="img/logo/Uma logo.svg"
+			type="image/x-icon"
+		/>
+		<title>Uma | Homepage</title>
+	</head>
+	<body>
+		<!-- Navbar -->
+		<nav
+			id="nav"
+			class="navbar sticky-top navbar-expand-lg bg-success navbar-dark"
+		>
+			<div class="container">
+				<a href="#" class="navbar-brand">
+					<img
+						src="img/logo/Uma logo.svg"
+						class="me-2"
+						height="54"
+						alt="MDB Logo"
+						loading="lazy"
+					/>
+				</a>
 
-    <!-- styles -->
-    <link rel="stylesheet" href="css/landing/landing.css">
-        <!-- font awesome -->
-        <script src="https://kit.fontawesome.com/57e83eb6e4.js" crossorigin="anonymous"></script>
-    <title>Travis | Homepage</title>
-</head>
-<body>
-    
-    <!-- nav-container -->
-    <div id="nav">
+				<!-- search -->
+				<div id="nav-search" class="p-2 rounded-pill w-auto">
+					<i class="bi bi-search m-2"></i>
+					<input type="text" placeholder="Search Uma" />
+				</div>
 
-        <!-- logo -->
-        <div id="main-logo">                                    
-            <!-- put link via js -->
-        </div>
+				<button
+					class="navbar-toggler"
+					type="button"
+					data-bs-toggle="collapse"
+					data-bs-target="#navmenu"
+				>
+					<span class="navbar-toggler-icon"></span>
+				</button>
 
-        <!-- nav list -->
-        <ul id="nav-list">
+				<div class="collapse navbar-collapse" id="navmenu">
+					<ul class="navbar-nav ms-auto">
+						<li class="nav-item">
+							<a href="#" class="nav-link">Sarangani</a>
+						</li>
+						<li class="nav-item">
+							<a href="#" class="nav-link">People</a>
+						</li>
+						<li class="nav-item">
+							<a href="#" class="nav-link">Practices</a>
+						</li>
+						<li class="nav-item">
+							<a href="#" class="nav-link">Sources</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
 
-            <li><a href="">HOME<i class="fa-solid fa-chevron-down" style="color: #ffffff;"></i></li>
-            <li><a href="">CROPS<i class="fa-solid fa-chevron-down" style="color: #ffffff;"></i></i></a></li>
-            <li><a href="">MAP<i class="fa-solid fa-chevron-down" style="color: #ffffff;"></i></i></a></li>
-            <li><a href="">REPORTS<i class="fa-solid fa-chevron-down" style="color: #ffffff;"></i></i></a></li>
-            <li><a href="">FARMERS<i class="fa-solid fa-chevron-down" style="color: #ffffff;"></i></i></a></li>
-            <li><a href="">FARMS<i class="fa-solid fa-chevron-down" style="color: #ffffff;"></i></i></a></li>
+		<!-- Showcase -->
+		<section id="main-showcase" class="position-relative">
+			<div
+				id="carouselExampleCaptions"
+				class="carousel slide h-10"
+				data-bs-ride="carousel"
+			>
+				<div class="carousel-indicators">
+					<button
+						type="button"
+						data-bs-target="#carouselExampleCaptions"
+						data-bs-slide-to="0"
+						class="active"
+						aria-current="true"
+						aria-label="Slide 1"
+					></button>
+					<button
+						type="button"
+						data-bs-target="#carouselExampleCaptions"
+						data-bs-slide-to="1"
+						aria-label="Slide 2"
+					></button>
+					<button
+						type="button"
+						data-bs-target="#carouselExampleCaptions"
+						data-bs-slide-to="2"
+						aria-label="Slide 3"
+					></button>
+				</div>
+				<div class="carousel-inner">
+					<div class="carousel-item active">
+						<div
+							class="carousel-image"
+							style="
+								background-image: url('https://images.unsplash.com/photo-1593480092626-cd38b2fc2e10?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1149&q=80');
+							"
+						></div>
+						<div
+							class="carousel-caption d-none d-md-block text-start"
+						>
+							<h5>Harvesting Excellence, One Crop at a Time</h5>
+							<p>
+								We strive for agricultural excellence, nurturing
+								each crop with care and dedication.
+							</p>
+						</div>
+					</div>
+					<div class="carousel-item">
+						<div
+							class="carousel-image"
+							style="
+								background-image: url('https://images.unsplash.com/photo-1609553868429-3d75802809d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1176&q=80');
+							"
+						></div>
+						<div
+							class="carousel-caption d-none d-md-block text-start"
+						>
+							<h5>Rooted in Tradition, Growing for the Future</h5>
+							<p>
+								Our farming heritage fuels our commitment to
+								sustainable growth and innovation.
+							</p>
+						</div>
+					</div>
+					<div class="carousel-item">
+						<div
+							class="carousel-image"
+							style="
+								background-image: url('https://images.unsplash.com/photo-1660903014788-8339c3120915?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1330&q=80');
+							"
+						></div>
+						<div
+							class="carousel-caption d-none d-md-block text-start"
+						>
+							<h5>
+								Where Traditional Agriculture Meets Innovation
+							</h5>
+							<p>
+								We blend the time-honored practices of
+								agriculture with cutting-edge innovations to
+								optimize crop production.
+							</p>
+						</div>
+					</div>
+				</div>
+				<button
+					class="carousel-control-prev"
+					type="button"
+					data-bs-target="#carouselExampleCaptions"
+					data-bs-slide="prev"
+				>
+					<span
+						class="carousel-control-prev-icon"
+						aria-hidden="true"
+					></span>
+					<span class="visually-hidden">Previous</span>
+				</button>
+				<button
+					class="carousel-control-next"
+					type="button"
+					data-bs-target="#carouselExampleCaptions"
+					data-bs-slide="next"
+				>
+					<span
+						class="carousel-control-next-icon"
+						aria-hidden="true"
+					></span>
+					<span class="visually-hidden">Next</span>
+				</button>
+			</div>
 
-        </ul>
+			<!-- brush -->
+			<div class="brush position-absolute bottom-0 end-0 w-100"></div>
+		</section>
 
-    </div>
+		<!-- Navigation Cards -->
+		<section id="nav-cards" class="my-5">
+			<div class="container">
+				<div class="row">
+					<!-- nav cards -->
+					<div
+						class="col col-lg-8 d-flex flex-column align-items-center grid gap-0 row-gap-4"
+					>
+						<a
+							href="#"
+							id="plink-crop"
+							class="plink-container col-9 col-lg-7"
+						>
+							<!-- text -->
+							<div class="plink-text">
+								<h6 class="plink-gentitle">Crops</h6>
+								<h5 class="plink-subtitle">
+									Traditional Crops
+								</h5>
+							</div>
+							<!-- arrow -->
+							<div class="arrow-container">
+								<i class="bi bi-arrow-right-short fs-3"></i>
+							</div>
+						</a>
 
-    <!-- title section -->
-    <div id="title-section-container">
-        <div id="title-section">
-    
-            <!-- title -->
-            <h1>Rice Varieties</h1>
-            <h2>Traditional Rice Varieties</h2>
-            <!-- description -->
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo eligendi architecto maiores tempora corrupti molestiae placeat officia facilis labore quo, rerum vel veniam porro vitae dignissimos, aut eaque nobis! Cum!</p>
-            <!-- 'discover' link -->
-            <a href="#">Dicover More</a>
-    
-        </div>
-    </div>
+						<!-- map -->
+						<a
+							href="#"
+							id="plink-map"
+							class="plink-container col-9 col-lg-7"
+						>
+							<!-- text -->
+							<div class="plink-text">
+								<h6 class="plink-gentitle">Map</h6>
+								<h5 class="plink-subtitle">Sarangani Map</h5>
+							</div>
+							<!-- arrow -->
+							<div class="arrow-container">
+								<i class="bi bi-arrow-right-short fs-3"></i>
+							</div>
+						</a>
 
-    <!-- page links -->
-    <div id="page-links-container">
+						<!-- two in a row -->
+						<div
+							id="double-card"
+							class="row grid gap-0 column-gap-4 col-9 col-lg-7"
+						>
+							<!-- tribe -->
+							<a
+								href="#"
+								id="plink-tribe"
+								class="plink-container col-10 col-lg-4"
+							>
+								<!-- text -->
+								<div class="plink-text">
+									<h6 class="plink-gentitle">Tribes</h6>
+									<h5 class="plink-subtitle">
+										Farming Tribes
+									</h5>
+								</div>
+								<!-- arrow -->
+								<div class="arrow-container">
+									<i class="bi bi-arrow-right-short fs-3"></i>
+								</div>
+							</a>
 
-        <!-- upperbrush -->
-        <div id="upperbrush" class="brush"></div>
+							<!-- farms -->
+							<a
+								href="#"
+								id="plink-farm"
+								class="plink-container col-10 col-lg-4"
+							>
+								<!-- text -->
+								<div class="plink-text">
+									<h6 class="plink-gentitle">Farms</h6>
+									<h5 class="plink-subtitle">Crop Farms</h5>
+								</div>
+								<!-- arrow -->
+								<div class="arrow-container">
+									<i class="bi bi-arrow-right-short fs-3"></i>
+								</div>
+							</a>
+						</div>
+					</div>
 
-        <!-- left -->
-        <div id="plink-column-left" class="plink-column">
+					<div class="col col-lg-4 d-none d-lg-block">
+						<div class="container my-2">
+							<!-- Tags -->
+							<div id="landing-tags" class="row py-4 px-3 mb-3">
+								<div class="">
+									<h4 class="w-25 py-2">Tags</h4>
+									<div
+										class="d-flex flex-row row grid gap-2 p-2"
+									>
+										<a
+											class="col col-auto rounded-pill link-underline-opacity-0 px-3 py-1"
+										>
+											trv
+										</a>
+										<a
+											class="col col-auto rounded-pill link-underline-opacity-0 px-3 py-1"
+										>
+											alabel
+										</a>
+										<a
+											class="col col-auto rounded-pill link-underline-opacity-0 px-3 py-1"
+										>
+											malgas
+										</a>
+										<a
+											class="col col-auto rounded-pill link-underline-opacity-0 px-3 py-1"
+										>
+											moradu
+										</a>
+										<a
+											class="col col-auto rounded-pill link-underline-opacity-0 px-3 py-1"
+										>
+											sarangani
+										</a>
+										<a
+											class="col col-auto rounded-pill link-underline-opacity-0 px-3 py-1"
+										>
+											malapatan
+										</a>
+										<a
+											class="col col-auto rounded-pill link-underline-opacity-0 px-3 py-1"
+										>
+											upland rice
+										</a>
+									</div>
+								</div>
+							</div>
 
-            <!-- page links -->
-            <!-- crop -->
-            <div id="plink-crop" class="plink-container">
-                <!-- text -->
-                <div class="plink-text">
-                    <h6 class="plink-gentitle">Crop</h6>
-                    <h5 class="plink-subtitle">Traditional Crops</h5>
-                </div>
-                <!-- arrow -->
-                <div class="arrow-container">
-                    <i class="fa-solid fa-arrow-right plink-arrow" style="color: #ffffff;"></i>
-                </div>
-            </div>
+							<!-- Socials -->
+							<div
+								id="landing-socials"
+								class="row py-4 px-3"
+								style="background-color: #ffffff"
+							>
+								<div class="">
+									<h4 class="w-25 py-2">Socials</h4>
+									<div
+										class="d-flex flex-row row grid gap-2 p-2"
+									>
+										<!-- facebook -->
+										<a
+											class="col col-auto border border-0 rounded-circle py-0 px-2 bg-transparent"
+										>
+											<i
+												class="fa-brands fa-facebook"
+											></i>
+										</a>
+										<!-- github -->
+										<a
+											class="col col-auto border border-0 rounded-circle py-0 px-2 bg-transparent"
+										>
+											<i class="fa-brands fa-github"></i>
+										</a>
+										<!-- instagram -->
+										<a
+											class="col col-auto border border-0 rounded-circle py-0 px-2 bg-transparent"
+										>
+											<i
+												class="fa-brands fa-instagram"
+											></i>
+										</a>
+										<!-- linkedIn -->
+										<a
+											class="col col-auto border border-0 rounded-circle py-0 px-2 bg-transparent"
+										>
+											<i
+												class="fa-brands fa-linkedin"
+											></i>
+										</a>
+										<!-- youtube -->
+										<a
+											class="col col-auto border border-0 rounded-circle py-0 px-2 bg-transparent"
+										>
+											<i class="fa-brands fa-youtube"></i>
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
 
-            <!-- map -->
-            <div id="plink-map" class="plink-container">
-                <!-- text -->
-                <div class="plink-text">
-                    <h6 class="plink-gentitle">Map</h6>
-                    <h5 class="plink-subtitle">Sarangani Traditional Crops Map</h5>
-                </div>
-                <!-- arrow -->
-                <div class="arrow-container">
-                    <i class="fa-solid fa-arrow-right plink-arrow" style="color: #ffffff;"></i>
-                </div>
-            </div>
+		<!-- Footer -->
+		<footer
+			class="text-white pt-5"
+			style="
+				background: #1f4e3d;
+				background-image: url('../../img/bg/footer-bg.png'),
+					url('../../img/bg/leaf\ .png');
+				background-repeat: no-repeat, no-repeat;
+				background-position: left bottom, right bottom;
+				background-size: 500px 250px, 300px 300px;
+			"
+		>
+			<div class="container">
+				<div class="row">
+					<div class="col-md-5 mb-3">
+						<div
+							style="
+								background-image: url('img/logo/travis-logo-white.svg');
+								background-repeat: no-repeat;
+								background-size: cover;
+								background-position: center;
+								aspect-ratio: 16 / 9;
+								height: 75px;
+							"
+						></div>
+						<p>
+							Discover the wisdom of generations past and the
+							power of modern data on our Traditional Crop
+							Information System website. Bridging heritage and
+							innovation to cultivate a sustainable future for
+							agriculture.
+						</p>
+					</div>
+					<div class="col-md-2 mb-2">
+						<h4>More</h4>
+						<ul class="list-unstyled">
+							<li>
+								<a
+									href="#"
+									class="text-white link-underline link-underline-opacity-0"
+									>About Project Travis</a
+								>
+							</li>
+							<li>
+								<a
+									href="#"
+									class="text-white link-underline link-underline-opacity-0"
+									>About Us</a
+								>
+							</li>
+							<li>
+								<a
+									href="#"
+									class="text-white link-underline link-underline-opacity-0"
+									>Contact Us</a
+								>
+							</li>
+							<li>
+								<a
+									href="#"
+									class="text-white link-underline link-underline-opacity-0"
+									>Sitemap</a
+								>
+							</li>
+							<li>
+								<a
+									href="#"
+									class="text-white link-underline link-underline-opacity-0"
+									>Travis for Staffs</a
+								>
+							</li>
+						</ul>
+					</div>
+					<div class="col-md-3 mb-2">
+						<h4>Updates</h4>
+						<ul class="list-unstyled">
+							<li>
+								<a
+									href="#"
+									class="text-white link-underline link-underline-opacity-0"
+									><h6>22 Jan, 2022</h6>
+									Meant widow equal an share least part.</a
+								>
+							</li>
+							<li>
+								<a
+									href="#"
+									class="text-white link-underline link-underline-opacity-0"
+									><h6>15 Jan, 2022</h6>
+									Rice kuan kuan.</a
+								>
+							</li>
+						</ul>
+					</div>
+					<div class="col-md-2 mb-2">
+						<h4 class="">Contact</h4>
+						<ul class="list-unstyled">
+							<li>
+								<a
+									href="#"
+									class="text-white link-underline link-underline-opacity-0"
+									><i class="bi bi-envelope"></i>
+									email@email.com</a
+								>
+							</li>
+							<li>
+								<a
+									href="#"
+									class="text-white link-underline link-underline-opacity-0"
+									><i class="bi bi-telephone"></i>
+									+631234567890</a
+								>
+							</li>
+						</ul>
+					</div>
+				</div>
 
-            <!-- tribe -->
-            <div id="plink-tribe" class="plink-container">
-                <!-- text -->
-                <div class="plink-text">
-                    <h6 class="plink-gentitle">Tribes</h6>
-                    <h5 class="plink-subtitle">Traditional Crop Farming Tribes</h5>
-                </div>
-                <!-- arrow -->
-                <div class="arrow-container">
-                    <i class="fa-solid fa-arrow-right plink-arrow" style="color: #ffffff;"></i>
-                </div>
-            </div>
-        </div>
+				<div
+					class="text-center py-3 px-5 row rounded-top-5"
+					style="background: #1a4133"
+				>
+					<a
+						href="#"
+						class="order-md-3 p-2 col-0 col-md-2 col-lg-1 link-light link-offset-3 link-underline-light link-underline-opacity-2-light"
+						>Terms</a
+					>
+					<a
+						href="#"
+						class="order-md-2 p-2 col-0 col-md-2 col-lg-1 link-light link-offset-3 link-underline-light link-underline-opacity-2-light"
+						>Support</a
+					>
+					<div
+						class="order-md-1 p-2 col-12 col-md-8 col-lg-10 text-md-start"
+					>
+						Copyright © 2023 Travis. All rights reserved.
+					</div>
+				</div>
+			</div>
+		</footer>
 
-        <!-- right -->
-        <div id="plink-column-right" class="page-link-column">
-
-            <!-- search on site -->
-            <div id="search-site-container" class="right-column-element">
-                <form id="search-site-in-container">
-                    <!-- search bar -->
-                    <input type="text" name="" id="" placeholder="Search on Site">
-                    <!-- icon -->
-                    <div id="search-icon">
-                        <i class="fa-solid fa-magnifying-glass" style="color: #ffffff;"></i>
-                    </div>
-                </form>
-            </div>
-
-            <!-- tags -->
-            <div id="tags-container" class="right-column-element-other">
-                <!-- title -->
-                <h4>Tags</h4>
-                <hr>
-                <!-- list -->
-                <ul id="tags-list">
-                    <li class="tag-list-item">trv</li>
-                    <li class="tag-list-item">alabel</li>
-                    <li class="tag-list-item">mnalgas</li>
-                    <li class="tag-list-item">moradu</li>
-                    <li class="tag-list-item">sarangani</li>
-                    <li class="tag-list-item">malapatan</li>
-                    <li class="tag-list-item">upland rice</li>
-                </ul>
-            </div>
-
-            <!-- follow us -->
-            <div id="follow-us-container" class="right-column-element-other">
-                 <!-- title -->
-                <h4>Follow Us</h4>
-                <hr>
-                <!-- list -->
-                <ul id="social-list">
-                    <li class="social-list-item"><i class="fa-brands fa-facebook fa-xl" style="color: #000000;"></i></li>
-                    <li class="social-list-item"><i class="fa-brands fa-github fa-xl" style="color: #000000;"></i></li>
-                    <li class="social-list-item"><i class="fa-brands fa-linkedin fa-xl" style="color: #000000;"></i></li>
-                    <li class="social-list-item"><i class="fa-brands fa-steam fa-xl" style="color: #000000;"></i></li>
-                    <li class="social-list-item"><i class="fa-brands fa-twitter fa-xl" style="color: #000000;"></i></li>
-                    <li class="social-list-item"><i class="fa-brands fa-youtube fa-xl" style="color: #000000;"></i></li>
-                    <li class="social-list-item"><i class="fa-brands fa-xbox fa-xl" style="color: #000000;"></i></li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- lowerbrush -->
-        <div id="lowerbrush" class="brush"></div>
-
-        <!-- footer -->
-        <footer>
-
-            <!-- logo -->
-            <div id="foot-logo" class="foot-item">
-                <div id="foot-icon"></div>
-                <p>Agriculture, the backbone of civilization, is the art and science of cultivating the land and rearing animals to produce food, fiber, and other resources for human consumption.</p>
-            </div>
-
-            <!-- more -->
-            <div id="foot-more" class="foot-item">
-                <h3>More</h3>
-                <ul>
-                    <li><a href="">About Project</a></li>
-                    <li><a href="">About Us</a></li>
-                    <li><a href="">Contact Us</a></li>
-                    <li><a href="">Sitemap</a></li>
-                    <li><a href="">Travis for Staffs</a></li>
-                </ul>
-            </div>
-
-            <!-- updates -->
-            <div id="foot-updates" class="foot-item">
-                <h3>Updates</h3>
-                <ul>
-                    <li>
-                        <a href="">
-                            <h6>22 Jan, 2022</h6>
-                            <p>Nakuan ang kuan</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="">
-                            <h6>22 Jan, 2022</h6>
-                            <p>Nakuan si kuan. Kuyawa lage</p>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-
-            <!-- contacts -->
-            <div id="foot-contact" class="foot-item">
-                <h3>Contact Us</h3>
-                <ul>
-                    <li><a href=""><i class="fa-regular fa-envelope" style="color: #ffffff;"></i>email@email.com</a></li>
-                    <li><a href=""><i class="fa-solid fa-phone" style="color: #ffffff;"></i>+633456824234</a></li>
-                </ul>
-            </div>
-
-            <!-- copyright -->
-            <div id="copyright">
-                <div>&copy; Copyright 2023. All Rights Reserved by Incognito</div>
-                <a href="">Terms</a>
-                <a href="">Support </a>
-            </div>
-        </footer>
-    </div>
-
-    <!-- scripts -->
-    <script src="js/landing/landing.js"></script>
-
-</body>
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+			crossorigin="anonymous"
+		></script>
+		<!-- font awesome -->
+		<script
+			src="https://kit.fontawesome.com/57e83eb6e4.js"
+			crossorigin="anonymous"
+		></script>
+	</body>
 </html>
