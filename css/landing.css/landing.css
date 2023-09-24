@@ -52,7 +52,7 @@ body {
 /* carousel */
 .carousel-image {
 	
-	filter: brightness(75%);
+	filter: brightness(65%);
 	height: 120vw;
 	max-height: 400px;
 	background-blend-mode: multiply;
@@ -63,7 +63,7 @@ body {
 /* caption */
 .carousel-caption h5{
 	font-size: 3em;
-	color: #ffd68a;
+	color: #ffc861;
 	font-family: 'Pacifico', cursive;
 }
 
@@ -78,7 +78,7 @@ body {
 
 /* NAV CARDS */
 #nav-cards{
-	/* background: #ffffdd; */
+	
 }
 
 
