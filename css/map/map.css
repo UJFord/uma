@@ -25,7 +25,7 @@ body *:not(body) {
 #map {
 	min-height: 100dvh;
 	min-width: 100dvw;
-	border: 1px red solid;
+	/* border: 1px red solid; */
 	position: absolute;
     top: 0;
 	left: 0;

@@ -1,0 +1,243 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;700&family=Pacifico&display=swap');
+
+/* variable colors */
+:root{
+	/* color pallete */
+	--mainBrand: #016A70;
+	--darkAccent:#647A78;
+	--lightAccent: #7FA9AD;
+	--darkShades: #202A21;
+	--lightShades: #FFFFDD;
+
+	/* others */
+	--searchTextColor: #e7e7e7;
+	--headColor: #ffc861;
+}
+
+a{
+	color: #fff;
+	text-decoration: none;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	font-size: 16px;
+	font-family: 'Manrope', sans-serif;
+	background: var(--lightShades);
+	font-family: 'Manrope', sans-serif;
+}
+
+/* nav */
+#nav {
+	background: var(--mainBrand);
+	background: linear-gradient(193deg, rgba(0,75,79,1) 0%, rgba(0,88,93,1) 24%, rgba(1,106,112,1) 100%);
+    box-shadow: 0px 13px 28px -5px #00000070;
+}
+/* nav search */
+#nav-search {
+	background: #f5f5f53f;
+}
+	#nav-search input {
+		background: none;
+		border: none;
+		color: var(--searchTextColor);
+	}
+		#nav-search i {
+			color: var(--searchTextColor);
+		}
+		#nav-search input::placeholder {
+			color: var(--searchTextColor);
+		}
+		#nav-search input:focus {
+			outline: none;
+		}
+
+/* showcase */
+#main-showcase{
+	height: 120vw;
+        max-height: 500px;
+    background-image: url('https://img.freepik.com/free-photo/golden-wheat-fields-glow-sunset-generated-by-ai_188544-23269.jpg?t=st=1697624947~exp=1697628547~hmac=6554428e5fe3f495917862dbe74ae459786024db839c7f1aa094c6a1c7211bce&w=1380');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        z-index: 0;
+	color: #fff;
+}
+    #main-showcase::before{
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #000000;
+        background: radial-gradient(circle, #00000000 0%, #0000003b 37%, #000000a2 89%);
+        z-index: -1;
+    }
+
+    #showcase-div h1{
+        z-index: 1;
+        font-family: 'Pacifico', cursive;
+        color: var(--headColor);
+		font-size: 4rem;
+    }
+
+/* brush */
+.brush{
+	height: 20px;
+	background-image: url('../../img/bg/colored\ brush.png');
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+}
+
+/* NAV CARDS */
+/* title and filter */
+#crops-title{
+	color: var(--darkShades);
+}
+#filter-search input{
+	background: var(--lightShades);
+}
+
+/* crop cards */
+.crop-card{
+	border-radius: 0.5rem;
+
+	background: #fff;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	aspect-ratio: 1/1;
+
+	position: relative;
+	overflow: hidden;
+
+	
+	animation: cardOut 0.5s ease-out 0s 1 forwards;
+}
+	/* card active */
+	.crop-card:active{
+		box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+	}
+		
+	/* card hover */
+	.crop-card:hover{
+		animation: cardIn 0.5s ease-out 0s 1 forwards;
+	}
+		@keyframes cardIn {
+			0% {
+				background-size: 150%;
+			}
+		
+			100% {
+				background-size: 200%;
+			}
+		}
+		@keyframes cardOut {
+			0% {
+				background-size: 200%;
+			}
+			100% {
+				background-size: 150%;
+			}
+		}
+
+	/* background dark to fade gradient */
+	.crop-card::before{
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-image: linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.2));
+		z-index: 0;
+	}
+
+	/* card text */
+	.crop-card-text{
+		color: #fff;
+		z-index: 1;
+		font-family: 'Pacifico', cursive;
+		color: #D7D7D7;
+	}
+		/* text */
+		.crop-card:hover .crop-name{
+			color: var(--headColor);
+		}
+		/* arrow */
+		.arrow-container{
+			position: relative;
+			color: #ffffff;
+			flex: 1;
+			display: flex;
+				justify-content: end;
+				align-items: center;
+			
+		}
+			.arrow-container i{
+				top: -2rem;
+				right: 0;
+				animation: arrowDown 0.5s ease-out 0s 1 forwards;
+		}
+			/* animation */
+			.crop-card:hover .arrow-container i{
+				animation: arrowUp 0.5s ease-out 0s 1 forwards;
+			}
+				@keyframes arrowUp {
+					0% {
+						transform: rotate(0deg);
+						right: 0;
+					}
+				
+					100% {
+						transform: rotate(-45deg);
+						right: 0.3rem;
+					}
+				}
+				@keyframes arrowDown {
+					0% {
+						transform: rotate(-45deg);
+						right: 0.3rem;
+					}
+					100% {
+						transform: rotate(0deg);
+						right: 0;
+					}
+				}
+
+
+
+
+
+/* FOOTER */
+#foot{
+	background: #015b60;
+	background-image: url('../../img/bg/footer-bg.png'),
+		url('../../img/bg/leaf\ .png');
+	background-repeat: no-repeat, no-repeat;
+	background-position: left bottom, right bottom;
+	background-size: 500px 250px, 300px 300px;
+}
+
+	/* logo */
+	#foot-logo{
+		background-image: url('../../img/logo/Uma\ logo.svg');
+			background-repeat: no-repeat;
+			background-size: cover;
+			background-position: center;
+			aspect-ratio: 1/1;
+			height: 75px;
+		margin-bottom: 10px;
+	}
+
+	/* credits */
+	#credits{
+		background: #024649;
+	}
