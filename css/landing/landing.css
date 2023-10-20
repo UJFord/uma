@@ -40,6 +40,9 @@ body {
 #nav-search {
 	background: #f5f5f53f;
 }
+	#nav-search i{
+		color: var(--searchTextColor);
+	}
 	#nav-search input {
 		background: none;
 		border: none;
@@ -64,7 +67,7 @@ body {
 		
 		filter: brightness(65%);
 		height: 120vw;
-		max-height: 400px;
+		max-height: 500px;
 		background-blend-mode: multiply;
 		background-size: cover;
 		background-position: center;
@@ -103,7 +106,7 @@ body {
 	overflow: hidden;
 	position: relative;
 	display: flex;
-		aspect-ratio: 2 / 1 ;
+		aspect-ratio: 16 / 9 ;
 		align-items: flex-end;
 		flex-direction: row;
 		flex-wrap: wrap;
@@ -168,14 +171,25 @@ body {
 				flex-direction: column;
 		}
 			.plink-gentitle{
-				border-bottom: #ffc861 1px solid;
 				width: 40%;
 				font-size: 1rem;
 				font-family: 'Pacifico', cursive;
 					color: #D7D7D7;
 			}
+				/* yellow line */
+				.plink-subtitle::before{
+					content: "";
+					position: absolute;
+					top: 0;
+					left: 0;
+					width: 4rem;
+					border-top: #ffc861 1px solid;
+					height: 100%;
+				}
 			.plink-subtitle{
+				position: relative;
 				font-size: 1.2rem;
+				padding-top: 0.5rem;
 			}
 		/* arrow */
 		.arrow-container{
@@ -219,9 +233,9 @@ body {
 	/* crop */
 	#plink-crop{
 		background-image:
-			url('https://images.unsplash.com/photo-1613728913341-8f29b02b8253?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80'), /* First image */
-			url('https://images.unsplash.com/photo-1530541835461-dedaf9cf368a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fGNyb3B8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60'), /* Third image */
-			url('https://images.unsplash.com/photo-1529313780224-1a12b68bed16?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80'); /* Second image */
+			url('https://images.unsplash.com/photo-1578652903016-b78571b87410?auto=format&fit=crop&q=80&w=1887&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'), /* First image */
+			url('https://images.unsplash.com/photo-1543218024-57a70143c369?auto=format&fit=crop&q=80&w=1935&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'), /* Second image */
+			url('https://images.unsplash.com/photo-1585369496137-6b539c324adc?auto=format&fit=crop&q=80&w=1887&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); /* Third image */
 			background-size: 32% 100% , 37% 100% , 32% 100%;
 			background-repeat: no-repeat;
 			background-position: left, center, right;
@@ -261,36 +275,36 @@ body {
 
 	/* tribe */
 	#plink-tribe{
-		background-image: url('https://images.pexels.com/photos/15092353/pexels-photo-15092353/free-photo-of-farmer-and-carabao-on-rice-field.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+		background-image: url('https://images.unsplash.com/photo-1545830790-68595959c491?auto=format&fit=crop&q=80&w=1935&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
 	}
 
 	/* farm */
 	#plink-farm{
-		background-image: url('https://images.pexels.com/photos/2516406/pexels-photo-2516406.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+		background-image: url('https://images.unsplash.com/photo-1513415756790-2ac1db1297d0?auto=format&fit=crop&q=80&w=1974&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
 	}
 
 	/* TAGS AND SOCIALS*/
 #landing-tags,  #landing-socials{
-	background-color: var(--darkAccent);
+	background-color: #647a7870;
 	border-radius: 0.5rem;
 }
 	/* tags */
 		/* titles */
 		#landing-tags h4, 
 		#landing-socials h4{
-			color: #fff;
+			color: var(--lightShades);
 			border-bottom: 3px var(--lightShades) solid;
-			font-size: 1.3rem;
+			font-size: 1rem;
 		}
 		/* links */
 		#landing-tags a{
 			background-color: var(--lightShades);
 			text-decoration: none;
 			color: var(--darkShades);
-			font-size: 0.8rem;
+			font-size: 0.6rem;
 		}
 			#landing-tags a:hover{
-				background-color: #c4c497;
+				background-color: #d8d8a3;
 				color: var(--lightShades);
 				cursor: pointer;
 			}
@@ -308,7 +322,7 @@ body {
 			cursor: pointer;
 		}
 			#landing-socials i:hover{
-				color: #c4c497;
+				color: #e9e9b2;
 			}
 			#landing-socials i:active{
 				color: #ffffff;
