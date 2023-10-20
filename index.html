@@ -14,7 +14,7 @@
 			href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css"
 		/>
 		<!-- cutom css -->
-		<link rel="stylesheet" href="css/landing.css/landing.css" />
+		<link rel="stylesheet" href="css/landing/landing.css" />
 		<!-- favicon -->
 		<link
 			rel="shortcut icon"
@@ -32,7 +32,7 @@
 			<div class="container">
 				<a href="#" class="navbar-brand">
 					<img
-						src="img/logo/Uma logo.svg"
+						src="img/logo/umalogo.png"
 						class="me-2"
 						height="54"
 						alt="MDB Logo"
@@ -42,7 +42,7 @@
 
 				<!-- search -->
 				<div id="nav-search" class="p-2 rounded-pill w-auto">
-					<i class="bi bi-search m-2"></i>
+					<i class="px-1 fa-solid fa-magnifying-glass"></i>
 					<input type="text" placeholder="Search Uma" />
 				</div>
 
@@ -112,10 +112,10 @@
 							"
 						></div>
 						<div
-							class="carousel-caption d-none d-md-block text-start"
+							class="carousel-caption text-start"
 						>
 							<h5>Harvesting Excellence, One Crop at a Time</h5>
-							<p>
+							<p class="d-none d-md-block">
 								We strive for agricultural excellence, nurturing
 								each crop with care and dedication.
 							</p>
@@ -129,10 +129,10 @@
 							"
 						></div>
 						<div
-							class="carousel-caption d-none d-md-block text-start"
+							class="carousel-caption text-start"
 						>
 							<h5>Rooted in Tradition, Growing for the Future</h5>
-							<p>
+							<p class="d-none d-md-block">
 								Our farming heritage fuels our commitment to
 								sustainable growth and innovation.
 							</p>
@@ -146,12 +146,12 @@
 							"
 						></div>
 						<div
-							class="carousel-caption d-none d-md-block text-start"
+							class="carousel-caption text-start"
 						>
 							<h5>
 								Where Traditional Agriculture Meets Innovation
 							</h5>
-							<p>
+							<p class="d-none d-md-block">
 								We blend the time-honored practices of
 								agriculture with cutting-edge innovations to
 								optimize crop production.
@@ -195,17 +195,17 @@
 				<div class="row">
 					<!-- nav cards -->
 					<div
-						class="col col-lg-8 d-flex flex-column align-items-center grid gap-0 row-gap-4"
+						class="col col-lg-9 d-flex flex-column align-items-center grid gap-0 row-gap-4"
 					>
 						<a
-							href="#"
+							href="html/crops.html"
 							id="plink-crop"
 							class="plink-container col-9 col-lg-7"
 						>
 							<!-- text -->
 							<div class="plink-text">
 								<h6 class="plink-gentitle">Crops</h6>
-								<h5 class="plink-subtitle">
+								<h5 class="plink-subtitle d-none d-md-block">
 									Traditional Crops
 								</h5>
 							</div>
@@ -217,14 +217,14 @@
 
 						<!-- map -->
 						<a
-							href="#"
+							href="html/map.html"
 							id="plink-map"
 							class="plink-container col-9 col-lg-7"
 						>
 							<!-- text -->
 							<div class="plink-text">
 								<h6 class="plink-gentitle">Map</h6>
-								<h5 class="plink-subtitle">Sarangani Map</h5>
+								<h5 class="plink-subtitle d-none d-md-block">Sarangani Map</h5>
 							</div>
 							<!-- arrow -->
 							<div class="arrow-container">
@@ -235,18 +235,18 @@
 						<!-- two in a row -->
 						<div
 							id="double-card"
-							class="row grid gap-0 column-gap-4 col-9 col-lg-7"
+							class="row column-gap-4 col-9 col-lg-7"
 						>
 							<!-- tribe -->
 							<a
 								href="#"
 								id="plink-tribe"
-								class="plink-container col-10 col-lg-4"
+								class="plink-container"
 							>
 								<!-- text -->
 								<div class="plink-text">
 									<h6 class="plink-gentitle">Tribes</h6>
-									<h5 class="plink-subtitle">
+									<h5 class="plink-subtitle d-none d-md-block">
 										Farming Tribes
 									</h5>
 								</div>
@@ -260,12 +260,12 @@
 							<a
 								href="#"
 								id="plink-farm"
-								class="plink-container col-10 col-lg-4"
+								class="plink-container"
 							>
 								<!-- text -->
 								<div class="plink-text">
 									<h6 class="plink-gentitle">Farms</h6>
-									<h5 class="plink-subtitle">Crop Farms</h5>
+									<h5 class="plink-subtitle d-none d-md-block">Crop Farms</h5>
 								</div>
 								<!-- arrow -->
 								<div class="arrow-container">
@@ -275,7 +275,7 @@
 						</div>
 					</div>
 
-					<div class="col col-lg-4 d-none d-lg-block">
+					<div class="col col-lg-3 d-none d-lg-block">
 						<div class="container my-2">
 							<!-- Tags -->
 							<div id="landing-tags" class="row py-4 px-3 mb-3">
@@ -324,11 +324,7 @@
 							</div>
 
 							<!-- Socials -->
-							<div
-								id="landing-socials"
-								class="row py-4 px-3"
-								style="background-color: #ffffff"
-							>
+							<div id="landing-socials" class="row py-4 px-3">
 								<div class="">
 									<h4 class="w-25 py-2">Socials</h4>
 									<div
@@ -380,30 +376,11 @@
 		</section>
 
 		<!-- Footer -->
-		<footer
-			class="text-white pt-5"
-			style="
-				background: #1f4e3d;
-				background-image: url('../../img/bg/footer-bg.png'),
-					url('../../img/bg/leaf\ .png');
-				background-repeat: no-repeat, no-repeat;
-				background-position: left bottom, right bottom;
-				background-size: 500px 250px, 300px 300px;
-			"
-		>
+		<footer id="foot" class="text-white pt-5">
 			<div class="container">
 				<div class="row">
 					<div class="col-md-5 mb-3">
-						<div
-							style="
-								background-image: url('img/logo/travis-logo-white.svg');
-								background-repeat: no-repeat;
-								background-size: cover;
-								background-position: center;
-								aspect-ratio: 16 / 9;
-								height: 75px;
-							"
-						></div>
+						<div id="foot-logo"></div>
 						<p>
 							Discover the wisdom of generations past and the
 							power of modern data on our Traditional Crop
@@ -497,8 +474,8 @@
 				</div>
 
 				<div
+					id="credits"
 					class="text-center py-3 px-5 row rounded-top-5"
-					style="background: #1a4133"
 				>
 					<a
 						href="#"
