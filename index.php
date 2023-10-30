@@ -198,7 +198,7 @@
 						class="col col-lg-9 d-flex flex-column align-items-center grid gap-0 row-gap-4"
 					>
 						<a
-							href="html/crops.html"
+							href="html/crops.php"
 							id="plink-crop"
 							class="plink-container col-9 col-lg-7"
 						>

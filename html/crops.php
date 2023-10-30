@@ -151,7 +151,64 @@
 
 				<!-- crop cards -->
 				<div id="crop-cards" class="row">
+
+					<?php
+					$connection = pg_connect("host=localhost dbname=farm_crops user=postgres password=123");
+					if (!$connection){
+						echo "An error occured";
+						exit;
+					}
+
+					$result = pg_query($connection, "select traditional_crop.crop_id, basic_info.image, basic_info.name from traditional_crop left join basic_info on traditional_crop.basic_info_id = basic_info.basic_info_id");
+            		$count = pg_num_rows($result);
 					
+					if ($count > 0) {
+						while ($row = pg_fetch_assoc($result)) {
+							$crop_id = $row['crop_id'];
+							$image = $row['image'];
+							$name = $row['name'];
+		
+					?>
+						<!-- Saging with data from db -->
+						<div class="card-container col-6 col-md-4 col-lg-2 p-2">
+
+							<a
+								href="crops/saging.php"
+							>
+								<!-- image -->
+								<div class="crop-card py-3 px-1 d-flex justify-content-center align-items-end">
+									<?php
+									if ($image == "") {
+										// Image not Available
+										echo "Image not found.";
+									} else {
+										// Image Available
+									?>
+										<img src="<?php echo $image; ?>">
+									<?php
+									}
+									?>
+									<div
+									class="crop-card-text row w-100 d-flex flex-row justify-content-between align-items-center"
+								>
+									<h4 class="crop-name col-6"><?php echo ucfirst($name); ?></h4>
+									<div class="col-2 arrow-container">
+										<i
+											class="position-absolute bi bi-arrow-right-short fs-3"
+										></i>
+									</div>
+								</div>
+
+								</div>
+
+							</a>
+						</div>
+					<?php
+						}
+					} else {
+						echo '<h5>No Record Found </h5>';
+					}
+					?>
 					<!-- Saging -->
 					<div class="card-container col-6 col-md-4 col-lg-2 p-2">
 						<a
