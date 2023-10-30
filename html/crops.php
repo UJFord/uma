@@ -172,9 +172,7 @@
 						<!-- Saging with data from db -->
 						<div class="card-container col-6 col-md-4 col-lg-2 p-2">
 
-							<a
-								href="crops/saging.php"
-							>
+							<a href="crops/saging.php?crop_id=<?php echo $crop_id; ?>">
 								<!-- image -->
 								<div class="crop-card py-3 px-1 d-flex justify-content-center align-items-end">
 									<?php
@@ -188,9 +186,7 @@
 									<?php
 									}
 									?>
-									<div
-									class="crop-card-text row w-100 d-flex flex-row justify-content-between align-items-center"
-								>
+									<div class="crop-card-text row w-100 d-flex flex-row justify-content-between align-items-center">
 									<h4 class="crop-name col-6"><?php echo ucfirst($name); ?></h4>
 									<div class="col-2 arrow-container">
 										<i
@@ -209,6 +205,7 @@
 						echo '<h5>No Record Found </h5>';
 					}
 					?>
+
 					<!-- Saging -->
 					<div class="card-container col-6 col-md-4 col-lg-2 p-2">
 						<a
