@@ -64,6 +64,8 @@
 							<a href="#" class="nav-link">People</a>
 						</li>
 						<li class="nav-item">
+							<a href="html/crops.php" class="nav-link">Traditional Crops</a>
+						<li class="nav-item">
 							<a href="#" class="nav-link">Practices</a>
 						</li>
 						<li class="nav-item">

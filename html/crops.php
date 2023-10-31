@@ -30,7 +30,7 @@
 			class="navbar sticky-top navbar-expand-lg bg-success navbar-dark"
 		>
 			<div class="container">
-				<a href="../index.html" class="navbar-brand">
+				<a href="../index.php" class="navbar-brand">
 					<img
 						src="../img/logo/umalogo.png"
 						class="me-2"
@@ -62,6 +62,9 @@
 						</li>
 						<li class="nav-item">
 							<a href="#" class="nav-link">People</a>
+						</li>
+						<li class="nav-item">
+							<a href="crops.php" class="nav-link">Traditional Crops</a>
 						</li>
 						<li class="nav-item">
 							<a href="#" class="nav-link">Practices</a>
