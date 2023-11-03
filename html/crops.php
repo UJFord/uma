@@ -185,7 +185,7 @@
 									} else {
 										// Image Available
 									?>
-										<img src="<?php echo $image; ?>">
+										<!-- <img src="<?php echo $image; ?>"> -->
 									<?php
 									}
 									?>
