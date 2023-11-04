@@ -37,22 +37,15 @@
 				$crop_id = $_GET['crop_id'];
 
 				// query to get the selected data from the db
-				$query = pg_query($connection,"SELECT basic_info.image, basic_info.name, basic_info.scientific_name, basic_info.origin, basic_info.genus, plant_type.plant_type_name, farming.farming_name, farming.farming_description, usage_info.usage_name, usage_info.usage_description, usage_info.usage_example FROM traditional_crop left join basic_info on traditional_crop.basic_info_id = basic_info.basic_info_id left join farming on basic_info.farming_id = farming.farming_id left join usage_info on basic_info.usage_id = usage_info.usage_id left join plant_type on basic_info.plant_type_id = plant_type.plant_type_id");
+				$query = pg_query($connection,"select tribe.tribe_id, practices.practices_name, practices.practices_description, practices.practices_image from tribe left join practices on tribe.practices_id = practices.practices_id");
 				$count = pg_num_rows($query);
 					
 				if ($count > 0) {
 					while ($row = pg_fetch_assoc($query)) {
-						$name = $row['name'];
-						$image = $row['image'];
-						$scientific_name = $row['scientific_name'];
-						$origin = $row['origin'];
-						$genus = $row['genus'];
-						$plant_type_name = $row['plant_type_name'];
-						$farming_name = $row['farming_name'];
-						$farming_description = $row['farming_description'];
-						$usage_name = $row['usage_name'];
-						$usage_description = $row['usage_description'];
-						$usage_example = $row['usage_example'];
+						$tribe_id = $row['tribe_id'];
+						$practices_name = $row['practices_name'];
+						$practices_description = $row['practices_description'];
+						$practices_image = $row['practices_image'];
 				} 
 				}
 				else {
@@ -65,8 +58,8 @@
 						<!-- Image -->
 						<div>
 							<?php
-							if (!empty($image)) {
-								echo '<img src="' . $image . '" style="max-width: 100%; height: auto;">';
+							if (!empty($practices_image)) {
+								echo '<img src="' . $practices_image . '" style="max-width: 100%; height: auto;">';
 							} else {
 								echo "Image not found.";
 							}
@@ -79,7 +72,7 @@
 						</a>
 
 						<!-- Crop Name -->
-						<h1 class="mb-4"><?php echo $name; ?></h1>
+						<h1 class="mb-4"><?php echo $practices_name; ?></h1>
 						<!-- Display other data here -->
 					</div>
 				</section>
@@ -94,22 +87,9 @@
 
 						<!-- desc -->
 						<div class="fs-6 mb-3">
-							<strong class="fs-4"><?php echo ucfirst($name);?></strong><?php echo $farming_description;?>
+							<strong class="fs-4"><?php echo ucfirst($practices_name);?> </strong><?php echo $practices_description;?>
 						</div>
-
-						<!-- scientific name -->
-						<div class="info-item"><i class="fa-solid fa-microscope"></i><p><em><?php echo $scientific_name;?></em></p></div>
-
-						<!-- plant type -->
-						<div class="info-item"><i class="fa-solid fa-seedling"></i><p><?php echo $origin;?></p></div>
-
-						<!-- use -->
-						<div class="info-item"><i class="fa-solid fa-utensils"></i><p><?php echo $usage_example;?></p></div>
-
-						<!-- origin -->
-						<div class="info-item"><i class="fa-regular fa-newspaper"></i><p><?php echo $usage_description;?></p></div>
 					</div>
-
 					<!-- map -->
 					<div></div>
 				</section>
