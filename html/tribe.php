@@ -10,7 +10,7 @@
 	<link rel="stylesheet" href="../css/crops/crops.css" />
 	<!-- favicon -->
 	<link rel="shortcut icon" href="../img/logo/umalogo.png" type="image/x-icon" />
-	<title>Uma | Practices </title>
+	<title>Uma | Tribes </title>
 </head>
 
 <body>
@@ -22,13 +22,15 @@
 	<!-- Showcase -->
 	<section id="main-showcase" class="position-relative">
 		<div id="showcase-div" class="container d-flex flex-column justify-content-center align-items-center h-100">
-			<h1 class="mb-4">Tribe Practices</h1>
+			<h1 class="mb-4">Tribes</h1>
 			<p class="w-75 text-center">
-			Sarangani is renowned for its rich cultural heritage and traditional practices. The indigenous tribe's 
-			heritage in Sarangani includes distinctive customs and rituals that have been practiced for generations. 
-			These age-old practices, deeply rooted in the tribe's history, encompass unique ceremonies, spiritual rites, 
-			and customary traditions. Passed down through ancestral wisdom, these practices not only sustain the tribe's 
-			identity and beliefs but also play a vital role in shaping the social fabric and preserving the rich cultural heritage of the community.
+			Sarangani is distinguished for its vibrant cultural diversity and ancient tribal legacies. 
+			The indigenous tribes in Sarangani uphold a wealth of heritage, embracing unique traditions and customary 
+			rituals that have endured through generations. These timeless practices, deeply embedded in the history of 
+			each tribe, encompass diverse ceremonies, spiritual customs, and ancestral traditions. Passed down through 
+			generations, these tribal legacies not only perpetuate the identity and beliefs of each tribe but also serve 
+			as a cornerstone in defining the social structure and safeguarding the diverse cultural heritage of the 
+			community.
 			</p>
 		</div>`
 
@@ -43,7 +45,7 @@
 			<div class="row d-flex justify-content-between mb-3">
 				<!-- title -->
 				<div class="col-6">
-					<h2 id="crops-title" class="fw-semibold">Practices</h2>
+					<h2 id="crops-title" class="fw-semibold">Tribes</h2>
 				</div>
 
 				<!-- search -->
@@ -87,7 +89,7 @@
 					exit;
 				}
 
-				$result = pg_query($connection, "select tribe.tribe_id, practices.practices_name, practices.practices_image from tribe left join practices on tribe.practices_id = practices.practices_id");
+				$result = pg_query($connection, "select tribe.tribe_id, tribe., practices.practices_image from tribe left join practices on tribe.practices_id = practices.practices_id");
 				$count = pg_num_rows($result);
 
 				if ($count > 0) {

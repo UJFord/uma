@@ -135,7 +135,7 @@
 
 				<!-- Saging -->
 				<div class="card-container col-6 col-md-4 col-lg-2 p-2">
-					<a href="crops/saging.html" class="crop-card py-3 px-1 d-flex justify-content-center align-items-end" style="
+					<a href="#" class="crop-card py-3 px-1 d-flex justify-content-center align-items-end" style="
 								background-image: url('https://images.unsplash.com/photo-1603833665858-e61d17a86224?auto=format&fit=crop&q=80&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&w=1854');
 							">
 						<div class="crop-card-text row w-100 d-flex flex-row justify-content-between align-items-center">
