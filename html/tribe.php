@@ -89,35 +89,40 @@
 					exit;
 				}
 
-				$result = pg_query($connection, "select tribe.tribe_id, tribe., practices.practices_image from tribe left join practices on tribe.practices_id = practices.practices_id");
+				$result = pg_query($connection, "select tribe.tribe_id, tribe.tribe_name, tribe.tribe_image, practices.practices_name, practices.practices_description, practices.practices_image, ritual.ritual_name, ritual.ritual_description, ritual.ritual_image from tribe left join practices on tribe.practices_id = practices.practices_id left join ritual on tribe.ritual_id = ritual.ritual_id");
 				$count = pg_num_rows($result);
 
 				if ($count > 0) {
 					while ($row = pg_fetch_assoc($result)) {
 						$tribe_id = $row['tribe_id'];
+						$tribe_name = $row['tribe_name'];
+						$tribe_image = $row['tribe_image'];
 						$practices_name = $row['practices_name'];
+						$practices_description = $row['practices_description'];
 						$practices_image = $row['practices_image'];
-
+						$ritual_name = $row['ritual_name'];
+						$ritual_description = $row['ritual_description'];
+						$ritual_image = $row['ritual_image'];
 				?>
 						<!-- Saging with data from db -->
 						<div class="card-container col-6 col-md-4 col-lg-2 p-2">
 
-							<a href="crops/practice.php?crop_id=<?php echo $tribe_id; ?>">
+							<a href="crops/tribe.php?crop_id=<?php echo $tribe_id; ?>">
 								<!-- image -->
 								<div class="crop-card py-3 px-1 d-flex justify-content-center align-items-end">
 									<?php
-									if ($practices_image == "") {
+									if ($tribe_image == "") {
 										// Image not Available
 										echo "Image not found.";
 									} else {
 										// Image Available
 									?>
-										<!-- <img src="<?php echo $practices_image; ?>"> -->
+										<!-- <img src="<?php echo $tribe_image; ?>"> -->
 									<?php
 									}
 									?>
 									<div class="crop-card-text row w-100 d-flex flex-row justify-content-between align-items-center">
-										<h4 class="crop-name col-6"><?php echo ucfirst($practices_name); ?></h4>
+										<h4 class="crop-name col-6"><?php echo ucfirst($tribe_name); ?></h4>
 										<div class="col-2 arrow-container">
 											<i class="position-absolute bi bi-arrow-right-short fs-3"></i>
 										</div>
