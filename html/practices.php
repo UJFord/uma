@@ -100,30 +100,27 @@
 						<!-- Saging with data from db -->
 						<div class="card-container col-6 col-md-4 col-lg-2 p-2">
 
-							<a href="crops/practice.php?crop_id=<?php echo $tribe_id; ?>">
-								<!-- image -->
-								<div class="crop-card py-3 px-1 d-flex justify-content-center align-items-end">
-									<?php
-									if ($practices_image == "") {
-										// Image not Available
-										echo "Image not found.";
-									} else {
-										// Image Available
-									?>
-										<!-- <img src="<?php echo $practices_image; ?>"> -->
-									<?php
-									}
-									?>
-									<div class="crop-card-text row w-100 d-flex flex-row justify-content-between align-items-center">
-										<h4 class="crop-name col-6"><?php echo ucfirst($practices_name); ?></h4>
-										<div class="col-2 arrow-container">
-											<i class="position-absolute bi bi-arrow-right-short fs-3"></i>
-										</div>
+						<a href="crops/practice.php?crop_id=<?php echo $tribe_id; ?>" class="crop-card py-3 px-1 d-flex justify-content-center align-items-center">
+							<div class="position-relative"><!-- A parent container for positioning -->
+								<?php
+								if ($practices_image == "") {
+									// Image not Available
+									echo "Image not found.";
+								} else {
+									// Image Available
+								?>
+								<img src="<?php echo $practices_image; ?>" style="width: 55%; height: 100%; object-fit: cover;">
+								<?php
+								}
+								?>
+								<div class="crop-card-text row w-100 position-absolute top-50 start-50 translate-middle">
+									<h4 class="crop-name col-6"><?php echo ucfirst($practices_name); ?></h4>
+									<div class="col-2 arrow-container">
+										<i class="bi bi-arrow-right-short fs-3"></i>
 									</div>
-
 								</div>
-
-							</a>
+							</div>
+						</a>
 						</div>
 				<?php
 					}
@@ -131,34 +128,6 @@
 					echo '<h5>No Record Found </h5>';
 				}
 				?>
-
-				<!-- Saging -->
-				<div class="card-container col-6 col-md-4 col-lg-2 p-2">
-					<a href="#" class="crop-card py-3 px-1 d-flex justify-content-center align-items-end" style="
-								background-image: url('https://images.unsplash.com/photo-1603833665858-e61d17a86224?auto=format&fit=crop&q=80&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&w=1854');
-							">
-						<div class="crop-card-text row w-100 d-flex flex-row justify-content-between align-items-center">
-							<h4 class="crop-name col-6">Saging</h4>
-							<div class="col-2 arrow-container">
-								<i class="position-absolute bi bi-arrow-right-short fs-3"></i>
-							</div>
-						</div>
-					</a>
-				</div>
-
-				<!-- Mais -->
-				<div class="card-container col-6 col-md-4 col-lg-2 p-2">
-					<a href="#" class="crop-card py-3 px-1 d-flex justify-content-center align-items-end" style="
-								background-image: url('https://plus.unsplash.com/premium_photo-1664299124175-e2c793325bfa?auto=format&fit=crop&q=80&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&w=2001');
-							">
-						<div class="crop-card-text row w-100 d-flex flex-row justify-content-between align-items-center">
-							<h4 class="crop-name col-6">Mais</h4>
-							<div class="col-2 arrow-container">
-								<i class="position-absolute bi bi-arrow-right-short fs-3"></i>
-							</div>
-						</div>
-					</a>
-				</div>
 			</div>
 		</div>
 	</section>

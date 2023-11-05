@@ -108,7 +108,6 @@ body {
 /* crop cards */
 .crop-card{
 	border-radius: 0.5rem;
-
 	background: #fff;
 	background-position: center;
 	background-repeat: no-repeat;
@@ -177,8 +176,8 @@ body {
 			color: #ffffff;
 			flex: 1;
 			display: flex;
-				justify-content: end;
-				align-items: center;
+			justify-content: end;
+			align-items: center;
 			
 		}
 			.arrow-container i{

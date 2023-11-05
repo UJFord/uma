@@ -72,7 +72,7 @@
 						</div>
 
 						<!-- Return -->
-						<a href="../crops.php">
+						<a href="../tribe.php">
 							<i class="bi bi-caret-left-square fs-1"></i>
 						</a>
 
@@ -103,7 +103,7 @@
 							<div class="image-container">
 								<?php
 								if (!empty($practices_image)) {
-									echo '<img src="' . $practices_image . '" style="max-width: 100%; height: auto;">';
+									/* echo '<img src="' . $practices_image . '" style="max-width: 100%; height: auto;">'; */
 								} else {
 									echo "Image not found.";
 								}
