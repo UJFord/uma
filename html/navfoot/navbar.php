@@ -57,7 +57,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
 					<a href="#" class="nav-link">Sarangani</a>
 				</li>
 				<li class="nav-item">
-					<a href="/incognito-capstone/html/tribe.php" class="nav-link">People</a>
+					<a href="/incognito-capstone/html/tribes.php" class="nav-link">People</a>
 				</li>
 				<li class="nav-item">
 					<a href="/incognito-capstone/html/crops.php" class="nav-link">Traditional Crops</a>
