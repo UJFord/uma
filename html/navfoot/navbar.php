@@ -18,7 +18,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
 				break;
 				//homepage
 				default:
-					echo 'index.php';
+					echo '../index.php';
 			}
 			?>
 		" class="navbar-brand">

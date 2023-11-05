@@ -16,7 +16,7 @@
 <body>
 	<!-- Navbar -->
 	<?php
-		require('navfoot/navbar.php');
+	require('navfoot/navbar.php');
 	?>
 
 	<!-- Showcase -->
@@ -24,13 +24,13 @@
 		<div id="showcase-div" class="container d-flex flex-column justify-content-center align-items-center h-100">
 			<h1 class="mb-4">Tribes</h1>
 			<p class="w-75 text-center">
-			Sarangani is distinguished for its vibrant cultural diversity and ancient tribal legacies. 
-			The indigenous tribes in Sarangani uphold a wealth of heritage, embracing unique traditions and customary 
-			rituals that have endured through generations. These timeless practices, deeply embedded in the history of 
-			each tribe, encompass diverse ceremonies, spiritual customs, and ancestral traditions. Passed down through 
-			generations, these tribal legacies not only perpetuate the identity and beliefs of each tribe but also serve 
-			as a cornerstone in defining the social structure and safeguarding the diverse cultural heritage of the 
-			community.
+				Sarangani is distinguished for its vibrant cultural diversity and ancient tribal legacies.
+				The indigenous tribes in Sarangani uphold a wealth of heritage, embracing unique traditions and customary
+				rituals that have endured through generations. These timeless practices, deeply embedded in the history of
+				each tribe, encompass diverse ceremonies, spiritual customs, and ancestral traditions. Passed down through
+				generations, these tribal legacies not only perpetuate the identity and beliefs of each tribe but also serve
+				as a cornerstone in defining the social structure and safeguarding the diverse cultural heritage of the
+				community.
 			</p>
 		</div>`
 
@@ -107,27 +107,27 @@
 						<!-- Saging with data from db -->
 						<div class="card-container col-6 col-md-4 col-lg-2 p-2">
 
-						<a href="crops/tribe.php?crop_id=<?php echo $tribe_id; ?>" class="crop-card py-3 px-1 d-flex justify-content-center align-items-center">
-							<div class="position-relative"><!-- A parent container for positioning -->
-								<?php
-								if ($tribe_image == "") {
-									// Image not Available
-									echo "Image not found.";
-								} else {
-									// Image Available
-								?>
-								<img src="<?php echo $tribe_image; ?>" style="width: 100%">
-								<?php
-								}
-								?>
-								<div class="crop-card-text row w-100 position-absolute start-50 translate-middle">
-									<h4 class="crop-name col-6"><?php echo ucfirst($tribe_name); ?></h4>
-									<div class="col-2 arrow-container">
-										<i class="bi bi-arrow-right-short fs-3"></i>
+							<a href="crops/tribe.php?crop_id=<?php echo $tribe_id; ?>" class="crop-card py-3 px-1 d-flex justify-content-center align-items-center">
+								<div class="position-relative"><!-- A parent container for positioning -->
+									<?php
+									if ($tribe_image == "") {
+										// Image not Available
+										echo "Image not found.";
+									} else {
+										// Image Available
+									?>
+										<img src="<?php echo $tribe_image; ?>" style="width: 100%">
+									<?php
+									}
+									?>
+									<div class="crop-card-text row w-100 position-absolute start-50 translate-middle">
+										<h4 class="crop-name col-6"><?php echo ucfirst($tribe_name); ?></h4>
+										<div class="col-2 arrow-container">
+											<i class="bi bi-arrow-right-short fs-3"></i>
+										</div>
 									</div>
 								</div>
-							</div>
-						</a>
+							</a>
 						</div>
 				<?php
 					}
@@ -138,8 +138,7 @@
 
 				<!-- tagakaolo -->
 				<div class="card-container col-6 col-md-4 col-lg-2 p-2">
-					<a href="#" class="crop-card py-3 px-1 d-flex justify-content-center align-items-end" 
-					style="background-image: url('https://cdn.shopify.com/s/files/1/0275/0903/0955/files/KAAYO-CSR-Photos-25May2020_4.jpg?v=1590403981');
+					<a href="#" class="crop-card py-3 px-1 d-flex justify-content-center align-items-end" style="background-image: url('https://cdn.shopify.com/s/files/1/0275/0903/0955/files/KAAYO-CSR-Photos-25May2020_4.jpg?v=1590403981');
 					">
 						<div class="crop-card-text row w-100 d-flex flex-row justify-content-between align-items-center">
 							<h4 class="crop-name col-6">Tagakaolo</h4>
@@ -169,7 +168,7 @@
 
 	<!-- Footer -->
 	<?php
-		require('navfoot/footer.php');
+	require('navfoot/footer.php');
 	?>>
 
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
