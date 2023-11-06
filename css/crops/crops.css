@@ -61,7 +61,7 @@ body {
 #main-showcase{
 	height: 120vw;
         max-height: 500px;
-    background-image: url('https://img.freepik.com/free-photo/golden-wheat-fields-glow-sunset-generated-by-ai_188544-23269.jpg?t=st=1697624947~exp=1697628547~hmac=6554428e5fe3f495917862dbe74ae459786024db839c7f1aa094c6a1c7211bce&w=1380');
+    background-image: url('https://images.unsplash.com/photo-1600399507991-c9f51bc7cc2f?auto=format&fit=crop&q=80&w=1675&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center;
@@ -75,8 +75,8 @@ body {
         left: 0;
         width: 100%;
         height: 100%;
-        background: #000000;
-        background: radial-gradient(circle, #00000000 0%, #0000003b 37%, #000000a2 89%);
+        background: rgb(2,0,36);
+		background: radial-gradient(circle, rgba(2,0,36,0.3837185386850053) 0%, rgba(0,0,0,0.722654112914697) 100%);
         z-index: -1;
     }
 
@@ -108,7 +108,6 @@ body {
 /* crop cards */
 .crop-card{
 	border-radius: 0.5rem;
-
 	background: #fff;
 	background-position: center;
 	background-repeat: no-repeat;
@@ -177,8 +176,8 @@ body {
 			color: #ffffff;
 			flex: 1;
 			display: flex;
-				justify-content: end;
-				align-items: center;
+			justify-content: end;
+			align-items: center;
 			
 		}
 			.arrow-container i{
