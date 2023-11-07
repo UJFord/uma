@@ -17,6 +17,7 @@
 	<!-- Navbar -->
 	<?php
 	require('navfoot/navbar.php');
+	require('navfoot/connection.php');
 	?>
 
 	<!-- Showcase -->
@@ -82,12 +83,6 @@
 			<div id="crop-cards" class="row">
 
 				<?php
-				$connection = pg_connect("host=localhost dbname=farm_crops user=postgres password=123");
-				if (!$connection) {
-					echo "An error occured";
-					exit;
-				}
-
 				$result = pg_query($connection, "select traditional_crop.crop_id, basic_info.image, basic_info.name from traditional_crop left join basic_info on traditional_crop.basic_info_id = basic_info.basic_info_id");
 				$count = pg_num_rows($result);
 
