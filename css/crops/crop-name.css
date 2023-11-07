@@ -1,0 +1,140 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;700&family=Pacifico&family=Roboto+Mono&display=swap');
+
+/* variable colors */
+:root{
+	/* color pallete */
+	--mainBrand: #016A70;
+	--darkAccent:#647A78;
+	--lightAccent: #7FA9AD;
+	--darkShades: #202A21;
+	--lightShades: #FFFFDD;
+
+	/* others */
+	--searchTextColor: #e7e7e7;
+	--headColor: #ffc861;
+    --paragraphColor: #435251;
+}
+
+a{
+	color: #464646;
+	text-decoration: none;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+
+body {
+	font-size: 16px;
+	font-family: 'Manrope', sans-serif;
+	background: var(--lightShades);
+	font-family: 'Manrope', sans-serif;
+    color: var(--darkShades);
+}
+
+#back-btn{
+    position: fixed;
+    top: 2rem;
+    left: 2rem;
+    z-index: 100;
+}
+    #back-btn i{
+        font-size: 4rem;
+    }
+    #back-btn:hover i{
+        cursor: pointer;
+        color: #797979;
+    }
+    #back-btn:active i{
+        color: #3d3d3d;
+    }
+
+/* CONTAINER */
+#main-container {
+}
+
+/* head */
+#head h1{
+    font-family: 'Pacifico', cursive;
+    font-size: 4rem;
+}
+#head p{
+    font-size: 1.2rem;
+    color: var(--paragraphColor);
+}
+
+/* other names and image */
+#name-n-img h3{
+    font-family: 'Manrope', sans-serif;
+    font-size: 3rem;
+    font-weight: bold;
+    color: var(--darkShades);
+}
+#name-n-img h5{
+    font-family: 'Roboto Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--paragraphColor);
+}
+#crop-image{
+    position: relative;
+	border-radius: 1.5rem;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+    aspect-ratio: 1/1;
+    z-index: -1;
+    overflow: hidden;
+}
+
+/* origin */
+#origin{
+    font-size: 1rem;
+}
+
+/* Usage and Farming */
+#use-n-farm{
+    position: relative;
+}
+#use-n-farm .container{
+    z-index: 1;
+}
+
+.use-n-farm-img{
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+    aspect-ratio: 4/3;
+    border-radius: 1rem;
+}
+
+#use-n-farm h4{
+    color: var(--lightShades);
+    font-weight: bold;
+    font-size: 2rem;
+    font-family: 'Roboto Mono', monospace;
+}
+
+#use-n-farm p{
+    color: #F2F2D6;
+}
+/* bg */
+#use-n-farm .bg-container{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+    #use-n-farm .bg{
+        background: var(--darkAccent);
+        width: 100%;
+        height: 80%;
+        z-index: 0;
+    }
+
+
+

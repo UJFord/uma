@@ -65,7 +65,6 @@ body {
 
     #showcase-div h1{
         z-index: 1;
-        font-family: 'Pacifico', cursive;
         color: var(--headColor);
 		font-size: 4rem;
     }

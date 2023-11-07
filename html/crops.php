@@ -93,9 +93,9 @@
 						$name = $row['name'];
 
 				?>
-						<!-- Saging -->
+						<!-- crop -->
 						<div class="card-container col-6 col-md-4 col-lg-2 p-2">
-							<a href="crops/saging.php?crop_id=<?php echo $crop_id; ?>" class="crop-card py-3 px-1 d-flex justify-content-center align-items-end" style="
+							<a href="crops/crop-name.php?crop_id=<?php echo $crop_id; ?>" class="crop-card py-3 px-1 d-flex justify-content-center align-items-end" style="
 									background-image: url('<?php echo $image; ?>');
 								">
 								<div class="crop-card-text row w-100 d-flex flex-row justify-content-between align-items-center">
