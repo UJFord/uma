@@ -42,7 +42,7 @@ body {
     z-index: 100;
 }
     #back-btn i{
-        font-size: 4rem;
+        font-size: 3rem;
     }
     #back-btn:hover i{
         cursor: pointer;
