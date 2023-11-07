@@ -105,7 +105,7 @@ if (isset($_GET['crop_id'])) {
 				<div id="usage" class="d-flex justify-content-evenly align-items-center">
 					<!-- text -->
 					<div class="text col-5">
-						<h4 class="">Usage</h4>
+						<h4 class=""><?php echo ucfirst($usage_name); ?></h4>
 						<p class=""><?php echo $usage_description; ?></p>
 					</div>
 					<!-- image -->
@@ -118,7 +118,7 @@ if (isset($_GET['crop_id'])) {
 					<div class="use-n-farm-img col-4 " style="background-image: url('<?php echo $farming_image; ?>');"></div>
 					<!-- text -->
 					<div class="text col-5">
-						<h4 class="">Farming</h4>
+						<h4 class=""><?php echo ucfirst($farming_name); ?></h4>
 						<p class=""><?php echo $farming_description; ?></p>
 					</div>
 				</div>

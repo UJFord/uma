@@ -116,33 +116,6 @@
 					echo '<h5>No Record Found </h5>';
 				}
 				?>
-
-				<!-- tagakaolo -->
-				<div class="card-container col-6 col-md-4 col-lg-2 p-2">
-					<a href="#" class="crop-card py-3 px-1 d-flex justify-content-center align-items-end" style="background-image: url('https://cdn.shopify.com/s/files/1/0275/0903/0955/files/KAAYO-CSR-Photos-25May2020_4.jpg?v=1590403981');
-					">
-						<div class="crop-card-text row w-100 d-flex flex-row justify-content-between align-items-center">
-							<h4 class="crop-name col-6">Tagakaolo</h4>
-							<div class="col-2 arrow-container">
-								<i class="position-absolute bi bi-arrow-right-short fs-3"></i>
-							</div>
-						</div>
-					</a>
-				</div>
-
-				<!-- Mais -->
-				<div class="card-container col-6 col-md-4 col-lg-2 p-2">
-					<a href="#" class="crop-card py-3 px-1 d-flex justify-content-center align-items-end" style="
-								background-image: url('https://tribesinthephilippines.files.wordpress.com/2018/03/family.jpg?w=566');
-							">
-						<div class="crop-card-text row w-100 d-flex flex-row justify-content-between align-items-center">
-							<h4 class="crop-name col-6">Tboli</h4>
-							<div class="col-2 arrow-container">
-								<i class="position-absolute bi bi-arrow-right-short fs-3"></i>
-							</div>
-						</div>
-					</a>
-				</div>
 			</div>
 		</div>
 	</section>
