@@ -32,7 +32,7 @@ if (isset($_GET['tribe_id'])) {
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
 	<!-- cutom css -->
-	<link rel="stylesheet" href="../../css/crops/saging.css" />
+	<link rel="stylesheet" href="../../css/tribes/tribes.css" />
 	<!-- favicon -->
 	<link rel="shortcut icon" href="../../img/logo/favicon.svg" type="image/x-icon" />
 	<title>Crops | <?php echo $tribe_name; ?></title>
@@ -42,7 +42,8 @@ if (isset($_GET['tribe_id'])) {
 	<!-- container -->
 	<div id="main-container" class="row border vh-100">
 
-		<section id="main-showcase" class="col-sm-6 position-relative h-100" style="background-image: url('<?php echo (!empty($tribe_image)) ? $tribe_image : ''; ?>');">
+		<!-- Showcase -->
+		<section id="main-showcase" class="col-6 h-100" style="background-image: url('<?php echo (!empty($tribe_image)) ? $tribe_image : ''; ?>');">
 			<div id="showcase-div" class="container p-5 d-flex flex-column justify-content-between align-items-start h-100">
 
 				<!-- Return -->
@@ -56,18 +57,21 @@ if (isset($_GET['tribe_id'])) {
 			</div>
 		</section>
 
-		<!-- Navigation Cards -->
-		<section id="info-section" class="col-sm-6 h-100 d-flex justify-content-center align-items-center p-5">
+		<!-- Information Section -->
+		<div class="col-6"></div>
+		<section id="info-section" class="col-6 h-100 d-flex justify-content-center p-5">
 			<!-- container -->
 			<div id="info-container" class="fs-6">
 
 				<!-- desc -->
-				<strong class="fs-4"><?php echo ucfirst($tribe_name); ?></strong>
+				<div class="description text-center d-flex flex-column align-items-center mb-4">
+					<h1 id="tribe-name" class="text-center"><?php echo ucfirst($tribe_name); ?></h1>
+					<p class="col-10">Sarangani, a province located in the southern part of the Philippines, is home to a variety of traditional indigenous communities. These groups have their own distinct cultural practices, beliefs, and ways of life that have been passed down through generations. These traditions often center around a strong connection to the land, nature, and spirituality. The people of Sarangani have worked hard to preserve their cultural heritage despite the challenges of modernization. Visitors to the province have the opportunity to experience and learn about the rich and diverse traditions of these indigenous communities through cultural exhibitions and interactions, contributing to the unique cultural tapestry of Sarangani.</p>
+				</div>
 
-				<hr>
-				<strong class="fs-4">Practices</strong>
-				<hr>
 
+				<!-- Practices -->
+				<h2 class="section-title">Practices</h2>
 				<!-- Div to contain practice Image and practice Example -->
 				<div class="usage-details">
 					<?php
@@ -87,24 +91,15 @@ if (isset($_GET['tribe_id'])) {
 								$practices_image = $row['practices_image'];
 
 					?>
-								<div>
-									<!-- practice image -->
-									<div class="image-container">
-										<?php
-										if (!empty($practices_image)) {
-											echo '<img src="' . $practices_image . '" style="max-width: 100%; height: auto;">';
-										} else {
-											echo "Image not found.";
-										}
-										?>
-									</div>
-									<!-- practice example -->
-									<div class="example-container">
-										<strong><?php echo $practices_name ?></strong>
-										<br><br>
-										<strong>Practice Description:</strong>
-										<p><?php echo $practices_description; ?></p>
-									</div>
+								<!-- practice example -->
+								<div class="">
+									<h3 class="prax-name"><?php echo $practices_name ?></h3>
+									<p class="mb-5">
+										<!-- image -->
+										<img src="<?php echo $practices_image;?>" class="rounded float-start m-2">
+										<!-- description -->
+										<?php echo $practices_description; ?>
+									</p>
 								</div>
 					<?php
 							}
@@ -115,9 +110,9 @@ if (isset($_GET['tribe_id'])) {
 					?>
 				</div>
 
-				<hr>
-				<strong class="fs-4">Rituals</strong>
-				<hr>
+
+				<!-- Rituals -->
+				<h2 class="section-title">Rituals</h2>
 				<!-- Div to contain tribe ritual data -->
 				<div class="usage-details">
 					<?php
@@ -137,24 +132,15 @@ if (isset($_GET['tribe_id'])) {
 								$ritual_image = $row['ritual_image'];
 
 					?>
-								<div>
-									<!-- ritual image -->
-									<div class="image-container">
-										<?php
-										if (!empty($ritual_image)) {
-											echo '<img src="' . $ritual_image . '" style="max-width: 100%; height: auto;">';
-										} else {
-											echo "Image not found.";
-										}
-										?>
-									</div>
-									<!-- ritual example -->
-									<div class="example-container">
-										<strong><?php echo $ritual_name ?></strong>
-										<br><br>
-										<strong>Ritual Description:</strong>
-										<p><?php echo $ritual_description; ?></p>
-									</div>
+								<!-- ritual example -->
+								<div class="">
+									<h2 class="prax-name"><?php echo $ritual_name ?></h2>
+									<p class="mb-5">
+										<!-- image -->
+										<img src="<?php echo $ritual_image;?>" class="rounded float-end m-2">
+										<!-- description -->
+										<?php echo $ritual_description; ?>
+									</p>
 								</div>
 					<?php
 							}

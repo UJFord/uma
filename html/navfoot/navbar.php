@@ -8,35 +8,9 @@ $current_page = basename($_SERVER['PHP_SELF']);
 <nav id="nav" class="navbar sticky-top navbar-expand-lg bg-success navbar-dark">
 	<div class="container">
 		<!-- changing src path depending on the current page -->
-		<a href="
-			<?php
-			// Define a variable to track the current page
-			switch ($current_page) {
-				//crops page
-				case 'crops.php':
-					echo '../index.php';
-				break;
-				//homepage
-				default:
-					echo '../index.php';
-			}
-			?>
-		" class="navbar-brand">
+		<a href="<?php echo ($current_page != 'index.php')? '../index.php' : '#';?>" class="navbar-brand">
 			<!-- changing src path depending on the current page -->
-			<img src="
-				<?php
-				// Define a variable to track the current page
-				switch ($current_page) {
-					// crops page
-					case 'crops.php':
-						echo '../img/logo/umalogo.png';
-						break;
-						//homepage
-					default:
-						echo 'img/logo/umalogo.png';
-				}
-				?>
-			" class="me-2" height="54" alt="Uma Logo" loading="lazy" />
+			<img src="<?php echo ($current_page == 'index.php')? 'img/logo/umalogo.png' : '../img/logo/umalogo.png';?>" class="me-2" height="54" alt="Uma Logo" loading="lazy" />
 		</a>
 
 		<!-- search -->
@@ -45,7 +19,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
 			<input type="text" placeholder="Search Uma" />
 		</div>
 
-			<!-- button for mobile -->
+		<!-- button for mobile -->
 		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
 			<span class="navbar-toggler-icon"></span>
 		</button>

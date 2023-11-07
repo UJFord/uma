@@ -1,0 +1,123 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;700&family=Pacifico&display=swap');
+/* 
+font-family: 'Manrope', sans-serif;
+font-family: 'Pacifico', cursive;
+font-family: 'Roboto Mono', monospace;
+*/
+
+/* variable colors */
+:root{
+	/* color pallete */
+	--mainBrand: #016A70;
+	--darkAccent:#647A78;
+	--lightAccent: #7FA9AD;
+	--darkShades: #202A21;
+	--lightShades: #FFFFDD;
+
+	/* others */
+	--searchTextColor: #e7e7e7;
+	--headColor: #ffc861;
+}
+
+a{
+	color: #fff;
+	text-decoration: none;
+}
+
+html{
+    overflow-x: hidden;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+img{
+    max-width: 10rem;
+}
+
+body {
+	font-size: 16px;
+	font-family: 'Manrope', sans-serif;
+	background: var(--lightShades);
+	font-family: 'Manrope', sans-serif;
+    color: var(--darkShades);
+    /* overflow-x: hidden; */
+}
+
+
+/* CONTAINER */
+
+/* showcase */
+#main-showcase{
+    position: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    z-index: 0;
+    color: #fff;
+    /* overflow: hidden; */
+}
+    #main-showcase::before{
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgb(0,0,0);
+        background: linear-gradient(180deg, rgba(0,0,0,0.23021708683473385) 0%, rgba(0,0,0,0.9164915966386554) 100%);
+        z-index: -1;
+    }
+
+    #showcase-div h1{
+        font-family: ;
+        z-index: 1;
+        color: var(--headColor);
+		font-size: 4rem;
+        font-family: 'Pacifico', cursive;
+    }
+
+/* tribe-name */
+#tribe-name{
+    font-weight: bold;
+    font-family: 'Roboto Mono', monospace;
+}
+
+.section-title{
+    font-size: 1rem;
+    font-family: 'Roboto Mono', monospace;
+
+}
+
+.prax-name{
+    font-weight: bold;
+}
+
+/* INFO */
+.info-item{
+    display: flex;
+    /* margin-left: 0.5rem; */
+}
+#info-container i{
+    margin: 0.5rem;
+}
+
+/* usage image and example containers */
+.usage-details {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.image-container {
+    max-width: 20%;
+    height: auto;
+    margin-right: 20px;
+}
+
+.example-container {
+    margin-right: 10px;
+}
