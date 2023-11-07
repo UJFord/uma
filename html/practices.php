@@ -17,6 +17,7 @@
 	<!-- Navbar -->
 	<?php
 		require('navfoot/navbar.php');
+		require('navfoot/connection.php');
 	?>
 
 	<!-- Showcase -->
@@ -81,46 +82,32 @@
 			<div id="crop-cards" class="row">
 
 				<?php
-				$connection = pg_connect("host=localhost dbname=farm_crops user=postgres password=123");
-				if (!$connection) {
-					echo "An error occured";
-					exit;
-				}
-
-				$result = pg_query($connection, "select tribe.tribe_id, practices.practices_name, practices.practices_image from tribe left join practices on tribe.practices_id = practices.practices_id");
+				$result = pg_query($connection, "select * from practices");
 				$count = pg_num_rows($result);
 
 				if ($count > 0) {
 					while ($row = pg_fetch_assoc($result)) {
-						$tribe_id = $row['tribe_id'];
+						$practices_id = $row['practices_id'];
 						$practices_name = $row['practices_name'];
+						$practices_description = $row['practices_description'];
 						$practices_image = $row['practices_image'];
 
 				?>
 						<!-- Saging with data from db -->
 						<div class="card-container col-6 col-md-4 col-lg-2 p-2">
 
-						<a href="crops/practice.php?crop_id=<?php echo $tribe_id; ?>" class="crop-card py-3 px-1 d-flex justify-content-center align-items-center">
-							<div class="position-relative"><!-- A parent container for positioning -->
-								<?php
-								if ($practices_image == "") {
-									// Image not Available
-									echo "Image not found.";
-								} else {
-									// Image Available
-								?>
-								<img src="<?php echo $practices_image; ?>" style="width: 55%; height: 100%; object-fit: cover;">
-								<?php
-								}
-								?>
-								<div class="crop-card-text row w-100 position-absolute top-50 start-50 translate-middle">
+						<a href="practice/practice.php?practices_id=<?php echo $practices_id; ?>" class="crop-card py-3 px-1 d-flex justify-content-center align-items-end" style="
+									background-image: url('<?php echo $practices_image; ?>');
+								">
+								<div class="crop-card-text row w-100 d-flex flex-row justify-content-between align-items-center">
+									<!-- crop name -->
 									<h4 class="crop-name col-6"><?php echo ucfirst($practices_name); ?></h4>
+									<!-- arrow -->
 									<div class="col-2 arrow-container">
-										<i class="bi bi-arrow-right-short fs-3"></i>
+										<i class="position-absolute bi bi-arrow-right-short fs-3"></i>
 									</div>
 								</div>
-							</div>
-						</a>
+							</a>
 						</div>
 				<?php
 					}

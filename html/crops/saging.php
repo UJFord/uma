@@ -1,3 +1,39 @@
+<?php
+// connection to db
+$connection = pg_connect("host=localhost dbname=farm_crops user=postgres password=123");
+
+// Check if the crop_id parameter is set in the URL
+if (isset($_GET['crop_id'])) {
+	// Retrieve the crop_id from the URL parameter
+	$crop_id = $_GET['crop_id'];
+
+	// query to get the selected data from the db
+	$query = pg_query($connection, "SELECT basic_info.image, basic_info.name, basic_info.basic_description, basic_info.scientific_name, basic_info.origin, basic_info.genus, plant_type.plant_type_name, farming.farming_name, farming.farming_image, farming.farming_description, usage_info.usage_name, usage_info.usage_description, usage_info.usage_example, usage_info.usage_image FROM traditional_crop left join basic_info on traditional_crop.basic_info_id = basic_info.basic_info_id left join farming on basic_info.farming_id = farming.farming_id left join usage_info on basic_info.usage_id = usage_info.usage_id left join plant_type on basic_info.plant_type_id = plant_type.plant_type_id WHERE crop_id='$crop_id'");
+	$count = pg_num_rows($query);
+
+	if ($count > 0) {
+		while ($row = pg_fetch_assoc($query)) {
+			$name = $row['name'];
+			$image = $row['image'];
+			$scientific_name = $row['scientific_name'];
+			$basic_description = $row['basic_description'];
+			$origin = $row['origin'];
+			$genus = $row['genus'];
+			$plant_type_name = $row['plant_type_name'];
+			$farming_name = $row['farming_name'];
+			$farming_description = $row['farming_description'];
+			$farming_image = $row['farming_image'];
+			$usage_name = $row['usage_name'];
+			$usage_description = $row['usage_description'];
+			$usage_example = $row['usage_example'];
+			$usage_image = $row['usage_image'];
+		}
+	} else {
+		echo "Crop ID not found in the URL.";
+	}
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,61 +46,17 @@
 	<link rel="stylesheet" href="../../css/crops/saging.css" />
 	<!-- favicon -->
 	<link rel="shortcut icon" href="../../img/logo/favicon.svg" type="image/x-icon" />
-	<title>Crops | Saging</title>
+	<title>Crops | <?php echo ucfirst($name); ?></title>
 </head>
 
 <body>
 	<!-- container -->
 	<div id="main-container" class="row border vh-100">
 
-		<?php
-		// connection to db
-		$connection = pg_connect("host=localhost dbname=farm_crops user=postgres password=123");
 
-		// Check if the crop_id parameter is set in the URL
-		if (isset($_GET['crop_id'])) {
-			// Retrieve the crop_id from the URL parameter
-			$crop_id = $_GET['crop_id'];
-
-			// query to get the selected data from the db
-			$query = pg_query($connection, "SELECT basic_info.image, basic_info.name, basic_info.basic_description, basic_info.scientific_name, basic_info.origin, basic_info.genus, plant_type.plant_type_name, farming.farming_name, farming.farming_image, farming.farming_description, usage_info.usage_name, usage_info.usage_description, usage_info.usage_example, usage_info.usage_image FROM traditional_crop left join basic_info on traditional_crop.basic_info_id = basic_info.basic_info_id left join farming on basic_info.farming_id = farming.farming_id left join usage_info on basic_info.usage_id = usage_info.usage_id left join plant_type on basic_info.plant_type_id = plant_type.plant_type_id");
-			$count = pg_num_rows($query);
-
-			if ($count > 0) {
-				while ($row = pg_fetch_assoc($query)) {
-					$name = $row['name'];
-					$image = $row['image'];
-					$scientific_name = $row['scientific_name'];
-					$basic_description = $row['basic_description'];
-					$origin = $row['origin'];
-					$genus = $row['genus'];
-					$plant_type_name = $row['plant_type_name'];
-					$farming_name = $row['farming_name'];
-					$farming_description = $row['farming_description'];
-					$farming_image = $row['farming_image'];
-					$usage_name = $row['usage_name'];
-					$usage_description = $row['usage_description'];
-					$usage_example = $row['usage_example'];
-					$usage_image = $row['usage_image'];
-				}
-			} else {
-				echo "Crop ID not found in the URL.";
-			}
-		}
-		?>
 		<!-- container -->
-		<section id="main-showcase" class="col-sm-6 position-relative h-100" style="background-image: url('<?php echo (!empty($image))? $image: '';?>');">
+		<section id="main-showcase" class="col-sm-6 position-relative h-100" style="background-image: url('<?php echo (!empty($image)) ? $image : ''; ?>');">
 			<div id="showcase-div" class="container p-5 d-flex flex-column justify-content-between align-items-start h-100">
-				<!-- Image -->
-				<!-- <div>
-					<?php
-					if (!empty($image)) {
-						echo '<img src="' . $image . '" style="max-width: 75%; height: auto;">';
-					} else {
-						echo "Image not found.";
-					}
-					?>
-				</div> -->
 
 				<!-- Return -->
 				<a href="../crops.php">
