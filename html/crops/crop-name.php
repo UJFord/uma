@@ -47,6 +47,12 @@ if (isset($_GET['crop_id'])) {
 	<!-- favicon -->
 	<link rel="shortcut icon" href="../../img/logo/favicon.svg" type="image/x-icon" />
 	<title>Crops | <?php echo ucfirst($name); ?></title>
+
+	<!-- leaflet -->
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+	<!-- Make sure you put this AFTER Leaflet's CSS -->
+	<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
 </head>
 
 <body>
@@ -129,10 +135,57 @@ if (isset($_GET['crop_id'])) {
 			</div>
 		</div>
 
-		<!-- map -->
-		<div></div>
+		<!-- map element -->
+		<!-- <div id="map-box" class="container d-flex justify-content-center">
+
+			<div id="map" class="col-6" style=""></div>
+		</div> -->
 	</div>
 
+
+
+
+	<!-- map script -->
+	<script>
+		// * FUNCTIONS
+		// navbar tag button onlclick show markers
+		let activeMarkers = [];
+		let showMarkers = (category, coordinates) => {
+
+		}
+
+
+
+		let map = L.map('map').setView([5.9267, 124.9948], 11);
+
+		L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+			maxZoom: 19,
+			minZoom: 0,
+			attribution: '© OpenStreetMap',
+		}).addTo(map);
+
+		// * Map Zoom Control Positioning
+		function addControlPlaceholders(map) {
+			var corners = map._controlCorners,
+				l = 'leaflet-',
+				container = map._controlContainer;
+
+			function createCorner(vSide, hSide) {
+				var className = l + vSide + ' ' + l + hSide;
+
+				corners[vSide + hSide] = L.DomUtil.create('div', className, container);
+			}
+
+			createCorner('verticalcenter', 'left');
+			createCorner('verticalcenter', 'right');
+		}
+		addControlPlaceholders(map);
+
+		// * Change the position of the Zoom Control to a newly created placeholder.
+		map.zoomControl.setPosition('verticalcenterright');
+	</script>
+
+	<!-- bootstrap -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 	<!-- font awesome -->
 	<script src="https://kit.fontawesome.com/57e83eb6e4.js" crossorigin="anonymous"></script>

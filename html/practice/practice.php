@@ -33,7 +33,7 @@ if (isset($_GET['practices_id'])) {
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
 	<!-- cutom css -->
-	<link rel="stylesheet" href="../../css/crops/saging.css" />
+	<link rel="stylesheet" href="../../css/crops/crops.css" />
 	<!-- favicon -->
 	<link rel="shortcut icon" href="../../img/logo/favicon.svg" type="image/x-icon" />
 	<title>Crops | Saging</title>

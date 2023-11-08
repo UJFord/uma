@@ -17,7 +17,6 @@
 	<!-- Navbar -->
 	<?php
 	require('navfoot/navbar.php');
-	require('navfoot/connection.php');
 	?>
 
 	<!-- Showcase -->

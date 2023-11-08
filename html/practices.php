@@ -16,8 +16,8 @@
 <body>
 	<!-- Navbar -->
 	<?php
-		require('navfoot/navbar.php');
-		require('navfoot/connection.php');
+	require('navfoot/navbar.php');
+	require('navfoot/connection.php');
 	?>
 
 	<!-- Showcase -->
@@ -25,11 +25,11 @@
 		<div id="showcase-div" class="container d-flex flex-column justify-content-center align-items-center h-100">
 			<h1 class="mb-4">Tribe Practices</h1>
 			<p class="w-75 text-center">
-			Sarangani is renowned for its rich cultural heritage and traditional practices. The indigenous tribe's 
-			heritage in Sarangani includes distinctive customs and rituals that have been practiced for generations. 
-			These age-old practices, deeply rooted in the tribe's history, encompass unique ceremonies, spiritual rites, 
-			and customary traditions. Passed down through ancestral wisdom, these practices not only sustain the tribe's 
-			identity and beliefs but also play a vital role in shaping the social fabric and preserving the rich cultural heritage of the community.
+				Sarangani is renowned for its rich cultural heritage and traditional practices. The indigenous tribe's
+				heritage in Sarangani includes distinctive customs and rituals that have been practiced for generations.
+				These age-old practices, deeply rooted in the tribe's history, encompass unique ceremonies, spiritual rites,
+				and customary traditions. Passed down through ancestral wisdom, these practices not only sustain the tribe's
+				identity and beliefs but also play a vital role in shaping the social fabric and preserving the rich cultural heritage of the community.
 			</p>
 		</div>`
 
@@ -96,7 +96,7 @@
 						<!-- Saging with data from db -->
 						<div class="card-container col-6 col-md-4 col-lg-2 p-2">
 
-						<a href="practice/practice.php?practices_id=<?php echo $practices_id; ?>" class="crop-card py-3 px-1 d-flex justify-content-center align-items-end" style="
+							<a href="practice/practice.php?practices_id=<?php echo $practices_id; ?>" class="crop-card py-3 px-1 d-flex justify-content-center align-items-end" style="
 									background-image: url('<?php echo $practices_image; ?>');
 								">
 								<div class="crop-card-text row w-100 d-flex flex-row justify-content-between align-items-center">
@@ -121,7 +121,7 @@
 
 	<!-- Footer -->
 	<?php
-		require('navfoot/footer.php');
+	require('navfoot/footer.php');
 	?>
 
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
