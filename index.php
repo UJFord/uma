@@ -15,9 +15,7 @@
 
 <body>
 	<!-- Navbar -->
-	<?php
-	require('html/navfoot/navbar.php');
-	?>
+	
 
 	<!-- Showcase -->
 	<section id="main-showcase" class="position-relative">
