@@ -81,27 +81,27 @@
 							</tr>
 							<tr>
 								<th class="table-secondary">Disease Resistance</th>
-								<td><input type="text" value="" class="w-100 border-0" disabled></td>
+								<td><input type="text" value="High" class="w-100 border-0" disabled></td>
 							</tr>
 							<tr>
 								<th class="table-secondary">Pest Resistance</th>
-								<td><input type="text" value="Upland rice, rainfed rice, hill rice" class="w-100 border-0" disabled></td>
+								<td><input type="text" value="High" class="w-100 border-0" disabled></td>
 							</tr>
 							<tr>
 								<th class="table-secondary">Drought Resistance</th>
-								<td><input type="text" value="Upland rice, rainfed rice, hill rice" class="w-100 border-0" disabled></td>
+								<td><input type="text" value="High" class="w-100 border-0" disabled></td>
 							</tr>
 							<tr>
 								<th class="table-secondary">Adaptability to Different Environments</th>
-								<td><input type="text" value="Upland rice, rainfed rice, hill rice" class="w-100 border-0" disabled></td>
+								<td><input type="text" value="High" class="w-100 border-0" disabled></td>
 							</tr>
 							<tr>
 								<th class="table-secondary">Cooking and Eating Quality</th>
-								<td><input type="text" value="Upland rice, rainfed rice, hill rice" class="w-100 border-0" disabled></td>
+								<td><input type="text" value="Good" class="w-100 border-0" disabled></td>
 							</tr>
 							<tr>
 								<th class="table-secondary">Nutritional Value</th>
-								<td><input type="text" value="Upland rice, rainfed rice, hill rice" class="w-100 border-0" disabled></td>
+								<td><input type="text" value="High in Protein and Fiber" class="w-100 border-0" disabled></td>
 							</tr>
 						</tbody>
 
@@ -114,11 +114,7 @@
 						<tbody>
 							<tr>
 								<th class="table-secondary">Description</th>
-								<td></td>
-							</tr>
-							<tr>
-								<th></th>
-								<td></td>
+								<td><textarea class="w-100 border-0" rows="10" disabled>Slash-and-burn agriculture: This method involves clearing a piece of land by slashing and burning the vegetation. The ashes from the fire are then used to fertilize the soil</textarea></td>
 							</tr>
 						</tbody>
 
@@ -131,11 +127,7 @@
 						<tbody>
 							<tr>
 								<th class="table-secondary">Description</th>
-								<td></td>
-							</tr>
-							<tr>
-								<th></th>
-								<td></td>
+								<td><textarea class="w-100 border-0" disabled>Uplands rice farmers in the region traditionally plant rice only once a year, specifically at the onset of the rainy season (June). This practice is not based solely on agricultural considerations but also on their cultural beliefs and reverence for the natural world. Farmers rely on the phases of the moon and the position of specific stars to determine the optimal planting time. For instance, the B'laans believe that a bird chirping three times signals the start of the planting season, while the Tibolis rely on the appearance of three stars in the north.</textarea></td>
 							</tr>
 						</tbody>
 
@@ -148,11 +140,11 @@
 						<tbody>
 							<tr>
 								<th class="table-secondary">Days to Maturity</th>
-								<td></td>
+								<td><input type="text" value="120" class="w-100 border-0" disabled></td>
 							</tr>
 							<tr>
 								<th class="table-secondary">Yield per Plant</th>
-								<td></td>
+								<td><input type="text" value="20g" class="w-100 border-0" disabled></td>
 							</tr>
 						</tbody>
 
@@ -165,11 +157,7 @@
 						<tbody>
 							<tr>
 								<th class="table-secondary">Description</th>
-								<td></td>
-							</tr>
-							<tr>
-								<th></th>
-								<td></td>
+								<td><textarea class="w-100 border-0" rows="10" disabled>Uplands rice farmers in the region traditionally plant rice only once a year, specifically at the onset of the rainy season (June). This practice is not based solely on agricultural considerations but also on their cultural beliefs and reverence for the natural world. Farmers rely on the phases of the moon and the position of specific stars to determine the optimal planting time. For instance, the B'laans believe that a bird chirping three times signals the start of the planting season, while the Tibolis rely on the appearance of three stars in the north.</textarea></td>
 							</tr>
 						</tbody>
 
@@ -197,7 +185,7 @@
 							</tr>
 						</thead>
 						<tbody>
-						<tr>
+							<tr>
 								<th class="table-secondary">Map</th>
 								<td></td>
 							</tr>
@@ -216,55 +204,55 @@
 						<tbody>
 							<tr>
 								<th class="table-secondary">Plant Height</th>
-								<td></td>
+								<td><input type="text" value="12g" class="w-100 border-0" disabled></td>
 							</tr>
 							<tr>
 								<th class="table-secondary">Panicle Length</th>
-								<td></td>
+								<td><input type="text" value="23cm" class="w-100 border-0" disabled></td>
 							</tr>
 							<tr>
 								<th class="table-secondary">Grain Quality</th>
-								<td></td>
+								<td><input type="text" value="Good" class="w-100 border-0" disabled></td>
 							</tr>
 							<tr>
 								<th class="table-secondary">Grain Color</th>
-								<td></td>
+								<td><input type="text" value="White" class="w-100 border-0" disabled></td>
 							</tr>
 							<tr>
 								<th class="table-secondary">Grain Length</th>
-								<td></td>
+								<td><input type="text" value="6.62mm" class="w-100 border-0" disabled></td>
 							</tr>
 							<tr>
 								<th class="table-secondary">Grain Width</th>
-								<td></td>
+								<td><input type="text" value="1.10mm" class="w-100 border-0" disabled></td>
 							</tr>
 							<tr>
 								<th class="table-secondary">Grain Shape</th>
-								<td></td>
+								<td><input type="text" value="Cylindrical" class="w-100 border-0" disabled></td>
 							</tr>
 							<tr>
 								<th class="table-secondary">Awn Length</th>
-								<td></td>
+								<td><input type="text" value="37.6 mm" class="w-100 border-0" disabled></td>
 							</tr>
 							<tr>
 								<th class="table-secondary">Leaf Length</th>
-								<td></td>
+								<td><input type="text" value="9.9 to 48 cm" class="w-100 border-0" disabled></td>
 							</tr>
 							<tr>
 								<th class="table-secondary">Leaf Width</th>
-								<td></td>
+								<td><input type="text" value="1.201 ± 0.03 cm" class="w-100 border-0" disabled></td>
 							</tr>
 							<tr>
 								<th class="table-secondary">Leaf Shape</th>
-								<td></td>
+								<td><input type="text" value="Long, Flat, Slender" class="w-100 border-0" disabled></td>
 							</tr>
 							<tr>
 								<th class="table-secondary">Stem Color</th>
-								<td></td>
+								<td><input type="text" value="Green" class="w-100 border-0" disabled></td>
 							</tr>
 							<tr>
 								<th class="table-secondary">Another Color</th>
-								<td></td>
+								<td><input type="text" value="Purple, Red, Black, Brown, Yellow" class="w-100 border-0" disabled></td>
 							</tr>
 						</tbody>
 
@@ -290,6 +278,45 @@
 							<tr>
 								<th class="table-secondary">Implications for Conservation and Breeding Efforts</th>
 								<td></td>
+							</tr>
+						</tbody>
+
+						<!-- potential for breeding -->
+						<thead>
+							<tr>
+								<th colspan="2" class="table-dark">Potential for Breeding</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<th class="table-secondary">Description</th>
+								<td><textarea class="w-100 border-0" rows="10" disabled>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repudiandae, culpa ipsa quia autem similique, fugiat accusamus eaque odio totam officia dolorum facilis beatae molestias tempora. Sequi id aspernatur, odit nulla consequatur esse tempore fuga reiciendis veniam autem sunt eos neque atque itaque nobis dolore pariatur dolorem velit placeat consequuntur aliquam?</textarea></td>
+							</tr>
+						</tbody>
+
+						<!-- threats from lowland-associated influences-->
+						<thead>
+							<tr>
+								<th colspan="2" class="table-dark">Threats from Lowland-Associated Influences</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<th class="table-secondary">Description</th>
+								<td><textarea class="w-100 border-0" rows="10" disabled>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repudiandae, culpa ipsa quia autem similique, fugiat accusamus eaque odio totam officia dolorum facilis beatae molestias tempora. Sequi id aspernatur, odit nulla consequatur esse tempore fuga reiciendis veniam autem sunt eos neque atque itaque nobis dolore pariatur dolorem velit placeat consequuntur aliquam?</textarea></td>
+							</tr>
+						</tbody>
+
+						<!-- other info-->
+						<thead>
+							<tr>
+								<th colspan="2" class="table-dark">Other Info</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<th class="table-secondary">Description</th>
+								<td><textarea class="w-100 border-0" rows="10" disabled>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repudiandae, culpa ipsa quia autem similique, fugiat accusamus eaque odio totam officia dolorum facilis beatae molestias tempora. Sequi id aspernatur, odit nulla consequatur esse tempore fuga reiciendis veniam autem sunt eos neque atque itaque nobis dolore pariatur dolorem velit placeat consequuntur aliquam?</textarea></td>
 							</tr>
 						</tbody>
 
