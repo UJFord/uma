@@ -10,7 +10,7 @@
 	<link rel="stylesheet" href="../../css/admin/crop.css" />
 	<!-- favicon -->
 	<link rel="shortcut icon" href="img/logo/Uma logo.svg" type="image/x-icon" />
-	<title>Uma | AdminPage</title>
+	<title>Crop sa Editor</title>
 </head>
 
 <body class="overflow-x-hidden">
@@ -38,12 +38,10 @@
 				</div>
 
 				<!-- crop information -->
-				<div id="" class="row form-control">
+				<div id="" class="row form-control p-3">
 
-					<!-- table -->
+					<!-- botanical information -->
 					<table id="info-table" class="table table-hover table-sm">
-
-						<!-- botanical information -->
 						<thead>
 							<tr>
 								<th colspan="2" class="table-dark">Botanical Information</th>
@@ -60,7 +58,10 @@
 							</tr>
 						</tbody>
 
-						<!-- characteristics of traditional rice -->
+					</table>
+
+					<!-- characteristics of traditional rice -->
+					<table class="table table-hover table-sm">
 						<thead>
 							<tr>
 								<th colspan="2" class="table-dark">Characteristics of Traditional Rice</th>
@@ -68,7 +69,7 @@
 						</thead>
 						<tbody>
 							<tr>
-								<th class="table-secondary">Taste</th>
+								<th class="table-secondary w-25">Taste</th>
 								<td><input type="text" value="Nutty" class="w-100 border-0" disabled></td>
 							</tr>
 							<tr>
@@ -104,8 +105,10 @@
 								<td><input type="text" value="High in Protein and Fiber" class="w-100 border-0" disabled></td>
 							</tr>
 						</tbody>
+					</table>
 
-						<!-- planting techniques -->
+					<!-- planting techniques -->
+					<table class="table table-hover table-sm">
 						<thead>
 							<tr>
 								<th colspan="2" class="table-dark">Planting Techniques</th>
@@ -113,12 +116,15 @@
 						</thead>
 						<tbody>
 							<tr>
-								<th class="table-secondary">Description</th>
+								<th class="table-secondary w-25">Description</th>
 								<td><textarea class="w-100 border-0" rows="10" disabled>Slash-and-burn agriculture: This method involves clearing a piece of land by slashing and burning the vegetation. The ashes from the fire are then used to fertilize the soil</textarea></td>
 							</tr>
 						</tbody>
+					</table>
 
-						<!-- Cultural and Spiritual -->
+
+					<!-- Cultural and Spiritual -->
+					<table class="table table-hover table-sm">
 						<thead>
 							<tr>
 								<th colspan="2" class="table-dark">Cultural and Spiritual</th>
@@ -126,12 +132,15 @@
 						</thead>
 						<tbody>
 							<tr>
-								<th class="table-secondary">Description</th>
-								<td><textarea class="w-100 border-0" disabled>Uplands rice farmers in the region traditionally plant rice only once a year, specifically at the onset of the rainy season (June). This practice is not based solely on agricultural considerations but also on their cultural beliefs and reverence for the natural world. Farmers rely on the phases of the moon and the position of specific stars to determine the optimal planting time. For instance, the B'laans believe that a bird chirping three times signals the start of the planting season, while the Tibolis rely on the appearance of three stars in the north.</textarea></td>
+								<th class="table-secondary w-25">Description</th>
+								<td><textarea class="w-100 border-0" rows="5" disabled>Uplands rice farmers in the region traditionally plant rice only once a year, specifically at the onset of the rainy season (June). This practice is not based solely on agricultural considerations but also on their cultural beliefs and reverence for the natural world. Farmers rely on the phases of the moon and the position of specific stars to determine the optimal planting time. For instance, the B'laans believe that a bird chirping three times signals the start of the planting season, while the Tibolis rely on the appearance of three stars in the north.</textarea></td>
 							</tr>
 						</tbody>
+					</table>
 
-						<!-- Agronomic Characteristic -->
+					<!-- Agronomic Characteristic -->
+
+					<table class="table table-hover table-sm">
 						<thead>
 							<tr>
 								<th colspan="2" class="table-dark">Agronomic Characteristic</th>
@@ -139,16 +148,18 @@
 						</thead>
 						<tbody>
 							<tr>
-								<th class="table-secondary">Days to Maturity</th>
+								<th class="table-secondary w-25">Days to Maturity</th>
 								<td><input type="text" value="120" class="w-100 border-0" disabled></td>
 							</tr>
 							<tr>
-								<th class="table-secondary">Yield per Plant</th>
+								<th class="table-secondary w-25">Yield per Plant</th>
 								<td><input type="text" value="20g" class="w-100 border-0" disabled></td>
 							</tr>
 						</tbody>
+					</table>
 
-						<!-- Role in maintaining upland ecosystems And biodiversity  -->
+					<!-- Role in maintaining upland ecosystems And biodiversity-->
+					<table class="table table-hover table-sm">
 						<thead>
 							<tr>
 								<th colspan="2" class="table-dark">Role in Maintaining Upland Ecosystems</th>
@@ -156,12 +167,14 @@
 						</thead>
 						<tbody>
 							<tr>
-								<th class="table-secondary">Description</th>
-								<td><textarea class="w-100 border-0" rows="10" disabled>Uplands rice farmers in the region traditionally plant rice only once a year, specifically at the onset of the rainy season (June). This practice is not based solely on agricultural considerations but also on their cultural beliefs and reverence for the natural world. Farmers rely on the phases of the moon and the position of specific stars to determine the optimal planting time. For instance, the B'laans believe that a bird chirping three times signals the start of the planting season, while the Tibolis rely on the appearance of three stars in the north.</textarea></td>
+								<th class="table-secondary w-25">Description</th>
+								<td><textarea class="w-100 border-0" rows="5" disabled>Uplands rice farmers in the region traditionally plant rice only once a year, specifically at the onset of the rainy season (June). This practice is not based solely on agricultural considerations but also on their cultural beliefs and reverence for the natural world. Farmers rely on the phases of the moon and the position of specific stars to determine the optimal planting time. For instance, the B'laans believe that a bird chirping three times signals the start of the planting season, while the Tibolis rely on the appearance of three stars in the north.</textarea></td>
 							</tr>
 						</tbody>
+					</table>
 
-						<!-- Genetic Diversity  -->
+					<!-- Genetic Diversity  -->
+					<table class="table table-hover table-sm">
 						<thead>
 							<tr>
 								<th colspan="2" class="table-dark">Genetic Diversity</th>
@@ -169,16 +182,14 @@
 						</thead>
 						<tbody>
 							<tr>
-								<th class="table-secondary">Description</th>
-								<td></td>
-							</tr>
-							<tr>
-								<th></th>
+								<th class="table-secondary w-25">Description</th>
 								<td></td>
 							</tr>
 						</tbody>
+					</table>
 
-						<!-- Location  -->
+					<!-- Location  -->
+					<table class="table table-hover table-sm">
 						<thead>
 							<tr>
 								<th colspan="2" class="table-dark">Location</th>
@@ -186,7 +197,7 @@
 						</thead>
 						<tbody>
 							<tr>
-								<th class="table-secondary">Map</th>
+								<th class="table-secondary w-25">Map</th>
 								<td></td>
 							</tr>
 							<tr>
@@ -194,8 +205,10 @@
 								<td></td>
 							</tr>
 						</tbody>
+					</table>
 
-						<!-- morphological characteristics  -->
+					<!-- morphological characteristics  -->
+					<table class="table table-hover table-sm">
 						<thead>
 							<tr>
 								<th colspan="2" class="table-dark">Morphological Characteristics</th>
@@ -203,7 +216,7 @@
 						</thead>
 						<tbody>
 							<tr>
-								<th class="table-secondary">Plant Height</th>
+								<th class="table-secondary w-25">Plant Height</th>
 								<td><input type="text" value="12g" class="w-100 border-0" disabled></td>
 							</tr>
 							<tr>
@@ -255,8 +268,10 @@
 								<td><input type="text" value="Purple, Red, Black, Brown, Yellow" class="w-100 border-0" disabled></td>
 							</tr>
 						</tbody>
+					</table>
 
-						<!-- relationship among cultivars  -->
+					<!-- relationship among cultivars  -->
+					<table class="table table-hover table-sm">
 						<thead>
 							<tr>
 								<th colspan="2" class="table-dark">Relationship Among Cultivars</th>
@@ -264,7 +279,7 @@
 						</thead>
 						<tbody>
 							<tr>
-								<th class="table-secondary">Distinct Groups of Cultivars based on Morphological and Genetic Characteristics</th>
+								<th class="table-secondary w-25">Distinct Groups of Cultivars based on Morphological and Genetic Characteristics</th>
 								<td></td>
 							</tr>
 							<tr>
@@ -280,8 +295,10 @@
 								<td></td>
 							</tr>
 						</tbody>
+					</table>
 
-						<!-- potential for breeding -->
+					<!-- potential for breeding -->
+					<table class="table table-hover table-sm">
 						<thead>
 							<tr>
 								<th colspan="2" class="table-dark">Potential for Breeding</th>
@@ -289,12 +306,14 @@
 						</thead>
 						<tbody>
 							<tr>
-								<th class="table-secondary">Description</th>
-								<td><textarea class="w-100 border-0" rows="10" disabled>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repudiandae, culpa ipsa quia autem similique, fugiat accusamus eaque odio totam officia dolorum facilis beatae molestias tempora. Sequi id aspernatur, odit nulla consequatur esse tempore fuga reiciendis veniam autem sunt eos neque atque itaque nobis dolore pariatur dolorem velit placeat consequuntur aliquam?</textarea></td>
+								<th class="table-secondary w-25">Description</th>
+								<td><textarea class="w-100 border-0" rows="5" disabled>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repudiandae, culpa ipsa quia autem similique, fugiat accusamus eaque odio totam officia dolorum facilis beatae molestias tempora. Sequi id aspernatur, odit nulla consequatur esse tempore fuga reiciendis veniam autem sunt eos neque atque itaque nobis dolore pariatur dolorem velit placeat consequuntur aliquam?</textarea></td>
 							</tr>
 						</tbody>
+					</table>
 
-						<!-- threats from lowland-associated influences-->
+					<!-- threats from lowland-associated influences-->
+					<table class="table table-hover table-sm">
 						<thead>
 							<tr>
 								<th colspan="2" class="table-dark">Threats from Lowland-Associated Influences</th>
@@ -302,12 +321,14 @@
 						</thead>
 						<tbody>
 							<tr>
-								<th class="table-secondary">Description</th>
-								<td><textarea class="w-100 border-0" rows="10" disabled>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repudiandae, culpa ipsa quia autem similique, fugiat accusamus eaque odio totam officia dolorum facilis beatae molestias tempora. Sequi id aspernatur, odit nulla consequatur esse tempore fuga reiciendis veniam autem sunt eos neque atque itaque nobis dolore pariatur dolorem velit placeat consequuntur aliquam?</textarea></td>
+								<th class="table-secondary w-25">Description</th>
+								<td><textarea class="w-100 border-0" rows=5" disabled>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repudiandae, culpa ipsa quia autem similique, fugiat accusamus eaque odio totam officia dolorum facilis beatae molestias tempora. Sequi id aspernatur, odit nulla consequatur esse tempore fuga reiciendis veniam autem sunt eos neque atque itaque nobis dolore pariatur dolorem velit placeat consequuntur aliquam?</textarea></td>
 							</tr>
 						</tbody>
+					</table>
 
-						<!-- other info-->
+					<!-- other info-->
+					<table class="table table-hover table-sm  mb-0">
 						<thead>
 							<tr>
 								<th colspan="2" class="table-dark">Other Info</th>
@@ -315,11 +336,10 @@
 						</thead>
 						<tbody>
 							<tr>
-								<th class="table-secondary">Description</th>
-								<td><textarea class="w-100 border-0" rows="10" disabled>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repudiandae, culpa ipsa quia autem similique, fugiat accusamus eaque odio totam officia dolorum facilis beatae molestias tempora. Sequi id aspernatur, odit nulla consequatur esse tempore fuga reiciendis veniam autem sunt eos neque atque itaque nobis dolore pariatur dolorem velit placeat consequuntur aliquam?</textarea></td>
+								<th class="table-secondary w-25">Description</th>
+								<td><textarea class="w-100 border-0" rows="5" disabled>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repudiandae, culpa ipsa quia autem similique, fugiat accusamus eaque odio totam officia dolorum facilis beatae molestias tempora. Sequi id aspernatur, odit nulla consequatur esse tempore fuga reiciendis veniam autem sunt eos neque atque itaque nobis dolore pariatur dolorem velit placeat consequuntur aliquam?</textarea></td>
 							</tr>
 						</tbody>
-
 					</table>
 
 				</div>

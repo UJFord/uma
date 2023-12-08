@@ -25,8 +25,8 @@
 		<!-- space holder of side panel -->
 		<section class=" d-none d-md-block col col-4 col-lg-3 col-xl-2 p-0 m-0"></section>
 		<!-- main panel -->
-		<section id="nav-cards" class="p-0 m-0 col col-md-4 col-lg-9 col-xl-10 pt-3">
-			<div class="container">
+		<section id="nav-cards" class="p-0 m-0 col col-md-4 col-lg-9 col-xl-10">
+			<div class="py-3 px-4">
 				<!-- title and filter -->
 				<div class="row d-flex justify-content-between mb-3">
 					<!-- title -->
@@ -82,7 +82,7 @@
 							<!-- Saging with data from db -->
 							<div class="card-container col-6 col-md-4 col-lg-2 p-2">
 
-								<a href="tribes/tribe.php?tribe_id=<?php echo $tribe_id; ?>" class="crop-card py-3 px-1 d-flex justify-content-center align-items-end" style="
+								<a href="tribe.php?tribe_id=<?php echo $tribe_id; ?>" class="crop-card py-3 px-1 d-flex justify-content-center align-items-end" style="
 									background-image: url('<?php echo $tribe_image; ?>');
 								">
 									<div class="crop-card-text row w-100 d-flex flex-row justify-content-between align-items-center">
