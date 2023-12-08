@@ -1,0 +1,13 @@
+/* variable colors */
+:root{
+	/* color pallete */
+	--mainBrand: #016A70;
+	--darkAccent:#647A78;
+	--lightAccent: #7FA9AD;
+	--darkShades: #202A21;
+	--lightShades: #FFFFDD;
+
+	/* others */
+	--searchTextColor: #e7e7e7;
+	--headColor: #ffc861;
+}

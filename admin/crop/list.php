@@ -7,24 +7,103 @@
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
 	<!-- cutom css -->
-	<link rel="stylesheet" href="../css/admin/dash.css" />
+	<link rel="stylesheet" href="../../css/admin/list.css" />
 	<!-- favicon -->
 	<link rel="shortcut icon" href="img/logo/Uma logo.svg" type="image/x-icon" />
 	<title>Uma | AdminPage</title>
 </head>
 
-<body>
+<body class="overflow-hidden">
 
 	<!-- container of everything -->
-	<div class="row">
+	<div class="row ">
 
 		<!-- sidebar -->
 		<?php
 		require('../sidebar/side.php');
 		?>
-
+		<!-- space holder of side panel -->
+		<section class=" d-none d-md-block col col-4 col-lg-3 col-xl-2 p-0 m-0"></section>
 		<!-- main panel -->
-		
+		<section id="nav-cards" class="p-0 m-0 col col-md-4 col-lg-9 col-xl-10">
+			<div class=" py-3 px-4">
+				<!-- title and filter -->
+				<div class="row d-flex justify-content-between mb-3">
+					<!-- title -->
+					<div class="col-6">
+						<h2 id="crops-title" class="fw-semibold">Crops</h2>
+					</div>
+
+					<!-- search -->
+					<div id="filter-search" class="col-6 col-md-5 col-lg-3">
+						<div class="input-group">
+							<button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+								<i class="bi bi-funnel"></i>
+							</button>
+							<ul class="dropdown-menu">
+								<li>
+									<a class="dropdown-item" href="#">Action</a>
+								</li>
+								<li>
+									<a class="dropdown-item" href="#">Another action</a>
+								</li>
+								<li>
+									<a class="dropdown-item" href="#">Something else here</a>
+								</li>
+								<li>
+									<hr class="dropdown-divider" />
+								</li>
+								<li>
+									<a class="dropdown-item" href="#">Separated link</a>
+								</li>
+							</ul>
+							<input type="text" class="form-control" placeholder="Start typing to filter..." />
+						</div>
+					</div>
+
+					<!-- crop cards -->
+					<div class="row"></div>
+				</div>
+
+				<!-- crop cards -->
+				<div id="crop-cards" class="row">
+
+					<?php
+					$result = pg_query($connection, "select traditional_crop.crop_id, basic_info.image, basic_info.name from traditional_crop left join basic_info on traditional_crop.basic_info_id = basic_info.basic_info_id order by basic_info.name");
+					$count = pg_num_rows($result);
+
+					if ($count > 0) {
+						while ($row = pg_fetch_assoc($result)) {
+							$crop_id = $row['crop_id'];
+							$image = $row['image'];
+							$name = $row['name'];
+
+					?>
+							<!-- crop -->
+							<div class="card-container col-6 col-md-4 col-lg-2 p-2">
+								<a href="crop.php?crop_id=<?php echo $crop_id; ?>" class="crop-card py-3 px-1 d-flex justify-content-center align-items-end" style="
+									background-image: url('<?php echo $image; ?>');
+								">
+									<div class="crop-card-text row w-100 d-flex flex-row justify-content-between align-items-center">
+										<!-- crop name -->
+										<h4 class="crop-name col-6"><?php echo ucfirst($name); ?></h4>
+										<!-- arrow -->
+										<div class="col-2 arrow-container">
+											<i class="position-absolute bi bi-arrow-right-short fs-3"></i>
+										</div>
+									</div>
+								</a>
+							</div>
+					<?php
+						}
+					} else {
+						echo '<h5>No more record</h5>';
+					}
+					?>
+				</div>
+			</div>
+		</section>
+
 	</div>
 
 	<!-- scipts -->
