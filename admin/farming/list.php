@@ -67,6 +67,10 @@
 
 				<!-- crop cards -->
 				<div id="crop-cards" class="row">
+					<!-- add entry button -->
+					<?php
+					require('../add/add.php');
+					?>
 
 					<?php
 

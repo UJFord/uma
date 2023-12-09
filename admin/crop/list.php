@@ -67,6 +67,10 @@
 
 				<!-- crop cards -->
 				<div id="crop-cards" class="row">
+					<!-- add entry button -->
+					<?php
+					require('../add/add.php');
+					?>
 
 					<?php
 					$result = pg_query($connection, "select traditional_crop.crop_id, basic_info.image, basic_info.name from traditional_crop left join basic_info on traditional_crop.basic_info_id = basic_info.basic_info_id order by basic_info.name");

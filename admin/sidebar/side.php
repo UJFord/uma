@@ -17,7 +17,7 @@ require('../../html/navfoot/connection.php');
             <i class="fa-solid fa-hands-holding-circle me-2"></i>
             <span class="fs-4">Uma for Staffs</span>
         </a>
-        <hr class="m-3">
+        <hr class="mx-3">
         <ul class="nav nav-pills flex-column mb-auto ps-3">
             <!-- crops sidebar nav -->
             <li class="nav-item">
@@ -58,8 +58,8 @@ require('../../html/navfoot/connection.php');
                 </a>
             </li>
         </ul>
-        <hr>
-        <div class="dropdown">
+        <hr class="mx-3">
+        <div class="dropdown m-3 mt-0">
             <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                 <img src="https://source.unsplash.com/32x32/?nature,water" alt="" width="32" height="32" class="rounded-circle me-2">
                 <strong>John Doe</strong>
