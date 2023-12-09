@@ -5,37 +5,45 @@ $current_page = $_SERVER['REQUEST_URI'];
 require('../../html/navfoot/connection.php');
 ?>
 
-<nav class="primary d-none d-md-block col col-4 col-lg-3 col-xl-2 fixed-top h-100 m-0 p-0">
-    <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark h-100">
+<!-- custom css -->
+<link rel="stylesheet" href="../../css/admin/side.css">
+
+<!-- main nav -->
+<nav id="main-nav" class="d-none d-md-block col col-4 col-lg-3 col-xl-2 fixed-top h-100 m-0 p-0">
+    <div class="d-flex flex-column flex-shrink-0 p-3 text-white h-100">
         <a href="#" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
             <i class="fa-solid fa-hands-holding-circle me-3"></i>
             <span class="fs-4">Uma for Staffs</span>
         </a>
         <hr>
         <ul class="nav nav-pills flex-column mb-auto">
-            <!-- <li class="nav-item">
-                active when current page
-                <a href="../dash/list.php" <?php echo ($current_page == '/incognito-capstone/admin/dash/list.php') ? 'class="nav-link active" aria-current="page"' : 'class="nav-link text-white"'; ?>>
-                    <i class="fa-solid fa-chart-line"></i>
-                    Dashboard
-                </a>
-            </li> -->
+            <!-- crops sidebar nav -->
             <li class="nav-item">
                 <a href="../crop/list.php" <?php echo ($current_page == '/incognito-capstone/admin/crop/list.php') ? 'class="nav-link active" aria-current="page"' : 'class="nav-link text-white"'; ?>>
-                    <i class="fa-solid fa-wheat-awn"></i>
+                    <i class="fa-solid fa-wheat-awn" style="width: 1.5rem;"></i>
                     Crops
                 </a>
             </li>
+            <!-- tribes sidebar nav -->
             <li>
                 <a href="../tribe/list.php" <?php echo ($current_page == '/incognito-capstone/admin/tribe/list.php') ? 'class="nav-link active" aria-current="page"' : 'class="nav-link text-white"'; ?>>
-                    <i class="fa-solid fa-people-group"></i>
+                    <i class="fa-solid fa-people-group" style="width: 1.5rem;"></i>
                     Tribes
                 </a>
             </li>
+            <!-- rituals sidebar nav -->
             <li>
-                <a href="../practice/list.php" <?php echo ($current_page == '/incognito-capstone/admin/practice/list.php') ? 'class="nav-link active" aria-current="page"' : 'class="nav-link text-white"'; ?>>
-                    <i class="fa-solid fa-trowel"></i>
-                    Practices
+                <a href="../ritual/list.php" <?php echo ($current_page == '/incognito-capstone/admin/practice/list.php') ? 'class="nav-link active" aria-current="page"' : 'class="nav-link text-white"'; ?>>
+                    <i class="fa-solid fa-book-open"  style="width: 1.5rem;"></i>
+                    Rituals
+                </a>
+            </li>
+            </li>
+            <!-- farming sidebar nav -->
+            <li>
+                <a href="../farming/list.php" <?php echo ($current_page == '/incognito-capstone/admin/practice/list.php') ? 'class="nav-link active" aria-current="page"' : 'class="nav-link text-white"'; ?>>
+                    <i class="fa-solid fa-mountain-sun" style="width: 1.5rem;"></i>
+                    Farming
                 </a>
             </li>
         </ul>
@@ -56,4 +64,7 @@ require('../../html/navfoot/connection.php');
             </ul>
         </div>
     </div>
+
+    <!-- font awesome script -->
+    <script src="https://kit.fontawesome.com/57e83eb6e4.js" crossorigin="anonymous"></script>
 </nav>

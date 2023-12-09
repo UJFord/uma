@@ -33,7 +33,9 @@
 				<!-- title-->
 				<div class="row d-flex justify-content-between mb-3">
 					<div class="col-6">
-						<h3 id="crops-title" class="fw-semibold">Crop Name</h3>
+						<h3 id="crops-title" class="fw-semibold">
+							<input type="text" value="Crop Name" class="border-0" disabled>
+						</h3>
 					</div>
 				</div>
 
@@ -56,6 +58,10 @@
 								<th class="table-secondary">Common Names</th>
 								<td><input type="text" value="Adlai" class="w-100 border-0" disabled></td>
 							</tr>
+							<tr>
+								<th class="table-secondary">Local Name</th>
+								<td><input type="text" value="Adlai" class="w-100 border-0" disabled></td>
+							</tr>
 						</tbody>
 
 					</table>
@@ -68,6 +74,10 @@
 							</tr>
 						</thead>
 						<tbody>
+							<tr>
+								<th class="table-secondary w-25">Image</th>
+								<td><input type="image" src="Submit" class="w-100 border-0"' disabled></td>
+							</tr>
 							<tr>
 								<th class="table-secondary w-25">Taste</th>
 								<td><input type="text" value="Nutty" class="w-100 border-0" disabled></td>
@@ -198,10 +208,6 @@
 						<tbody>
 							<tr>
 								<th class="table-secondary w-25">Map</th>
-								<td></td>
-							</tr>
-							<tr>
-								<th></th>
 								<td></td>
 							</tr>
 						</tbody>

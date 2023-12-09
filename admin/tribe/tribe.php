@@ -33,16 +33,24 @@
 				<!-- title-->
 				<div class="row d-flex justify-content-between mb-3">
 					<div class="col-6">
-						<h3 id="crops-title" class="fw-semibold">Tribe Name</h3>
+						<h3 id="crops-title" class="fw-semibold"><input type="text" value="Tribe Name" class="w-100 border-0" disabled></h3>
 					</div>
 				</div>
 
-				<!-- crop information -->
+				<!-- tribe information -->
 				<div id="" class="row form-control p-3">
 
 					<table class="table table-hover table-sm">
 
 						<tbody>
+							<tr>
+								<th class="table-secondary w-25" scope="row">Name</th>
+								<td><input type="text" value="Oryza sativa L" class="w-100 border-0" disabled></td>
+							</tr>
+							<tr>
+								<th class="table-secondary w-25" scope="row">Image</th>
+								<td><input type="image" src="Submit" class="w-100 border-0"' disabled></td>
+							</tr>
 							<tr>
 								<th class="table-secondary w-25" scope="row">Location</th>
 								<td><input type="text" value="Oryza sativa L" class="w-100 border-0" disabled></td>

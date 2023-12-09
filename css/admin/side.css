@@ -1,0 +1,23 @@
+*{
+    border: 0;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* stored colors */
+/* variable colors */
+:root{
+	/* color pallete */
+	--mainBrand: #016A70;
+	--darkAccent:#647A78;
+	--lightAccent: #7FA9AD;
+	--darkShades: #202A21;
+	--lightShades: #FFFFDD;
+}
+
+/* main nav */
+#main-nav{
+    background: rgb(1,106,112);
+background: linear-gradient(66deg, rgba(1,106,112,1) 0%, rgba(34,125,130,1) 100%);
+}
