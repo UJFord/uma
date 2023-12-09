@@ -7,7 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
     <!-- cutom css -->
-	<link rel="stylesheet" href="../../css/admin/entry.css" />
+    <link rel="stylesheet" href="../../css/admin/entry.css" />
     <!-- favicon -->
     <link rel="shortcut icon" href="img/logo/Uma logo.svg" type="image/x-icon" />
     <title>Crop sa Editor</title>
@@ -28,7 +28,7 @@
         <section id="nav-cards" class="p-0 m-0 col col-md-9 col-xl-10 min-vh-100">
 
             <!-- form for submitting -->
-            <form id="main-panel" action="" class="h-100 py-3 px-5">
+            <form id="form-panel" action="" class="h-100 py-3 px-5">
 
                 <!-- title-->
                 <div class="row d-flex justify-content-between mb-3">
@@ -45,15 +45,15 @@
                         <tbody>
                             <tr>
                                 <th class="table-secondary w-25" scope="row">Name</th>
-                                <td><input type="text" value="Oryza sativa L" class="w-100 border-0" disabled></td>
+                                <td><input type="text" value="Oryza sativa L" class="w-100 border-0 p-1" disabled></td>
                             </tr>
                             <tr>
                                 <th class="table-secondary">Description</th>
-                                <td><textarea class="w-100 border-0" rows="5" disabled>Slash-and-burn agriculture: This method involves clearing a piece of land by slashing and burning the vegetation. The ashes from the fire are then used to fertilize the soil</textarea></td>
+                                <td><textarea class="w-100 border-0 p-1" rows="5" disabled>Slash-and-burn agriculture: This method involves clearing a piece of land by slashing and burning the vegetation. The ashes from the fire are then used to fertilize the soil</textarea></td>
                             </tr>
                             <tr>
-								<th class="table-secondary w-25">Image</th>
-								<td><input type="image" src="Submit" class="w-100 border-0"' disabled></td>
+                                <th class="table-secondary w-25">Image</th>
+                                <td><input type="image" src="Submit" class="w-100 border-0 p-1"' disabled></td>
 							</tr>
                         </tbody>
 
@@ -64,20 +64,20 @@
                         <tbody>
                             <tr>
                                 <th class="table-secondary w-25">Purpose</th>
-                                <td><textarea class="w-100 border-0" rows="5" disabled>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia magni suscipit reprehenderit! Dolore harum nemo beatae ducimus aspernatur saepe, repellendus nostrum cumque libero est, quod quia rerum. Excepturi modi id quod reiciendis minus numquam?nfjsffdasnfos
+                                <td><textarea class="w-100 border-0 p-1" rows="5" disabled>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia magni suscipit reprehenderit! Dolore harum nemo beatae ducimus aspernatur saepe, repellendus nostrum cumque libero est, quod quia rerum. Excepturi modi id quod reiciendis minus numquam?nfjsffdasnfos
                                 </textarea></td>
                             </tr>
                             <tr>
                                 <th class="table-secondary w-25">Timing</th>
-                                <td><textarea class="w-100 border-0" rows="5" disabled>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia magni suscipit reprehenderit! Dolore harum nemo beatae ducimus aspernatur saepe, repellendus nostrum cumque libero est, quod quia rerum. Excepturi modi id quod reiciendis minus numquam?</textarea></td>
+                                <td><textarea class="w-100 border-0 p-1" rows="5" disabled>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia magni suscipit reprehenderit! Dolore harum nemo beatae ducimus aspernatur saepe, repellendus nostrum cumque libero est, quod quia rerum. Excepturi modi id quod reiciendis minus numquam?</textarea></td>
                             </tr>
                             <tr>
                                 <th class="table-secondary w-25">Participants</th>
-                                <td><textarea class="w-100 border-0" rows="5" disabled>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia magni suscipit reprehenderit! Dolore harum nemo beatae ducimus aspernatur saepe, repellendus nostrum cumque libero est, quod quia rerum. Excepturi modi id quod reiciendis minus numquam?</textarea></td>
+                                <td><textarea class="w-100 border-0 p-1" rows="5" disabled>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia magni suscipit reprehenderit! Dolore harum nemo beatae ducimus aspernatur saepe, repellendus nostrum cumque libero est, quod quia rerum. Excepturi modi id quod reiciendis minus numquam?</textarea></td>
                             </tr>
                             <tr>
                                 <th class="table-secondary w-25">Items Used</th>
-                                <td><textarea class="w-100 border-0" rows="5" disabled>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia magni suscipit reprehenderit! Dolore harum nemo beatae ducimus aspernatur saepe, repellendus nostrum cumque libero est, quod quia rerum. Excepturi modi id quod reiciendis minus numquam?</textarea></td>
+                                <td><textarea class="w-100 border-0 p-1" rows="5" disabled>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia magni suscipit reprehenderit! Dolore harum nemo beatae ducimus aspernatur saepe, repellendus nostrum cumque libero est, quod quia rerum. Excepturi modi id quod reiciendis minus numquam?</textarea></td>
                             </tr>
                         </tbody>
                     </table>
@@ -87,19 +87,27 @@
                         <tbody>
                             <tr>
                                 <th class="table-secondary w-25">Other Info</th>
-                                <td><textarea class="w-100 border-0" rows="5" disabled>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia magni suscipit reprehenderit! Dolore harum nemo beatae ducimus aspernatur saepe, repellendus nostrum cumque libero est, quod quia rerum. Excepturi modi id quod reiciendis minus numquam?nfjsffdasnfos
+                                <td><textarea class="w-100 border-0 p-1" rows="5" disabled>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia magni suscipit reprehenderit! Dolore harum nemo beatae ducimus aspernatur saepe, repellendus nostrum cumque libero est, quod quia rerum. Excepturi modi id quod reiciendis minus numquam?nfjsffdasnfos
                                 </textarea></td>
                             </tr>
                         </tbody>
                     </table>
 
                 </div>
+
+                <!-- editting buttons -->
+                <?php
+                require('../edit-btn/edit-btn.php');
+                ?>
             </form>
         </section>
 
     </div>
 
-    <!-- scipts -->
+	<!-- scipts -->
+	<!-- custom -->
+	<script src="../../js/admin/entry-edit.js"></script>
+	<!-- bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
     <!-- font awesome -->
     <script src="https://kit.fontawesome.com/57e83eb6e4.js" crossorigin="anonymous"></script>
