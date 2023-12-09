@@ -31,7 +31,7 @@
 				<div class="row d-flex justify-content-between mb-3">
 					<!-- title -->
 					<div class="col-6">
-						<h2 id="crops-title" class="fw-semibold">Tribes</h2>
+						<h2 id="crops-title" class="fw-semibold">Rituals</h2>
 					</div>
 
 					<!-- search -->
@@ -79,10 +79,10 @@
 							$tribe_name = $row['tribe_name'];
 							$tribe_image = $row['tribe_image'];
 					?>
-							<!-- Saging with data from db -->
+							<!--  -->
 							<div class="card-container col-6 col-md-4 col-lg-2 p-2">
 
-								<a href="tribe.php?tribe_id=<?php echo $tribe_id; ?>" class="crop-card py-3 px-1 d-flex justify-content-center align-items-end" style="
+								<a href="ritual.php?tribe_id=<?php echo $tribe_id; ?>" class="crop-card py-3 px-1 d-flex justify-content-center align-items-end" style="
 									background-image: url('<?php echo $tribe_image; ?>');
 								">
 									<div class="crop-card-text row w-100 d-flex flex-row justify-content-between align-items-center">
