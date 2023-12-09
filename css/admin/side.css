@@ -19,5 +19,10 @@
 /* main nav */
 #main-nav{
     background: rgb(1,106,112);
-background: linear-gradient(66deg, rgba(1,106,112,1) 0%, rgba(34,125,130,1) 100%);
+	background: linear-gradient(66deg, rgba(1,106,112,1) 0%, rgba(34,125,130,1) 100%);
+}
+
+/* active navs */
+.active-nav {
+	background: var(--lightShades);
 }

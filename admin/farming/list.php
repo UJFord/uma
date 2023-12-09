@@ -82,7 +82,7 @@
 							<!-- Saging with data from db -->
 							<div class="card-container col-6 col-md-4 col-lg-2 p-2">
 
-								<a href="practice.php?tribe_id=<?php echo $tribe_id; ?>" class="crop-card py-3 px-1 d-flex justify-content-center align-items-end" style="
+								<a href="farming.php?tribe_id=<?php echo $tribe_id; ?>" class="crop-card py-3 px-1 d-flex justify-content-center align-items-end" style="
 									background-image: url('<?php echo $tribe_image; ?>');
 								">
 									<div class="crop-card-text row w-100 d-flex flex-row justify-content-between align-items-center">
