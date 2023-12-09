@@ -28,7 +28,7 @@
 		<section id="nav-cards" class="p-0 m-0 col col-md-9 col-xl-10 min-vh-100">
 
 			<!-- form for submitting -->
-			<form  id="main-panel" action="" class="h-100 py-3 px-5">
+			<form id="form-panel" action="" class="h-100 py-3 px-5">
 
 				<!-- title-->
 				<div class="row d-flex justify-content-between mb-3">
@@ -45,27 +45,27 @@
 						<tbody>
 							<tr>
 								<th class="table-secondary w-25" scope="row">Name</th>
-								<td><input type="text" value="Oryza sativa L" class="w-100 border-0" disabled></td>
+								<td><input type="text" value="Oryza sativa L" class="w-100 border-0 p-1" disabled></td>
 							</tr>
 							<tr>
 								<th class="table-secondary w-25" scope="row">Image</th>
-								<td><input type="image" src="Submit" class="w-100 border-0"' disabled></td>
+								<td><input type="image" src="Submit" class="w-100 border-0 p-1"' disabled></td>
 							</tr>
 							<tr>
 								<th class="table-secondary w-25" scope="row">Location</th>
-								<td><input type="text" value="Oryza sativa L" class="w-100 border-0" disabled></td>
+								<td><input type="text" value="Oryza sativa L" class="w-100 border-0 p-1" disabled></td>
 							</tr>
 							<tr>
 								<th class="table-secondary">Language and Dialect</th>
-								<td><input type="text" value="Adlai" class="w-100 border-0" disabled></td>
+								<td><input type="text" value="Adlai" class="w-100 border-0 p-1" disabled></td>
 							</tr>
 							<tr>
 								<th class="table-secondary">Population</th>
-								<td><input type="text" value="Adlai" class="w-100 border-0" disabled></td>
+								<td><input type="text" value="Adlai" class="w-100 border-0 p-1" disabled></td>
 							</tr>
 							<tr>
 								<th class="table-secondary">Livelihood and Practices</th>
-								<td><input type="text" value="Adlai" class="w-100 border-0" disabled></td>
+								<td><input type="text" value="Adlai" class="w-100 border-0 p-1" disabled></td>
 							</tr>
 						</tbody>
 
@@ -75,19 +75,19 @@
 						<tbody>
 							<tr>
 								<th class="table-secondary w-25" scope="row">Farming Practices</th>
-								<td><input type="text" value="Oryza sativa L" class="w-100 border-0" disabled></td>
+								<td><input type="text" value="Oryza sativa L" class="w-100 border-0 p-1" disabled></td>
 							</tr>
 							<tr>
 								<th class="table-secondary">Social Structure and Kinship System</th>
-								<td><input type="text" value="Adlai" class="w-100 border-0" disabled></td>
+								<td><input type="text" value="Adlai" class="w-100 border-0 p-1" disabled></td>
 							</tr>
 							<tr>
 								<th class="table-secondary">Beliefs and Customs</th>
-								<td><input type="text" value="Adlai" class="w-100 border-0" disabled></td>
+								<td><input type="text" value="Adlai" class="w-100 border-0 p-1" disabled></td>
 							</tr>
 							<tr>
 								<th class="table-secondary">Cultural Significance</th>
-								<td><input type="text" value="Adlai" class="w-100 border-0" disabled></td>
+								<td><input type="text" value="Adlai" class="w-100 border-0 p-1" disabled></td>
 							</tr>
 						</tbody>
 					</table>
@@ -96,11 +96,11 @@
 						<tbody>
 							<tr>
 								<th class="table-secondary w-25" scope="row">Challenges and Threats</th>
-								<td><input type="text" value="Oryza sativa L" class="w-100 border-0" disabled></td>
+								<td><input type="text" value="Oryza sativa L" class="w-100 border-0 p-1" disabled></td>
 							</tr>
 							<tr>
 								<th class="table-secondary">Efforts of Revitalization</th>
-								<td><input type="text" value="Adlai" class="w-100 border-0" disabled></td>
+								<td><input type="text" value="Adlai" class="w-100 border-0 p-1" disabled></td>
 							</tr>
 						</tbody>
 					</table>
@@ -109,18 +109,27 @@
 						<tbody>
 							<tr>
 								<th class="table-secondary w-25" scope="row">Other Info</th>
-								<td><input type="text" value="Oryza sativa L" class="w-100 border-0" disabled></td>
+								<td><input type="text" value="Oryza sativa L" class="w-100 border-0 p-1" disabled></td>
 							</tr>
 						</tbody>
 					</table>
 
 				</div>
+
+
+				<!-- editting buttons -->
+				<?php
+				require('../edit-btn/edit-btn.php');
+				?>
 			</form>
 		</section>
 
 	</div>
 
 	<!-- scipts -->
+	<!-- custom -->
+	<script src="../../js/admin/entry-edit.js"></script>
+	<!-- bootstrap -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 	<!-- font awesome -->
 	<script src="https://kit.fontawesome.com/57e83eb6e4.js" crossorigin="anonymous"></script>
