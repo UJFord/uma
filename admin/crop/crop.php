@@ -27,11 +27,14 @@
 		<!-- main panel -->
 		<section class="p-0 m-0 col col-md-9 col-xl-10 min-vh-100">
 
+			
 			<!-- form for submitting -->
 			<form id="form-panel" class="h-100 py-3 px-5">
+				<!-- back button -->
+				<a href="list.php" class="link-offset-2"><i class="bi bi-chevron-left"></i>Go Back</a>
 
 				<!-- title-->
-				<div class="row d-flex justify-content-between mb-3">
+				<div class="row d-flex justify-content-between my-3">
 					<div class="col-6">
 						<h3>
 							<input id="title" type="text" value="Crop Name" class="fw-semibold w-100 border-0 py-1 px-2" disabled>

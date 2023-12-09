@@ -1,6 +1,6 @@
 <!-- get current page -->
 <?php
-$current_page = $_SERVER['REQUEST_URI'];
+$current_page = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
 require('../../html/navfoot/connection.php');
 ?>
@@ -10,38 +10,49 @@ require('../../html/navfoot/connection.php');
 
 <!-- main nav -->
 <nav id="main-nav" class="d-none d-md-block col col-3 col-lg-3 col-xl-2 fixed-top h-100 m-0 p-0">
-    <div class="d-flex flex-column flex-shrink-0 p-3 text-white h-100">
-        <a href="#" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-            <i class="fa-solid fa-hands-holding-circle me-3"></i>
+    <div class="d-flex flex-column flex-shrink-0 text-white h-100">
+        <!-- title -->
+        <a href="#" class="d-flex align-items-center m-3 mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+            <!-- logo -->
+            <i class="fa-solid fa-hands-holding-circle me-2"></i>
             <span class="fs-4">Uma for Staffs</span>
         </a>
-        <hr>
-        <ul class="nav nav-pills flex-column mb-auto">
+        <hr class="m-3">
+        <ul class="nav nav-pills flex-column mb-auto ps-3">
             <!-- crops sidebar nav -->
             <li class="nav-item">
-                <a href="../crop/list.php" <?php echo ($current_page == '/incognito-capstone/admin/crop/list.php') ? 'class="nav-link active" aria-current="page"' : 'class="nav-link text-white"'; ?>>
+                <a href="../crop/list.php" <?php echo (strpos($current_page, '/uma/admin/crop/list.php') === 0 || strpos($current_page, '/uma/admin/crop/crop.php') === 0)
+                                                ? 'class="nav-link text-dark fw-semibold rounded-start-pill active-nav"'
+                                                : 'class="nav-link text-white"'; ?>>
                     <i class="fa-solid fa-wheat-awn" style="width: 1.5rem;"></i>
                     Crops
                 </a>
             </li>
             <!-- tribes sidebar nav -->
             <li>
-                <a href="../tribe/list.php" <?php echo ($current_page == '/incognito-capstone/admin/tribe/list.php') ? 'class="nav-link active" aria-current="page"' : 'class="nav-link text-white"'; ?>>
+                <a href="../tribe/list.php" <?php echo (strpos($current_page, '/uma/admin/tribe/list.php') === 0 || strpos($current_page, '/uma/admin/tribe/tribe.php') === 0)
+                                                ? 'class="nav-link text-dark fw-semibold rounded-start-pill active-nav"'
+                                                : 'class="nav-link text-white"'; ?>>
                     <i class="fa-solid fa-people-group" style="width: 1.5rem;"></i>
                     Tribes
                 </a>
+
             </li>
             <!-- rituals sidebar nav -->
             <li>
-                <a href="../ritual/list.php" <?php echo ($current_page == '/incognito-capstone/admin/practice/list.php') ? 'class="nav-link active" aria-current="page"' : 'class="nav-link text-white"'; ?>>
-                    <i class="fa-solid fa-book-open"  style="width: 1.5rem;"></i>
+                <a href="../ritual/list.php" <?php echo (strpos($current_page, '/uma/admin/ritual/list.php') === 0 || strpos($current_page, '/uma/admin/ritual/ritual.php') === 0)
+                                                ? 'class="nav-link text-dark fw-semibold rounded-start-pill active-nav"'
+                                                : 'class="nav-link text-white"'; ?>>
+                    <i class="fa-solid fa-book-open" style="width: 1.5rem;"></i>
                     Rituals
                 </a>
             </li>
             </li>
             <!-- farming sidebar nav -->
             <li>
-                <a href="../farming/list.php" <?php echo ($current_page == '/incognito-capstone/admin/practice/list.php') ? 'class="nav-link active" aria-current="page"' : 'class="nav-link text-white"'; ?>>
+                <a href="../farming/list.php" <?php echo (strpos($current_page, '/uma/admin/farming/list.php') === 0 || strpos($current_page, '/uma/admin/farming/farming.php') === 0)
+                                                ? 'class="nav-link text-dark fw-semibold rounded-start-pill active-nav"'
+                                                : 'class="nav-link text-white"'; ?>>
                     <i class="fa-solid fa-mountain-sun" style="width: 1.5rem;"></i>
                     Farming
                 </a>
