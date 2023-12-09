@@ -33,7 +33,7 @@
                 <!-- title-->
                 <div class="row d-flex justify-content-between mb-3">
                     <div class="col-6">
-                        <h3 id="crops-title"><input type="text" value="Farming Practice Name" class="fw-semibold w-100 border-0" disabled></h3>
+                        <h3 id="crops-title"><input type="text" value="Farming Practice Name" class="fw-semibold w-100 border-0 py-1 px-2" disabled></h3>
                     </div>
                 </div>
 
