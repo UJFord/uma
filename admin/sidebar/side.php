@@ -9,7 +9,7 @@ require('../../html/navfoot/connection.php');
 <link rel="stylesheet" href="../../css/admin/side.css">
 
 <!-- main nav -->
-<nav id="main-nav" class="d-none d-md-block col col-4 col-lg-3 col-xl-2 fixed-top h-100 m-0 p-0">
+<nav id="main-nav" class="d-none d-md-block col col-3 col-lg-3 col-xl-2 fixed-top h-100 m-0 p-0">
     <div class="d-flex flex-column flex-shrink-0 p-3 text-white h-100">
         <a href="#" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
             <i class="fa-solid fa-hands-holding-circle me-3"></i>

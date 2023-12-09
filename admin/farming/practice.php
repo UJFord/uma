@@ -7,7 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
     <!-- cutom css -->
-    <!-- <link rel="stylesheet" href="../../css/admin/crop.css" /> -->
+	<link rel="stylesheet" href="../../css/admin/entry.css" />
     <!-- favicon -->
     <link rel="shortcut icon" href="img/logo/Uma logo.svg" type="image/x-icon" />
     <title>Crop sa Editor</title>
@@ -23,17 +23,17 @@
         require('../sidebar/side.php');
         ?>
         <!-- space holder of side panel -->
-        <section class=" d-none d-md-block col col-4 col-lg-3 col-xl-2 p-0 m-0"></section>
+        <section class=" d-none d-md-block col col-3 col-xl-2 p-0 m-0"></section>
         <!-- main panel -->
-        <section id="nav-cards" class="p-0 m-0 col col-md-8 col-lg-9 col-xl-10">
+        <section id="nav-cards" class="p-0 m-0 col col-md-9 col-xl-10 min-vh-100">
 
             <!-- form for submitting -->
-            <form action="" class=" py-3 px-5">
+            <form id="main-panel" action="" class="h-100 py-3 px-5">
 
                 <!-- title-->
                 <div class="row d-flex justify-content-between mb-3">
                     <div class="col-6">
-                        <h3 id="crops-title" class="fw-semibold"><input type="text" value="Farming Practice Name" class="w-100 border-0" disabled></h3>
+                        <h3 id="crops-title"><input type="text" value="Farming Practice Name" class="fw-semiboldw-100 border-0" disabled></h3>
                     </div>
                 </div>
 

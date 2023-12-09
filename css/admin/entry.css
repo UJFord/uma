@@ -11,3 +11,7 @@
 	--searchTextColor: #e7e7e7;
 	--headColor: #ffc861;
 }
+
+#main-panel{
+	background: var(--lightShades);
+}
