@@ -32,6 +32,7 @@
 					<!-- title -->
 					<div class="col-6">
 						<h2 id="crops-title" class="fw-semibold">Crops</h2>
+						<a href="crop-create.php" class="btn btn-primary float-end">Add Crop</a>
 					</div>
 
 					<!-- search -->
@@ -67,16 +68,17 @@
 
 				<!-- crop cards -->
 				<div id="crop-cards" class="row">
+					<?php include('../message.php'); ?>
 
 					<?php
-					$result = pg_query($connection, "select traditional_crop.crop_id, basic_info.image, basic_info.name from traditional_crop left join basic_info on traditional_crop.basic_info_id = basic_info.basic_info_id order by basic_info.name");
+					$result = pg_query($connection, "select * from crops order by crop_id");
 					$count = pg_num_rows($result);
 
 					if ($count > 0) {
 						while ($row = pg_fetch_assoc($result)) {
 							$crop_id = $row['crop_id'];
 							$image = $row['image'];
-							$name = $row['name'];
+							$crop_name = $row['crop_name'];
 
 					?>
 							<!-- crop -->
@@ -86,13 +88,18 @@
 								">
 									<div class="crop-card-text row w-100 d-flex flex-row justify-content-between align-items-center">
 										<!-- crop name -->
-										<h4 class="crop-name col-6"><?php echo ucfirst($name); ?></h4>
+										<h4 class="crop-name col-6"><?php echo ucfirst($crop_name); ?></h4>
 										<!-- arrow -->
 										<div class="col-2 arrow-container">
 											<i class="position-absolute bi bi-arrow-right-short fs-3"></i>
 										</div>
 									</div>
 								</a>
+								<td>
+									<form action="code.php" method='POST' class="d-inline">
+										<button type="submit" name="delete_crop" value="<?php echo $crop_id; ?>" class="btn btn-danger btn-sm">Delete</a>
+									</form>
+								</td>
 							</div>
 					<?php
 						}

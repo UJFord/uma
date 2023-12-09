@@ -7,7 +7,9 @@
     <div id="apply-cancel-box" class="d-none m-3">
         <!-- apply -->
         <!-- dapat mag reload sha sa page with all new and edited info -->
-        <button id="apply-btn" type="button" class="btn btn-success px-3 py-2 me-1"><i class="fa-solid fa-check me-1"></i>Apply</button>
+        <a href="../crop/code.php">
+        <button id="apply-btn" type="submit" name="update_crop" class="btn btn-success px-3 py-2 me-1"><i class="fa-solid fa-check me-1"></i>Apply</button>
+        </a>
         <!-- cancel -->
         <!-- dapat mag reload sha sa page nga ang state is just like tung gi click niya kani nga entry sa list -->
         <a href="#">
