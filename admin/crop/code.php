@@ -4,7 +4,7 @@ session_start();
 
 $con = pg_connect("host=localhost dbname=farm_crops user=postgres password=123") or die("Could not connect to server\n");
 
-if (isset($_POST['save_crop'])) {
+if (isset($_POST['save'])) {
     // Inserting into agronomic_information table
     $query = "INSERT INTO agronomic_information (days_to_mature, yield_potential) VALUES ($1, $2) RETURNING agronomic_information_id";
     $query_run = pg_query_params($con, $query, [$_POST['days_to_mature'], $_POST['yield_potential']]);
@@ -123,6 +123,7 @@ if (isset($_POST['save_crop'])) {
     ]);
 
     if ($query_run_crop) {
+        // echo "Query: $query";
         $row = pg_fetch_row($query_run_crop);
         $crop_id = $row[0];
         $_SESSION['message'] = "Crop Created Successfully";
@@ -134,7 +135,7 @@ if (isset($_POST['save_crop'])) {
     }
 }
 
-if (isset($_POST['update_crop'])) {
+if (isset($_POST['update'])) {
     // Assuming you have a variable $_POST['crop_id'] containing the ID of the crop to update
     // crops table
     $crop_id = pg_escape_string($con, $_POST['crop_id']);
@@ -265,6 +266,7 @@ if (isset($_POST['update_crop'])) {
     ]);
 
     if ($query_run_crop) {
+        // echo "Query: $query";
         $_SESSION['message'] = "Crop Updated Successfully";
         header("Location: crop.php?crop_id=" . $_POST['crop_id']); // Assuming your update page is named 'update.php'
         exit(0);
@@ -274,9 +276,8 @@ if (isset($_POST['update_crop'])) {
     }
 }
 
-
-if (isset($_POST['delete_crop'])) {
-    $crop_id = $_POST['delete_crop'];
+if (isset($_POST['delete'])) {
+    $crop_id = $_POST['crop_id'];
     $result = pg_query($con, "select * from crops where crop_id='$crop_id'");
     $count = pg_num_rows($result);
 

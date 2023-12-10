@@ -26,12 +26,19 @@
 		<section class=" d-none d-md-block col col-4 col-lg-3 col-xl-2 p-0 m-0"></section>
 		<!-- main panel -->
 		<section id="nav-cards" class="p-0 m-0 col col-md-4 col-lg-9 col-xl-10">
-			<div class="py-3 px-4">
+			<div class=" py-3 px-4">
 				<!-- title and filter -->
 				<div class="row d-flex justify-content-between mb-3">
 					<!-- title -->
 					<div class="col-6">
-						<h2 id="crops-title" class="fw-semibold">Farming Practices</h2>
+						<h2 id="crops-title" class="fw-semibold">Crops</h2>
+                        <?php
+                        $search = pg_escape_string($connection, $_POST['search']);
+                        ?>
+                        <h2>
+                            <a href="#" class="text-black">"<?php echo $search; ?>"</a>
+                            <a href="list.php" class="text-black">( &times; )</a>
+                        </h2>
 					</div>
 
 					<!-- search -->
@@ -58,55 +65,54 @@
 								</li>
 							</ul>
 							<form action="search.php" method="POST">
-								<input type="search" name="search" class="form-control" placeholder="Start typing to filter..." />
-							</form>
+                                <input type="search" name="search" class="form-control" placeholder="Start typing to filter..." />
+                            </form>
 						</div>
 					</div>
+				</div>
 
-					<!-- crop cards -->
-					<div class="row"></div>
+				<!-- crop cards -->
+				<div id="crop-cards" class="row">
+					<?php 
+					include('../message.php'); 
+					// add entry button
+					require('../add/add.php');
+					?>
 
-					<!-- crop cards -->
-					<div id="crop-cards" class="row">
-						<?php
-						// add entry button
-						require('../add/add.php');
-						?>
+					<?php
+					$result = pg_query($connection, "select * from crops where crop_name like '%$search%' OR DESCRIPTION LIKE '%$search%'");
+					$count = pg_num_rows($result);
 
-						<?php
-						$result = pg_query($connection, "select * from farming");
-						$count = pg_num_rows($result);
+					if ($count > 0) {
+						while ($row = pg_fetch_assoc($result)) {
+							$crop_id = $row['crop_id'];
+							$image = $row['image'];
+							$crop_name = $row['crop_name'];
 
-						if ($count > 0) {
-							while ($row = pg_fetch_assoc($result)) {
-								$farming_id = $row['farming_id'];
-								$farming_name = $row['farming_name'];
-								$image = $row['image'];
-						?>
-								<!-- Saging with data from db -->
-								<div class="card-container col-6 col-md-4 col-lg-2 p-2">
-
-									<a href="farming.php?farming_id=<?php echo $farming_id; ?>" class="crop-card py-3 px-1 d-flex justify-content-center align-items-end" style="
+					?>
+							<!-- crop -->
+							<div class="card-container col-6 col-md-4 col-lg-2 p-2">
+								<a href="crop.php?crop_id=<?php echo $crop_id; ?>" class="crop-card py-3 px-1 d-flex justify-content-center align-items-end" style="
 									background-image: url('<?php echo $image; ?>');
 								">
-										<div class="crop-card-text row w-100 d-flex flex-row justify-content-between align-items-center">
-											<!-- crop name -->
-											<h4 class="crop-name col-6"><?php echo ucfirst($farming_name); ?></h4>
-											<!-- arrow -->
-											<div class="col-2 arrow-container">
-												<i class="position-absolute bi bi-arrow-right-short fs-3"></i>
-											</div>
+									<div class="crop-card-text row w-100 d-flex flex-row justify-content-between align-items-center">
+										<!-- crop name -->
+										<h4 class="crop-name col-6"><?php echo ucfirst($crop_name); ?></h4>
+										<!-- arrow -->
+										<div class="col-2 arrow-container">
+											<i class="position-absolute bi bi-arrow-right-short fs-3"></i>
 										</div>
-									</a>
-								</div>
-						<?php
-							}
-						} else {
-							echo '<h5>No Record Found </h5>';
+									</div>
+								</a>
+							</div>
+					<?php
 						}
-						?>
-					</div>
+					} else {
+						echo '<h5>No more record</h5>';
+					}
+					?>
 				</div>
+			</div>
 		</section>
 
 	</div>

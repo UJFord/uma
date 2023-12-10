@@ -28,21 +28,17 @@
 		<section id="nav-cards" class="p-0 m-0 col col-md-8 col-lg-9 col-xl-10">
 
 			<!-- form for submitting -->
-			<form name="Form" action="code.php" autocomplete="off" onsubmit="return validateForm()" method="POST" class=" py-3 px-5">
+			<form id="form-panel" name="Form" action="code.php" autocomplete="off" onsubmit="return validateForm()" method="POST" class=" py-3 px-5">
 
 				<!-- title-->
 				<div class="row d-flex justify-content-between mb-3">
 					<div class="col-6">
-						<h3 id="crops-title" class="fw-semibold">Create Crop</h3>
+						<h3 id="crops-title"><input type="text" name="crop_name" placeholder="Crop Name" class="fw-semibold w-100 border-0 py-1 px-2"></h3>
 					</div>
 				</div>
 
 				<!-- crop information -->
 				<div id="" class="row form-control p-3">
-
-					<div class="mb-3">
-						<button type="submit" name="save_crop" class="btn btn-primary">Save crop</button>
-					</div>
 
 					<?php include('../message.php'); ?>
 
@@ -54,10 +50,6 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<th class="table-secondary w-25" scope="row">Crop Name</th>
-								<td><input type="text" name="crop_name" placeholder="Enter Crop Name" class="w-100 border-0"></td>
-							</tr>
 							<tr>
 								<th class="table-secondary">Upland or Lowand</th>
 								<td><input type="text" name="upland_or_lowland" placeholder="Upland or Lowland" class="w-100 border-0"></td>
@@ -404,6 +396,10 @@
 						</tbody>
 					</table>
 				</div>
+				<!-- editting buttons -->
+				<?php
+				require('../edit-btn/add-btn.php');
+				?>
 			</form>
 		</section>
 

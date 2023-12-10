@@ -40,8 +40,6 @@
 					$current_morphological_characteristic_id = $crops['morphological_characteristic_id'];
 					$current_traditional_crop_traits_id = $crops['traditional_crop_traits_id'];
 					$current_relationship_among_cultivars_id = $crops['relationship_among_cultivars_id'];
-
-
 			?>
 					<!-- form for submitting -->
 					<form id="form-panel" name="Form" action="code.php" autocomplete="off" onsubmit="return validateForm()" method="POST" class="h-100 py-3 px-5">
@@ -655,17 +653,16 @@
 							</table>
 
 						</div>
+						<!-- editting buttons -->
 						<?php
 						require('../edit-btn/edit-btn.php');
 						?>
 					</form>
 			<?php
-
 				}
 			}
 			?>
 		</section>
-		<!-- editting buttons -->
 	</div>
 
 	<!-- scipts -->

@@ -17,7 +17,7 @@ require('../../html/navfoot/connection.php');
             <i class="fa-solid fa-hands-holding-circle me-2"></i>
             <span class="fs-4">Uma for Staffs</span>
         </a>
-        <hr class="m-3">
+        <hr class="mx-3">
         <ul class="nav nav-pills flex-column mb-auto ps-3">
             <!-- crops sidebar nav -->
             <li class="nav-item">
@@ -41,8 +41,8 @@ require('../../html/navfoot/connection.php');
             <!-- rituals sidebar nav -->
             <li>
                 <a href="../ritual/list.php" <?php echo (strpos($current_page, '/uma/admin/ritual/list.php') === 0 || strpos($current_page, '/uma/admin/ritual/ritual.php') === 0)
-                                                ? 'class="nav-link text-dark fw-semibold rounded-start-pill active-nav"'
-                                                : 'class="nav-link text-white"'; ?>>
+                                                    ? 'class="nav-link text-dark fw-semibold rounded-start-pill active-nav"'
+                                                    : 'class="nav-link text-white"'; ?>>
                     <i class="fa-solid fa-book-open" style="width: 1.5rem;"></i>
                     Rituals
                 </a>
@@ -51,15 +51,15 @@ require('../../html/navfoot/connection.php');
             <!-- farming sidebar nav -->
             <li>
                 <a href="../farming/list.php" <?php echo (strpos($current_page, '/uma/admin/farming/list.php') === 0 || strpos($current_page, '/uma/admin/farming/farming.php') === 0)
-                                                ? 'class="nav-link text-dark fw-semibold rounded-start-pill active-nav"'
-                                                : 'class="nav-link text-white"'; ?>>
+                                                    ? 'class="nav-link text-dark fw-semibold rounded-start-pill active-nav"'
+                                                    : 'class="nav-link text-white"'; ?>>
                     <i class="fa-solid fa-mountain-sun" style="width: 1.5rem;"></i>
                     Farming
                 </a>
             </li>
         </ul>
-        <hr>
-        <div class="dropdown">
+        <hr class="mx-3">
+        <div class="dropdown mx-3 mt-0">
             <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                 <img src="https://source.unsplash.com/32x32/?nature,water" alt="" width="32" height="32" class="rounded-circle me-2">
                 <strong>John Doe</strong>

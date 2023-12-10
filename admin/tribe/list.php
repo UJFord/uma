@@ -57,33 +57,35 @@
 									<a class="dropdown-item" href="#">Separated link</a>
 								</li>
 							</ul>
-							<input type="text" class="form-control" placeholder="Start typing to filter..." />
+							<form action="search.php" method="POST">
+                                <input type="search" name="search" class="form-control" placeholder="Start typing to filter..." />
+                            </form>
 						</div>
 					</div>
-
-					<!-- crop cards -->
-					<div class="row"></div>
 				</div>
 
 				<!-- crop cards -->
 				<div id="crop-cards" class="row">
+					<?php
+					// add entry button
+					require('../add/add.php');
+					?>
 
 					<?php
-
-					$result = pg_query($connection, "select tribe.tribe_id, tribe.tribe_name, tribe.tribe_image from tribe");
+					$result = pg_query($connection, "select * from tribe");
 					$count = pg_num_rows($result);
 
 					if ($count > 0) {
 						while ($row = pg_fetch_assoc($result)) {
 							$tribe_id = $row['tribe_id'];
 							$tribe_name = $row['tribe_name'];
-							$tribe_image = $row['tribe_image'];
+							$image = $row['image'];
 					?>
 							<!-- Saging with data from db -->
 							<div class="card-container col-6 col-md-4 col-lg-2 p-2">
 
 								<a href="tribe.php?tribe_id=<?php echo $tribe_id; ?>" class="crop-card py-3 px-1 d-flex justify-content-center align-items-end" style="
-									background-image: url('<?php echo $tribe_image; ?>');
+									background-image: url('<?php echo $image; ?>');
 								">
 									<div class="crop-card-text row w-100 d-flex flex-row justify-content-between align-items-center">
 										<!-- crop name -->

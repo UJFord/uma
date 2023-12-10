@@ -32,7 +32,6 @@
 					<!-- title -->
 					<div class="col-6">
 						<h2 id="crops-title" class="fw-semibold">Crops</h2>
-						<a href="crop-create.php" class="btn btn-primary float-end">Add Crop</a>
 					</div>
 
 					<!-- search -->
@@ -58,17 +57,20 @@
 									<a class="dropdown-item" href="#">Separated link</a>
 								</li>
 							</ul>
-							<input type="text" class="form-control" placeholder="Start typing to filter..." />
+							<form action="search.php" method="POST">
+                                <input type="search" name="search" class="form-control" placeholder="Start typing to filter..." />
+                            </form>
 						</div>
 					</div>
-
-					<!-- crop cards -->
-					<div class="row"></div>
 				</div>
 
 				<!-- crop cards -->
 				<div id="crop-cards" class="row">
-					<?php include('../message.php'); ?>
+					<?php 
+					include('../message.php'); 
+					// add entry button
+					require('../add/add.php');
+					?>
 
 					<?php
 					$result = pg_query($connection, "select * from crops order by crop_id");
@@ -95,11 +97,6 @@
 										</div>
 									</div>
 								</a>
-								<td>
-									<form action="code.php" method='POST' class="d-inline">
-										<button type="submit" name="delete_crop" value="<?php echo $crop_id; ?>" class="btn btn-danger btn-sm">Delete</a>
-									</form>
-								</td>
 							</div>
 					<?php
 						}
