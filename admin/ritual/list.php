@@ -62,9 +62,14 @@
                             </form>
 						</div>
 					</div>
+				</div>
 
-					<!-- crop cards -->
-					<div class="row"></div>
+				<!-- crop cards -->
+				<div id="crop-cards" class="row">
+					<!-- add entry button -->
+					<?php
+					require('../add/add.php');
+					?>
 
 					<!-- crop cards -->
 					<div id="crop-cards" class="row">
