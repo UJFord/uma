@@ -35,11 +35,20 @@
 
 				if (pg_num_rows($query_run) > 0) {
 					$crops = pg_fetch_assoc($query_run);
-					$current_agronomic_information_id = $crops['agronomic_information_id'];
-					$current_botanical_information_id = $crops['botanical_information_id'];
-					$current_morphological_characteristic_id = $crops['morphological_characteristic_id'];
-					$current_traditional_crop_traits_id = $crops['traditional_crop_traits_id'];
-					$current_relationship_among_cultivars_id = $crops['relationship_among_cultivars_id'];
+					// Null check and default value for agronomic_information_id
+					$current_agronomic_information_id = $crops['agronomic_information_id'] ?? 'default_agronomic_id';
+
+					// Null check and default value for botanical_information_id
+					$current_botanical_information_id = $crops['botanical_information_id'] ?? 'default_botanical_id';
+
+					// Null check and default value for morphological_characteristic_id
+					$current_morphological_characteristic_id = $crops['morphological_characteristic_id'] ?? 'default_morphological_id';
+
+					// Null check and default value for traditional_crop_traits_id
+					$current_traditional_crop_traits_id = $crops['traditional_crop_traits_id'] ?? 'default_traditional_traits_id';
+
+					// Null check and default value for relationship_among_cultivars_id
+					$current_relationship_among_cultivars_id = $crops['relationship_among_cultivars_id'] ?? 'default_relationship_id';
 			?>
 					<!-- form for submitting -->
 					<form id="form-panel" name="Form" action="code.php" autocomplete="off" onsubmit="return validateForm()" method="POST" class="h-100 py-3 px-5">

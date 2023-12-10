@@ -58,26 +58,20 @@
 								</li>
 							</ul>
 							<form action="search.php" method="POST">
-                                <input type="search" name="search" class="form-control" placeholder="Start typing to filter..." />
-                            </form>
+								<input type="search" name="search" class="form-control" placeholder="Start typing to filter..." />
+							</form>
 						</div>
 					</div>
 				</div>
 
 				<!-- crop cards -->
 				<div id="crop-cards" class="row">
-					<!-- add entry button -->
 					<?php
+					// add entry button
 					require('../add/add.php');
 					?>
-
 					<!-- crop cards -->
 					<div id="crop-cards" class="row">
-						<?php
-						// add entry button
-						require('../add/add.php');
-						?>
-
 						<?php
 						$result = pg_query($connection, "select * from ritual");
 						$count = pg_num_rows($result);

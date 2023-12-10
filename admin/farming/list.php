@@ -66,18 +66,12 @@
 
 				<!-- crop cards -->
 				<div id="crop-cards" class="row">
-					<!-- add entry button -->
 					<?php
+					// add entry button
 					require('../add/add.php');
 					?>
-
 					<!-- crop cards -->
 					<div id="crop-cards" class="row">
-						<?php
-						// add entry button
-						require('../add/add.php');
-						?>
-
 						<?php
 						$result = pg_query($connection, "select * from farming");
 						$count = pg_num_rows($result);
