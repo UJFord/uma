@@ -26,70 +26,71 @@
 		<section class=" d-none d-md-block col col-3 col-xl-2 p-0 m-0"></section>
 		<!-- main panel -->
 		<section id="nav-cards" class="p-0 m-0 col col-md-9 col-xl-10 min-vh-100">
+			<?php
+			if (isset($_GET['tribe_id'])) {
+				$tribe_id = pg_escape_string($connection, $_GET['tribe_id']);
+				$query = "SELECT * from tribe WHERE tribe_id='$tribe_id'";
+				$query_run = pg_query($connection, $query);
 
-			<!-- form for submitting -->
-			<form id="form-panel" action="" class="h-100 py-3 px-5">
-				<!-- back button -->
-				<a href="list.php" class="link-offset-2"><i class="bi bi-chevron-left"></i>Go Back</a>
+				if (pg_num_rows($query_run) > 0) {
+					$tribe = pg_fetch_assoc($query_run);
+			?>
+					<!-- form for submitting -->
+					<form id="form-panel" name="Form" action="code.php" autocomplete="off" onsubmit="return validateForm()" method="POST" class="h-100 py-3 px-5">
+						<!-- back button -->
+						<a href="list.php" class="link-offset-2"><i class="bi bi-chevron-left"></i>Go Back</a>
 
-				<!-- title-->
-				<div class="row d-flex justify-content-between my-3">
-					<div class="col-6">
-						<h3 id="crops-title"><input type="text" value="Tribe Name" class="fw-semibold w-100 border-0 py-1 px-2" disabled></h3>
-					</div>
-				</div>
+						<!-- title-->
+						<div class="row d-flex justify-content-between my-3">
+							<div class="col-6">
+								<h3 id="crops-title"><input type="text" name="tribe_name" value="<?= $tribe['tribe_name']; ?>" class="fw-semibold w-100 border-0 py-1 px-2" disabled></h3>
+							</div>
+						</div>
 
-				<!-- tribe information -->
-				<div id="" class="row form-control p-3">
+						<!-- tribe information -->
+						<div id="" class="row form-control p-3">
 
-					<table class="table table-hover table-sm">
+							<table class="table table-hover table-sm">
 
-						<tbody>
-							<tr>
-								<th class="table-secondary w-25" scope="row">Name</th>
-								<td><input type="text" value="Oryza sativa L" class="w-100 border-0 p-1" disabled></td>
-							</tr>
+							<input type="hidden" name="tribe_id" value="<?= $tribe['tribe_id']; ?>">
+
+							<tbody>
 							<tr>
 								<th class="table-secondary w-25" scope="row">Image</th>
-								<td><input type="image" src="Submit" class="w-100 border-0 p-1"' disabled></td>
+								<td><input type="text" name="image" value="<?= $tribe['image']; ?>" class="w-100 border-0 p-1"' disabled></td>
 							</tr>
 							<tr>
 								<th class="table-secondary w-25" scope="row">Location</th>
-								<td><input type="text" value="Oryza sativa L" class="w-100 border-0 p-1" disabled></td>
+								<td><input type="text" name="location" value="<?= $tribe['location']; ?>" class="w-100 border-0 p-1" disabled></td>
 							</tr>
 							<tr>
 								<th class="table-secondary">Language and Dialect</th>
-								<td><input type="text" value="Adlai" class="w-100 border-0 p-1" disabled></td>
+								<td><input type="text" name="language_and_dialect" value="<?= $tribe['language_and_dialect']; ?>" class="w-100 border-0 p-1" disabled></td>
 							</tr>
 							<tr>
 								<th class="table-secondary">Population</th>
-								<td><input type="text" value="Adlai" class="w-100 border-0 p-1" disabled></td>
+								<td><input type="text" name="population" value="<?= $tribe['population']; ?>" class="w-100 border-0 p-1" disabled></td>
 							</tr>
 							<tr>
 								<th class="table-secondary">Livelihood and Practices</th>
-								<td><input type="text" value="Adlai" class="w-100 border-0 p-1" disabled></td>
+								<td><input type="text" name="livelihood_and_practices" value="<?= $tribe['livelihood_and_practices']; ?>" class="w-100 border-0 p-1" disabled></td>
 							</tr>
 						</tbody>
-
 					</table>
 
 					<table class="table table-hover table-sm">
 						<tbody>
 							<tr>
 								<th class="table-secondary w-25" scope="row">Farming Practices</th>
-								<td><input type="text" value="Oryza sativa L" class="w-100 border-0 p-1" disabled></td>
+								<td><input type="text" name="farming_practices" value="<?= $tribe['farming_practices']; ?>" class="w-100 border-0 p-1" disabled></td>
 							</tr>
 							<tr>
 								<th class="table-secondary">Social Structure and Kinship System</th>
-								<td><input type="text" value="Adlai" class="w-100 border-0 p-1" disabled></td>
+								<td><input type="text" name="social_structure_and_kinship_system" value="<?= $tribe['social_structure_and_kinship_system']; ?>" class="w-100 border-0 p-1" disabled></td>
 							</tr>
 							<tr>
 								<th class="table-secondary">Beliefs and Customs</th>
-								<td><input type="text" value="Adlai" class="w-100 border-0 p-1" disabled></td>
-							</tr>
-							<tr>
-								<th class="table-secondary">Cultural Significance</th>
-								<td><input type="text" value="Adlai" class="w-100 border-0 p-1" disabled></td>
+								<td><input type="text" name="beliefs_and_customs" value="<?= $tribe['beliefs_and_customs']; ?>" class="w-100 border-0 p-1" disabled></td>
 							</tr>
 						</tbody>
 					</table>
@@ -98,11 +99,11 @@
 						<tbody>
 							<tr>
 								<th class="table-secondary w-25" scope="row">Challenges and Threats</th>
-								<td><input type="text" value="Oryza sativa L" class="w-100 border-0 p-1" disabled></td>
+								<td><input type="text" name="challenges_and_threats" value="<?= $tribe['challenges_and_threats']; ?>" class="w-100 border-0 p-1" disabled></td>
 							</tr>
 							<tr>
 								<th class="table-secondary">Efforts of Revitalization</th>
-								<td><input type="text" value="Adlai" class="w-100 border-0 p-1" disabled></td>
+								<td><input type="text" name="efforts_of_revitalization" value="<?= $tribe['efforts_of_revitalization']; ?>" class="w-100 border-0 p-1" disabled></td>
 							</tr>
 						</tbody>
 					</table>
@@ -111,19 +112,20 @@
 						<tbody>
 							<tr>
 								<th class="table-secondary w-25" scope="row">Other Info</th>
-								<td><input type="text" value="Oryza sativa L" class="w-100 border-0 p-1" disabled></td>
+								<td><input type="text" name="other_info" value="<?= $tribe['other_info']; ?>" class="w-100 border-0 p-1" disabled></td>
 							</tr>
 						</tbody>
 					</table>
-
 				</div>
-
-
 				<!-- editting buttons -->
 				<?php
-				require('../edit-btn/edit-btn.php');
+					require('../edit-btn/edit-btn.php');
 				?>
-			</form>
+				</form>
+			<?php
+				}
+			}
+			?>
 		</section>
 
 	</div>

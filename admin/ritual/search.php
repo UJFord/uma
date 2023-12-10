@@ -32,6 +32,13 @@
 					<!-- title -->
 					<div class="col-6">
 						<h2 id="crops-title" class="fw-semibold">Rituals</h2>
+                        <?php
+                        $search = pg_escape_string($connection, $_POST['search']);
+                        ?>
+                        <h2>
+                            <a href="#" class="text-black">"<?php echo $search; ?>"</a>
+                            <a href="list.php" class="text-black">( &times; )</a>
+                        </h2>
 					</div>
 
 					<!-- search -->
@@ -62,14 +69,9 @@
                             </form>
 						</div>
 					</div>
-				</div>
 
-				<!-- crop cards -->
-				<div id="crop-cards" class="row">
-					<!-- add entry button -->
-					<?php
-					require('../add/add.php');
-					?>
+					<!-- crop cards -->
+					<div class="row"></div>
 
 					<!-- crop cards -->
 					<div id="crop-cards" class="row">
@@ -79,7 +81,7 @@
 						?>
 
 						<?php
-						$result = pg_query($connection, "select * from ritual");
+						$result = pg_query($connection, "select * from ritual where ritual_name like '%$search%' OR DESCRIPTION LIKE '%$search%'");
 						$count = pg_num_rows($result);
 
 						if ($count > 0) {

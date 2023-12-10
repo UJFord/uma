@@ -57,12 +57,11 @@
 									<a class="dropdown-item" href="#">Separated link</a>
 								</li>
 							</ul>
-							<input type="text" class="form-control" placeholder="Start typing to filter..." />
+							<form action="search.php" method="POST">
+								<input type="search" name="search" class="form-control" placeholder="Start typing to filter..." />
+							</form>
 						</div>
 					</div>
-
-					<!-- crop cards -->
-					<div class="row"></div>
 				</div>
 
 				<!-- crop cards -->
@@ -72,41 +71,47 @@
 					require('../add/add.php');
 					?>
 
-					<?php
+					<!-- crop cards -->
+					<div id="crop-cards" class="row">
+						<?php
+						// add entry button
+						require('../add/add.php');
+						?>
 
-					$result = pg_query($connection, "select tribe.tribe_id, tribe.tribe_name, tribe.tribe_image from tribe");
-					$count = pg_num_rows($result);
+						<?php
+						$result = pg_query($connection, "select * from farming");
+						$count = pg_num_rows($result);
 
-					if ($count > 0) {
-						while ($row = pg_fetch_assoc($result)) {
-							$tribe_id = $row['tribe_id'];
-							$tribe_name = $row['tribe_name'];
-							$tribe_image = $row['tribe_image'];
-					?>
-							<!-- Saging with data from db -->
-							<div class="card-container col-6 col-md-4 col-lg-2 p-2">
+						if ($count > 0) {
+							while ($row = pg_fetch_assoc($result)) {
+								$farming_id = $row['farming_id'];
+								$farming_name = $row['farming_name'];
+								$image = $row['image'];
+						?>
+								<!-- Saging with data from db -->
+								<div class="card-container col-6 col-md-4 col-lg-2 p-2">
 
-								<a href="farming.php?tribe_id=<?php echo $tribe_id; ?>" class="crop-card py-3 px-1 d-flex justify-content-center align-items-end" style="
-									background-image: url('<?php echo $tribe_image; ?>');
+									<a href="farming.php?farming_id=<?php echo $farming_id; ?>" class="crop-card py-3 px-1 d-flex justify-content-center align-items-end" style="
+									background-image: url('<?php echo $image; ?>');
 								">
-									<div class="crop-card-text row w-100 d-flex flex-row justify-content-between align-items-center">
-										<!-- crop name -->
-										<h4 class="crop-name col-6"><?php echo ucfirst($tribe_name); ?></h4>
-										<!-- arrow -->
-										<div class="col-2 arrow-container">
-											<i class="position-absolute bi bi-arrow-right-short fs-3"></i>
+										<div class="crop-card-text row w-100 d-flex flex-row justify-content-between align-items-center">
+											<!-- crop name -->
+											<h4 class="crop-name col-6"><?php echo ucfirst($farming_name); ?></h4>
+											<!-- arrow -->
+											<div class="col-2 arrow-container">
+												<i class="position-absolute bi bi-arrow-right-short fs-3"></i>
+											</div>
 										</div>
-									</div>
-								</a>
-							</div>
-					<?php
+									</a>
+								</div>
+						<?php
+							}
+						} else {
+							echo '<h5>No Record Found </h5>';
 						}
-					} else {
-						echo '<h5>No Record Found </h5>';
-					}
-					?>
+						?>
+					</div>
 				</div>
-			</div>
 		</section>
 
 	</div>

@@ -57,30 +57,30 @@
 									<a class="dropdown-item" href="#">Separated link</a>
 								</li>
 							</ul>
-							<input type="text" class="form-control" placeholder="Start typing to filter..." />
+							<form action="search.php" method="POST">
+                                <input type="search" name="search" class="form-control" placeholder="Start typing to filter..." />
+                            </form>
 						</div>
 					</div>
-
-					<!-- crop cards -->
-					<div class="row"></div>
 				</div>
 
 				<!-- crop cards -->
 				<div id="crop-cards" class="row">
-					<!-- add entry button -->
-					<?php
+					<?php 
+					include('../message.php'); 
+					// add entry button
 					require('../add/add.php');
 					?>
 
 					<?php
-					$result = pg_query($connection, "select traditional_crop.crop_id, basic_info.image, basic_info.name from traditional_crop left join basic_info on traditional_crop.basic_info_id = basic_info.basic_info_id order by basic_info.name");
+					$result = pg_query($connection, "select * from crops order by crop_id");
 					$count = pg_num_rows($result);
 
 					if ($count > 0) {
 						while ($row = pg_fetch_assoc($result)) {
 							$crop_id = $row['crop_id'];
 							$image = $row['image'];
-							$name = $row['name'];
+							$crop_name = $row['crop_name'];
 
 					?>
 							<!-- crop -->
@@ -90,7 +90,7 @@
 								">
 									<div class="crop-card-text row w-100 d-flex flex-row justify-content-between align-items-center">
 										<!-- crop name -->
-										<h4 class="crop-name col-6"><?php echo ucfirst($name); ?></h4>
+										<h4 class="crop-name col-6"><?php echo ucfirst($crop_name); ?></h4>
 										<!-- arrow -->
 										<div class="col-2 arrow-container">
 											<i class="position-absolute bi bi-arrow-right-short fs-3"></i>

@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="../../css/admin/entry.css" />
     <!-- favicon -->
     <link rel="shortcut icon" href="img/logo/Uma logo.svg" type="image/x-icon" />
-    <title>Crop sa Editor</title>
+    <title>Crop as Editor</title>
 </head>
 
 <body class="overflow-x-hidden">
@@ -26,60 +26,65 @@
         <section class=" d-none d-md-block col col-3 col-xl-2 p-0 m-0"></section>
         <!-- main panel -->
         <section id="nav-cards" class="p-0 m-0 col col-md-9 col-xl-10 min-vh-100">
+            <?php
+            if (isset($_GET['ritual_id'])) {
+                $ritual_id = pg_escape_string($connection, $_GET['ritual_id']);
+                $query = "SELECT * from ritual WHERE ritual_id='$ritual_id'";
+                $query_run = pg_query($connection, $query);
 
-            <!-- form for submitting -->
-            <form id="form-panel" action="" class="h-100 py-3 px-5">
-				<!-- back button -->
-				<a href="list.php" class="link-offset-2"><i class="bi bi-chevron-left"></i>Go Back</a>
+                if (pg_num_rows($query_run) > 0) {
+                    $ritual = pg_fetch_assoc($query_run);
+            ?>
 
-                <!-- title-->
-                <div class="row d-flex justify-content-between my-3">
-                    <div class="col-6">
-                        <h3 id="crops-title"><input type="text" value="Ritual Name" class="fw-semibold w-100 border-0 py-1 px-2" disabled></h3>
-                    </div>
-                </div>
+                    <!-- form for submitting -->
+                    <form id="form-panel" name="Form" action="code.php" autocomplete="off" onsubmit="return validateForm()" method="POST" class="h-100 py-3 px-5">
+                        <!-- back button -->
+                        <a href="list.php" class="link-offset-2"><i class="bi bi-chevron-left"></i>Go Back</a>
 
-                <!-- crop information -->
-                <div id="" class="row form-control p-3">
+                        <!-- title-->
+                        <div class="row d-flex justify-content-between my-3">
+                            <div class="col-6">
+                                <h3 id="crops-title"><input type="text" name="ritual_name" value="<?= $ritual['ritual_name']; ?>" class="fw-semibold w-100 border-0 py-1 px-2" disabled></h3>
+                            </div>
+                        </div>
 
-                    <!-- botanical information -->
-                    <table id="info-table" class="table table-hover table-sm">
-                        <tbody>
-                            <tr>
-                                <th class="table-secondary w-25" scope="row">Name</th>
-                                <td><input type="text" value="Oryza sativa L" class="w-100 border-0 p-1" disabled></td>
-                            </tr>
-                            <tr>
-                                <th class="table-secondary">Description</th>
-                                <td><textarea class="w-100 border-0 p-1" rows="5" disabled>Slash-and-burn agriculture: This method involves clearing a piece of land by slashing and burning the vegetation. The ashes from the fire are then used to fertilize the soil</textarea></td>
-                            </tr>
-                            <tr>
-                                <th class="table-secondary w-25">Image</th>
-                                <td><input type="image" src="Submit" class="w-100 border-0 p-1"' disabled></td>
+                        <!-- crop information -->
+                        <div id="" class="row form-control p-3">
+
+                            <!-- to get the ritual id -->
+                            <input type="hidden" name="ritual_id" value="<?= $ritual['ritual_id']; ?>">
+
+                            <!-- Ritual Information -->
+                            <table id="info-table" class="table table-hover table-sm">
+                                <tbody>
+                                    <tr>
+                                        <th class="table-secondary">Description</th>
+                                        <td><textarea class="w-100 border-0 p-1" name="description" rows="5" disabled><?= $ritual['description']; ?></textarea></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="table-secondary w-25">Image</th>
+                                        <td><input type="text" name="image" value="<?= $ritual['image']; ?>" class="w-100 border-0 p-1"' disabled></td>
 							</tr>
                         </tbody>
-
                     </table>
 
-                    <!-- characteristics of traditional rice -->
                     <table class="table table-hover table-sm">
                         <tbody>
                             <tr>
                                 <th class="table-secondary w-25">Purpose</th>
-                                <td><textarea class="w-100 border-0 p-1" rows="5" disabled>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia magni suscipit reprehenderit! Dolore harum nemo beatae ducimus aspernatur saepe, repellendus nostrum cumque libero est, quod quia rerum. Excepturi modi id quod reiciendis minus numquam?nfjsffdasnfos
-                                </textarea></td>
+                                <td><textarea class="w-100 border-0 p-1" name="purpose" rows="5" disabled><?= $ritual['purpose']; ?></textarea></td>
                             </tr>
                             <tr>
                                 <th class="table-secondary w-25">Timing</th>
-                                <td><textarea class="w-100 border-0 p-1" rows="5" disabled>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia magni suscipit reprehenderit! Dolore harum nemo beatae ducimus aspernatur saepe, repellendus nostrum cumque libero est, quod quia rerum. Excepturi modi id quod reiciendis minus numquam?</textarea></td>
+                                <td><textarea class="w-100 border-0 p-1" name="timing" rows="5" disabled><?= $ritual['timing']; ?></textarea></td>
                             </tr>
                             <tr>
                                 <th class="table-secondary w-25">Participants</th>
-                                <td><textarea class="w-100 border-0 p-1" rows="5" disabled>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia magni suscipit reprehenderit! Dolore harum nemo beatae ducimus aspernatur saepe, repellendus nostrum cumque libero est, quod quia rerum. Excepturi modi id quod reiciendis minus numquam?</textarea></td>
+                                <td><textarea class="w-100 border-0 p-1" name="participants" rows="5" disabled><?= $ritual['participants']; ?></textarea></td>
                             </tr>
                             <tr>
                                 <th class="table-secondary w-25">Items Used</th>
-                                <td><textarea class="w-100 border-0 p-1" rows="5" disabled>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia magni suscipit reprehenderit! Dolore harum nemo beatae ducimus aspernatur saepe, repellendus nostrum cumque libero est, quod quia rerum. Excepturi modi id quod reiciendis minus numquam?</textarea></td>
+                                <td><textarea class="w-100 border-0 p-1" name="items_used" rows="5" disabled><?= $ritual['items_used']; ?></textarea></td>
                             </tr>
                         </tbody>
                     </table>
@@ -89,7 +94,7 @@
                         <tbody>
                             <tr>
                                 <th class="table-secondary w-25">Other Info</th>
-                                <td><textarea class="w-100 border-0 p-1" rows="5" disabled>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia magni suscipit reprehenderit! Dolore harum nemo beatae ducimus aspernatur saepe, repellendus nostrum cumque libero est, quod quia rerum. Excepturi modi id quod reiciendis minus numquam?nfjsffdasnfos
+                                <td><textarea class="w-100 border-0 p-1" rows="5" name="other_info" disabled><?= $ritual['other_info']; ?>
                                 </textarea></td>
                             </tr>
                         </tbody>
@@ -99,9 +104,13 @@
 
                 <!-- editting buttons -->
                 <?php
-                require('../edit-btn/edit-btn.php');
+                    require('../edit-btn/edit-btn.php');
                 ?>
             </form>
+            <?php
+                }
+            }
+            ?>
         </section>
 
     </div>

@@ -26,110 +26,120 @@
         <section class=" d-none d-md-block col col-3 col-xl-2 p-0 m-0"></section>
         <!-- main panel -->
         <section id="nav-cards" class="p-0 m-0 col col-md-9 col-xl-10 min-vh-100">
+            <?php
+            if (isset($_GET['farming_id'])) {
+                $farming_id = pg_escape_string($connection, $_GET['farming_id']);
+                $query = "SELECT * from farming WHERE farming_id='$farming_id'";
+                $query_run = pg_query($connection, $query);
 
-            <!-- form for submitting -->
-            <form id="form-panel" action="" class="h-100 py-3 px-5">
-				<!-- back button -->
-				<a href="list.php" class="link-offset-2"><i class="bi bi-chevron-left"></i>Go Back</a>
+                if (pg_num_rows($query_run) > 0) {
+                    $farming = pg_fetch_assoc($query_run);
+            ?>
+                    <!-- form for submitting -->
+                    <form id="form-panel" name="Form" action="code.php" autocomplete="off" onsubmit="return validateForm()" method="POST" class="h-100 py-3 px-5">
+                        <!-- back button -->
+                        <a href="list.php" class="link-offset-2"><i class="bi bi-chevron-left"></i>Go Back</a>
 
-                <!-- title-->
-                <div class="row d-flex justify-content-between my-3">
-                    <div class="col-6">
-                        <h3 id="crops-title"><input type="text" value="Farming Practice Name" class="fw-semibold w-100 border-0 py-1 px-2" disabled></h3>
-                    </div>
-                </div>
+                        <!-- title-->
+                        <div class="row d-flex justify-content-between my-3">
+                            <div class="col-6">
+                                <h3 id="crops-title"><input type="text" name="farming_name" value="<?= $farming['farming_name']; ?>" class="fw-semibold w-100 border-0 py-1 px-2" disabled></h3>
+                            </div>
+                        </div>
 
-                <!-- crop information -->
-                <div id="" class="row form-control p-3">
+                        <!-- Farming information -->
+                        <div id="" class="row form-control p-3">
 
-                    <!-- botanical information -->
-                    <table id="info-table" class="table table-hover table-sm">
-                        <tbody>
-                            <tr>
-                                <th class="table-secondary w-25" scope="row">Name</th>
-                                <td><input type="text" value="Oryza sativa L" class="w-100 border-0 p-1" disabled></td>
-                            </tr>
-                            <tr>
-                                <th class="table-secondary">Description</th>
-                                <td><textarea class="w-100 border-0 p-1" rows="5" disabled>Slash-and-burn agriculture: This method involves clearing a piece of land by slashing and burning the vegetation. The ashes from the fire are then used to fertilize the soil</textarea></td>
-                            </tr>
-                            <tr>
-                                <th class="table-secondary w-25">Image</th>
-                                <td><input type="image" src="Submit" class="w-100 border-0 p-1"' disabled></td>
+                        <!-- to get farming_id -->
+                        <input type="hidden" name="farming_id" value="<?= $farming['farming_id']; ?>">
+
+                            <!-- Farming information -->
+                            <table id="info-table" class="table table-hover table-sm">
+                                <tbody>
+                                    <tr>
+                                        <th class="table-secondary">Description</th>
+                                        <td><textarea class="w-100 border-0 p-1" name="description" rows="5" disabled><?= $farming['description']; ?></textarea></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="table-secondary w-25">Image Link</th>
+                                        <td><input type="text" name="image" value="<?= $farming['image']; ?>" class="w-100 border-0 p-1"' disabled></td>
 							</tr>
                         </tbody>
+                        </table>
 
-                    </table>
+                        <!-- characteristics of traditional rice -->
+                        <table class="table table-hover table-sm">
+                            <tbody>
+                                <tr>
+                                    <th class="table-secondary w-25">Importance</th>
+                                    <td><textarea class="w-100 border-0 p-1" name="importance" rows="5" disabled><?= $farming['importance']; ?>
+                                    </textarea></td>
+                                </tr>
+                                <tr>
+                                    <th class="table-secondary w-25">Role in Maintaning Upland Ecosystems</th>
+                                    <td><textarea class="w-100 border-0 p-1" name="role_in_maintaning_upland_ecosystem" rows="5" disabled><?= $farming['role_in_maintaning_upland_ecosystem']; ?></textarea></td>
+                                </tr>
+                                <tr>
+                                    <th class="table-secondary w-25">Timing</th>
+                                    <td><textarea class="w-100 border-0 p-1" name="timing" rows="5" disabled><?= $farming['timing']; ?></textarea></td>
+                                </tr>
+                                <tr>
+                                    <th class="table-secondary w-25">Benefits</th>
+                                    <td><textarea class="w-100 border-0 p-1" name="benefits" rows="5" disabled><?= $farming['benefits']; ?></textarea></td>
+                                </tr>
+                                <tr>
+                                    <th class="table-secondary w-25">Environmetal Impacts</th>
+                                    <td><textarea class="w-100 border-0 p-1" name="environmental_impacts" rows="5" disabled><?= $farming['environmental_impacts']; ?></textarea></td>
+                                </tr>
 
-                    <!-- characteristics of traditional rice -->
-                    <table class="table table-hover table-sm">
-                        <tbody>
+                        </table>
+
+                        <table class="table table-hover table-sm">
                             <tr>
-                                <th class="table-secondary w-25">Importance</th>
-                                <td><textarea class="w-100 border-0 p-1" rows="5" disabled>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia magni suscipit reprehenderit! Dolore harum nemo beatae ducimus aspernatur saepe, repellendus nostrum cumque libero est, quod quia rerum. Excepturi modi id quod reiciendis minus numquam?nfjsffdasnfos
-                                </textarea></td>
+                                <th class="table-secondary w-25">Considerations</th>
+                                <td><textarea class="w-100 border-0 p-1" name="considerations" rows="5" disabled><?= $farming['considerations']; ?></textarea></td>
                             </tr>
                             <tr>
-                                <th class="table-secondary w-25">Role in Maintaning Upland Ecosystems</th>
-                                <td><textarea class="w-100 border-0 p-1" rows="5" disabled>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia magni suscipit reprehenderit! Dolore harum nemo beatae ducimus aspernatur saepe, repellendus nostrum cumque libero est, quod quia rerum. Excepturi modi id quod reiciendis minus numquam?</textarea></td>
+                                <th class="table-secondary w-25">Sustainable Practices</th>
+                                <td><textarea class="w-100 border-0 p-1" name="sustainable_practices" rows="5" disabled><?= $farming['sustainable_practices']; ?></textarea></td>
                             </tr>
                             <tr>
-                                <th class="table-secondary w-25">Timing</th>
-                                <td><textarea class="w-100 border-0 p-1" rows="5" disabled>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia magni suscipit reprehenderit! Dolore harum nemo beatae ducimus aspernatur saepe, repellendus nostrum cumque libero est, quod quia rerum. Excepturi modi id quod reiciendis minus numquam?</textarea></td>
+                                <th class="table-secondary w-25">History Development</th>
+                                <td><textarea class="w-100 border-0 p-1" name="history_development" rows="5" disabled><?= $farming['history_development']; ?></textarea></td>
                             </tr>
                             <tr>
-                                <th class="table-secondary w-25">Benefits</th>
-                                <td><textarea class="w-100 border-0 p-1" rows="5" disabled>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia magni suscipit reprehenderit! Dolore harum nemo beatae ducimus aspernatur saepe, repellendus nostrum cumque libero est, quod quia rerum. Excepturi modi id quod reiciendis minus numquam?</textarea></td>
+                                <th class="table-secondary w-25">Construction and Maintenance</th>
+                                <td><textarea class="w-100 border-0 p-1" name="construction_and_maintenance" rows="5" disabled><?= $farming['construction_and_maintenance']; ?></textarea></td>
                             </tr>
                             <tr>
-                                <th class="table-secondary w-25">Environmetal Impacts</th>
-                                <td><textarea class="w-100 border-0 p-1" rows="5" disabled>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia magni suscipit reprehenderit! Dolore harum nemo beatae ducimus aspernatur saepe, repellendus nostrum cumque libero est, quod quia rerum. Excepturi modi id quod reiciendis minus numquam?</textarea></td>
+                                <th class="table-secondary w-25">Challenges</th>
+                                <td><textarea class="w-100 border-0 p-1" name="challenges" rows="5" disabled><?= $farming['challenges']; ?></textarea></td>
                             </tr>
+                            <tr>
+                                <th class="table-secondary w-25">Principles</th>
+                                <td><textarea class="w-100 border-0 p-1" name="principles" rows="5" disabled><?= $farming['principles']; ?></textarea></td>
+                            </tr>
+                        </table>
 
-                    </table>
-
-                    <table class="table table-hover table-sm">
-                        <tr>
-                            <th class="table-secondary w-25">Considerations</th>
-                            <td><textarea class="w-100 border-0 p-1" rows="5" disabled>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia magni suscipit reprehenderit! Dolore harum nemo beatae ducimus aspernatur saepe, repellendus nostrum cumque libero est, quod quia rerum. Excepturi modi id quod reiciendis minus numquam?</textarea></td>
-                        </tr>
-                        <tr>
-                            <th class="table-secondary w-25">Sustainable Practices</th>
-                            <td><textarea class="w-100 border-0 p-1" rows="5" disabled>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia magni suscipit reprehenderit! Dolore harum nemo beatae ducimus aspernatur saepe, repellendus nostrum cumque libero est, quod quia rerum. Excepturi modi id quod reiciendis minus numquam?</textarea></td>
-                        </tr>
-                        <tr>
-                            <th class="table-secondary w-25">History Development</th>
-                            <td><textarea class="w-100 border-0 p-1" rows="5" disabled>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia magni suscipit reprehenderit! Dolore harum nemo beatae ducimus aspernatur saepe, repellendus nostrum cumque libero est, quod quia rerum. Excepturi modi id quod reiciendis minus numquam?</textarea></td>
-                        </tr>
-                        <tr>
-                            <th class="table-secondary w-25">Construction and Maintenance</th>
-                            <td><textarea class="w-100 border-0 p-1" rows="5" disabled>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia magni suscipit reprehenderit! Dolore harum nemo beatae ducimus aspernatur saepe, repellendus nostrum cumque libero est, quod quia rerum. Excepturi modi id quod reiciendis minus numquam?</textarea></td>
-                        </tr>
-                        <tr>
-                            <th class="table-secondary w-25">Challenges</th>
-                            <td><textarea class="w-100 border-0 p-1" rows="5" disabled>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia magni suscipit reprehenderit! Dolore harum nemo beatae ducimus aspernatur saepe, repellendus nostrum cumque libero est, quod quia rerum. Excepturi modi id quod reiciendis minus numquam?</textarea></td>
-                        </tr>
-                        <tr>
-                            <th class="table-secondary w-25">Principles</th>
-                            <td><textarea class="w-100 border-0 p-1" rows="5" disabled>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia magni suscipit reprehenderit! Dolore harum nemo beatae ducimus aspernatur saepe, repellendus nostrum cumque libero est, quod quia rerum. Excepturi modi id quod reiciendis minus numquam?</textarea></td>
-                        </tr>
-                    </table>
-
-                    <table class="table table-hover table-sm mb-0">
-                        <tr>
-                            <th class="table-secondary w-25">Other Info</th>
-                            <td><textarea class="w-100 border-0 p-1" rows="5" disabled>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia magni suscipit reprehenderit! Dolore harum nemo beatae ducimus aspernatur saepe, repellendus nostrum cumque libero est, quod quia rerum. Excepturi modi id quod reiciendis minus numquam?</textarea></td>
-                        </tr>
-                        </tbody>
-                    </table>
+                        <table class="table table-hover table-sm mb-0">
+                            <tr>
+                                <th class="table-secondary w-25">Other Info</th>
+                                <td><textarea class="w-100 border-0 p-1" name="other_info" rows="5" disabled><?= $farming['other_info']; ?></textarea></td>
+                            </tr>
+                            </tbody>
+                        </table>
 
                 </div>
 
                 <!-- editting buttons -->
                 <?php
-                require('../edit-btn/edit-btn.php');
+                    require('../edit-btn/edit-btn.php');
                 ?>
             </form>
+            <?php
+                }
+            }
+            ?>
         </section>
 
     </div>
