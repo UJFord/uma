@@ -35,20 +35,11 @@
 
 				if (pg_num_rows($query_run) > 0) {
 					$crops = pg_fetch_assoc($query_run);
-					// Null check and default value for agronomic_information_id
-					$current_agronomic_information_id = $crops['agronomic_information_id'] ?? 'default_agronomic_id';
-
-					// Null check and default value for botanical_information_id
-					$current_botanical_information_id = $crops['botanical_information_id'] ?? 'default_botanical_id';
-
-					// Null check and default value for morphological_characteristic_id
-					$current_morphological_characteristic_id = $crops['morphological_characteristic_id'] ?? 'default_morphological_id';
-
-					// Null check and default value for traditional_crop_traits_id
-					$current_traditional_crop_traits_id = $crops['traditional_crop_traits_id'] ?? 'default_traditional_traits_id';
-
-					// Null check and default value for relationship_among_cultivars_id
-					$current_relationship_among_cultivars_id = $crops['relationship_among_cultivars_id'] ?? 'default_relationship_id';
+					$current_agronomic_information_id = $crops['agronomic_information_id'];
+					$current_botanical_information_id = $crops['botanical_information_id'];
+					$current_morphological_characteristic_id = $crops['morphological_characteristic_id'];
+					$current_traditional_crop_traits_id = $crops['traditional_crop_traits_id'];
+					$current_relationship_among_cultivars_id = $crops['relationship_among_cultivars_id'];
 			?>
 					<!-- form for submitting -->
 					<form id="form-panel" name="Form" action="code.php" autocomplete="off" onsubmit="return validateForm()" method="POST" class="h-100 py-3 px-5">
@@ -123,48 +114,64 @@
 								<tbody>
 									<?php
 									// PHP code to display available Botanical Information from the database
-									// Query to select all available Botanical Information in the database
-									$query2 = "SELECT * FROM botanical_information where botanical_information_id='$current_botanical_information_id'";
 
-									// Executing query
-									$query_run2 = pg_query($connection, $query2);
+									// Check if $current_botanical_information_id is not null
+									if ($current_botanical_information_id !== null) {
+										// Query to select all available Botanical Information in the database
+										$query2 = "SELECT * FROM botanical_information where botanical_information_id='$current_botanical_information_id'";
 
-									// Count rows to check whether we have a Botanical Information or not
-									$count2 = pg_num_rows($query_run2);
+										// Executing query
+										$query_run2 = pg_query($connection, $query2);
 
-									// If count is greater than 0, we have a Botanical Information; else, we do not have a Botanical Information
-									if ($count2 > 0) {
-										// We have a Botanical Information
-										while ($row2 = pg_fetch_assoc($query_run2)) {
-											// Get the details of the Botanical Information
-											$scientific_name = $row2['scientific_name'];
-											$common_names = $row2['common_names'];
+										// Count rows to check whether we have Botanical Information or not
+										$count2 = pg_num_rows($query_run2);
 
+										// If count is greater than 0, we have Botanical Information; else, we do not have Botanical Information
+										if ($count2 > 0) {
+											// We have Botanical Information
+											while ($row2 = pg_fetch_assoc($query_run2)) {
+												// Get the details of the Botanical Information
+												$scientific_name = $row2['scientific_name'];
+												$common_names = $row2['common_names'];
 									?>
+												<tr>
+													<th class="table-secondary w-25" scope="row">Scientific Name</th>
+													<td><input type="text" name="scientific_name" value="<?php echo $scientific_name; ?>" class="w-100 border-0 p-1" disabled></td>
+												</tr>
+												<tr>
+													<th class="table-secondary"></th>
+													<td><input type="text" name="common_names" value="<?php echo $common_names; ?>" class="w-100 border-0 p-1" disabled></td>
+												</tr>
+											<?php
+											}
+										} else {
+											// We do not have Botanical Information
+											?>
 											<tr>
 												<th class="table-secondary w-25" scope="row">Scientific Name</th>
-												<td><input type="text" name="scientific_name" value="<?php echo $scientific_name; ?>" class="w-100 border-0 p-1" disabled></td>
+												<td><input type="text" name="scientific_name" class="w-100 border-0 p-1" disabled>No Scientific Name Available</td>
 											</tr>
 											<tr>
-												<th class="table-secondary"></th>
-												<td><input type="text" name="common_names" value="<?php echo $common_names; ?>" class="w-100 border-0 p-1" disabled></td>
+												<th class="table-secondary">Common Names</th>
+												<td><input type="text" name="common_names" class="w-100 border-0 p-1" disabled>No Common Name Available</td>
 											</tr>
 										<?php
 										}
 									} else {
-										// We do not have a Botanical Information
+										// Handle the case when $current_botanical_information_id is null
 										?>
 										<tr>
 											<th class="table-secondary w-25" scope="row">Scientific Name</th>
-											<td><input type="text" name="scientific_name" value="0" class="w-100 border-0 p-1" disabled>No Scientific Name Available</td>
+											<td><input type="text" name="scientific_name" placeholder="No Scientific Name Available" class="w-100 border-0 p-1" disabled></td>
 										</tr>
 										<tr>
 											<th class="table-secondary">Common Names</th>
-											<td><input type="text" name="common_names" value="0" class="w-100 border-0 p-1" disabled>No Common Name Available</td>
+											<td><input type="text" name="common_names" placeholder="No Common Name Available" class="w-100 border-0 p-1" disabled></td>
 										</tr>
 									<?php
 									}
 									?>
+
 								</tbody>
 							</table>
 
@@ -178,97 +185,140 @@
 								<tbody>
 									<?php
 									// PHP code to display available Traditional Crop Traits from the database
-									// Query to select all available Traditional Crop Traits in the database
-									$query3 = "SELECT * FROM traditional_crop_traits where traditional_crop_traits_id='$current_traditional_crop_traits_id'";
 
-									// Executing query
-									$query_run3 = pg_query($connection, $query3);
+									// Check if $current_traditional_crop_traits_id is not null
+									if ($current_traditional_crop_traits_id !== null) {
+										// Query to select all available Traditional Crop Traits in the database
+										$query3 = "SELECT * FROM traditional_crop_traits WHERE traditional_crop_traits_id='$current_traditional_crop_traits_id'";
 
-									// If count is greater than 0, we have a Traditional Crop Traits; else, we do not have a Traditional Crop Traits
-									if (pg_num_rows($query_run) > 0) {
-										$traditional_crop_traits = pg_fetch_assoc($query_run3);
+										// Executing query
+										$query_run3 = pg_query($connection, $query3);
+
+										// If count is greater than 0, we have Traditional Crop Traits; else, we do not have Traditional Crop Traits
+										if (pg_num_rows($query_run3) > 0) {
+											$traditional_crop_traits = pg_fetch_assoc($query_run3);
 									?>
-										<tr>
-											<th class="table-secondary w-25" scope="row">Taste</th>
-											<td><input type="text" name="taste" value="<?= $traditional_crop_traits['taste']; ?>" class="w-100 border-0 p-1" disabled></td>
-										</tr>
-										<tr>
-											<th class="table-secondary">Aroma</th>
-											<td><input type="text" name="aroma" value="<?= $traditional_crop_traits['aroma']; ?>" class="w-100 border-0 p-1" disabled></td>
-										</tr>
-										<tr>
-											<th class="table-secondary">Maturation</th>
-											<td><input type="text" name="maturation" value="<?= $traditional_crop_traits['maturation']; ?>" class="w-100 border-0 p-1" disabled></td>
-										</tr>
-										<tr>
-											<th class="table-secondary">Drought Tolerance</th>
-											<td><input type="text" name="drought_tolerance" value="<?= $traditional_crop_traits['drought_tolerance']; ?>" class="w-100 border-0 p-1" disabled></td>
-										</tr>
-										<tr>
-											<th class="table-secondary">Environmental Adaptability</th>
-											<td><input type="text" name="environment_adaptability" value="<?= $traditional_crop_traits['environment_adaptability']; ?>" class="w-100 border-0 p-1" disabled></td>
-										</tr>
-										<tr>
-											<th class="table-secondary">Culinary Quality</th>
-											<td><input type="text" name="culinary_quality" value="<?= $traditional_crop_traits['culinary_quality']; ?>" class="w-100 border-0 p-1" disabled></td>
-										</tr>
-										<tr>
-											<th class="table-secondary">Nutritional Value</th>
-											<td><input type="text" name="nutritional_value" value="<?= $traditional_crop_traits['nutritional_value']; ?>" class="w-100 border-0 p-1" disabled></td>
-										</tr>
-										<tr>
-											<th class="table-secondary">Disease Resistance</th>
-											<td><input type="text" name="disease_resistance" value="<?= $traditional_crop_traits['disease_resistance']; ?>" class="w-100 border-0 p-1" disabled></td>
-										</tr>
-										<tr>
-											<th class="table-secondary">Pest Resistance</th>
-											<td><input type="text" name="pest_resistance" value="<?= $traditional_crop_traits['pest_resistance']; ?>" class="w-100 border-0 p-1" disabled></td>
-										</tr>
-
-									<?php
-
+											<tr>
+												<th class="table-secondary w-25" scope="row">Taste</th>
+												<td><input type="text" name="taste" value="<?= $traditional_crop_traits['taste']; ?>" class="w-100 border-0 p-1" disabled></td>
+											</tr>
+											<tr>
+												<th class="table-secondary">Aroma</th>
+												<td><input type="text" name="aroma" value="<?= $traditional_crop_traits['aroma']; ?>" class="w-100 border-0 p-1" disabled></td>
+											</tr>
+											<tr>
+												<th class="table-secondary">Maturation</th>
+												<td><input type="text" name="maturation" value="<?= $traditional_crop_traits['maturation']; ?>" class="w-100 border-0 p-1" disabled></td>
+											</tr>
+											<tr>
+												<th class="table-secondary">Drought Tolerance</th>
+												<td><input type="text" name="drought_tolerance" value="<?= $traditional_crop_traits['drought_tolerance']; ?>" class="w-100 border-0 p-1" disabled></td>
+											</tr>
+											<tr>
+												<th class="table-secondary">Environmental Adaptability</th>
+												<td><input type="text" name="environment_adaptability" value="<?= $traditional_crop_traits['environment_adaptability']; ?>" class="w-100 border-0 p-1" disabled></td>
+											</tr>
+											<tr>
+												<th class="table-secondary">Culinary Quality</th>
+												<td><input type="text" name="culinary_quality" value="<?= $traditional_crop_traits['culinary_quality']; ?>" class="w-100 border-0 p-1" disabled></td>
+											</tr>
+											<tr>
+												<th class="table-secondary">Nutritional Value</th>
+												<td><input type="text" name="nutritional_value" value="<?= $traditional_crop_traits['nutritional_value']; ?>" class="w-100 border-0 p-1" disabled></td>
+											</tr>
+											<tr>
+												<th class="table-secondary">Disease Resistance</th>
+												<td><input type="text" name="disease_resistance" value="<?= $traditional_crop_traits['disease_resistance']; ?>" class="w-100 border-0 p-1" disabled></td>
+											</tr>
+											<tr>
+												<th class="table-secondary">Pest Resistance</th>
+												<td><input type="text" name="pest_resistance" value="<?= $traditional_crop_traits['pest_resistance']; ?>" class="w-100 border-0 p-1" disabled></td>
+											</tr>
+										<?php
+										} else {
+											// We do not have Traditional Crop Traits
+										?>
+											<tr>
+												<th class="table-secondary w-25">Taste</th>
+												<td><input type="text" name="taste" value="0" class="w-100 border-0 p-1" disabled>No Taste Available</td>
+											</tr>
+											<tr>
+												<th class="table-secondary">Aroma</th>
+												<td><input type="text" name="aroma" value="0" class="w-100 border-0 p-1" disabled>No Aroma Available</td>
+											</tr>
+											<tr>
+												<th class="table-secondary">Maturation Period</th>
+												<td><input type="text" name="maturation" value="0" class="w-100 border-0 p-1" disabled>No Maturation Period Available</td>
+											</tr>
+											<tr>
+												<th class="table-secondary">Drought Tolerance</th>
+												<td><input type="text" name="drought_tolerance" value="0" class="w-100 border-0 p-1" disabled>No Drought Tolerance Available</td>
+											</tr>
+											<tr>
+												<th class="table-secondary">Adaptability to Different Environments</th>
+												<td><input type="text" name="environment_adaptability" value="0" class="w-100 border-0 p-1" disabled>No Adaptability to Different Environments Available</td>
+											</tr>
+											<tr>
+												<th class="table-secondary">Cooking and Eating Quality</th>
+												<td><input type="text" name="culinary_quality" value="0" class="w-100 border-0 p-1" disabled>No Cooking and Eating Quality Available</td>
+											</tr>
+											<tr>
+												<th class="table-secondary">Nutritional Value</th>
+												<td><input type="text" name="nutritional_value" value="0" class="w-100 border-0 p-1" disabled>No Nutritional Value Available</td>
+											</tr>
+											<tr>
+												<th class="table-secondary">Disease Resistance</th>
+												<td><input type="text" name="disease_resistance" value="0" class="w-100 border-0 p-1" disabled>No Disease Resistance Available</td>
+											</tr>
+											<tr>
+												<th class="table-secondary">Pest Resistance</th>
+												<td><input type="text" name="pest_resistance" value="0" class="w-100 border-0 p-1" disabled>No Pest Resistance Available</td>
+											</tr>
+										<?php
+										}
 									} else {
-										// We do not have a Traditional Crop Traits
-									?>
+										// Handle the case when $current_traditional_crop_traits_id is null
+										?>
 										<tr>
 											<th class="table-secondary w-25">Taste</th>
-											<td><input type="text" name="taste" value="0" class="w-100 border-0 p-1">No Taste Available</td>
+											<td><input type="text" name="taste" placeholder="No Taste Available" class="w-100 border-0 p-1" disabled></td>
 										</tr>
 										<tr>
 											<th class="table-secondary">Aroma</th>
-											<td><input type="text" name="aroma" value="0" class="w-100 border-0 p-1">No Aroma Available</td>
+											<td><input type="text" name="aroma" placeholder="No Aroma Available" class="w-100 border-0 p-1" disabled></td>
 										</tr>
 										<tr>
-											<th class="table-secondary">Maturity Period</th>
-											<td><input type="text" name="maturation" value="0" class="w-100 border-0 p-1">No Maturation Period Available</td>
+											<th class="table-secondary">Maturation Period</th>
+											<td><input type="text" name="maturation" placeholder="No Maturation Period Available" class="w-100 border-0 p-1" disabled></td>
 										</tr>
 										<tr>
 											<th class="table-secondary">Drought Tolerance</th>
-											<td><input type="text" name="drought_tolerance" value="0" class="w-100 border-0 p-1">No Drought Tolerance Available</td>
+											<td><input type="text" name="drought_tolerance" placeholder="No Drought Tolerance Available" class="w-100 border-0 p-1" disabled></td>
 										</tr>
 										<tr>
 											<th class="table-secondary">Adaptability to Different Environments</th>
-											<td><input type="text" name="environment_adaptability" value="0" class="w-100 border-0 p-1">No Adaptability to Different Environments Available</td>
+											<td><input type="text" name="environment_adaptability" placeholder="No Adaptability to Different Environments Available" class="w-100 border-0 p-1" disabled></td>
 										</tr>
 										<tr>
 											<th class="table-secondary">Cooking and Eating Quality</th>
-											<td><input type="text" name="culinary_quality" value="0" class="w-100 border-0 p-1">No Cooking and Eating Quality Available</td>
+											<td><input type="text" name="culinary_quality" placeholder="No Cooking and Eating Quality Available" class="w-100 border-0 p-1" disabled></td>
 										</tr>
 										<tr>
 											<th class="table-secondary">Nutritional Value</th>
-											<td><input type="text" name="nutritional_value" value="0" class="w-100 border-0 p-1">No Nutritional Value Available</td>
+											<td><input type="text" name="nutritional_value" placeholder="No Nutritional Value Available" class="w-100 border-0 p-1" disabled></td>
 										</tr>
 										<tr>
 											<th class="table-secondary">Disease Resistance</th>
-											<td><input type="text" name="disease_resistance" value="0" class="w-100 border-0 p-1">No Disease Resistance Available</td>
+											<td><input type="text" name="disease_resistance" placeholder="No Disease Resistance Available" class="w-100 border-0 p-1" disabled></td>
 										</tr>
 										<tr>
 											<th class="table-secondary">Pest Resistance</th>
-											<td><input type="text" name="pest_resistance" value="0" class="w-100 border-0 p-1">No Pest Resistance Available</td>
+											<td><input type="text" name="pest_resistance" placeholder="No Pest Resistance Available" class="w-100 border-0 p-1" disabled></td>
 										</tr>
 									<?php
 									}
 									?>
+
 								</tbody>
 							</table>
 
