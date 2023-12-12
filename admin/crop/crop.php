@@ -435,70 +435,84 @@
 									if ($current_morphological_characteristic_id !== null) {
 										// PHP code to display available Morphological Characteristics from the database
 										// Query to select all available Morphological Characteristics in the database
-										$query6 = "SELECT * FROM morphological_characteristic where morphological_characteristic_id='$current_morphological_characteristic_id'";
+										$query6 = "SELECT * FROM morphological_characteristic WHERE morphological_characteristic_id='$current_morphological_characteristic_id'";
 
 										// Executing query
 										$query_run6 = pg_query($connection, $query6);
 
-										// If count is greater than 0, we have a Morphological Characteristics; else, we do not have a Morphological Characteristics
+										// If count is greater than 0, we have Morphological Characteristics; else, we do not have Morphological Characteristics
 										if (pg_num_rows($query_run6) > 0) {
 											$morphological_characteristic = pg_fetch_assoc($query_run6);
 
+											// Define default values for each field if they are null
+											$plant_height = isset($morphological_characteristic['plant_height']) ? $morphological_characteristic['plant_height'] : "Not Available";
+											$panicle_length = isset($morphological_characteristic['panicle_length']) ? $morphological_characteristic['panicle_length'] : "Not Available";
+											$grain_quality = isset($morphological_characteristic['grain_quality']) ? $morphological_characteristic['grain_quality'] : "Not Available";
+											$grain_color = isset($morphological_characteristic['grain_color']) ? $morphological_characteristic['grain_color'] : "Not Available";
+											$grain_length = isset($morphological_characteristic['grain_length']) ? $morphological_characteristic['grain_length'] : "Not Available";
+											$grain_width = isset($morphological_characteristic['grain_width']) ? $morphological_characteristic['grain_width'] : "Not Available";
+											$grain_shape = isset($morphological_characteristic['grain_shape']) ? $morphological_characteristic['grain_shape'] : "Not Available";
+											$awn_length = isset($morphological_characteristic['awn_length']) ? $morphological_characteristic['awn_length'] : "Not Available";
+											$leaf_length = isset($morphological_characteristic['leaf_length']) ? $morphological_characteristic['leaf_length'] : "Not Available";
+											$leaf_width = isset($morphological_characteristic['leaf_width']) ? $morphological_characteristic['leaf_width'] : "Not Available";
+											$leaf_shape = isset($morphological_characteristic['leaf_shape']) ? $morphological_characteristic['leaf_shape'] : "Not Available";
+											$stem_color = isset($morphological_characteristic['stem_color']) ? $morphological_characteristic['stem_color'] : "Not Available";
+											$another_color = isset($morphological_characteristic['another_color']) ? $morphological_characteristic['another_color'] : "Not Available";
 									?>
 											<tr>
 												<th class="table-secondary w-25" scope="row">Plant Height</th>
-												<td><input type="text" name="plant_height" value="<?php echo $morphological_characteristic['plant_height']; ?>" class="w-100 border-0 p-1" disabled></td>
+												<td><input type="text" name="plant_height" value="<?= $plant_height; ?>" class="w-100 border-0 p-1" disabled></td>
 											</tr>
 											<tr>
 												<th class="table-secondary">Panicle Length</th>
-												<td><input type="text" name="panicle_length" value="<?php echo $morphological_characteristic['panicle_length']; ?>" class="w-100 border-0 p-1" disabled></td>
+												<td><input type="text" name="panicle_length" value="<?= $panicle_length; ?>" class="w-100 border-0 p-1" disabled></td>
 											</tr>
 											<tr>
 												<th class="table-secondary">Grain Quality</th>
-												<td><input type="text" name="grain_quality" value="<?php echo $morphological_characteristic['grain_quality']; ?>" class="w-100 border-0 p-1" disabled></td>
+												<td><input type="text" name="grain_quality" value="<?= $grain_quality; ?>" class="w-100 border-0 p-1" disabled></td>
 											</tr>
 											<tr>
 												<th class="table-secondary">Grain Color</th>
-												<td><input type="text" name="grain_color" value="<?php echo $morphological_characteristic['grain_color']; ?>" class="w-100 border-0 p-1" disabled></td>
+												<td><input type="text" name="grain_color" value="<?= $grain_color; ?>" class="w-100 border-0 p-1" disabled></td>
 											</tr>
 											<tr>
 												<th class="table-secondary">Grain Length</th>
-												<td><input type="text" name="grain_length" value="<?php echo $morphological_characteristic['grain_length']; ?>" class="w-100 border-0 p-1" disabled></td>
+												<td><input type="text" name="grain_length" value="<?= $grain_length; ?>" class="w-100 border-0 p-1" disabled></td>
 											</tr>
 											<tr>
 												<th class="table-secondary">Grain Width</th>
-												<td><input type="text" name="grain_width" value="<?php echo $morphological_characteristic['grain_width']; ?>" class="w-100 border-0 p-1" disabled></td>
+												<td><input type="text" name="grain_width" value="<?= $grain_width; ?>" class="w-100 border-0 p-1" disabled></td>
 											</tr>
 											<tr>
 												<th class="table-secondary">Grain Shape</th>
-												<td><input type="text" name="grain_shape" value="<?php echo $morphological_characteristic['grain_shape']; ?>" class="w-100 border-0 p-1" disabled></td>
+												<td><input type="text" name="grain_shape" value="<?= $grain_shape; ?>" class="w-100 border-0 p-1" disabled></td>
 											</tr>
 											<tr>
 												<th class="table-secondary">Awn Length</th>
-												<td><input type="text" name="awn_length" value="<?php echo $morphological_characteristic['awn_length']; ?>" class="w-100 border-0 p-1" disabled></td>
+												<td><input type="text" name="awn_length" value="<?= $awn_length; ?>" class="w-100 border-0 p-1" disabled></td>
 											</tr>
 											<tr>
 												<th class="table-secondary">Leaf Length</th>
-												<td><input type="text" name="leaf_length" value="<?php echo $morphological_characteristic['leaf_length']; ?>" class="w-100 border-0 p-1" disabled></td>
+												<td><input type="text" name="leaf_length" value="<?= $leaf_length; ?>" class="w-100 border-0 p-1" disabled></td>
 											</tr>
 											<tr>
 												<th class="table-secondary">Leaf Width</th>
-												<td><input type="text" name="leaf_width" value="<?php echo $morphological_characteristic['leaf_width']; ?>" class="w-100 border-0 p-1" disabled></td>
+												<td><input type="text" name="leaf_width" value="<?= $leaf_width; ?>" class="w-100 border-0 p-1" disabled></td>
 											</tr>
 											<tr>
 												<th class="table-secondary">Leaf Shape</th>
-												<td><input type="text" name="leaf_shape" value="<?php echo $morphological_characteristic['leaf_shape']; ?>" class="w-100 border-0 p-1" disabled></td>
+												<td><input type="text" name="leaf_shape" value="<?= $leaf_shape; ?>" class="w-100 border-0 p-1" disabled></td>
 											</tr>
 											<tr>
 												<th class="table-secondary">Stem Color</th>
-												<td><input type="text" name="stem_color" value="<?php echo $morphological_characteristic['stem_color']; ?>" class="w-100 border-0 p-1" disabled></td>
+												<td><input type="text" name="stem_color" value="<?= $stem_color; ?>" class="w-100 border-0 p-1" disabled></td>
 											</tr>
 											<tr>
 												<th class="table-secondary">Another Color</th>
-												<td><input type="text" name="another_color" value="<?php echo $morphological_characteristic['another_color']; ?>" class="w-100 border-0 p-1" disabled></td>
+												<td><input type="text" name="another_color" value="<?= $another_color; ?>" class="w-100 border-0 p-1" disabled></td>
 											</tr>
 										<?php
-										} 
+										}
 									} else {
 										// Handle the case when $current_morphological_characteristic_id is null
 										?>
@@ -554,7 +568,6 @@
 											<th class="table-secondary">Another Color</th>
 											<td><input type="text" name="another_color" placeholder="No Another Color Available" class="w-100 border-0 p-1" disabled></td>
 										</tr>
-
 									<?php
 									}
 									?>
