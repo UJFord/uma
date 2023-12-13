@@ -71,7 +71,17 @@
 						<div class="row d-flex justify-content-between my-3">
 							<div class="col-6">
 								<h3>
-									<input id="title" type="text" name="crop_name" value="<?= $crops['crop_name']; ?>" class="fw-semibold w-100 border-0 py-1 px-2" disabled>
+									<?php
+									if ($upland_or_lowland !== null) {
+									?>
+										<input id="title" type="text" name="crop_name" value="<?= $crops['crop_name']; ?>" class="fw-semibold w-100 border-0 py-1 px-2" disabled>
+									<?php
+									} else {
+									?>
+										<input id="title" type="text" name="crop_name" placeholder="No Name" class="fw-semibold w-100 border-0 py-1 px-2" disabled>
+									<?php
+									}
+									?>
 								</h3>
 							</div>
 						</div>
@@ -233,17 +243,42 @@
 											$row2 = pg_fetch_assoc($query_run2);
 
 											// Get the details of the Botanical Information
-											$scientific_name = isset($row2['scientific_name']) ? $row2['scientific_name'] : "";
-											$common_names = isset($row2['common_names']) ? $row2['common_names'] : "";
+											$scientific_name = isset($row2['scientific_name']) ? $row2['scientific_name'] : null;
+											$common_names = isset($row2['common_names']) ? $row2['common_names'] : null;
 									?>
-											<tr>
-												<th class="table-secondary w-25" scope="row">Scientific Name</th>
-												<td><input type="text" name="scientific_name" value="<?= $scientific_name; ?>" class="w-100 border-0 p-1" disabled></td>
-											</tr>
-											<tr>
-												<th class="table-secondary">Common Names</th>
-												<td><input type="text" name="common_names" value="<?= $common_names; ?>" class="w-100 border-0 p-1" disabled></td>
-											</tr>
+											<?php
+											if ($scientific_name !== null) {
+											?>
+												<tr>
+													<th class="table-secondary w-25">Scientific Name</th>
+													<td><input type="text" name="scientific_name" value="<?= $scientific_name; ?>" class="w-100 border-0 p-1" disabled></td>
+												</tr>
+											<?php
+											} else {
+											?>
+												<tr>
+													<th class="table-secondary w-25">Scientific Name</th>
+													<td><input type="text" name="scientific_name" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
+												</tr>
+											<?php
+											}
+
+											if ($common_names !== null) {
+											?>
+												<tr>
+													<th class="table-secondary w-25">Common Name</th>
+													<td><input type="text" name="common_names" value="<?= $common_names; ?>" class="w-100 border-0 p-1" disabled></td>
+												</tr>
+											<?php
+											} else {
+											?>
+												<tr>
+													<th class="table-secondary w-25">Common Name</th>
+													<td><input type="text" name="common_names" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
+												</tr>
+											<?php
+											}
+											?>
 										<?php
 										}
 									} else {
@@ -288,52 +323,161 @@
 											$traditional_crop_traits = pg_fetch_assoc($query_run3);
 
 											// Define default values for each field if they are null
-											$taste = isset($traditional_crop_traits['taste']) ? $traditional_crop_traits['taste'] : "";
-											$aroma = isset($traditional_crop_traits['aroma']) ? $traditional_crop_traits['aroma'] : "";
-											$maturation = isset($traditional_crop_traits['maturation']) ? $traditional_crop_traits['maturation'] : "";
-											$drought_tolerance = isset($traditional_crop_traits['drought_tolerance']) ? $traditional_crop_traits['drought_tolerance'] : "";
-											$environment_adaptability = isset($traditional_crop_traits['environment_adaptability']) ? $traditional_crop_traits['environment_adaptability'] : "";
-											$culinary_quality = isset($traditional_crop_traits['culinary_quality']) ? $traditional_crop_traits['culinary_quality'] : "";
-											$nutritional_value = isset($traditional_crop_traits['nutritional_value']) ? $traditional_crop_traits['nutritional_value'] : "";
-											$disease_resistance = isset($traditional_crop_traits['disease_resistance']) ? $traditional_crop_traits['disease_resistance'] : "";
-											$pest_resistance = isset($traditional_crop_traits['pest_resistance']) ? $traditional_crop_traits['pest_resistance'] : "";
+											$taste = isset($traditional_crop_traits['taste']) ? $traditional_crop_traits['taste'] : null;
+											$aroma = isset($traditional_crop_traits['aroma']) ? $traditional_crop_traits['aroma'] : null;
+											$maturation = isset($traditional_crop_traits['maturation']) ? $traditional_crop_traits['maturation'] : null;
+											$drought_tolerance = isset($traditional_crop_traits['drought_tolerance']) ? $traditional_crop_traits['drought_tolerance'] : null;
+											$environment_adaptability = isset($traditional_crop_traits['environment_adaptability']) ? $traditional_crop_traits['environment_adaptability'] : null;
+											$culinary_quality = isset($traditional_crop_traits['culinary_quality']) ? $traditional_crop_traits['culinary_quality'] : null;
+											$nutritional_value = isset($traditional_crop_traits['nutritional_value']) ? $traditional_crop_traits['nutritional_value'] : null;
+											$disease_resistance = isset($traditional_crop_traits['disease_resistance']) ? $traditional_crop_traits['disease_resistance'] : null;
+											$pest_resistance = isset($traditional_crop_traits['pest_resistance']) ? $traditional_crop_traits['pest_resistance'] : null;
 									?>
-											<tr>
-												<th class="table-secondary w-25" scope="row">Taste</th>
-												<td><input type="text" name="taste" value="<?= $taste; ?>" class="w-100 border-0 p-1" disabled></td>
-											</tr>
-											<tr>
-												<th class="table-secondary">Aroma</th>
-												<td><input type="text" name="aroma" value="<?= $aroma; ?>" class="w-100 border-0 p-1" disabled></td>
-											</tr>
-											<tr>
-												<th class="table-secondary">Maturation Period</th>
-												<td><input type="text" name="maturation" value="<?= $maturation; ?>" class="w-100 border-0 p-1" disabled></td>
-											</tr>
-											<tr>
-												<th class="table-secondary">Drought Tolerance</th>
-												<td><input type="text" name="drought_tolerance" value="<?= $drought_tolerance; ?>" class="w-100 border-0 p-1" disabled></td>
-											</tr>
-											<tr>
-												<th class="table-secondary">Adaptability to Different Environments</th>
-												<td><input type="text" name="environment_adaptability" value="<?= $environment_adaptability; ?>" class="w-100 border-0 p-1" disabled></td>
-											</tr>
-											<tr>
-												<th class="table-secondary">Cooking and Eating Quality</th>
-												<td><input type="text" name="culinary_quality" value="<?= $culinary_quality; ?>" class="w-100 border-0 p-1" disabled></td>
-											</tr>
-											<tr>
-												<th class="table-secondary">Nutritional Value</th>
-												<td><input type="text" name="nutritional_value" value="<?= $nutritional_value; ?>" class="w-100 border-0 p-1" disabled></td>
-											</tr>
-											<tr>
-												<th class="table-secondary">Disease Resistance</th>
-												<td><input type="text" name="disease_resistance" value="<?= $disease_resistance; ?>" class="w-100 border-0 p-1" disabled></td>
-											</tr>
-											<tr>
-												<th class="table-secondary">Pest Resistance</th>
-												<td><input type="text" name="pest_resistance" value="<?= $pest_resistance; ?>" class="w-100 border-0 p-1" disabled></td>
-											</tr>
+											<?php
+											if ($taste !== null) {
+											?>
+												<tr>
+													<th class="table-secondary w-25">Taste</th>
+													<td><input type="text" name="taste" value="<?= $taste; ?>" class="w-100 border-0 p-1" disabled></td>
+												</tr>
+											<?php
+											} else {
+											?>
+												<tr>
+													<th class="table-secondary w-25">Taste</th>
+													<td><input type="text" name="taste" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
+												</tr>
+											<?php
+											}
+
+											if ($aroma !== null) {
+											?>
+												<tr>
+													<th class="table-secondary w-25">Aroma</th>
+													<td><input type="text" name="aroma" value="<?= $aroma; ?>" class="w-100 border-0 p-1" disabled></td>
+												</tr>
+											<?php
+											} else {
+											?>
+												<tr>
+													<th class="table-secondary w-25">Aroma</th>
+													<td><input type="text" name="aroma" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
+												</tr>
+											<?php
+											}
+
+											if ($maturation !== null) {
+											?>
+												<tr>
+													<th class="table-secondary w-25">Maturation</th>
+													<td><input type="text" name="maturation" value="<?= $maturation; ?>" class="w-100 border-0 p-1" disabled></td>
+												</tr>
+											<?php
+											} else {
+											?>
+												<tr>
+													<th class="table-secondary w-25">Maturation</th>
+													<td><input type="text" name="maturation" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
+												</tr>
+											<?php
+											}
+
+											if ($drought_tolerance !== null) {
+											?>
+												<tr>
+													<th class="table-secondary w-25">Drought Tolerance</th>
+													<td><input type="text" name="drought_tolerance" value="<?= $drought_tolerance; ?>" class="w-100 border-0 p-1" disabled></td>
+												</tr>
+											<?php
+											} else {
+											?>
+												<tr>
+													<th class="table-secondary w-25">Drought Tolerance</th>
+													<td><input type="text" name="drought_tolerance" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
+												</tr>
+											<?php
+											}
+
+											if ($environment_adaptability !== null) {
+											?>
+												<tr>
+													<th class="table-secondary w-25">Environment Adaptability</th>
+													<td><input type="text" name="environment_adaptability" value="<?= $environment_adaptability; ?>" class="w-100 border-0 p-1" disabled></td>
+												</tr>
+											<?php
+											} else {
+											?>
+												<tr>
+													<th class="table-secondary w-25">Environment Adaptability</th>
+													<td><input type="text" name="environment_adaptability" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
+												</tr>
+											<?php
+											}
+
+											if ($culinary_quality !== null) {
+											?>
+												<tr>
+													<th class="table-secondary w-25">Culinary Quality</th>
+													<td><input type="text" name="culinary_quality" value="<?= $culinary_quality; ?>" class="w-100 border-0 p-1" disabled></td>
+												</tr>
+											<?php
+											} else {
+											?>
+												<tr>
+													<th class="table-secondary w-25">Culinary Quality</th>
+													<td><input type="text" name="culinary_quality" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
+												</tr>
+											<?php
+											}
+
+											if ($nutritional_value !== null) {
+											?>
+												<tr>
+													<th class="table-secondary w-25">Nutritional Value</th>
+													<td><input type="text" name="nutritional_value" value="<?= $nutritional_value; ?>" class="w-100 border-0 p-1" disabled></td>
+												</tr>
+											<?php
+											} else {
+											?>
+												<tr>
+													<th class="table-secondary w-25">Nutritional Value</th>
+													<td><input type="text" name="nutritional_value" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
+												</tr>
+											<?php
+											}
+
+											if ($disease_resistance !== null) {
+											?>
+												<tr>
+													<th class="table-secondary w-25">Disease Resistance</th>
+													<td><input type="text" name="disease_resistance" value="<?= $disease_resistance; ?>" class="w-100 border-0 p-1" disabled></td>
+												</tr>
+											<?php
+											} else {
+											?>
+												<tr>
+													<th class="table-secondary w-25">Disease Resistance</th>
+													<td><input type="text" name="disease_resistance" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
+												</tr>
+											<?php
+											}
+
+											if ($pest_resistance !== null) {
+											?>
+												<tr>
+													<th class="table-secondary w-25">Pest Resistance</th>
+													<td><input type="text" name="pest_resistance" value="<?= $pest_resistance; ?>" class="w-100 border-0 p-1" disabled></td>
+												</tr>
+											<?php
+											} else {
+											?>
+												<tr>
+													<th class="table-secondary w-25">Pest Resistance</th>
+													<td><input type="text" name="pest_resistance" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
+												</tr>
+											<?php
+											}
+											?>
 										<?php
 										}
 									} else {
@@ -458,17 +602,44 @@
 										if (pg_num_rows($query_run5) > 0) {
 											$agronomic_information = pg_fetch_assoc($query_run5);
 											// Define default values for each field if they are null
-											$days_to_mature = isset($agronomic_information['days_to_mature']) ? $agronomic_information['days_to_mature'] : "";
-											$yield_potential = isset($agronomic_information['yield_potential']) ? $agronomic_information['yield_potential'] : "No Yield Potential Available";
+											$days_to_mature = isset($agronomic_information['days_to_mature']) ? $agronomic_information['days_to_mature'] : null;
+											$yield_potential = isset($agronomic_information['yield_potential']) ? $agronomic_information['yield_potential'] : null;
 									?>
-											<tr>
-												<th class="table-secondary w-25" scope="row">Days to Mature</th>
-												<td><input type="text" name="days_to_mature" value="<?= $days_to_mature; ?>" class="w-100 border-0 p-1" disabled></td>
-											</tr>
-											<tr>
-												<th class="table-secondary">Yield Potential</th>
-												<td><input type="text" name="yield_potential" value="<?= $yield_potential ?>" class="w-100 border-0 p-1" disabled></td>
-											</tr>
+											<?php
+											if ($days_to_mature !== null) {
+												// echo "Debug: Value is not null - " . $days_to_mature;
+											?>
+												<tr>
+													<th class="table-secondary w-25">Days to Mature</th>
+													<td><input type="text" name="days_to_mature" value="<?= $days_to_mature; ?>" class="w-100 border-0 p-1" disabled></td>
+												</tr>
+											<?php
+											} else {
+												// echo "Debug: Value is null - " . $days_to_mature;
+											?>
+												<tr>
+													<th class="table-secondary w-25">Days to Mature</th>
+													<td><input type="text" name="days_to_mature" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
+												</tr>
+											<?php
+											}
+
+											if ($yield_potential !== null) {
+											?>
+												<tr>
+													<th class="table-secondary w-25">Yield Potential</th>
+													<td><input type="text" name="yield_potential" value="<?= $yield_potential; ?>" class="w-100 border-0 p-1" disabled></td>
+												</tr>
+											<?php
+											} else {
+											?>
+												<tr>
+													<th class="table-secondary w-25">Yield Potential</th>
+													<td><input type="text" name="yield_potential" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
+												</tr>
+											<?php
+											}
+											?>
 										<?php
 										}
 									} else {
@@ -485,7 +656,6 @@
 									<?php
 									}
 									?>
-
 								</tbody>
 							</table>
 
@@ -585,10 +755,6 @@
 										<th class="table-secondary w-25">Map</th>
 										<td></td>
 									</tr>
-									<tr>
-										<th></th>
-										<td></td>
-									</tr>
 								</tbody>
 							</table>
 
@@ -614,72 +780,229 @@
 											$morphological_characteristic = pg_fetch_assoc($query_run6);
 
 											// Define default values for each field if they are null
-											$plant_height = isset($morphological_characteristic['plant_height']) ? $morphological_characteristic['plant_height'] : "Not Available";
-											$panicle_length = isset($morphological_characteristic['panicle_length']) ? $morphological_characteristic['panicle_length'] : "Not Available";
-											$grain_quality = isset($morphological_characteristic['grain_quality']) ? $morphological_characteristic['grain_quality'] : "Not Available";
-											$grain_color = isset($morphological_characteristic['grain_color']) ? $morphological_characteristic['grain_color'] : "Not Available";
-											$grain_length = isset($morphological_characteristic['grain_length']) ? $morphological_characteristic['grain_length'] : "Not Available";
-											$grain_width = isset($morphological_characteristic['grain_width']) ? $morphological_characteristic['grain_width'] : "Not Available";
-											$grain_shape = isset($morphological_characteristic['grain_shape']) ? $morphological_characteristic['grain_shape'] : "Not Available";
-											$awn_length = isset($morphological_characteristic['awn_length']) ? $morphological_characteristic['awn_length'] : "Not Available";
-											$leaf_length = isset($morphological_characteristic['leaf_length']) ? $morphological_characteristic['leaf_length'] : "Not Available";
-											$leaf_width = isset($morphological_characteristic['leaf_width']) ? $morphological_characteristic['leaf_width'] : "Not Available";
-											$leaf_shape = isset($morphological_characteristic['leaf_shape']) ? $morphological_characteristic['leaf_shape'] : "Not Available";
-											$stem_color = isset($morphological_characteristic['stem_color']) ? $morphological_characteristic['stem_color'] : "Not Available";
-											$another_color = isset($morphological_characteristic['another_color']) ? $morphological_characteristic['another_color'] : "Not Available";
+											$plant_height = isset($morphological_characteristic['plant_height']) ? $morphological_characteristic['plant_height'] : null;
+											$panicle_length = isset($morphological_characteristic['panicle_length']) ? $morphological_characteristic['panicle_length'] : null;
+											$grain_quality = isset($morphological_characteristic['grain_quality']) ? $morphological_characteristic['grain_quality'] : null;
+											$grain_color = isset($morphological_characteristic['grain_color']) ? $morphological_characteristic['grain_color'] : null;
+											$grain_length = isset($morphological_characteristic['grain_length']) ? $morphological_characteristic['grain_length'] : null;
+											$grain_width = isset($morphological_characteristic['grain_width']) ? $morphological_characteristic['grain_width'] : null;
+											$grain_shape = isset($morphological_characteristic['grain_shape']) ? $morphological_characteristic['grain_shape'] : null;
+											$awn_length = isset($morphological_characteristic['awn_length']) ? $morphological_characteristic['awn_length'] : null;
+											$leaf_length = isset($morphological_characteristic['leaf_length']) ? $morphological_characteristic['leaf_length'] : null;
+											$leaf_width = isset($morphological_characteristic['leaf_width']) ? $morphological_characteristic['leaf_width'] : null;
+											$leaf_shape = isset($morphological_characteristic['leaf_shape']) ? $morphological_characteristic['leaf_shape'] : null;
+											$stem_color = isset($morphological_characteristic['stem_color']) ? $morphological_characteristic['stem_color'] : null;
+											$another_color = isset($morphological_characteristic['another_color']) ? $morphological_characteristic['another_color'] : null;
 									?>
-											<tr>
-												<th class="table-secondary w-25" scope="row">Plant Height</th>
-												<td><input type="text" name="plant_height" value="<?= $plant_height; ?>" class="w-100 border-0 p-1" disabled></td>
-											</tr>
-											<tr>
-												<th class="table-secondary">Panicle Length</th>
-												<td><input type="text" name="panicle_length" value="<?= $panicle_length; ?>" class="w-100 border-0 p-1" disabled></td>
-											</tr>
-											<tr>
-												<th class="table-secondary">Grain Quality</th>
-												<td><input type="text" name="grain_quality" value="<?= $grain_quality; ?>" class="w-100 border-0 p-1" disabled></td>
-											</tr>
-											<tr>
-												<th class="table-secondary">Grain Color</th>
-												<td><input type="text" name="grain_color" value="<?= $grain_color; ?>" class="w-100 border-0 p-1" disabled></td>
-											</tr>
-											<tr>
-												<th class="table-secondary">Grain Length</th>
-												<td><input type="text" name="grain_length" value="<?= $grain_length; ?>" class="w-100 border-0 p-1" disabled></td>
-											</tr>
-											<tr>
-												<th class="table-secondary">Grain Width</th>
-												<td><input type="text" name="grain_width" value="<?= $grain_width; ?>" class="w-100 border-0 p-1" disabled></td>
-											</tr>
-											<tr>
-												<th class="table-secondary">Grain Shape</th>
-												<td><input type="text" name="grain_shape" value="<?= $grain_shape; ?>" class="w-100 border-0 p-1" disabled></td>
-											</tr>
-											<tr>
-												<th class="table-secondary">Awn Length</th>
-												<td><input type="text" name="awn_length" value="<?= $awn_length; ?>" class="w-100 border-0 p-1" disabled></td>
-											</tr>
-											<tr>
-												<th class="table-secondary">Leaf Length</th>
-												<td><input type="text" name="leaf_length" value="<?= $leaf_length; ?>" class="w-100 border-0 p-1" disabled></td>
-											</tr>
-											<tr>
-												<th class="table-secondary">Leaf Width</th>
-												<td><input type="text" name="leaf_width" value="<?= $leaf_width; ?>" class="w-100 border-0 p-1" disabled></td>
-											</tr>
-											<tr>
-												<th class="table-secondary">Leaf Shape</th>
-												<td><input type="text" name="leaf_shape" value="<?= $leaf_shape; ?>" class="w-100 border-0 p-1" disabled></td>
-											</tr>
-											<tr>
-												<th class="table-secondary">Stem Color</th>
-												<td><input type="text" name="stem_color" value="<?= $stem_color; ?>" class="w-100 border-0 p-1" disabled></td>
-											</tr>
-											<tr>
-												<th class="table-secondary">Another Color</th>
-												<td><input type="text" name="another_color" value="<?= $another_color; ?>" class="w-100 border-0 p-1" disabled></td>
-											</tr>
+											<?php
+											if ($plant_height !== null) {
+											?>
+												<tr>
+													<th class="table-secondary w-25">Plant Height</th>
+													<td><input type="text" name="plant_height" value="<?= $plant_height; ?>" class="w-100 border-0 p-1" disabled></td>
+												</tr>
+											<?php
+											} else {
+											?>
+												<tr>
+													<th class="table-secondary w-25">Plant Height</th>
+													<td><input type="text" name="plant_height" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
+												</tr>
+											<?php
+											}
+
+											if ($panicle_length !== null) {
+											?>
+												<tr>
+													<th class="table-secondary w-25">Panicle Length</th>
+													<td><input type="text" name="panicle_length" value="<?= $panicle_length; ?>" class="w-100 border-0 p-1" disabled></td>
+												</tr>
+											<?php
+											} else {
+											?>
+												<tr>
+													<th class="table-secondary w-25">Panicle Length</th>
+													<td><input type="text" name="panicle_length" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
+												</tr>
+											<?php
+											}
+
+											if ($grain_quality !== null) {
+											?>
+												<tr>
+													<th class="table-secondary w-25">Grain Quality</th>
+													<td><input type="text" name="grain_quality" value="<?= $grain_quality; ?>" class="w-100 border-0 p-1" disabled></td>
+												</tr>
+											<?php
+											} else {
+											?>
+												<tr>
+													<th class="table-secondary w-25">Grain Quality</th>
+													<td><input type="text" name="grain_quality" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
+												</tr>
+											<?php
+											}
+
+											if ($grain_color !== null) {
+											?>
+												<tr>
+													<th class="table-secondary w-25">Grain Color</th>
+													<td><input type="text" name="grain_color" value="<?= $grain_color; ?>" class="w-100 border-0 p-1" disabled></td>
+												</tr>
+											<?php
+											} else {
+											?>
+												<tr>
+													<th class="table-secondary w-25">Grain Color</th>
+													<td><input type="text" name="grain_color" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
+												</tr>
+											<?php
+											}
+
+											if ($grain_length !== null) {
+											?>
+												<tr>
+													<th class="table-secondary w-25">Grain Length</th>
+													<td><input type="text" name="grain_length" value="<?= $grain_length; ?>" class="w-100 border-0 p-1" disabled></td>
+												</tr>
+											<?php
+											} else {
+											?>
+												<tr>
+													<th class="table-secondary w-25">Grain Length</th>
+													<td><input type="text" name="grain_length" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
+												</tr>
+											<?php
+											}
+
+											if ($grain_width !== null) {
+											?>
+												<tr>
+													<th class="table-secondary w-25">Grain Width</th>
+													<td><input type="text" name="grain_width" value="<?= $grain_width; ?>" class="w-100 border-0 p-1" disabled></td>
+												</tr>
+											<?php
+											} else {
+											?>
+												<tr>
+													<th class="table-secondary w-25">Grain Width</th>
+													<td><input type="text" name="grain_width" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
+												</tr>
+											<?php
+											}
+
+											if ($grain_shape !== null) {
+											?>
+												<tr>
+													<th class="table-secondary w-25">Grain Shape</th>
+													<td><input type="text" name="grain_shape" value="<?= $grain_shape; ?>" class="w-100 border-0 p-1" disabled></td>
+												</tr>
+											<?php
+											} else {
+											?>
+												<tr>
+													<th class="table-secondary w-25">Grain Shape</th>
+													<td><input type="text" name="grain_shape" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
+												</tr>
+											<?php
+											}
+
+											if ($awn_length !== null) {
+											?>
+												<tr>
+													<th class="table-secondary w-25">Awn Length</th>
+													<td><input type="text" name="awn_length" value="<?= $awn_length; ?>" class="w-100 border-0 p-1" disabled></td>
+												</tr>
+											<?php
+											} else {
+											?>
+												<tr>
+													<th class="table-secondary w-25">Awn Length</th>
+													<td><input type="text" name="awn_length" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
+												</tr>
+											<?php
+											}
+
+											if ($leaf_length !== null) {
+											?>
+												<tr>
+													<th class="table-secondary w-25">Leaf Length</th>
+													<td><input type="text" name="leaf_length" value="<?= $leaf_length; ?>" class="w-100 border-0 p-1" disabled></td>
+												</tr>
+											<?php
+											} else {
+											?>
+												<tr>
+													<th class="table-secondary w-25">Leaf Length</th>
+													<td><input type="text" name="leaf_length" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
+												</tr>
+											<?php
+											}
+
+											if ($leaf_width !== null) {
+											?>
+												<tr>
+													<th class="table-secondary w-25">Leaf Width</th>
+													<td><input type="text" name="leaf_width" value="<?= $leaf_width; ?>" class="w-100 border-0 p-1" disabled></td>
+												</tr>
+											<?php
+											} else {
+											?>
+												<tr>
+													<th class="table-secondary w-25">Leaf Width</th>
+													<td><input type="text" name="leaf_width" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
+												</tr>
+											<?php
+											}
+
+											if ($leaf_shape !== null) {
+											?>
+												<tr>
+													<th class="table-secondary w-25">Leaf Shape</th>
+													<td><input type="text" name="leaf_shape" value="<?= $leaf_shape; ?>" class="w-100 border-0 p-1" disabled></td>
+												</tr>
+											<?php
+											} else {
+											?>
+												<tr>
+													<th class="table-secondary w-25">Leaf Shape</th>
+													<td><input type="text" name="leaf_shape" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
+												</tr>
+											<?php
+											}
+
+											if ($stem_color !== null) {
+											?>
+												<tr>
+													<th class="table-secondary w-25">Stem Color</th>
+													<td><input type="text" name="stem_color" value="<?= $stem_color; ?>" class="w-100 border-0 p-1" disabled></td>
+												</tr>
+											<?php
+											} else {
+											?>
+												<tr>
+													<th class="table-secondary w-25">Stem Color</th>
+													<td><input type="text" name="stem_color" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
+												</tr>
+											<?php
+											}
+
+											if ($another_color !== null) {
+											?>
+												<tr>
+													<th class="table-secondary w-25">Another Color</th>
+													<td><input type="text" name="another_color" value="<?= $another_color; ?>" class="w-100 border-0 p-1" disabled></td>
+												</tr>
+											<?php
+											} else {
+											?>
+												<tr>
+													<th class="table-secondary w-25">Another Color</th>
+													<td><input type="text" name="another_color" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
+												</tr>
+											<?php
+											}
+											?>
 										<?php
 										}
 									} else {
@@ -766,34 +1089,78 @@
 										if (pg_num_rows($query_run7) > 0) {
 											$relationship_among_cultivars = pg_fetch_assoc($query_run7);
 
-											// Distinct Groups of Cultivars based on Morphological and Genetic Characteristics
-											$distinct_groups = isset($relationship_among_cultivars['distinct_cultivar_groups_morph_gen']) ? $relationship_among_cultivars['distinct_cultivar_groups_morph_gen'] : "No Distinct Groups Available";
+											// Define default values for each field if they are null
+											$distinct_cultivar_groups_morph_gen = isset($relationship_among_cultivars['distinct_cultivar_groups_morph_gen']) ? $relationship_among_cultivars['distinct_cultivar_groups_morph_gen'] : null;
+											$cultivar_relations_cluster_and_pca = isset($relationship_among_cultivars['cultivar_relations_cluster_and_pca']) ? $relationship_among_cultivars['cultivar_relations_cluster_and_pca'] : null;
+											$hybridization_potential = isset($relationship_among_cultivars['hybridization_potential']) ? $relationship_among_cultivars['hybridization_potential'] : null;
+											$conservation_and_breeding_implications = isset($relationship_among_cultivars['conservation_and_breeding_implications']) ? $relationship_among_cultivars['conservation_and_breeding_implications'] : null;
 
-											// Relationships Among Cultivars based on Cluster Analysis and Principal Component Analysis
-											$relations_cluster_pca = isset($relationship_among_cultivars['cultivar_relations_cluster_and_pca']) ? $relationship_among_cultivars['cultivar_relations_cluster_and_pca'] : "No Relationships Available";
-
-											// Potential for Hybridization and Breeding Among Cultivars
-											$hybridization_potential = isset($relationship_among_cultivars['hybridization_potential']) ? $relationship_among_cultivars['hybridization_potential'] : "No Hybridization Potential Available";
-
-											// Implications for Conservation and Breeding Efforts
-											$conservation_breeding_implications = isset($relationship_among_cultivars['conservation_and_breeding_implications']) ? $relationship_among_cultivars['conservation_and_breeding_implications'] : "No Implications Available";
 									?>
-											<tr>
-												<th class="table-secondary w-25" scope="row">Distinct Groups of Cultivars based on Morphological and Genetic Characteristics</th>
-												<td><textarea name="distinct_cultivar_groups_morph_gen" class="w-100 border-0 p-1" rows="5" disabled><?= $distinct_groups; ?></textarea></td>
-											</tr>
-											<tr>
-												<th class="table-secondary">Relationships Among Cultivars based on Cluster Analysis and Principal Component Analysis</th>
-												<td><textarea name="cultivar_relations_cluster_and_pca" class="w-100 border-0 p-1" rows="5" disabled><?= $relations_cluster_pca; ?></textarea></td>
-											</tr>
-											<tr>
-												<th class="table-secondary">Potential for Hybridization and Breeding Among Cultivars</th>
-												<td><textarea name="hybridization_potential" class="w-100 border-0 p-1" rows="5" disabled><?= $hybridization_potential; ?></textarea></td>
-											</tr>
-											<tr>
-												<th class="table-secondary">Implications for Conservation and Breeding Efforts</th>
-												<td><textarea name="conservation_and_breeding_implications" class="w-100 border-0 p-1" rows="5" disabled><?= $conservation_breeding_implications; ?></textarea></td>
-											</tr>
+											<?php
+											if ($distinct_cultivar_groups_morph_gen !== null) {
+											?>
+												<tr>
+													<th class="table-secondary w-25">Distinct Groups of Cultivars based on Morphological and Genetic Characteristics</th>
+													<td><input type="text" name="distinct_cultivar_groups_morph_gen" value="<?= $distinct_cultivar_groups_morph_gen; ?>" class="w-100 border-0 p-1" disabled></td>
+												</tr>
+											<?php
+											} else {
+											?>
+												<tr>
+													<th class="table-secondary w-25">Distinct Groups of Cultivars based on Morphological and Genetic Characteristics</th>
+													<td><input type="text" name="distinct_cultivar_groups_morph_gen" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
+												</tr>
+											<?php
+											}
+
+											if ($cultivar_relations_cluster_and_pca !== null) {
+											?>
+												<tr>
+													<th class="table-secondary w-25">Relationships Among Cultivars based on Cluster Analysis and Principal Component Analysis</th>
+													<td><input type="text" name="cultivar_relations_cluster_and_pca" value="<?= $cultivar_relations_cluster_and_pca; ?>" class="w-100 border-0 p-1" disabled></td>
+												</tr>
+											<?php
+											} else {
+											?>
+												<tr>
+													<th class="table-secondary w-25">Relationships Among Cultivars based on Cluster Analysis and Principal Component Analysis</th>
+													<td><input type="text" name="cultivar_relations_cluster_and_pca" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
+												</tr>
+											<?php
+											}
+
+											if ($hybridization_potential !== null) {
+											?>
+												<tr>
+													<th class="table-secondary w-25">Potential for Hybridization and Breeding Among Cultivars</th>
+													<td><input type="text" name="hybridization_potential" value="<?= $hybridization_potential; ?>" class="w-100 border-0 p-1" disabled></td>
+												</tr>
+											<?php
+											} else {
+											?>
+												<tr>
+													<th class="table-secondary w-25">Potential for Hybridization and Breeding Among Cultivars</th>
+													<td><input type="text" name="hybridization_potential" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
+												</tr>
+											<?php
+											}
+
+											if ($conservation_and_breeding_implications !== null) {
+											?>
+												<tr>
+													<th class="table-secondary w-25">Implications for Conservation and Breeding Efforts</th>
+													<td><input type="text" name="conservation_and_breeding_implications" value="<?= $conservation_and_breeding_implications; ?>" class="w-100 border-0 p-1" disabled></td>
+												</tr>
+											<?php
+											} else {
+											?>
+												<tr>
+													<th class="table-secondary w-25">Implications for Conservation and Breeding Efforts</th>
+													<td><input type="text" name="conservation_and_breeding_implications" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
+												</tr>
+											<?php
+											}
+											?>
 										<?php
 										}
 									} else {
