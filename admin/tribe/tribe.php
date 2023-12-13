@@ -59,7 +59,17 @@
 						<!-- title-->
 						<div class="row d-flex justify-content-between my-3">
 							<div class="col-6">
-								<h3 id="crops-title"><input type="text" name="tribe_name" value="<?= $tribe_name; ?>" class="fw-semibold w-100 border-0 py-1 px-2" disabled></h3>
+								<?php
+								if ($tribe_name !== null) {
+								?>
+									<h3 id="crops-title"><input type="text" name="tribe_name" value="<?= $tribe_name; ?>" class="fw-semibold w-100 border-0 py-1 px-2" disabled></h3>
+								<?php
+								}else{
+									?>
+									<h3 id="crops-title"><input type="text" name="tribe_name" placeholder="No Name" class="fw-semibold w-100 border-0 py-1 px-2" disabled></h3>
+									<?php
+								}
+								?>
 							</div>
 						</div>
 
@@ -249,7 +259,7 @@
 
 							<table class="table table-hover table-sm mb-0">
 								<tbody>
-								<?php
+									<?php
 									if ($other_info !== null) {
 									?>
 										<tr>

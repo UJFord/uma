@@ -45,6 +45,7 @@
 
 					// Get the data from crops table
 					// Define default values for each field if they are null
+					$crop_name = isset($crops['crop_name']) ? $crops['crop_name'] : null;
 					$upland_or_lowland = isset($crops['upland_or_lowland']) ? $crops['upland_or_lowland'] : null;
 					$season = isset($crops['season']) ? $crops['season'] : null;
 					$category = isset($crops['category']) ? $crops['category'] : null;
@@ -72,7 +73,7 @@
 							<div class="col-6">
 								<h3>
 									<?php
-									if ($upland_or_lowland !== null) {
+									if ($crop_name !== null) {
 									?>
 										<input id="title" type="text" name="crop_name" value="<?= $crops['crop_name']; ?>" class="fw-semibold w-100 border-0 py-1 px-2" disabled>
 									<?php
