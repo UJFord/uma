@@ -34,7 +34,7 @@
                 <!-- title-->
                 <div class="row d-flex justify-content-between my-3">
                     <div class="col-6">
-                        <h3 id="crops-title"><input type="text" name="ritual_name" placeholder="Enter Ritual Name" class="fw-semibold w-100 border-0 py-1 px-2"></h3>
+                        <h3 id="crops-title"><input type="text" name="ritual_name" placeholder="Enter Ritual Name" class="fw-semibold w-100 border py-1 px-2"></h3>
                     </div>
                 </div>
 
@@ -46,11 +46,11 @@
                         <tbody>
                             <tr>
                                 <th class="table-secondary">Description</th>
-                                <td><textarea class="w-100 border-0 p-1" name="description" placeholder="Enter Description" rows="5"></textarea></td>
+                                <td><textarea class="w-100 border p-1" name="description" placeholder="Enter Description" rows="5"></textarea></td>
                             </tr>
                             <tr>
                                 <th class="table-secondary w-25">Image Link</th>
-                                <td><input type="text" name="image" placeholder="Enter Image Link" class="w-100 border-0 p-1"></td>
+                                <td><input type="text" name="image" placeholder="Enter Image Link" class="w-100 border p-1"></td>
                             </tr>
                         </tbody>
                     </table>
@@ -59,19 +59,19 @@
                         <tbody>
                             <tr>
                                 <th class="table-secondary w-25">Purpose</th>
-                                <td><textarea class="w-100 border-0 p-1" name="purpose" placeholder="Enter Purpose" rows="5"></textarea></td>
+                                <td><textarea class="w-100 border p-1" name="purpose" placeholder="Enter Purpose" rows="5"></textarea></td>
                             </tr>
                             <tr>
                                 <th class="table-secondary w-25">Timing</th>
-                                <td><textarea class="w-100 border-0 p-1" name="timing" placeholder="Enter Timinng" rows="5"></textarea></td>
+                                <td><textarea class="w-100 border p-1" name="timing" placeholder="Enter Timinng" rows="5"></textarea></td>
                             </tr>
                             <tr>
                                 <th class="table-secondary w-25">Participants</th>
-                                <td><textarea class="w-100 border-0 p-1" name="participants" placeholder="Enter Participants" rows="5"></textarea></td>
+                                <td><textarea class="w-100 border p-1" name="participants" placeholder="Enter Participants" rows="5"></textarea></td>
                             </tr>
                             <tr>
                                 <th class="table-secondary w-25">Items Used</th>
-                                <td><textarea class="w-100 border-0 p-1" name="items_used" placeholder="Enter Items Used" rows="5"></textarea></td>
+                                <td><textarea class="w-100 border p-1" name="items_used" placeholder="Enter Items Used" rows="5"></textarea></td>
                             </tr>
                         </tbody>
                     </table>
@@ -81,7 +81,7 @@
                         <tbody>
                             <tr>
                                 <th class="table-secondary w-25">Other Info</th>
-                                <td><textarea class="w-100 border-0 p-1" rows="5" name="other_info" placeholder="Enter Other Info"></textarea></td>
+                                <td><textarea class="w-100 border p-1" rows="5" name="other_info" placeholder="Enter Other Info"></textarea></td>
                             </tr>
                         </tbody>
                     </table>

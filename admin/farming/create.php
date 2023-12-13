@@ -35,7 +35,7 @@
                 <!-- title-->
                 <div class="row d-flex justify-content-between my-3">
                     <div class="col-6">
-                        <h3 id="crops-title"><input type="text" name="farming_name" placeholder="Enter Farming Practice Name" class="fw-semibold w-100 border-0 py-1 px-2"></h3>
+                        <h3 id="crops-title"><input type="text" name="farming_name" placeholder="Enter Farming Practice Name" class="fw-semibold w-100 border py-1 px-2"></h3>
                     </div>
                 </div>
 
@@ -47,11 +47,11 @@
                         <tbody>
                             <tr>
                                 <th class="table-secondary">Description</th>
-                                <td><textarea class="w-100 border-0 p-1" name="description" placeholder="Enter Description" rows="5"></textarea></td>
+                                <td><textarea class="w-100 border p-1" name="description" placeholder="Enter Description" rows="5"></textarea></td>
                             </tr>
                             <tr>
                                 <th class="table-secondary w-25">Image Link</th>
-                                <td><input type="text" name="image" placeholder="Enter Image Link" class="w-100 border-0 p-1"></td>
+                                <td><input type="text" name="image" placeholder="Enter Image Link" class="w-100 border p-1"></td>
                             </tr>
                         </tbody>
 
@@ -61,23 +61,23 @@
                         <tbody>
                             <tr>
                                 <th class="table-secondary w-25">Importance</th>
-                                <td><textarea class="w-100 border-0 p-1" name="importance" placeholder="Enter Importance" rows="5"></textarea></td>
+                                <td><textarea class="w-100 border p-1" name="importance" placeholder="Enter Importance" rows="5"></textarea></td>
                             </tr>
                             <tr>
                                 <th class="table-secondary w-25">Role in Maintaning Upland Ecosystems</th>
-                                <td><textarea class="w-100 border-0 p-1" name="role_in_maintaning_upland_ecosystem" placeholder="Enter Role in Maintaning Upland Ecosystems" rows="5"></textarea></td>
+                                <td><textarea class="w-100 border p-1" name="role_in_maintaning_upland_ecosystem" placeholder="Enter Role in Maintaning Upland Ecosystems" rows="5"></textarea></td>
                             </tr>
                             <tr>
                                 <th class="table-secondary w-25">Timing</th>
-                                <td><textarea class="w-100 border-0 p-1" name="timing" placeholder="Enter Timing" rows="5"></textarea></td>
+                                <td><textarea class="w-100 border p-1" name="timing" placeholder="Enter Timing" rows="5"></textarea></td>
                             </tr>
                             <tr>
                                 <th class="table-secondary w-25">Benefits</th>
-                                <td><textarea class="w-100 border-0 p-1" name="benefits" placeholder="Enter Benefits" rows="5"></textarea></td>
+                                <td><textarea class="w-100 border p-1" name="benefits" placeholder="Enter Benefits" rows="5"></textarea></td>
                             </tr>
                             <tr>
                                 <th class="table-secondary w-25">Environmetal Impacts</th>
-                                <td><textarea class="w-100 border-0 p-1" name="environmental_impacts" placeholder="Enter Environmetal Impacts" rows="5"></textarea></td>
+                                <td><textarea class="w-100 border p-1" name="environmental_impacts" placeholder="Enter Environmetal Impacts" rows="5"></textarea></td>
                             </tr>
 
                     </table>
@@ -85,34 +85,34 @@
                     <table class="table table-hover table-sm">
                         <tr>
                             <th class="table-secondary w-25">Considerations</th>
-                            <td><textarea class="w-100 border-0 p-1" name="considerations" placeholder="Enter Considerations" rows="5"></textarea></td>
+                            <td><textarea class="w-100 border p-1" name="considerations" placeholder="Enter Considerations" rows="5"></textarea></td>
                         </tr>
                         <tr>
                             <th class="table-secondary w-25">Sustainable Practices</th>
-                            <td><textarea class="w-100 border-0 p-1" name="sustainable_practices" placeholder="Enter Sustainable Practices" rows="5"></textarea></td>
+                            <td><textarea class="w-100 border p-1" name="sustainable_practices" placeholder="Enter Sustainable Practices" rows="5"></textarea></td>
                         </tr>
                         <tr>
                             <th class="table-secondary w-25">History Development</th>
-                            <td><textarea class="w-100 border-0 p-1" name="history_development" placeholder="Enter History Development" rows="5"></textarea></td>
+                            <td><textarea class="w-100 border p-1" name="history_development" placeholder="Enter History Development" rows="5"></textarea></td>
                         </tr>
                         <tr>
                             <th class="table-secondary w-25">Construction and Maintenance</th>
-                            <td><textarea class="w-100 border-0 p-1" name="construction_and_maintenance" placeholder="Enter Construction and Maintenance" rows="5"></textarea></td>
+                            <td><textarea class="w-100 border p-1" name="construction_and_maintenance" placeholder="Enter Construction and Maintenance" rows="5"></textarea></td>
                         </tr>
                         <tr>
                             <th class="table-secondary w-25">Challenges</th>
-                            <td><textarea class="w-100 border-0 p-1" name="challenges" placeholder="Enter Challenges" rows="5"></textarea></td>
+                            <td><textarea class="w-100 border p-1" name="challenges" placeholder="Enter Challenges" rows="5"></textarea></td>
                         </tr>
                         <tr>
                             <th class="table-secondary w-25">Principles</th>
-                            <td><textarea class="w-100 border-0 p-1" name="principles" placeholder="Enter Principles" rows="5"></textarea></td>
+                            <td><textarea class="w-100 border p-1" name="principles" placeholder="Enter Principles" rows="5"></textarea></td>
                         </tr>
                     </table>
 
                     <table class="table table-hover table-sm mb-0">
                         <tr>
                             <th class="table-secondary w-25">Other Info</th>
-                            <td><textarea class="w-100 border-0 p-1" name="other_info" placeholder="Enter Other Info" rows="5"></textarea></td>
+                            <td><textarea class="w-100 border p-1" name="other_info" placeholder="Enter Other Info" rows="5"></textarea></td>
                         </tr>
                         </tbody>
                     </table>
