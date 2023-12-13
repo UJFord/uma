@@ -121,8 +121,6 @@
 							</div>
 					<?php
 						}
-					} else {
-						echo '<h5>No more record</h5>';
 					}
 					?>
 				</div>

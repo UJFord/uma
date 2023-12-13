@@ -117,8 +117,6 @@
 							</div>
 					<?php
 						}
-					} else {
-						echo '<h5>No Record Found </h5>';
 					}
 					?>
 				</div>
