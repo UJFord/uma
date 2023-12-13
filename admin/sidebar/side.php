@@ -21,7 +21,7 @@ require('../../html/navfoot/connection.php');
         <ul class="nav nav-pills flex-column mb-auto ps-3">
             <!-- crops sidebar nav -->
             <li class="nav-item">
-                <a href="../crop/list.php" <?php echo (strpos($current_page, '/uma/admin/crop/list.php') === 0 || strpos($current_page, '/uma/admin/crop/crop.php') === 0)
+                <a href="../crop/list.php" <?php echo (strpos($current_page, '/uma/admin/crop/list.php') === 0 || strpos($current_page, '/uma/admin/crop/crop.php') === 0 || strpos($current_page, '/uma/admin/crop/create.php') === 0)
                                                 ? 'class="nav-link text-dark fw-semibold rounded-start-pill active-nav"'
                                                 : 'class="nav-link text-white"'; ?>>
                     <i class="fa-solid fa-wheat-awn" style="width: 1.5rem;"></i>
@@ -30,7 +30,7 @@ require('../../html/navfoot/connection.php');
             </li>
             <!-- tribes sidebar nav -->
             <li>
-                <a href="../tribe/list.php" <?php echo (strpos($current_page, '/uma/admin/tribe/list.php') === 0 || strpos($current_page, '/uma/admin/tribe/tribe.php') === 0)
+                <a href="../tribe/list.php" <?php echo (strpos($current_page, '/uma/admin/tribe/list.php') === 0 || strpos($current_page, '/uma/admin/tribe/tribe.php') === 0 || strpos($current_page, '/uma/admin/tribe/create.php') === 0)
                                                 ? 'class="nav-link text-dark fw-semibold rounded-start-pill active-nav"'
                                                 : 'class="nav-link text-white"'; ?>>
                     <i class="fa-solid fa-people-group" style="width: 1.5rem;"></i>
@@ -40,7 +40,7 @@ require('../../html/navfoot/connection.php');
             </li>
             <!-- rituals sidebar nav -->
             <li>
-                <a href="../ritual/list.php" <?php echo (strpos($current_page, '/uma/admin/ritual/list.php') === 0 || strpos($current_page, '/uma/admin/ritual/ritual.php') === 0)
+                <a href="../ritual/list.php" <?php echo (strpos($current_page, '/uma/admin/ritual/list.php') === 0 || strpos($current_page, '/uma/admin/ritual/ritual.php') === 0 || strpos($current_page, '/uma/admin/ritual/create.php') === 0)
                                                     ? 'class="nav-link text-dark fw-semibold rounded-start-pill active-nav"'
                                                     : 'class="nav-link text-white"'; ?>>
                     <i class="fa-solid fa-book-open" style="width: 1.5rem;"></i>
