@@ -58,16 +58,16 @@
 								</li>
 							</ul>
 							<form action="search.php" method="POST">
-                                <input type="search" name="search" class="form-control" placeholder="Start typing to filter..." />
-                            </form>
+								<input type="search" name="search" class="form-control" placeholder="Start typing to filter..." />
+							</form>
 						</div>
 					</div>
 				</div>
 
 				<!-- crop cards -->
 				<div id="crop-cards" class="row">
-					<?php 
-					include('../message.php'); 
+					<?php
+					include('../message.php');
 					// add entry button
 					require('../add/add.php');
 					?>
@@ -85,18 +85,39 @@
 					?>
 							<!-- crop -->
 							<div class="card-container col-6 col-md-4 col-lg-2 p-2">
-								<a href="crop.php?crop_id=<?php echo $crop_id; ?>" class="crop-card py-3 px-1 d-flex justify-content-center align-items-end" style="
+								<?php
+								if ($image !== null) {
+								?>
+									<a href="crop.php?crop_id=<?php echo $crop_id; ?>" class="crop-card py-3 px-1 d-flex justify-content-center align-items-end" style="
 									background-image: url('<?php echo $image; ?>');
 								">
-									<div class="crop-card-text row w-100 d-flex flex-row justify-content-between align-items-center">
-										<!-- crop name -->
-										<h4 class="crop-name col-6"><?php echo ucfirst($crop_name); ?></h4>
-										<!-- arrow -->
-										<div class="col-2 arrow-container">
-											<i class="position-absolute bi bi-arrow-right-short fs-3"></i>
+										<div class="crop-card-text row w-100 d-flex flex-row justify-content-between align-items-center">
+											<!-- crop name -->
+											<h4 class="crop-name col-6"><?php echo ucfirst($crop_name); ?></h4>
+											<!-- arrow -->
+											<div class="col-2 arrow-container">
+												<i class="position-absolute bi bi-arrow-right-short fs-3"></i>
+											</div>
 										</div>
-									</div>
-								</a>
+									</a>
+								<?php
+								} else {
+								?>
+									<a href="crop.php?crop_id=<?php echo $crop_id; ?>" class="crop-card py-3 px-1 d-flex justify-content-center align-items-end" style="
+									background-image: url('https://t3.ftcdn.net/jpg/02/48/42/64/360_F_248426448_NVKLywWqArG2ADUxDq6QprtIzsF82dMF.jpg');
+								">
+										<div class="crop-card-text row w-100 d-flex flex-row justify-content-between align-items-center">
+											<!-- crop name -->
+											<h4 class="crop-name col-6"><?php echo ucfirst($crop_name); ?></h4>
+											<!-- arrow -->
+											<div class="col-2 arrow-container">
+												<i class="position-absolute bi bi-arrow-right-short fs-3"></i>
+											</div>
+										</div>
+									</a>
+								<?php
+								}
+								?>
 							</div>
 					<?php
 						}

@@ -79,14 +79,31 @@
 							$farming_name = $row['farming_name'];
 							$image = $row['image'];
 					?>
-							<!-- Saging with data from db -->
+							<!-- data from db -->
 							<div class="card-container col-6 col-md-4 col-lg-2 p-2">
-
-								<a href="farming.php?farming_id=<?php echo $farming_id; ?>" class="crop-card py-3 px-1 d-flex justify-content-center align-items-end" style="
+								<?php
+								if ($image !== null) {
+								?>
+									<a href="farming.php?farming_id=<?php echo $farming_id; ?>" class="crop-card py-3 px-1 d-flex justify-content-center align-items-end" style="
 									background-image: url('<?php echo $image; ?>');
 								">
+										<div class="crop-card-text row w-100 d-flex flex-row justify-content-between align-items-center">
+											<!-- Farming name -->
+											<h4 class="crop-name col-6"><?php echo ucfirst($farming_name); ?></h4>
+											<!-- arrow -->
+											<div class="col-2 arrow-container">
+												<i class="position-absolute bi bi-arrow-right-short fs-3"></i>
+											</div>
+										</div>
+									</a>
+								<?php
+								} else {
+								?>
+								<a href="farming.php?farming_id=<?php echo $farming_id; ?>" class="crop-card py-3 px-1 d-flex justify-content-center align-items-end" style="
+									background-image: url('https://t3.ftcdn.net/jpg/02/48/42/64/360_F_248426448_NVKLywWqArG2ADUxDq6QprtIzsF82dMF.jpg');
+								">
 									<div class="crop-card-text row w-100 d-flex flex-row justify-content-between align-items-center">
-										<!-- crop name -->
+										<!-- Farming name -->
 										<h4 class="crop-name col-6"><?php echo ucfirst($farming_name); ?></h4>
 										<!-- arrow -->
 										<div class="col-2 arrow-container">
@@ -94,6 +111,9 @@
 										</div>
 									</div>
 								</a>
+								<?php
+								}
+								?>
 							</div>
 					<?php
 						}

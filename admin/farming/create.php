@@ -29,8 +29,8 @@
 
             <!-- form for submitting -->
             <form id="form-panel" name="Form" action="code.php" autocomplete="off" onsubmit="return validateForm()" method="POST" class="h-100 py-3 px-5">
-				<!-- back button -->
-				<a href="list.php" class="link-offset-2"><i class="bi bi-chevron-left"></i>Go Back</a>
+                <!-- back button -->
+                <a href="list.php" class="link-offset-2"><i class="bi bi-chevron-left"></i>Go Back</a>
 
                 <!-- title-->
                 <div class="row d-flex justify-content-between my-3">
@@ -51,8 +51,8 @@
                             </tr>
                             <tr>
                                 <th class="table-secondary w-25">Image Link</th>
-                                <td><input type="text" name="image" placeholder="Enter Image Link" class="w-100 border-0 p-1"'></td>
-							</tr>
+                                <td><input type="text" name="image" placeholder="Enter Image Link" class="w-100 border-0 p-1"></td>
+                            </tr>
                         </tbody>
 
                     </table>
@@ -61,8 +61,7 @@
                         <tbody>
                             <tr>
                                 <th class="table-secondary w-25">Importance</th>
-                                <td><textarea class="w-100 border-0 p-1" name="importance" placeholder="Enter Importance" rows="5">
-                                </textarea></td>
+                                <td><textarea class="w-100 border-0 p-1" name="importance" placeholder="Enter Importance" rows="5"></textarea></td>
                             </tr>
                             <tr>
                                 <th class="table-secondary w-25">Role in Maintaning Upland Ecosystems</th>
@@ -128,9 +127,9 @@
     </div>
 
     <!-- scipts -->
-	<!-- custom -->
-	<script src="../../js/admin/entry-edit.js"></script>
-	<!-- bootstrap -->
+    <!-- custom -->
+    <script src="../../js/admin/entry-edit.js"></script>
+    <!-- bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
     <!-- font awesome -->
     <script src="https://kit.fontawesome.com/57e83eb6e4.js" crossorigin="anonymous"></script>

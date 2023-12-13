@@ -34,6 +34,22 @@
 
 				if (pg_num_rows($query_run) > 0) {
 					$tribe = pg_fetch_assoc($query_run);
+
+					// get the data from the tribe table
+					// Define default values for each field if they are null
+					$tribe_name = isset($tribe['tribe_name']) ? $tribe['tribe_name'] : null;
+					$image = isset($tribe['image']) ? $tribe['image'] : null;
+					$location = isset($tribe['location']) ? $tribe['location'] : null;
+					$language_and_dialect = isset($tribe['language_and_dialect']) ? $tribe['language_and_dialect'] : null;
+					$population = isset($tribe['population']) ? $tribe['population'] : null;
+					$livelihood_and_practices = isset($tribe['livelihood_and_practices']) ? $tribe['livelihood_and_practices'] : null;
+					$farming_practices = isset($tribe['farming_practices']) ? $tribe['farming_practices'] : null;
+					$social_structure_and_kinship_system = isset($tribe['social_structure_and_kinship_system']) ? $tribe['social_structure_and_kinship_system'] : null;
+					$beliefs_and_customs = isset($tribe['beliefs_and_customs']) ? $tribe['beliefs_and_customs'] : null;
+					$challenges_and_threats = isset($tribe['challenges_and_threats']) ? $tribe['challenges_and_threats'] : null;
+					$efforts_of_revitalization = isset($tribe['efforts_of_revitalization']) ? $tribe['efforts_of_revitalization'] : null;
+					$other_info = isset($tribe['other_info']) ? $tribe['other_info'] : null;
+
 			?>
 					<!-- form for submitting -->
 					<form id="form-panel" name="Form" action="code.php" autocomplete="off" onsubmit="return validateForm()" method="POST" class="h-100 py-3 px-5">
@@ -43,7 +59,17 @@
 						<!-- title-->
 						<div class="row d-flex justify-content-between my-3">
 							<div class="col-6">
-								<h3 id="crops-title"><input type="text" name="tribe_name" value="<?= $tribe['tribe_name']; ?>" class="fw-semibold w-100 border-0 py-1 px-2" disabled></h3>
+								<?php
+								if ($tribe_name !== null) {
+								?>
+									<h3 id="crops-title"><input type="text" name="tribe_name" value="<?= $tribe_name; ?>" class="fw-semibold w-100 border-0 py-1 px-2" disabled></h3>
+								<?php
+								}else{
+									?>
+									<h3 id="crops-title"><input type="text" name="tribe_name" placeholder="No Name" class="fw-semibold w-100 border-0 py-1 px-2" disabled></h3>
+									<?php
+								}
+								?>
 							</div>
 						</div>
 
@@ -52,76 +78,212 @@
 
 							<table class="table table-hover table-sm">
 
-							<input type="hidden" name="tribe_id" value="<?= $tribe['tribe_id']; ?>">
+								<input type="hidden" name="tribe_id" value="<?= $tribe['tribe_id']; ?>">
 
-							<tbody>
-							<tr>
-								<th class="table-secondary w-25" scope="row">Image</th>
-								<td><input type="text" name="image" value="<?= $tribe['image']; ?>" class="w-100 border-0 p-1"' disabled></td>
-							</tr>
-							<tr>
-								<th class="table-secondary w-25" scope="row">Location</th>
-								<td><input type="text" name="location" value="<?= $tribe['location']; ?>" class="w-100 border-0 p-1" disabled></td>
-							</tr>
-							<tr>
-								<th class="table-secondary">Language and Dialect</th>
-								<td><input type="text" name="language_and_dialect" value="<?= $tribe['language_and_dialect']; ?>" class="w-100 border-0 p-1" disabled></td>
-							</tr>
-							<tr>
-								<th class="table-secondary">Population</th>
-								<td><input type="text" name="population" value="<?= $tribe['population']; ?>" class="w-100 border-0 p-1" disabled></td>
-							</tr>
-							<tr>
-								<th class="table-secondary">Livelihood and Practices</th>
-								<td><input type="text" name="livelihood_and_practices" value="<?= $tribe['livelihood_and_practices']; ?>" class="w-100 border-0 p-1" disabled></td>
-							</tr>
-						</tbody>
-					</table>
+								<tbody>
+									<?php
+									if ($image !== null) {
+									?>
+										<tr>
+											<th class="table-secondary w-25">Image Link</th>
+											<td><input type="text" name="image" value="<?= $image; ?>" class="w-100 border-0 p-1" disabled></td>
+										</tr>
+									<?php
+									} else {
+									?>
+										<tr>
+											<th class="table-secondary w-25">Image Link</th>
+											<td><input type="text" name="image" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
+										</tr>
+									<?php
+									}
 
-					<table class="table table-hover table-sm">
-						<tbody>
-							<tr>
-								<th class="table-secondary w-25" scope="row">Farming Practices</th>
-								<td><input type="text" name="farming_practices" value="<?= $tribe['farming_practices']; ?>" class="w-100 border-0 p-1" disabled></td>
-							</tr>
-							<tr>
-								<th class="table-secondary">Social Structure and Kinship System</th>
-								<td><input type="text" name="social_structure_and_kinship_system" value="<?= $tribe['social_structure_and_kinship_system']; ?>" class="w-100 border-0 p-1" disabled></td>
-							</tr>
-							<tr>
-								<th class="table-secondary">Beliefs and Customs</th>
-								<td><input type="text" name="beliefs_and_customs" value="<?= $tribe['beliefs_and_customs']; ?>" class="w-100 border-0 p-1" disabled></td>
-							</tr>
-						</tbody>
-					</table>
+									if ($location !== null) {
+									?>
+										<tr>
+											<th class="table-secondary w-25">Location</th>
+											<td><input type="text" name="location" value="<?= $location; ?>" class="w-100 border-0 p-1" disabled></td>
+										</tr>
+									<?php
+									} else {
+									?>
+										<tr>
+											<th class="table-secondary w-25">Location</th>
+											<td><input type="text" name="location" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
+										</tr>
+									<?php
+									}
 
-					<table class="table table-hover table-sm">
-						<tbody>
-							<tr>
-								<th class="table-secondary w-25" scope="row">Challenges and Threats</th>
-								<td><input type="text" name="challenges_and_threats" value="<?= $tribe['challenges_and_threats']; ?>" class="w-100 border-0 p-1" disabled></td>
-							</tr>
-							<tr>
-								<th class="table-secondary">Efforts of Revitalization</th>
-								<td><input type="text" name="efforts_of_revitalization" value="<?= $tribe['efforts_of_revitalization']; ?>" class="w-100 border-0 p-1" disabled></td>
-							</tr>
-						</tbody>
-					</table>
+									if ($language_and_dialect !== null) {
+									?>
+										<tr>
+											<th class="table-secondary w-25">Language and Dialect</th>
+											<td><input type="text" name="language_and_dialect" value="<?= $language_and_dialect; ?>" class="w-100 border-0 p-1" disabled></td>
+										</tr>
+									<?php
+									} else {
+									?>
+										<tr>
+											<th class="table-secondary w-25">Language and Dialect</th>
+											<td><input type="text" name="language_and_dialect" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
+										</tr>
+									<?php
+									}
 
-					<table class="table table-hover table-sm mb-0">
-						<tbody>
-							<tr>
-								<th class="table-secondary w-25" scope="row">Other Info</th>
-								<td><input type="text" name="other_info" value="<?= $tribe['other_info']; ?>" class="w-100 border-0 p-1" disabled></td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-				<!-- editting buttons -->
-				<?php
-					require('../edit-btn/edit-btn.php');
-				?>
-				</form>
+									if ($population !== null) {
+									?>
+										<tr>
+											<th class="table-secondary w-25">Population</th>
+											<td><input type="text" name="population" value="<?= $population; ?>" class="w-100 border-0 p-1" disabled></td>
+										</tr>
+									<?php
+									} else {
+									?>
+										<tr>
+											<th class="table-secondary w-25">Population</th>
+											<td><input type="text" name="population" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
+										</tr>
+									<?php
+									}
+
+									if ($livelihood_and_practices !== null) {
+									?>
+										<tr>
+											<th class="table-secondary w-25">Livelihood and Practices</th>
+											<td><input type="text" name="livelihood_and_practices" value="<?= $livelihood_and_practices; ?>" class="w-100 border-0 p-1" disabled></td>
+										</tr>
+									<?php
+									} else {
+									?>
+										<tr>
+											<th class="table-secondary w-25">Livelihood and Practices</th>
+											<td><input type="text" name="livelihood_and_practices" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
+										</tr>
+									<?php
+									}
+									?>
+								</tbody>
+							</table>
+
+							<table class="table table-hover table-sm">
+								<tbody>
+									<?php
+									if ($farming_practices !== null) {
+									?>
+										<tr>
+											<th class="table-secondary w-25">Farming Practices</th>
+											<td><input type="text" name="farming_practices" value="<?= $farming_practices; ?>" class="w-100 border-0 p-1" disabled></td>
+										</tr>
+									<?php
+									} else {
+									?>
+										<tr>
+											<th class="table-secondary w-25">Farming Practices</th>
+											<td><input type="text" name="farming_practices" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
+										</tr>
+									<?php
+									}
+
+									if ($social_structure_and_kinship_system !== null) {
+									?>
+										<tr>
+											<th class="table-secondary w-25">Social Structure and Kinship</th>
+											<td><input type="text" name="social_structure_and_kinship_system" value="<?= $social_structure_and_kinship_system; ?>" class="w-100 border-0 p-1" disabled></td>
+										</tr>
+									<?php
+									} else {
+									?>
+										<tr>
+											<th class="table-secondary w-25">Social Structure and Kinship</th>
+											<td><input type="text" name="social_structure_and_kinship_system" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
+										</tr>
+									<?php
+									}
+
+									if ($beliefs_and_customs !== null) {
+									?>
+										<tr>
+											<th class="table-secondary w-25">Beliefs and Customs</th>
+											<td><input type="text" name="beliefs_and_customs" value="<?= $beliefs_and_customs; ?>" class="w-100 border-0 p-1" disabled></td>
+										</tr>
+									<?php
+									} else {
+									?>
+										<tr>
+											<th class="table-secondary w-25">Beliefs and Customs</th>
+											<td><input type="text" name="beliefs_and_customs" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
+										</tr>
+									<?php
+									}
+									?>
+								</tbody>
+							</table>
+
+							<table class="table table-hover table-sm">
+								<tbody>
+									<?php
+									if ($challenges_and_threats !== null) {
+									?>
+										<tr>
+											<th class="table-secondary w-25">Challenges and Threats</th>
+											<td><input type="text" name="challenges_and_threats" value="<?= $challenges_and_threats; ?>" class="w-100 border-0 p-1" disabled></td>
+										</tr>
+									<?php
+									} else {
+									?>
+										<tr>
+											<th class="table-secondary w-25">Challenges and Threats</th>
+											<td><input type="text" name="challenges_and_threats" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
+										</tr>
+									<?php
+									}
+
+									if ($efforts_of_revitalization !== null) {
+									?>
+										<tr>
+											<th class="table-secondary w-25">Efforts of Revitalization</th>
+											<td><input type="text" name="efforts_of_revitalization" value="<?= $efforts_of_revitalization; ?>" class="w-100 border-0 p-1" disabled></td>
+										</tr>
+									<?php
+									} else {
+									?>
+										<tr>
+											<th class="table-secondary w-25">Efforts of Revitalization</th>
+											<td><input type="text" name="efforts_of_revitalization" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
+										</tr>
+									<?php
+									}
+									?>
+								</tbody>
+							</table>
+
+							<table class="table table-hover table-sm mb-0">
+								<tbody>
+									<?php
+									if ($other_info !== null) {
+									?>
+										<tr>
+											<th class="table-secondary w-25">Other Info</th>
+											<td><input type="text" name="other_info" value="<?= $other_info; ?>" class="w-100 border-0 p-1" disabled></td>
+										</tr>
+									<?php
+									} else {
+									?>
+										<tr>
+											<th class="table-secondary w-25">Other Info</th>
+											<td><input type="text" name="other_info" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
+										</tr>
+									<?php
+									}
+									?>
+								</tbody>
+							</table>
+						</div>
+						<!-- editting buttons -->
+						<?php
+						require('../edit-btn/edit-btn.php');
+						?>
+					</form>
 			<?php
 				}
 			}
