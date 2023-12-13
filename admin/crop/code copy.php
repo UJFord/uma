@@ -5,18 +5,15 @@ session_start();
 $con = pg_connect("host=localhost dbname=farm_crops user=postgres password=123") or die("Could not connect to server\n");
 
 if (isset($_POST['save'])) {
-    // Function to handle values, including NULL
+    // Function to wrap non-empty values in single quotes and handle empty values
     function handleValue($value)
     {
-        if ($value === '') {
-            return 'NULL';
+        if ($value === '' || $value === null) {
+            return "NULL";
         } else {
-            // Wrap in single quotes for non-empty values
-            return pg_escape_literal($value);
+            return pg_escape_string($value);
         }
     }
-
-
 
     // Check for null values in foreign tables id
     $agronomic_information_id = handleValue($_POST['agronomic_information_id']);

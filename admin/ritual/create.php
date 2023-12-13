@@ -50,8 +50,8 @@
                             </tr>
                             <tr>
                                 <th class="table-secondary w-25">Image Link</th>
-                                <td><input type="text" name="image" placeholder="Enter Image Link" class="w-100 border-0 p-1"'></td>
-							</tr>
+                                <td><input type="text" name="image" placeholder="Enter Image Link" class="w-100 border-0 p-1"></td>
+                            </tr>
                         </tbody>
                     </table>
 
@@ -81,8 +81,7 @@
                         <tbody>
                             <tr>
                                 <th class="table-secondary w-25">Other Info</th>
-                                <td><textarea class="w-100 border-0 p-1" rows="5" name="other_info" placeholder="Enter Other Info">
-                                </textarea></td>
+                                <td><textarea class="w-100 border-0 p-1" rows="5" name="other_info" placeholder="Enter Other Info"></textarea></td>
                             </tr>
                         </tbody>
                     </table>
@@ -97,10 +96,10 @@
 
     </div>
 
-	<!-- scipts -->
-	<!-- custom -->
-	<script src="../../js/admin/entry-edit.js"></script>
-	<!-- bootstrap -->
+    <!-- scipts -->
+    <!-- custom -->
+    <script src="../../js/admin/entry-edit.js"></script>
+    <!-- bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
     <!-- font awesome -->
     <script src="https://kit.fontawesome.com/57e83eb6e4.js" crossorigin="anonymous"></script>

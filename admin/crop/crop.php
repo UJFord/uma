@@ -35,11 +35,32 @@
 
 				if (pg_num_rows($query_run) > 0) {
 					$crops = pg_fetch_assoc($query_run);
+
+					// get the id for the roreign tables
 					$current_agronomic_information_id = $crops['agronomic_information_id'];
 					$current_botanical_information_id = $crops['botanical_information_id'];
 					$current_morphological_characteristic_id = $crops['morphological_characteristic_id'];
 					$current_traditional_crop_traits_id = $crops['traditional_crop_traits_id'];
 					$current_relationship_among_cultivars_id = $crops['relationship_among_cultivars_id'];
+
+					// Get the data from crops table
+					// Define default values for each field if they are null
+					$upland_or_lowland = isset($crops['upland_or_lowland']) ? $crops['upland_or_lowland'] : null;
+					$season = isset($crops['season']) ? $crops['season'] : null;
+					$category = isset($crops['category']) ? $crops['category'] : null;
+					$links = isset($crops['links']) ? $crops['links'] : null;
+					$description = isset($crops['description']) ? $crops['description'] : null;
+					$image = isset($crops['image']) ? $crops['image'] : null;
+					$local_name = isset($crops['local_name']) ? $crops['local_name'] : null;
+					$planting_techniques = isset($crops['planting_techniques']) ? $crops['planting_techniques'] : null;
+					$cultural_and_spiritual_significance = isset($crops['cultural_and_spiritual_significance']) ? $crops['cultural_and_spiritual_significance'] : null;
+					$rice_biodiversity_uplift = isset($crops['rice_biodiversity_uplift']) ? $crops['rice_biodiversity_uplift'] : null;
+					$economic_importance = isset($crops['economic_importance']) ? $crops['economic_importance'] : null;
+					$traditional_knowledge_and_practices = isset($crops['traditional_knowledge_and_practices']) ? $crops['traditional_knowledge_and_practices'] : null;
+					$breeding_potential = isset($crops['breeding_potential']) ? $crops['breeding_potential'] : null;
+					$threats = isset($crops['threats']) ? $crops['threats'] : null;
+					$other_info = isset($crops['other_info']) ? $crops['other_info'] : null;
+
 			?>
 					<!-- form for submitting -->
 					<form id="form-panel" name="Form" action="code.php" autocomplete="off" onsubmit="return validateForm()" method="POST" class="h-100 py-3 px-5">
@@ -73,34 +94,117 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<th class="table-secondary">Upland or Lowand</th>
-										<td><input type="text" name="upland_or_lowland" value="<?= $crops['upland_or_lowland']; ?>" class="w-100 border-0 p-1" disabled></td>
-									</tr>
-									<tr>
-										<th class="table-secondary w-25" scope="row">Season</th>
-										<td><input type="text" name="season" value="<?= $crops['season']; ?>" class="w-100 border-0 p-1" disabled></td>
-									</tr>
-									<tr>
-										<th class="table-secondary w-25" scope="row">Category</th>
-										<td><input type="text" name="category" value="<?= $crops['category']; ?>" class="w-100 border-0 p-1" disabled></td>
-									</tr>
-									<tr>
-										<th class="table-secondary w-25" scope="row">Links</th>
-										<td><input type="text" name="links" value="<?= $crops['links']; ?>" class="w-100 border-0 p-1" disabled></td>
-									</tr>
-									<tr>
-										<th class="table-secondary w-25" scope="row">Description</th>
-										<td><input type="text" name="description" value="<?= $crops['description']; ?>" class="w-100 border-0 p-1" disabled></td>
-									</tr>
-									<tr>
-										<th class="table-secondary w-25" scope="row">Image Link</th>
-										<td><input type="text" name="image" value="<?= $crops['image']; ?>" class="w-100 border-0 p-1" disabled></td>
-									</tr>
-									<tr>
-										<th class="table-secondary w-25" scope="row">Local Name</th>
-										<td><input type="text" name="local_name" value="<?= $crops['local_name']; ?>" class="w-100 border-0 p-1" disabled></td>
-									</tr>
+									<?php
+									if ($upland_or_lowland !== null) {
+									?>
+										<tr>
+											<th class="table-secondary w-25">Upland or Lowand</th>
+											<td><input type="text" name="upland_or_lowland" value="<?= $upland_or_lowland; ?>" class="w-100 border-0 p-1" disabled></td>
+										</tr>
+									<?php
+									} else {
+									?>
+										<tr>
+											<th class="table-secondary w-25">Upland or Lowand</th>
+											<td><input type="text" name="upland_or_lowland" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
+										</tr>
+									<?php
+									}
+
+									if ($season !== null) {
+									?>
+										<tr>
+											<th class="table-secondary w-25">Season</th>
+											<td><input type="text" name="season" value="<?= $season; ?>" class="w-100 border-0 p-1" disabled></td>
+										</tr>
+									<?php
+									} else {
+									?>
+										<tr>
+											<th class="table-secondary w-25">Season</th>
+											<td><input type="text" name="season" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
+										</tr>
+									<?php
+									}
+
+									if ($category !== null) {
+									?>
+										<tr>
+											<th class="table-secondary w-25">Category</th>
+											<td><input type="text" name="category" value="<?= $category; ?>" class="w-100 border-0 p-1" disabled></td>
+										</tr>
+									<?php
+									} else {
+									?>
+										<tr>
+											<th class="table-secondary w-25">Category</th>
+											<td><input type="text" name="category" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
+										</tr>
+									<?php
+									}
+
+									if ($links !== null) {
+									?>
+										<tr>
+											<th class="table-secondary w-25">Links</th>
+											<td><input type="text" name="links" value="<?= $links; ?>" class="w-100 border-0 p-1" disabled></td>
+										</tr>
+									<?php
+									} else {
+									?>
+										<tr>
+											<th class="table-secondary w-25">Links</th>
+											<td><input type="text" name="links" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
+										</tr>
+									<?php
+									}
+
+									if ($description !== null) {
+									?>
+										<tr>
+											<th class="table-secondary w-25">Description</th>
+											<td><input type="text" name="description" value="<?= $description; ?>" class="w-100 border-0 p-1" disabled></td>
+										</tr>
+									<?php
+									} else {
+									?>
+										<tr>
+											<th class="table-secondary w-25">Description</th>
+											<td><input type="text" name="description" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
+										</tr>
+									<?php
+									}
+									if ($image !== null) {
+									?>
+										<tr>
+											<th class="table-secondary w-25">Image Link</th>
+											<td><input type="text" name="image" value="<?= $image; ?>" class="w-100 border-0 p-1" disabled></td>
+										</tr>
+									<?php
+									} else {
+									?>
+										<tr>
+											<th class="table-secondary w-25">Image Link</th>
+											<td><input type="text" name="image" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
+										</tr>
+									<?php
+									}
+									if ($local_name !== null) {
+									?>
+										<tr>
+											<th class="table-secondary w-25">Local Name</th>
+											<td><input type="text" name="local_name" value="<?= $local_name; ?>" class="w-100 border-0 p-1" disabled></td>
+										</tr>
+									<?php
+									} else {
+									?>
+										<tr>
+											<th class="table-secondary w-25">Local Name</th>
+											<td><input type="text" name="local_name" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
+										</tr>
+									<?php
+									}
+									?>
 								</tbody>
 							</table>
 
@@ -129,8 +233,8 @@
 											$row2 = pg_fetch_assoc($query_run2);
 
 											// Get the details of the Botanical Information
-											$scientific_name = isset($row2['scientific_name']) ? $row2['scientific_name'] : "No Scientific Name Available";
-											$common_names = isset($row2['common_names']) ? $row2['common_names'] : "No Common Name Available";
+											$scientific_name = isset($row2['scientific_name']) ? $row2['scientific_name'] : "";
+											$common_names = isset($row2['common_names']) ? $row2['common_names'] : "";
 									?>
 											<tr>
 												<th class="table-secondary w-25" scope="row">Scientific Name</th>
@@ -147,11 +251,11 @@
 										?>
 										<tr>
 											<th class="table-secondary w-25" scope="row">Scientific Name</th>
-											<td><input type="text" name="scientific_name" placeholder="No Scientific Name Available" class="w-100 border-0 p-1" disabled></td>
+											<td><input type="text" name="scientific_name" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
 										</tr>
 										<tr>
 											<th class="table-secondary">Common Names</th>
-											<td><input type="text" name="common_names" placeholder="No Common Name Available" class="w-100 border-0 p-1" disabled></td>
+											<td><input type="text" name="common_names" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
 										</tr>
 									<?php
 									}
@@ -184,15 +288,15 @@
 											$traditional_crop_traits = pg_fetch_assoc($query_run3);
 
 											// Define default values for each field if they are null
-											$taste = isset($traditional_crop_traits['taste']) ? $traditional_crop_traits['taste'] : "No Taste Available";
-											$aroma = isset($traditional_crop_traits['aroma']) ? $traditional_crop_traits['aroma'] : "No Aroma Available";
-											$maturation = isset($traditional_crop_traits['maturation']) ? $traditional_crop_traits['maturation'] : "No Maturation Period Available";
-											$drought_tolerance = isset($traditional_crop_traits['drought_tolerance']) ? $traditional_crop_traits['drought_tolerance'] : "No Drought Tolerance Available";
-											$environment_adaptability = isset($traditional_crop_traits['environment_adaptability']) ? $traditional_crop_traits['environment_adaptability'] : "No Adaptability to Different Environments Available";
-											$culinary_quality = isset($traditional_crop_traits['culinary_quality']) ? $traditional_crop_traits['culinary_quality'] : "No Cooking and Eating Quality Available";
-											$nutritional_value = isset($traditional_crop_traits['nutritional_value']) ? $traditional_crop_traits['nutritional_value'] : "No Nutritional Value Available";
-											$disease_resistance = isset($traditional_crop_traits['disease_resistance']) ? $traditional_crop_traits['disease_resistance'] : "No Disease Resistance Available";
-											$pest_resistance = isset($traditional_crop_traits['pest_resistance']) ? $traditional_crop_traits['pest_resistance'] : "No Pest Resistance Available";
+											$taste = isset($traditional_crop_traits['taste']) ? $traditional_crop_traits['taste'] : "";
+											$aroma = isset($traditional_crop_traits['aroma']) ? $traditional_crop_traits['aroma'] : "";
+											$maturation = isset($traditional_crop_traits['maturation']) ? $traditional_crop_traits['maturation'] : "";
+											$drought_tolerance = isset($traditional_crop_traits['drought_tolerance']) ? $traditional_crop_traits['drought_tolerance'] : "";
+											$environment_adaptability = isset($traditional_crop_traits['environment_adaptability']) ? $traditional_crop_traits['environment_adaptability'] : "";
+											$culinary_quality = isset($traditional_crop_traits['culinary_quality']) ? $traditional_crop_traits['culinary_quality'] : "";
+											$nutritional_value = isset($traditional_crop_traits['nutritional_value']) ? $traditional_crop_traits['nutritional_value'] : "";
+											$disease_resistance = isset($traditional_crop_traits['disease_resistance']) ? $traditional_crop_traits['disease_resistance'] : "";
+											$pest_resistance = isset($traditional_crop_traits['pest_resistance']) ? $traditional_crop_traits['pest_resistance'] : "";
 									?>
 											<tr>
 												<th class="table-secondary w-25" scope="row">Taste</th>
@@ -237,39 +341,39 @@
 										?>
 										<tr>
 											<th class="table-secondary w-25">Taste</th>
-											<td><input type="text" name="taste" placeholder="No Taste Available" class="w-100 border-0 p-1" disabled></td>
+											<td><input type="text" name="taste" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
 										</tr>
 										<tr>
 											<th class="table-secondary">Aroma</th>
-											<td><input type="text" name="aroma" placeholder="No Aroma Available" class="w-100 border-0 p-1" disabled></td>
+											<td><input type="text" name="aroma" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
 										</tr>
 										<tr>
 											<th class="table-secondary">Maturation Period</th>
-											<td><input type="text" name="maturation" placeholder="No Maturation Period Available" class="w-100 border-0 p-1" disabled></td>
+											<td><input type="text" name="maturation" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
 										</tr>
 										<tr>
 											<th class="table-secondary">Drought Tolerance</th>
-											<td><input type="text" name="drought_tolerance" placeholder="No Drought Tolerance Available" class="w-100 border-0 p-1" disabled></td>
+											<td><input type="text" name="drought_tolerance" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
 										</tr>
 										<tr>
 											<th class="table-secondary">Adaptability to Different Environments</th>
-											<td><input type="text" name="environment_adaptability" placeholder="No Adaptability to Different Environments Available" class="w-100 border-0 p-1" disabled></td>
+											<td><input type="text" name="environment_adaptability" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
 										</tr>
 										<tr>
 											<th class="table-secondary">Cooking and Eating Quality</th>
-											<td><input type="text" name="culinary_quality" placeholder="No Cooking and Eating Quality Available" class="w-100 border-0 p-1" disabled></td>
+											<td><input type="text" name="culinary_quality" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
 										</tr>
 										<tr>
 											<th class="table-secondary">Nutritional Value</th>
-											<td><input type="text" name="nutritional_value" placeholder="No Nutritional Value Available" class="w-100 border-0 p-1" disabled></td>
+											<td><input type="text" name="nutritional_value" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
 										</tr>
 										<tr>
 											<th class="table-secondary">Disease Resistance</th>
-											<td><input type="text" name="disease_resistance" placeholder="No Disease Resistance Available" class="w-100 border-0 p-1" disabled></td>
+											<td><input type="text" name="disease_resistance" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
 										</tr>
 										<tr>
 											<th class="table-secondary">Pest Resistance</th>
-											<td><input type="text" name="pest_resistance" placeholder="No Pest Resistance Available" class="w-100 border-0 p-1" disabled></td>
+											<td><input type="text" name="pest_resistance" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
 										</tr>
 									<?php
 									}
@@ -285,10 +389,23 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<th class="table-secondary w-25">Description</th>
-										<td><textarea name="planting_techniques" value="<?= $crops['planting_techniques']; ?>" class="w-100 border-0 p-1" rows="10" disabled><?= $crops['planting_techniques']; ?></textarea></td>
-									</tr>
+									<?php
+									if ($planting_techniques !== null) {
+									?>
+										<tr>
+											<th class="table-secondary w-25">Description</th>
+											<td><textarea name="planting_techniques" class="w-100 border-0 p-1" rows="5" disabled><?= $planting_techniques; ?></textarea></td>
+										</tr>
+									<?php
+									} else {
+									?>
+										<tr>
+											<th class="table-secondary w-25">Description</th>
+											<td><textarea name="planting_techniques" class="w-100 border-0 p-1" rows="5" placeholder="Empty" disabled></textarea></td>
+										</tr>
+									<?php
+									}
+									?>
 								</tbody>
 							</table>
 
@@ -300,10 +417,23 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<th class="table-secondary w-25">Description</th>
-										<td><textarea name="cultural_and_spiritual_significance" value="<?= $crops['cultural_and_spiritual_significance']; ?>" class="w-100 border-0 p-1" rows="5" disabled><?= $crops['cultural_and_spiritual_significance']; ?></textarea></td>
-									</tr>
+									<?php
+									if ($cultural_and_spiritual_significance !== null) {
+									?>
+										<tr>
+											<th class="table-secondary w-25">Description</th>
+											<td><textarea name="cultural_and_spiritual_significance" class="w-100 border-0 p-1" rows="5" disabled><?= $cultural_and_spiritual_significance; ?></textarea></td>
+										</tr>
+									<?php
+									} else {
+									?>
+										<tr>
+											<th class="table-secondary w-25">Description</th>
+											<td><textarea name="cultural_and_spiritual_significance" class="w-100 border-0 p-1" rows="5" placeholder="Empty" disabled></textarea></td>
+										</tr>
+									<?php
+									}
+									?>
 								</tbody>
 							</table>
 
@@ -328,7 +458,7 @@
 										if (pg_num_rows($query_run5) > 0) {
 											$agronomic_information = pg_fetch_assoc($query_run5);
 											// Define default values for each field if they are null
-											$days_to_mature = isset($agronomic_information['days_to_mature']) ? $agronomic_information['days_to_mature'] : "No Days to Mature Available";
+											$days_to_mature = isset($agronomic_information['days_to_mature']) ? $agronomic_information['days_to_mature'] : "";
 											$yield_potential = isset($agronomic_information['yield_potential']) ? $agronomic_information['yield_potential'] : "No Yield Potential Available";
 									?>
 											<tr>
@@ -346,11 +476,11 @@
 										?>
 										<tr>
 											<th class="table-secondary w-25" scope="row">Days to Mature</th>
-											<td><input type="text" name="days_to_mature" placeholder="No Days to Mature Available" class="w-100 border-0 p-1" disabled></td>
+											<td><input type="text" name="days_to_mature" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
 										</tr>
 										<tr>
 											<th class="table-secondary">Yield Potential</th>
-											<td><input type="text" name="yield_potential" placeholder="No Yield Potential Available" class="w-100 border-0 p-1" disabled></td>
+											<td><input type="text" name="yield_potential" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
 										</tr>
 									<?php
 									}
@@ -367,10 +497,23 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<th class="table-secondary w-25">Description</th>
-										<td><textarea name="rice_biodiversity_uplift" value="<?php echo $crops['rice_biodiversity_uplift']; ?>" class="w-100 border-0 p-1" rows="5" disabled><?php echo $crops['rice_biodiversity_uplift']; ?></textarea></td>
-									</tr>
+									<?php
+									if ($rice_biodiversity_uplift !== null) {
+									?>
+										<tr>
+											<th class="table-secondary w-25">Description</th>
+											<td><textarea name="rice_biodiversity_uplift" class="w-100 border-0 p-1" rows="5" disabled><?= $rice_biodiversity_uplift; ?></textarea></td>
+										</tr>
+									<?php
+									} else {
+									?>
+										<tr>
+											<th class="table-secondary w-25">Description</th>
+											<td><textarea name="rice_biodiversity_uplift" class="w-100 border-0 p-1" rows="5" placeholder="Empty" disabled></textarea></td>
+										</tr>
+									<?php
+									}
+									?>
 								</tbody>
 							</table>
 
@@ -382,10 +525,23 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<th class="table-secondary w-25">Description</th>
-										<td><textarea name="economic_importance" class="w-100 border-0 p-1" rows="5" value="<?php echo $crops['economic_importance']; ?>" disabled><?php echo $crops['economic_importance']; ?></textarea></td>
-									</tr>
+									<?php
+									if ($economic_importance !== null) {
+									?>
+										<tr>
+											<th class="table-secondary w-25">Description</th>
+											<td><textarea name="economic_importance" class="w-100 border-0 p-1" rows="5" disabled><?= $economic_importance; ?></textarea></td>
+										</tr>
+									<?php
+									} else {
+									?>
+										<tr>
+											<th class="table-secondary w-25">Description</th>
+											<td><textarea name="economic_importance" class="w-100 border-0 p-1" rows="5" placeholder="Empty" disabled></textarea></td>
+										</tr>
+									<?php
+									}
+									?>
 								</tbody>
 							</table>
 
@@ -397,10 +553,23 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<th class="table-secondary w-25">Description</th>
-										<td><textarea name="traditional_knowledge_and_practices" class="w-100 border-0 p-1" rows="5" value="<?php echo $crops['traditional_knowledge_and_practices']; ?>" disabled><?php echo $crops['traditional_knowledge_and_practices']; ?></textarea></td>
-									</tr>
+									<?php
+									if ($traditional_knowledge_and_practices !== null) {
+									?>
+										<tr>
+											<th class="table-secondary w-25">Description</th>
+											<td><textarea name="traditional_knowledge_and_practices" class="w-100 border-0 p-1" rows="5" disabled><?= $traditional_knowledge_and_practices; ?></textarea></td>
+										</tr>
+									<?php
+									} else {
+									?>
+										<tr>
+											<th class="table-secondary w-25">Description</th>
+											<td><textarea name="traditional_knowledge_and_practices" class="w-100 border-0 p-1" rows="5" placeholder="Empty" disabled></textarea></td>
+										</tr>
+									<?php
+									}
+									?>
 								</tbody>
 							</table>
 
@@ -518,55 +687,55 @@
 										?>
 										<tr>
 											<th class="table-secondary w-25" scope="row">Plant Height</th>
-											<td><input type="text" name="plant_height" placeholder="No Plant Height Available" class="w-100 border-0 p-1" disabled></td>
+											<td><input type="text" name="plant_height" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
 										</tr>
 										<tr>
 											<th class="table-secondary">Panicle Length</th>
-											<td><input type="text" name="panicle_length" placeholder="No Panicle Length Available" class="w-100 border-0 p-1" disabled></td>
+											<td><input type="text" name="panicle_length" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
 										</tr>
 										<tr>
 											<th class="table-secondary">Grain Quality</th>
-											<td><input type="text" name="grain_quality" placeholder="No Grain Quality Available" class="w-100 border-0 p-1" disabled></td>
+											<td><input type="text" name="grain_quality" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
 										</tr>
 										<tr>
 											<th class="table-secondary">Grain Color</th>
-											<td><input type="text" name="grain_color" placeholder="No Grain Color Available" class="w-100 border-0 p-1" disabled></td>
+											<td><input type="text" name="grain_color" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
 										</tr>
 										<tr>
 											<th class="table-secondary">Grain Length</th>
-											<td><input type="text" name="grain_length" placeholder="No Grain Length Available" class="w-100 border-0 p-1" disabled></td>
+											<td><input type="text" name="grain_length" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
 										</tr>
 										<tr>
 											<th class="table-secondary">Grain Width</th>
-											<td><input type="text" name="grain_width" placeholder="No Grain Width Available" class="w-100 border-0 p-1" disabled></td>
+											<td><input type="text" name="grain_width" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
 										</tr>
 										<tr>
 											<th class="table-secondary">Grain Shape</th>
-											<td><input type="text" name="grain_shape" placeholder="No Grain Shape Available" class="w-100 border-0 p-1" disabled></td>
+											<td><input type="text" name="grain_shape" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
 										</tr>
 										<tr>
 											<th class="table-secondary">Awn Length</th>
-											<td><input type="text" name="awn_length" placeholder="No Awn Length Available" class="w-100 border-0 p-1" disabled></td>
+											<td><input type="text" name="awn_length" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
 										</tr>
 										<tr>
 											<th class="table-secondary">Leaf Length</th>
-											<td><input type="text" name="leaf_length" placeholder="No Leaf Length Available" class="w-100 border-0 p-1" disabled></td>
+											<td><input type="text" name="leaf_length" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
 										</tr>
 										<tr>
 											<th class="table-secondary">Leaf Width</th>
-											<td><input type="text" name="leaf_width" placeholder="No Leaf Width Available" class="w-100 border-0 p-1" disabled></td>
+											<td><input type="text" name="leaf_width" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
 										</tr>
 										<tr>
 											<th class="table-secondary">Leaf Shape</th>
-											<td><input type="text" name="leaf_shape" placeholder="No Leaf Shape Available" class="w-100 border-0 p-1" disabled></td>
+											<td><input type="text" name="leaf_shape" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
 										</tr>
 										<tr>
 											<th class="table-secondary">Stem Color</th>
-											<td><input type="text" name="stem_color" placeholder="No Stem Color Available" class="w-100 border-0 p-1" disabled></td>
+											<td><input type="text" name="stem_color" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
 										</tr>
 										<tr>
 											<th class="table-secondary">Another Color</th>
-											<td><input type="text" name="another_color" placeholder="No Another Color Available" class="w-100 border-0 p-1" disabled></td>
+											<td><input type="text" name="another_color" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
 										</tr>
 									<?php
 									}
@@ -632,19 +801,19 @@
 										?>
 										<tr>
 											<th class="table-secondary w-25" scope="row">Distinct Groups of Cultivars based on Morphological and Genetic Characteristics</th>
-											<td><textarea name="distinct_cultivar_groups_morph_gen" class="w-100 border-0 p-1" rows="5" disabled>No Distinct Groups of Cultivars based on Morphological and Genetic Characteristics Available</textarea></td>
+											<td><textarea name="distinct_cultivar_groups_morph_gen" class="w-100 border-0 p-1" rows="5" placeholder="Empty" disabled></textarea></td>
 										</tr>
 										<tr>
 											<th class="table-secondary">Relationships Among Cultivars based on Cluster Analysis and Principal Component Analysis</th>
-											<td><textarea name="cultivar_relations_cluster_and_pca" class="w-100 border-0 p-1" rows="5" disabled>No Relationships Among Cultivars based on Cluster Analysis and Principal Component Analysis Available</textarea></td>
+											<td><textarea name="cultivar_relations_cluster_and_pca" class="w-100 border-0 p-1" rows="5" placeholder="Empty" disabled></textarea></td>
 										</tr>
 										<tr>
 											<th class="table-secondary">Potential for Hybridization and Breeding Among Cultivars</th>
-											<td><textarea name="hybridization_potential" class="w-100 border-0 p-1" rows="5" disabled>No Potential for Hybridization and Breeding Among Cultivars Available</textarea></td>
+											<td><textarea name="hybridization_potential" class="w-100 border-0 p-1" rows="5" placeholder="Empty" disabled></textarea></td>
 										</tr>
 										<tr>
 											<th class="table-secondary">Implications for Conservation and Breeding Efforts</th>
-											<td><textarea name="conservation_and_breeding_implications" class="w-100 border-0 p-1" rows="5" disabled>No Implications for Conservation and Breeding Efforts Available</textarea></td>
+											<td><textarea name="conservation_and_breeding_implications" class="w-100 border-0 p-1" rows="5" placeholder="Empty" disabled></textarea></td>
 										</tr>
 									<?php
 									}
@@ -660,10 +829,23 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<th class="table-secondary w-25">Description</th>
-										<td><textarea name="breeding_potential" class="w-100 border-0 p-1" rows="5" value="<?php echo $crops['breeding_potential']; ?>" disabled><?php echo $crops['breeding_potential']; ?></textarea></td>
-									</tr>
+									<?php
+									if ($breeding_potential !== null) {
+									?>
+										<tr>
+											<th class="table-secondary w-25">Description</th>
+											<td><textarea name="breeding_potential" class="w-100 border-0 p-1" rows="5" disabled><?= $breeding_potential; ?></textarea></td>
+										</tr>
+									<?php
+									} else {
+									?>
+										<tr>
+											<th class="table-secondary w-25">Description</th>
+											<td><textarea name="breeding_potential" class="w-100 border-0 p-1" rows="5" placeholder="Empty" disabled></textarea></td>
+										</tr>
+									<?php
+									}
+									?>
 								</tbody>
 							</table>
 
@@ -675,10 +857,23 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<th class="table-secondary w-25">Description</th>
-										<td><textarea name="threats" class="w-100 border-0 p-1" rows="5" value="<?php echo $crops['threats']; ?>" disabled><?php echo $crops['threats']; ?></textarea></td>
-									</tr>
+									<?php
+									if ($threats !== null) {
+									?>
+										<tr>
+											<th class="table-secondary w-25">Description</th>
+											<td><textarea name="threats" class="w-100 border-0 p-1" rows="5" disabled><?= $threats; ?></textarea></td>
+										</tr>
+									<?php
+									} else {
+									?>
+										<tr>
+											<th class="table-secondary w-25">Description</th>
+											<td><textarea name="threats" class="w-100 border-0 p-1" rows="5" placeholder="Empty" disabled></textarea></td>
+										</tr>
+									<?php
+									}
+									?>
 								</tbody>
 							</table>
 
@@ -690,10 +885,23 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<th class="table-secondary w-25">Description</th>
-										<td><textarea name="other_info" class="w-100 border-0 p-1" rows="5" value="<?php echo $crops['other_info']; ?>" disabled><?php echo $crops['other_info']; ?></textarea></td>
-									</tr>
+									<?php
+									if ($other_info !== null) {
+									?>
+										<tr>
+											<th class="table-secondary w-25">Description</th>
+											<td><textarea name="other_info" class="w-100 border-0 p-1" rows="5" disabled><?= $other_info; ?></textarea></td>
+										</tr>
+									<?php
+									} else {
+									?>
+										<tr>
+											<th class="table-secondary w-25">Description</th>
+											<td><textarea name="other_info" class="w-100 border-0 p-1" rows="5" placeholder="Empty" disabled></textarea></td>
+										</tr>
+									<?php
+									}
+									?>
 								</tbody>
 							</table>
 

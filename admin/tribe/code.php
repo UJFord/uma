@@ -4,16 +4,30 @@ session_start();
 $con = pg_connect("host=localhost dbname=farm_crops user=postgres password=123") or die("Could not connect to server\n");
 
 if (isset($_POST['save'])) {
+    // Escape user inputs for data in Tribe table
+    $tribe_name = empty($_POST['tribe_name']) ? 'NULL' : "'" . $_POST['tribe_name'] . "'";
+    $image = empty($_POST['image']) ? 'NULL' : "'" . $_POST['image'] . "'";
+    $location = empty($_POST['location']) ? 'NULL' : "'" . $_POST['location'] . "'";
+    $language_and_dialect = empty($_POST['language_and_dialect']) ? 'NULL' : "'" . $_POST['language_and_dialect'] . "'";
+    $population = empty($_POST['population']) ? 'NULL' : "'" . $_POST['population'] . "'";
+    $livelihood_and_practices = empty($_POST['livelihood_and_practices']) ? 'NULL' : "'" . $_POST['livelihood_and_practices'] . "'";
+    $farming_practices = empty($_POST['farming_practices']) ? 'NULL' : "'" . $_POST['farming_practices'] . "'";
+    $social_structure_and_kinship_system = empty($_POST['social_structure_and_kinship_system']) ? 'NULL' : "'" . $_POST['social_structure_and_kinship_system'] . "'";
+    $beliefs_and_customs = empty($_POST['beliefs_and_customs']) ? 'NULL' : "'" . $_POST['beliefs_and_customs'] . "'";
+    $challenges_and_threats = empty($_POST['challenges_and_threats']) ? 'NULL' : "'" . $_POST['challenges_and_threats'] . "'";
+    $efforts_of_revitalization = empty($_POST['efforts_of_revitalization']) ? 'NULL' : "'" . $_POST['efforts_of_revitalization'] . "'";
+    $other_info = empty($_POST['other_info']) ? 'NULL' : "'" . $_POST['other_info'] . "'";
+
     // Inserting into tribe table
     $query = "INSERT INTO tribe 
         (tribe_name, image, location, language_and_dialect, population, livelihood_and_practices, farming_practices,
         social_structure_and_kinship_system, beliefs_and_customs, challenges_and_threats, efforts_of_revitalization,
         other_info) 
         VALUES 
-        ('{$_POST['tribe_name']}', '{$_POST['image']}', '{$_POST['location']}', '{$_POST['language_and_dialect']}',
-        '{$_POST['population']}', '{$_POST['livelihood_and_practices']}', '{$_POST['farming_practices']}'
-        , '{$_POST['social_structure_and_kinship_system']}', '{$_POST['beliefs_and_customs']}', '{$_POST['challenges_and_threats']}'
-        , '{$_POST['efforts_of_revitalization']}', '{$_POST['other_info']}') 
+        ($tribe_name, $image, $location, $language_and_dialect,
+        $population, $livelihood_and_practices, $farming_practices,
+        $social_structure_and_kinship_system, $beliefs_and_customs, $challenges_and_threats,
+        $efforts_of_revitalization, $other_info) 
         RETURNING tribe_id";
 
     $query_run = pg_query($con, $query);
@@ -27,10 +41,7 @@ if (isset($_POST['save'])) {
         exit(0);
     } else {
         echo "Error: " . pg_last_error($con);
-        // $_SESSION['message'] = "Tribe Not Created";
-        // $_SESSION['message_type'] = 'error';
-        // $_SESSION['error_details'] = pg_last_error($con);
-        // header("Location: create.php");
+        // Handle the error, if needed
         exit(0);
     }
 }
@@ -50,19 +61,42 @@ if (isset($_POST['update'])) {
     $efforts_of_revitalization = pg_escape_string($con, $_POST['efforts_of_revitalization']);
     $other_info = pg_escape_string($con, $_POST['other_info']);
 
+    // Function to wrap non-empty values in single quotes and handle empty values
+    function handleValue($value) {
+        if ($value === '') {
+            return 'NULL';  // Set to NULL if empty
+        } else {
+            return "'" . $value . "'";  // Wrap in single quotes for non-empty values
+        }
+    }
+
+    // Apply the function to each field
+    $tribe_name = handleValue($tribe_name);
+    $image = handleValue($image);
+    $location = handleValue($location);
+    $language_and_dialect = handleValue($language_and_dialect);
+    $population = handleValue($population);
+    $livelihood_and_practices = handleValue($livelihood_and_practices);
+    $farming_practices = handleValue($farming_practices);
+    $social_structure_and_kinship_system = handleValue($social_structure_and_kinship_system);
+    $beliefs_and_customs = handleValue($beliefs_and_customs);
+    $challenges_and_threats = handleValue($challenges_and_threats);
+    $efforts_of_revitalization = handleValue($efforts_of_revitalization);
+    $other_info = handleValue($other_info);
+
     $query = "UPDATE tribe SET 
-            tribe_name = '$tribe_name',
-            image = '$image',
-            location = '$location',
-            language_and_dialect = '$language_and_dialect',
-            population = '$population',
-            livelihood_and_practices = '$livelihood_and_practices',
-            farming_practices = '$farming_practices',
-            social_structure_and_kinship_system = '$social_structure_and_kinship_system',
-            beliefs_and_customs = '$beliefs_and_customs',
-            challenges_and_threats = '$challenges_and_threats',
-            efforts_of_revitalization = '$efforts_of_revitalization',
-            other_info = '$other_info'
+            tribe_name = $tribe_name,
+            image = $image,
+            location = $location,
+            language_and_dialect = $language_and_dialect,
+            population = $population,
+            livelihood_and_practices = $livelihood_and_practices,
+            farming_practices = $farming_practices,
+            social_structure_and_kinship_system = $social_structure_and_kinship_system,
+            beliefs_and_customs = $beliefs_and_customs,
+            challenges_and_threats = $challenges_and_threats,
+            efforts_of_revitalization = $efforts_of_revitalization,
+            other_info = $other_info
             WHERE tribe_id = $tribe_id";
 
     $query_run = pg_query($con, $query);
@@ -98,4 +132,3 @@ if (isset($_POST['delete'])) {
         exit(0);
     }
 }
-?>
