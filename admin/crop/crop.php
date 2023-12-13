@@ -79,7 +79,7 @@
 									<?php
 									} else {
 									?>
-										<input id="title" type="text" name="crop_name" placeholder="No Name" class="fw-semibold w-100 border-0 py-1 px-2" disabled>
+										<input id="title" type="text" name="crop_name" placeholder="Empty" class="fw-semibold w-100 border-0 py-1 px-2" disabled>
 									<?php
 									}
 									?>
@@ -97,11 +97,11 @@
 							<input type="hidden" name="traditional_crop_traits_id" value="<?= $crops['traditional_crop_traits_id']; ?>">
 							<input type="hidden" name="relationship_among_cultivars_id" value="<?= $crops['relationship_among_cultivars_id']; ?>">
 
-							<!-- Crop Info -->
+							<!-- General Information -->
 							<table id="info-table" class="table table-hover table-sm">
 								<thead>
 									<tr>
-										<th colspan="2" class="table-dark">Crop Info</th>
+										<th colspan="2" class="table-dark">General Information</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -188,14 +188,14 @@
 									if ($image !== null) {
 									?>
 										<tr>
-											<th class="table-secondary w-25">Image Link</th>
+											<th class="table-secondary w-25">Link to Image</th>
 											<td><input type="text" name="image" value="<?= $image; ?>" class="w-100 border-0 p-1" disabled></td>
 										</tr>
 									<?php
 									} else {
 									?>
 										<tr>
-											<th class="table-secondary w-25">Image Link</th>
+											<th class="table-secondary w-25">Link to Image</th>
 											<td><input type="text" name="image" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
 										</tr>
 									<?php

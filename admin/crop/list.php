@@ -104,7 +104,7 @@
 								} else {
 								?>
 									<a href="crop.php?crop_id=<?php echo $crop_id; ?>" class="crop-card py-3 px-1 d-flex justify-content-center align-items-end" style="
-									background-image: url('https://t3.ftcdn.net/jpg/02/48/42/64/360_F_248426448_NVKLywWqArG2ADUxDq6QprtIzsF82dMF.jpg');
+									background-image: url('https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image.png');
 								">
 										<div class="crop-card-text row w-100 d-flex flex-row justify-content-between align-items-center">
 											<!-- crop name -->

@@ -59,7 +59,7 @@ require('../../html/navfoot/connection.php');
             </li>
         </ul>
         <hr class="mx-3">
-        <div class="dropdown mx-3 mt-0">
+        <div class="dropdown mx-3 mt-0 mb-3">
             <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                 <img src="https://source.unsplash.com/32x32/?nature,water" alt="" width="32" height="32" class="rounded-circle me-2">
                 <strong>John Doe</strong>

@@ -13,6 +13,10 @@ editBtn.addEventListener('click', () => {
     let editBox = document.querySelector('#edit-btn-box');
     // apply and cancel box
     let applyCancelBox = document.querySelector('#apply-cancel-box');
+    // delete button
+    let deleteBox = document.querySelector('#delete-box');
+
+    
 
 
     inputDisabled.forEach(input => {
@@ -27,6 +31,8 @@ editBtn.addEventListener('click', () => {
     editBox.classList.add('d-none');
     // show apply and cancel box
     applyCancelBox.classList.remove('d-none');
+    // delete box
+    deleteBox.classList.remove('d-none');
 });
 
 // cancel
