@@ -71,23 +71,23 @@
 								<tbody>
 										<tr>
 											<th class="table-secondary w-25">Image Link</th>
-											<td><input type="text" name="image" value="<?php echo ($image != null) ? $image : 'placeholder="Empty"'; ?>" class="w-100 border-0 p-1" disabled></td>
+											<td><input type="text" name="image" <?php echo ($image != null) ? $image : 'placeholder="Empty"'; ?> class="w-100 border-0 p-1" disabled></td>
 										</tr>
 										<tr>
 											<th class="table-secondary w-25">Location</th>
-											<td><input type="text" name="location" value="<?php echo ($location != null) ? $location : 'placeholder="Empty"'; ?>" class="w-100 border-0 p-1" disabled></td>
+											<td><input type="text" name="location" <?php echo ($location != null) ? $location : 'placeholder="Empty"'; ?> class="w-100 border-0 p-1" disabled></td>
 										</tr>
 										<tr>
 											<th class="table-secondary w-25">Language and Dialect</th>
-											<td><input type="text" name="language_and_dialect" value="<?php echo ($language_and_dialect != null) ? $language_and_dialect : 'placeholder="Empty"'; ?>" class="w-100 border-0 p-1" disabled></td>
+											<td><input type="text" name="language_and_dialect" <?php echo ($language_and_dialect != null) ? $language_and_dialect : 'placeholder="Empty"'; ?> class="w-100 border-0 p-1" disabled></td>
 										</tr>
 										<tr>
 											<th class="table-secondary w-25">Population</th>
-											<td><input type="text" name="population" value="<?php echo ($population != null) ? $population : 'placeholder="Empty"'; ?>" class="w-100 border-0 p-1" disabled></td>
+											<td><input type="text" name="population" <?php echo ($population != null) ? $population : 'placeholder="Empty"'; ?> class="w-100 border-0 p-1" disabled></td>
 										</tr>
 										<tr>
 											<th class="table-secondary w-25">Livelihood and Practices</th>
-											<td><input type="text" name="livelihood_and_practices" value="<?php echo ($livelihood_and_practices != null) ? $livelihood_and_practices : 'placeholder="Empty"'; ?>" class="w-100 border-0 p-1" disabled></td>
+											<td><input type="text" name="livelihood_and_practices" <?php echo ($livelihood_and_practices != null) ? $livelihood_and_practices : 'placeholder="Empty"'; ?> class="w-100 border-0 p-1" disabled></td>
 										</tr>
 								</tbody>
 							</table>
@@ -96,15 +96,15 @@
 								<tbody>
 										<tr>
 											<th class="table-secondary w-25">Farming Practices</th>
-											<td><input type="text" name="farming_practices" value="<?php echo ($farming_practices != null) ? $farming_practices : 'placeholder="Empty"'; ?>" class="w-100 border-0 p-1" disabled></td>
+											<td><input type="text" name="farming_practices" <?php echo ($farming_practices != null) ? $farming_practices : 'placeholder="Empty"'; ?> class="w-100 border-0 p-1" disabled></td>
 										</tr>
 										<tr>
 											<th class="table-secondary w-25">Social Structure and Kinship</th>
-											<td><input type="text" name="social_structure_and_kinship_system" value="<?php echo ($social_structure_and_kinship_system != null) ? $social_structure_and_kinship_system : 'placeholder="Empty"'; ?>" class="w-100 border-0 p-1" disabled></td>
+											<td><input type="text" name="social_structure_and_kinship_system" <?php echo ($social_structure_and_kinship_system != null) ? $social_structure_and_kinship_system : 'placeholder="Empty"'; ?> class="w-100 border-0 p-1" disabled></td>
 										</tr>
 										<tr>
 											<th class="table-secondary w-25">Beliefs and Customs</th>
-											<td><input type="text" name="beliefs_and_customs" value="<?php echo ($beliefs_and_customs != null) ? $beliefs_and_customs : 'placeholder="Empty"'; ?>" class="w-100 border-0 p-1" disabled></td>
+											<td><input type="text" name="beliefs_and_customs" <?php echo ($beliefs_and_customs != null) ? $beliefs_and_customs : 'placeholder="Empty"'; ?> class="w-100 border-0 p-1" disabled></td>
 										</tr>
 								</tbody>
 							</table>
@@ -113,11 +113,11 @@
 								<tbody>
 										<tr>
 											<th class="table-secondary w-25">Challenges and Threats</th>
-											<td><input type="text" name="challenges_and_threats" value="<?php echo ($challenges_and_threats != null) ? $challenges_and_threats : 'placeholder="Empty"'; ?>" class="w-100 border-0 p-1" disabled></td>
+											<td><input type="text" name="challenges_and_threats" <?php echo ($challenges_and_threats != null) ? $challenges_and_threats : 'placeholder="Empty"'; ?> class="w-100 border-0 p-1" disabled></td>
 										</tr>
 										<tr>
 											<th class="table-secondary w-25">Efforts of Revitalization</th>
-											<td><input type="text" name="efforts_of_revitalization" value="<?php echo ($efforts_of_revitalization != null) ? $efforts_of_revitalization : 'placeholder="Empty"'; ?>" class="w-100 border-0 p-1" disabled></td>
+											<td><input type="text" name="efforts_of_revitalization" <?php echo ($efforts_of_revitalization != null) ? $efforts_of_revitalization : 'placeholder="Empty"'; ?> class="w-100 border-0 p-1" disabled></td>
 										</tr>
 								</tbody>
 							</table>
@@ -126,7 +126,7 @@
 								<tbody>
 										<tr>
 											<th class="table-secondary w-25">Other Info</th>
-											<td><input type="text" name="other_info" value="<?php echo ($other_info != null) ? $other_info : 'placeholder="Empty"'; ?>" class="w-100 border-0 p-1" disabled></td>
+											<td><input type="text" name="other_info" <?php echo ($other_info != null) ? $other_info : 'placeholder="Empty"'; ?> class="w-100 border-0 p-1" disabled></td>
 										</tr>
 								</tbody>
 							</table>

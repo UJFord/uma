@@ -72,17 +72,7 @@
 						<div class="row d-flex justify-content-between my-3">
 							<div class="col-6">
 								<h3>
-									<?php
-									if ($crop_name !== null) {
-									?>
-										<input id="title" type="text" name="crop_name" value="<?= $crops['crop_name']; ?>" class="fw-semibold w-100 border-0 py-1 px-2" disabled>
-									<?php
-									} else {
-									?>
-										<input id="title" type="text" name="crop_name" placeholder="Empty" class="fw-semibold w-100 border-0 py-1 px-2" disabled>
-									<?php
-									}
-									?>
+										<input id="title" type="text" name="crop_name" <?php echo ($crop_name != null) ? 'value="' . $crop_name . '"' : 'placeholder="Empty"'; ?> class="fw-semibold w-100 border-0 py-1 px-2" disabled>
 								</h3>
 							</div>
 						</div>
@@ -105,117 +95,34 @@
 									</tr>
 								</thead>
 								<tbody>
-									<?php
-									if ($upland_or_lowland !== null) {
-									?>
 										<tr>
 											<th class="table-secondary w-25">Upland or Lowand</th>
-											<td><input type="text" name="upland_or_lowland" value="<?= $upland_or_lowland; ?>" class="w-100 border-0 p-1" disabled></td>
+											<td><input type="text" name="upland_or_lowland" <?php echo ($upland_or_lowland != null) ? 'value="' . $upland_or_lowland . '"' : 'placeholder="Empty"'; ?> class="w-100 border-0 p-1" disabled></td>
 										</tr>
-									<?php
-									} else {
-									?>
-										<tr>
-											<th class="table-secondary w-25">Upland or Lowand</th>
-											<td><input type="text" name="upland_or_lowland" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
-										</tr>
-									<?php
-									}
-									
-									if ($season !== null) {
-									?>
 										<tr>
 											<th class="table-secondary w-25">Season</th>
 											<td><input type="text" name="season" value="<?= $season; ?>" class="w-100 border-0 p-1" disabled></td>
 										</tr>
-									<?php
-									} else {
-									?>
-										<tr>
-											<th class="table-secondary w-25">Season</th>
-											<td><input type="text" name="season" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
-										</tr>
-									<?php
-									}
-
-									if ($category !== null) {
-									?>
 										<tr>
 											<th class="table-secondary w-25">Category</th>
 											<td><input type="text" name="category" value="<?= $category; ?>" class="w-100 border-0 p-1" disabled></td>
 										</tr>
-									<?php
-									} else {
-									?>
-										<tr>
-											<th class="table-secondary w-25">Category</th>
-											<td><input type="text" name="category" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
-										</tr>
-									<?php
-									}
-
-									if ($links !== null) {
-									?>
 										<tr>
 											<th class="table-secondary w-25">Links</th>
 											<td><input type="text" name="links" value="<?= $links; ?>" class="w-100 border-0 p-1" disabled></td>
 										</tr>
-									<?php
-									} else {
-									?>
-										<tr>
-											<th class="table-secondary w-25">Links</th>
-											<td><input type="text" name="links" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
-										</tr>
-									<?php
-									}
-
-									if ($description !== null) {
-									?>
 										<tr>
 											<th class="table-secondary w-25">Description</th>
 											<td><input type="text" name="description" value="<?= $description; ?>" class="w-100 border-0 p-1" disabled></td>
 										</tr>
-									<?php
-									} else {
-									?>
-										<tr>
-											<th class="table-secondary w-25">Description</th>
-											<td><input type="text" name="description" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
-										</tr>
-									<?php
-									}
-									if ($image !== null) {
-									?>
 										<tr>
 											<th class="table-secondary w-25">Link to Image</th>
 											<td><input type="text" name="image" value="<?= $image; ?>" class="w-100 border-0 p-1" disabled></td>
 										</tr>
-									<?php
-									} else {
-									?>
-										<tr>
-											<th class="table-secondary w-25">Link to Image</th>
-											<td><input type="text" name="image" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
-										</tr>
-									<?php
-									}
-									if ($local_name !== null) {
-									?>
 										<tr>
 											<th class="table-secondary w-25">Local Name</th>
 											<td><input type="text" name="local_name" value="<?= $local_name; ?>" class="w-100 border-0 p-1" disabled></td>
 										</tr>
-									<?php
-									} else {
-									?>
-										<tr>
-											<th class="table-secondary w-25">Local Name</th>
-											<td><input type="text" name="local_name" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
-										</tr>
-									<?php
-									}
-									?>
 								</tbody>
 							</table>
 
