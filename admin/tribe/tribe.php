@@ -59,17 +59,7 @@
 						<!-- title-->
 						<div class="row d-flex justify-content-between my-3">
 							<div class="col-6">
-								<?php
-								if ($tribe_name !== null) {
-								?>
-									<h3 id="crops-title"><input type="text" name="tribe_name" value="<?= $tribe_name; ?>" class="fw-semibold w-100 border-0 py-1 px-2" disabled></h3>
-								<?php
-								}else{
-									?>
-									<h3 id="crops-title"><input type="text" name="tribe_name" placeholder="No Name" class="fw-semibold w-100 border-0 py-1 px-2" disabled></h3>
-									<?php
-								}
-								?>
+									<h3 id="crops-title"><input type="text" name="tribe_name" <?php echo ($tribe_name != null) ? 'value="' . $tribe_name . '"' : 'placeholder="Empty"'; ?> class="fw-semibold w-100 border-0 py-1 px-2" disabled></h3>
 							</div>
 						</div>
 
@@ -77,205 +67,67 @@
 						<div id="" class="row form-control p-3">
 
 							<table class="table table-hover table-sm">
-
 								<input type="hidden" name="tribe_id" value="<?= $tribe['tribe_id']; ?>">
-
 								<tbody>
-									<?php
-									if ($image !== null) {
-									?>
 										<tr>
 											<th class="table-secondary w-25">Image Link</th>
-											<td><input type="text" name="image" value="<?= $image; ?>" class="w-100 border-0 p-1" disabled></td>
+											<td><input type="text" name="image" value="<?php echo ($image != null) ? $image : 'placeholder="Empty"'; ?>" class="w-100 border-0 p-1" disabled></td>
 										</tr>
-									<?php
-									} else {
-									?>
-										<tr>
-											<th class="table-secondary w-25">Image Link</th>
-											<td><input type="text" name="image" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
-										</tr>
-									<?php
-									}
-
-									if ($location !== null) {
-									?>
 										<tr>
 											<th class="table-secondary w-25">Location</th>
-											<td><input type="text" name="location" value="<?= $location; ?>" class="w-100 border-0 p-1" disabled></td>
+											<td><input type="text" name="location" value="<?php echo ($location != null) ? $location : 'placeholder="Empty"'; ?>" class="w-100 border-0 p-1" disabled></td>
 										</tr>
-									<?php
-									} else {
-									?>
-										<tr>
-											<th class="table-secondary w-25">Location</th>
-											<td><input type="text" name="location" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
-										</tr>
-									<?php
-									}
-
-									if ($language_and_dialect !== null) {
-									?>
 										<tr>
 											<th class="table-secondary w-25">Language and Dialect</th>
-											<td><input type="text" name="language_and_dialect" value="<?= $language_and_dialect; ?>" class="w-100 border-0 p-1" disabled></td>
+											<td><input type="text" name="language_and_dialect" value="<?php echo ($language_and_dialect != null) ? $language_and_dialect : 'placeholder="Empty"'; ?>" class="w-100 border-0 p-1" disabled></td>
 										</tr>
-									<?php
-									} else {
-									?>
-										<tr>
-											<th class="table-secondary w-25">Language and Dialect</th>
-											<td><input type="text" name="language_and_dialect" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
-										</tr>
-									<?php
-									}
-
-									if ($population !== null) {
-									?>
 										<tr>
 											<th class="table-secondary w-25">Population</th>
-											<td><input type="text" name="population" value="<?= $population; ?>" class="w-100 border-0 p-1" disabled></td>
+											<td><input type="text" name="population" value="<?php echo ($population != null) ? $population : 'placeholder="Empty"'; ?>" class="w-100 border-0 p-1" disabled></td>
 										</tr>
-									<?php
-									} else {
-									?>
-										<tr>
-											<th class="table-secondary w-25">Population</th>
-											<td><input type="text" name="population" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
-										</tr>
-									<?php
-									}
-
-									if ($livelihood_and_practices !== null) {
-									?>
 										<tr>
 											<th class="table-secondary w-25">Livelihood and Practices</th>
-											<td><input type="text" name="livelihood_and_practices" value="<?= $livelihood_and_practices; ?>" class="w-100 border-0 p-1" disabled></td>
+											<td><input type="text" name="livelihood_and_practices" value="<?php echo ($livelihood_and_practices != null) ? $livelihood_and_practices : 'placeholder="Empty"'; ?>" class="w-100 border-0 p-1" disabled></td>
 										</tr>
-									<?php
-									} else {
-									?>
-										<tr>
-											<th class="table-secondary w-25">Livelihood and Practices</th>
-											<td><input type="text" name="livelihood_and_practices" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
-										</tr>
-									<?php
-									}
-									?>
 								</tbody>
 							</table>
 
 							<table class="table table-hover table-sm">
 								<tbody>
-									<?php
-									if ($farming_practices !== null) {
-									?>
 										<tr>
 											<th class="table-secondary w-25">Farming Practices</th>
-											<td><input type="text" name="farming_practices" value="<?= $farming_practices; ?>" class="w-100 border-0 p-1" disabled></td>
+											<td><input type="text" name="farming_practices" value="<?php echo ($farming_practices != null) ? $farming_practices : 'placeholder="Empty"'; ?>" class="w-100 border-0 p-1" disabled></td>
 										</tr>
-									<?php
-									} else {
-									?>
-										<tr>
-											<th class="table-secondary w-25">Farming Practices</th>
-											<td><input type="text" name="farming_practices" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
-										</tr>
-									<?php
-									}
-
-									if ($social_structure_and_kinship_system !== null) {
-									?>
 										<tr>
 											<th class="table-secondary w-25">Social Structure and Kinship</th>
-											<td><input type="text" name="social_structure_and_kinship_system" value="<?= $social_structure_and_kinship_system; ?>" class="w-100 border-0 p-1" disabled></td>
+											<td><input type="text" name="social_structure_and_kinship_system" value="<?php echo ($social_structure_and_kinship_system != null) ? $social_structure_and_kinship_system : 'placeholder="Empty"'; ?>" class="w-100 border-0 p-1" disabled></td>
 										</tr>
-									<?php
-									} else {
-									?>
-										<tr>
-											<th class="table-secondary w-25">Social Structure and Kinship</th>
-											<td><input type="text" name="social_structure_and_kinship_system" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
-										</tr>
-									<?php
-									}
-
-									if ($beliefs_and_customs !== null) {
-									?>
 										<tr>
 											<th class="table-secondary w-25">Beliefs and Customs</th>
-											<td><input type="text" name="beliefs_and_customs" value="<?= $beliefs_and_customs; ?>" class="w-100 border-0 p-1" disabled></td>
+											<td><input type="text" name="beliefs_and_customs" value="<?php echo ($beliefs_and_customs != null) ? $beliefs_and_customs : 'placeholder="Empty"'; ?>" class="w-100 border-0 p-1" disabled></td>
 										</tr>
-									<?php
-									} else {
-									?>
-										<tr>
-											<th class="table-secondary w-25">Beliefs and Customs</th>
-											<td><input type="text" name="beliefs_and_customs" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
-										</tr>
-									<?php
-									}
-									?>
 								</tbody>
 							</table>
 
 							<table class="table table-hover table-sm">
 								<tbody>
-									<?php
-									if ($challenges_and_threats !== null) {
-									?>
 										<tr>
 											<th class="table-secondary w-25">Challenges and Threats</th>
-											<td><input type="text" name="challenges_and_threats" value="<?= $challenges_and_threats; ?>" class="w-100 border-0 p-1" disabled></td>
+											<td><input type="text" name="challenges_and_threats" value="<?php echo ($challenges_and_threats != null) ? $challenges_and_threats : 'placeholder="Empty"'; ?>" class="w-100 border-0 p-1" disabled></td>
 										</tr>
-									<?php
-									} else {
-									?>
-										<tr>
-											<th class="table-secondary w-25">Challenges and Threats</th>
-											<td><input type="text" name="challenges_and_threats" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
-										</tr>
-									<?php
-									}
-
-									if ($efforts_of_revitalization !== null) {
-									?>
 										<tr>
 											<th class="table-secondary w-25">Efforts of Revitalization</th>
-											<td><input type="text" name="efforts_of_revitalization" value="<?= $efforts_of_revitalization; ?>" class="w-100 border-0 p-1" disabled></td>
+											<td><input type="text" name="efforts_of_revitalization" value="<?php echo ($efforts_of_revitalization != null) ? $efforts_of_revitalization : 'placeholder="Empty"'; ?>" class="w-100 border-0 p-1" disabled></td>
 										</tr>
-									<?php
-									} else {
-									?>
-										<tr>
-											<th class="table-secondary w-25">Efforts of Revitalization</th>
-											<td><input type="text" name="efforts_of_revitalization" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
-										</tr>
-									<?php
-									}
-									?>
 								</tbody>
 							</table>
 
 							<table class="table table-hover table-sm mb-0">
 								<tbody>
-									<?php
-									if ($other_info !== null) {
-									?>
 										<tr>
 											<th class="table-secondary w-25">Other Info</th>
-											<td><input type="text" name="other_info" value="<?= $other_info; ?>" class="w-100 border-0 p-1" disabled></td>
+											<td><input type="text" name="other_info" value="<?php echo ($other_info != null) ? $other_info : 'placeholder="Empty"'; ?>" class="w-100 border-0 p-1" disabled></td>
 										</tr>
-									<?php
-									} else {
-									?>
-										<tr>
-											<th class="table-secondary w-25">Other Info</th>
-											<td><input type="text" name="other_info" placeholder="Empty" class="w-100 border-0 p-1" disabled></td>
-										</tr>
-									<?php
-									}
-									?>
 								</tbody>
 							</table>
 						</div>
