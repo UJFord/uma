@@ -15,6 +15,9 @@
 
 <body>
 	<!-- Navbar -->
+	<?php
+	require('html/navfoot/navbar.php');
+	?>
 	
 
 	<!-- Showcase -->

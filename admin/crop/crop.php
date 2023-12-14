@@ -121,7 +121,7 @@
 										</tr>
 									<?php
 									}
-
+									
 									if ($season !== null) {
 									?>
 										<tr>

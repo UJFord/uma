@@ -31,12 +31,12 @@ $current_page = basename($_SERVER['PHP_SELF']);
 					<a href="#" class="nav-link">Sarangani</a>
 				</li>
 				<li class="nav-item">
-					<a href="/incognito-capstone/html/tribes.php" class="nav-link">People</a>
+					<a href="/uma/html/tribes.php" class="nav-link">People</a>
 				</li>
 				<li class="nav-item">
-					<a href="/incognito-capstone/html/crops.php" class="nav-link">Traditional Crops</a>
+					<a href="/uma/html/crops.php" class="nav-link">Traditional Crops</a>
 				<li class="nav-item">
-					<a href="/incognito-capstone/html/practices.php" class="nav-link">Practices</a>
+					<a href="/uma/html/practices.php" class="nav-link">Practices</a>
 				</li>
 				<li class="nav-item">
 					<a href="#" class="nav-link">Sources</a>
