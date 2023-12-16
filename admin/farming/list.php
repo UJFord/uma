@@ -82,7 +82,7 @@
 							<!-- data from db -->
 							<div class="card-container col-6 col-md-4 col-lg-2 p-2">
 								<?php
-								if ($image !== null) {
+								if ($image !== 'Empty') {
 								?>
 									<a href="farming.php?farming_id=<?php echo $farming_id; ?>" class="crop-card py-3 px-1 d-flex justify-content-center align-items-end" style="
 									background-image: url('<?php echo $image; ?>');

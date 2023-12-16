@@ -4,31 +4,42 @@ session_start();
 $con = pg_connect("host=localhost dbname=farm_crops user=postgres password=123") or die("Could not connect to server\n");
 
 if (isset($_POST['save'])) {
+    // Function to handle NULL values and escape single quotes
+    function handleValue($value)
+    {
+        if ($value === '' || $value === 'NULL') {
+            $emptyValue = 'Empty';
+            return $emptyValue; // Set to the string "Empty" if empty or NULL
+        } else {
+            return pg_escape_literal($value);  // Use pg_escape_literal for proper handling of single quotes
+        }
+    }
+
     // Escape user inputs for data in Tribe table
-    $tribe_name = empty($_POST['tribe_name']) ? 'NULL' : "'" . $_POST['tribe_name'] . "'";
-    $image = empty($_POST['image']) ? 'NULL' : "'" . $_POST['image'] . "'";
-    $location = empty($_POST['location']) ? 'NULL' : "'" . $_POST['location'] . "'";
-    $language_and_dialect = empty($_POST['language_and_dialect']) ? 'NULL' : "'" . $_POST['language_and_dialect'] . "'";
-    $population = empty($_POST['population']) ? 'NULL' : "'" . $_POST['population'] . "'";
-    $livelihood_and_practices = empty($_POST['livelihood_and_practices']) ? 'NULL' : "'" . $_POST['livelihood_and_practices'] . "'";
-    $farming_practices = empty($_POST['farming_practices']) ? 'NULL' : "'" . $_POST['farming_practices'] . "'";
-    $social_structure_and_kinship_system = empty($_POST['social_structure_and_kinship_system']) ? 'NULL' : "'" . $_POST['social_structure_and_kinship_system'] . "'";
-    $beliefs_and_customs = empty($_POST['beliefs_and_customs']) ? 'NULL' : "'" . $_POST['beliefs_and_customs'] . "'";
-    $challenges_and_threats = empty($_POST['challenges_and_threats']) ? 'NULL' : "'" . $_POST['challenges_and_threats'] . "'";
-    $efforts_of_revitalization = empty($_POST['efforts_of_revitalization']) ? 'NULL' : "'" . $_POST['efforts_of_revitalization'] . "'";
-    $other_info = empty($_POST['other_info']) ? 'NULL' : "'" . $_POST['other_info'] . "'";
+    $tribe_name = handleValue($_POST['tribe_name']);
+    $image = handleValue($_POST['image']);
+    $location = handleValue($_POST['location']);
+    $language_and_dialect = handleValue($_POST['language_and_dialect']);
+    $population = handleValue($_POST['population']);
+    $livelihood_and_practices = handleValue($_POST['livelihood_and_practices']);
+    $farming_practices = handleValue($_POST['farming_practices']);
+    $social_structure_and_kinship_system = handleValue($_POST['social_structure_and_kinship_system']);
+    $beliefs_and_customs = handleValue($_POST['beliefs_and_customs']);
+    $challenges_and_threats = handleValue($_POST['challenges_and_threats']);
+    $efforts_of_revitalization = handleValue($_POST['efforts_of_revitalization']);
+    $other_info = handleValue($_POST['other_info']);
 
     // Inserting into tribe table
     $query = "INSERT INTO tribe 
-        (tribe_name, image, location, language_and_dialect, population, livelihood_and_practices, farming_practices,
-        social_structure_and_kinship_system, beliefs_and_customs, challenges_and_threats, efforts_of_revitalization,
-        other_info) 
-        VALUES 
-        ($tribe_name, $image, $location, $language_and_dialect,
-        $population, $livelihood_and_practices, $farming_practices,
-        $social_structure_and_kinship_system, $beliefs_and_customs, $challenges_and_threats,
-        $efforts_of_revitalization, $other_info) 
-        RETURNING tribe_id";
+    (tribe_name, image, location, language_and_dialect, population, livelihood_and_practices, farming_practices,
+    social_structure_and_kinship_system, beliefs_and_customs, challenges_and_threats, efforts_of_revitalization,
+    other_info) 
+    VALUES 
+    ($tribe_name, $image, $location, $language_and_dialect,
+    $population, $livelihood_and_practices, $farming_practices,
+    $social_structure_and_kinship_system, $beliefs_and_customs, $challenges_and_threats,
+    $efforts_of_revitalization, $other_info) 
+    RETURNING tribe_id";
 
     $query_run = pg_query($con, $query);
 
@@ -62,9 +73,11 @@ if (isset($_POST['update'])) {
     $other_info = pg_escape_string($con, $_POST['other_info']);
 
     // Function to wrap non-empty values in single quotes and handle empty values
-    function handleValue($value) {
+    function handleValue($value)
+    {
         if ($value === '') {
-            return 'NULL';  // Set to NULL if empty
+            $emptyValue = 'Empty';
+            return $emptyValue;  // Set to NULL if empty
         } else {
             return "'" . $value . "'";  // Wrap in single quotes for non-empty values
         }

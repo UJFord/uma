@@ -5,182 +5,180 @@ session_start();
 $con = pg_connect("host=localhost dbname=farm_crops user=postgres password=123") or die("Could not connect to server\n");
 
 if (isset($_POST['save'])) {
-    // Escape user inputs for data in agronomic_information table
-    $days_to_mature = empty($_POST['days_to_mature']) ? 'NULL' : "'" . $_POST['days_to_mature'] . "'";
-    $yield_potential = empty($_POST['yield_potential']) ? 'NULL' : "'" . $_POST['yield_potential'] . "'";
-
-    // Inserting into agronomic_information table
-    $query = "INSERT INTO agronomic_information (days_to_mature, yield_potential) 
-    VALUES ($days_to_mature, $yield_potential) RETURNING agronomic_information_id";
-
-    $query_run = pg_query($con, $query);
-
-    if ($query_run) {
-        $row = pg_fetch_row($query_run);
-        $agronomic_information_id = $row[0];
-    } else {
-        echo pg_last_error($con);
-        header("Location: crop-create.php");
-        exit(0);
+    // Function to handle empty values
+    function handleEmpty($value)
+    {
+        return empty($value) ? 'Empty' : $value;
     }
 
-    // Escape user inputs for data in Botanical Information table
-    $scientific_name = empty($_POST['scientific_name']) ? 'NULL' : "'" . $_POST['scientific_name'] . "'";
-    $common_names = empty($_POST['common_names']) ? 'NULL' : "'" . $_POST['common_names'] . "'";
+    if (isset($_POST['save'])) {
+        // Escape user inputs for data in agronomic_information table
+        $days_to_mature = handleEmpty($_POST['days_to_mature']);
+        $yield_potential = handleEmpty($_POST['yield_potential']);
 
-    // Inserting into Botanical Information table
-    $query = "INSERT INTO botanical_information (scientific_name, common_names) 
-    VALUES ($scientific_name, $common_names) RETURNING botanical_information_id";
+        // Inserting into agronomic_information table using parameterized query
+        $query_agronomic = "INSERT INTO agronomic_information (days_to_mature, yield_potential) 
+                    VALUES ($1, $2) RETURNING agronomic_information_id";
 
-    $query_run_botanical = pg_query($con, $query);
+        $query_run_agronomic = pg_query_params($con, $query_agronomic, array($days_to_mature, $yield_potential));
 
-    if ($query_run_botanical) {
-        $row = pg_fetch_row($query_run_botanical);
-        $botanical_information_id = $row[0];
-    } else {
-        $_SESSION['message'] = "Botanical Information Not Created";
-        $_SESSION['message_type'] = 'error';
-        $_SESSION['error_details'] = pg_last_error($con);
-        header("Location: crop-create.php");
-        exit(0);
-    }
+        if ($query_run_agronomic) {
+            $row_agronomic = pg_fetch_row($query_run_agronomic);
+            $agronomic_information_id = $row_agronomic[0];
+        } else {
+            echo "Error: " . pg_last_error($con);
+            exit(0);
+        }
 
-    // Escape user inputs for data in Farming table
-    $plant_height = empty($_POST['plant_height']) ? 'NULL' : "'" . $_POST['plant_height'] . "'";
-    $panicle_length = empty($_POST['panicle_length']) ? 'NULL' : "'" . $_POST['panicle_length'] . "'";
-    $grain_quality = empty($_POST['grain_quality']) ? 'NULL' : "'" . $_POST['grain_quality'] . "'";
-    $grain_color = empty($_POST['grain_color']) ? 'NULL' : "'" . $_POST['grain_color'] . "'";
-    $grain_length = empty($_POST['grain_length']) ? 'NULL' : "'" . $_POST['grain_length'] . "'";
-    $grain_width = empty($_POST['grain_width']) ? 'NULL' : "'" . $_POST['grain_width'] . "'";
-    $grain_shape = empty($_POST['grain_shape']) ? 'NULL' : "'" . $_POST['grain_shape'] . "'";
-    $awn_length = empty($_POST['awn_length']) ? 'NULL' : "'" . $_POST['awn_length'] . "'";
-    $leaf_length = empty($_POST['leaf_length']) ? 'NULL' : "'" . $_POST['leaf_length'] . "'";
-    $leaf_width = empty($_POST['leaf_width']) ? 'NULL' : "'" . $_POST['leaf_width'] . "'";
-    $leaf_shape = empty($_POST['leaf_shape']) ? 'NULL' : "'" . $_POST['leaf_shape'] . "'";
-    $stem_color = empty($_POST['stem_color']) ? 'NULL' : "'" . $_POST['stem_color'] . "'";
-    $another_color = empty($_POST['another_color']) ? 'NULL' : "'" . $_POST['another_color'] . "'";
+        // Escape user inputs for data in Botanical Information table
+        $scientific_name = handleEmpty($_POST['scientific_name']);
+        $common_names = handleEmpty($_POST['common_names']);
 
+        // Inserting into Botanical Information table using parameterized query
+        $query_botanical = "INSERT INTO botanical_information (scientific_name, common_names) 
+                    VALUES ($1, $2) RETURNING botanical_information_id";
 
-    // Inserting into Morphological Characteristic table
-    $query = "INSERT INTO morphological_characteristic (plant_height, panicle_length, grain_quality, grain_color, grain_length,
+        $query_run_botanical = pg_query_params($con, $query_botanical, array($scientific_name, $common_names));
+
+        if ($query_run_botanical) {
+            $row_botanical = pg_fetch_row($query_run_botanical);
+            $botanical_information_id = $row_botanical[0];
+        } else {
+            echo "Error: " . pg_last_error($con);
+            exit(0);
+        }
+
+        // Escape user inputs for data in Morphological Characteristic table
+        $plant_height = handleEmpty($_POST['plant_height']);
+        $panicle_length = handleEmpty($_POST['panicle_length']);
+        $grain_quality = handleEmpty($_POST['grain_quality']);
+        $grain_color = handleEmpty($_POST['grain_color']);
+        $grain_length = handleEmpty($_POST['grain_length']);
+        $grain_width = handleEmpty($_POST['grain_width']);
+        $grain_shape = handleEmpty($_POST['grain_shape']);
+        $awn_length = handleEmpty($_POST['awn_length']);
+        $leaf_length = handleEmpty($_POST['leaf_length']);
+        $leaf_width = handleEmpty($_POST['leaf_width']);
+        $leaf_shape = handleEmpty($_POST['leaf_shape']);
+        $stem_color = handleEmpty($_POST['stem_color']);
+        $another_color = handleEmpty($_POST['another_color']);
+
+        // Inserting into Morphological Characteristic table using parameterized query
+        $query_morphological = "INSERT INTO morphological_characteristic (plant_height, panicle_length, grain_quality, grain_color, grain_length,
     grain_width, grain_shape, awn_length, leaf_length, leaf_width, leaf_shape, stem_color, another_color) 
-    VALUES ($plant_height, $panicle_length, $grain_quality, $grain_color, $grain_length, $grain_width, $grain_shape, $awn_length,
-    $leaf_length, $leaf_width, $leaf_shape, $stem_color, $another_color) RETURNING morphological_characteristic_id";
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) RETURNING morphological_characteristic_id";
 
-    $query_run_morphological = pg_query($con, $query);
+        $query_run_morphological = pg_query_params($con, $query_morphological, array(
+            $plant_height, $panicle_length, $grain_quality, $grain_color, $grain_length,
+            $grain_width, $grain_shape, $awn_length, $leaf_length, $leaf_width,
+            $leaf_shape, $stem_color, $another_color
+        ));
 
-    if ($query_run_morphological) {
-        $row = pg_fetch_row($query_run_morphological);
-        $morphological_characteristic_id = $row[0];
-    } else {
-        $_SESSION['message'] = "Morphological Characteristic Not Created";
-        $_SESSION['message_type'] = 'error';
-        $_SESSION['error_details'] = pg_last_error($con);
-        header("Location: crop-create.php");
-        exit(0);
-    }
+        if ($query_run_morphological) {
+            $row_morphological = pg_fetch_row($query_run_morphological);
+            $morphological_characteristic_id = $row_morphological[0];
+        } else {
+            echo "Error: " . pg_last_error($con);
+            exit(0);
+        }
 
-    // Escape user inputs for data in Traditional Crop Traits table
-    $taste = empty($_POST['taste']) ? 'NULL' : "'" . $_POST['taste'] . "'";
-    $aroma = empty($_POST['aroma']) ? 'NULL' : "'" . $_POST['aroma'] . "'";
-    $maturation = empty($_POST['maturation']) ? 'NULL' : "'" . $_POST['maturation'] . "'";
-    $drought_tolerance = empty($_POST['drought_tolerance']) ? 'NULL' : "'" . $_POST['drought_tolerance'] . "'";
-    $environment_adaptability = empty($_POST['environment_adaptability']) ? 'NULL' : "'" . $_POST['environment_adaptability'] . "'";
-    $culinary_quality = empty($_POST['culinary_quality']) ? 'NULL' : "'" . $_POST['culinary_quality'] . "'";
-    $nutritional_value = empty($_POST['nutritional_value']) ? 'NULL' : "'" . $_POST['nutritional_value'] . "'";
-    $disease_resistance = empty($_POST['disease_resistance']) ? 'NULL' : "'" . $_POST['disease_resistance'] . "'";
-    $pest_resistance = empty($_POST['pest_resistance']) ? 'NULL' : "'" . $_POST['pest_resistance'] . "'";
+        // Escape user inputs for data in Traditional Crop Traits table
+        $taste = handleEmpty($_POST['taste']);
+        $aroma = handleEmpty($_POST['aroma']);
+        $maturation = handleEmpty($_POST['maturation']);
+        $drought_tolerance = handleEmpty($_POST['drought_tolerance']);
+        $environment_adaptability = handleEmpty($_POST['environment_adaptability']);
+        $culinary_quality = handleEmpty($_POST['culinary_quality']);
+        $nutritional_value = handleEmpty($_POST['nutritional_value']);
+        $disease_resistance = handleEmpty($_POST['disease_resistance']);
+        $pest_resistance = handleEmpty($_POST['pest_resistance']);
 
-    // Inserting into Traditional Crop Traits table
-    $query = "INSERT INTO traditional_crop_traits (taste, aroma, maturation, drought_tolerance, environment_adaptability,
-    culinary_quality, nutritional_value, disease_resistance, pest_resistance) 
-    VALUES ($taste, $aroma, $maturation, $drought_tolerance, $environment_adaptability, $culinary_quality, $nutritional_value,
-    $disease_resistance, $pest_resistance) RETURNING traditional_crop_traits_id";
+        // Inserting into Traditional Crop Traits table using parameterized query
+        $query_traits = "INSERT INTO traditional_crop_traits (taste, aroma, maturation, drought_tolerance, environment_adaptability,
+        culinary_quality, nutritional_value, disease_resistance, pest_resistance) 
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING traditional_crop_traits_id";
 
-    $query_run_traits = pg_query($con, $query);
+        $query_run_traits = pg_query_params($con, $query_traits, array(
+            $taste, $aroma, $maturation, $drought_tolerance, $environment_adaptability, $culinary_quality, $nutritional_value,
+            $disease_resistance, $pest_resistance
+        ));
 
-    if ($query_run_traits) {
-        $row = pg_fetch_row($query_run_traits);
-        $traditional_crop_traits_id = $row[0];
-    } else {
-        $_SESSION['message'] = "Traditional Crop Traits Not Created";
-        $_SESSION['message_type'] = 'error';
-        $_SESSION['error_details'] = pg_last_error($con);
-        header("Location: crop-create.php");
-        exit(0);
-    }
+        if ($query_run_traits) {
+            $row_traits = pg_fetch_row($query_run_traits);
+            $traditional_crop_traits_id = $row_traits[0];
+        } else {
+            echo "Error: " . pg_last_error($con);
+            exit(0);
+        }
 
-    // Escape user inputs for data in Relaationship aamong Cultivars table
-    $distinct_cultivar_groups_morph_gen = empty($_POST['distinct_cultivar_groups_morph_gen']) ? 'NULL' : "'" . $_POST['distinct_cultivar_groups_morph_gen'] . "'";
-    $cultivar_relations_cluster_and_pca = empty($_POST['cultivar_relations_cluster_and_pca']) ? 'NULL' : "'" . $_POST['cultivar_relations_cluster_and_pca'] . "'";
-    $hybridization_potential = empty($_POST['hybridization_potential']) ? 'NULL' : "'" . $_POST['hybridization_potential'] . "'";
-    $conservation_and_breeding_implications = empty($_POST['conservation_and_breeding_implications']) ? 'NULL' : "'" . $_POST['conservation_and_breeding_implications'] . "'";
-
-    // Inserting into Relationship among Cultivars table
-    $query = "INSERT INTO relationship_among_cultivars (distinct_cultivar_groups_morph_gen, cultivar_relations_cluster_and_pca,
+        // Continue with the same approach for Relationship among Cultivars
+        $query_cultivars = "INSERT INTO relationship_among_cultivars (distinct_cultivar_groups_morph_gen, cultivar_relations_cluster_and_pca,
     hybridization_potential, conservation_and_breeding_implications) 
-    VALUES ($distinct_cultivar_groups_morph_gen, $cultivar_relations_cluster_and_pca, $hybridization_potential,
-    $conservation_and_breeding_implications) RETURNING relationship_among_cultivars_id";
+    VALUES ($1, $2, $3, $4) RETURNING relationship_among_cultivars_id";
 
-    $query_run_cultivars = pg_query($con, $query);
+        $query_run_cultivars = pg_query_params($con, $query_cultivars, array(
+            handleEmpty($_POST['distinct_cultivar_groups_morph_gen']),
+            handleEmpty($_POST['cultivar_relations_cluster_and_pca']),
+            handleEmpty($_POST['hybridization_potential']),
+            handleEmpty($_POST['conservation_and_breeding_implications'])
+        ));
 
-    if ($query_run_cultivars) {
-        $row = pg_fetch_row($query_run_cultivars);
-        $relationship_among_cultivars_id = $row[0];
-    } else {
-        $_SESSION['message'] = "Relationship among Cultivars Not Created";
-        $_SESSION['message_type'] = 'error';
-        $_SESSION['error_details'] = pg_last_error($con);
-        header("Location: crop-create.php");
-        exit(0);
-    }
+        if ($query_run_cultivars) {
+            $row_cultivars = pg_fetch_row($query_run_cultivars);
+            $relationship_among_cultivars_id = $row_cultivars[0];
+        } else {
+            echo "Error: " . pg_last_error($con);
+            exit(0);
+        }
 
-    // Escape user inputs for data in crops table
-    $image = empty($_POST['image']) ? 'NULL' : "'" . $_POST['image'] . "'";
-    $crop_name = empty($_POST['crop_name']) ? 'NULL' : "'" . $_POST['crop_name'] . "'";
-    $description = empty($_POST['description']) ? 'NULL' : "'" . $_POST['description'] . "'";
-    $upland_or_lowland = empty($_POST['upland_or_lowland']) ? 'NULL' : "'" . $_POST['upland_or_lowland'] . "'";
-    $season = empty($_POST['season']) ? 'NULL' : "'" . $_POST['season'] . "'";
-    $economic_importance = empty($_POST['economic_importance']) ? 'NULL' : "'" . $_POST['economic_importance'] . "'";
-    $category = empty($_POST['category']) ? 'NULL' : "'" . $_POST['category'] . "'";
-    $links = empty($_POST['links']) ? 'NULL' : "'" . $_POST['links'] . "'";
-    $local_name = empty($_POST['local_name']) ? 'NULL' : "'" . $_POST['local_name'] . "'";
-    $planting_techniques = empty($_POST['planting_techniques']) ? 'NULL' : "'" . $_POST['planting_techniques'] . "'";
-    $cultural_and_spiritual_significance = empty($_POST['cultural_and_spiritual_significance']) ? 'NULL' : "'" . $_POST['cultural_and_spiritual_significance'] . "'";
-    $breeding_potential = empty($_POST['breeding_potential']) ? 'NULL' : "'" . $_POST['breeding_potential'] . "'";
-    $threats = empty($_POST['threats']) ? 'NULL' : "'" . $_POST['threats'] . "'";
-    $other_info = empty($_POST['other_info']) ? 'NULL' : "'" . $_POST['other_info'] . "'";
-    $rice_biodiversity_uplift = empty($_POST['rice_biodiversity_uplift']) ? 'NULL' : "'" . $_POST['rice_biodiversity_uplift'] . "'";
-    $traditional_knowledge_and_practices = empty($_POST['traditional_knowledge_and_practices']) ? 'NULL' : "'" . $_POST['traditional_knowledge_and_practices'] . "'";
-
-    // Inserting into Crop table
-    $query = "INSERT INTO crops (
-    agronomic_information_id, botanical_information_id,
-    morphological_characteristic_id, traditional_crop_traits_id, relationship_among_cultivars_id,
-    \"image\", crop_name, \"description\", upland_or_lowland, season,
-    economic_importance, category, links, local_name, planting_techniques,
-    cultural_and_spiritual_significance, breeding_potential, threats,
-    other_info, rice_biodiversity_uplift, traditional_knowledge_and_practices
+        // Inserting into Crop table using parameterized query
+        $query_crop = "INSERT INTO crops (
+        agronomic_information_id, botanical_information_id,
+        morphological_characteristic_id, traditional_crop_traits_id, relationship_among_cultivars_id,
+        \"image\", crop_name, \"description\", upland_or_lowland, season,
+        economic_importance, category, links, local_name, planting_techniques,
+        cultural_and_spiritual_significance, breeding_potential, threats,
+        other_info, rice_biodiversity_uplift, traditional_knowledge_and_practices
     ) VALUES (
-        $agronomic_information_id, $botanical_information_id, $morphological_characteristic_id, $traditional_crop_traits_id,
-        $relationship_among_cultivars_id, $image, $crop_name, $description, $upland_or_lowland,
-        $season, $economic_importance, $local_name, $cultural_and_spiritual_significance, $breeding_potential,
-        $threats, $other_info, $rice_biodiversity_uplift, $traditional_knowledge_and_practices,
-        $category, $links, $planting_techniques
+        $1, $2, $3, $4, $5, $6, $7, $8, $9, $10,
+        $11, $12, $13, $14, $15, $16, $17, $18, $19,
+        $20, $21
     ) RETURNING crop_id";
 
-    $query_run_crop = pg_query($con, $query);
+        $query_run_crop = pg_query_params($con, $query_crop, array(
+            $agronomic_information_id,
+            $botanical_information_id,
+            $morphological_characteristic_id,
+            $traditional_crop_traits_id,
+            $relationship_among_cultivars_id,
+            handleEmpty($_POST['image']),
+            handleEmpty($_POST['crop_name']),
+            handleEmpty($_POST['description']),
+            handleEmpty($_POST['upland_or_lowland']),
+            handleEmpty($_POST['season']),
+            handleEmpty($_POST['economic_importance']),
+            handleEmpty($_POST['category']),
+            handleEmpty($_POST['links']),
+            handleEmpty($_POST['local_name']),
+            handleEmpty($_POST['planting_techniques']),
+            handleEmpty($_POST['cultural_and_spiritual_significance']),
+            handleEmpty($_POST['breeding_potential']),
+            handleEmpty($_POST['threats']),
+            handleEmpty($_POST['other_info']),
+            handleEmpty($_POST['rice_biodiversity_uplift']),
+            handleEmpty($_POST['traditional_knowledge_and_practices'])
+        ));
 
-    if ($query_run_crop) {
-        // echo "Query: $query";
-        $row = pg_fetch_row($query_run_crop);
-        $crop_id = $row[0];
-        $_SESSION['message'] = "Crop Created Successfully";
-        header("Location: list.php");
-        exit(0);
-    } else {
-        echo "Error: " . pg_last_error($con);
-        exit(0);
+        if ($query_run_crop) {
+            $row_crop = pg_fetch_row($query_run_crop);
+            $crop_id = $row_crop[0];
+            $_SESSION['message'] = "Crop Created Successfully";
+            header("Location: list.php");
+            exit(0);
+        } else {
+            echo "Error: " . pg_last_error($con);
+            exit(0);
+        }
     }
 }
 
@@ -256,7 +254,7 @@ if (isset($_POST['update'])) {
         global $con;
 
         if ($value === '' || $value === null) {
-            return 'NULL';
+            return "'Empty'";
         } else {
             // Wrap in single quotes for non-empty values
             return "'" . pg_escape_string($con, $value) . "'";
