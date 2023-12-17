@@ -82,7 +82,7 @@
 							<!--  -->
 							<div class="card-container col-6 col-md-4 col-lg-2 p-2">
 								<?php
-								if ($image !== null) {
+								if ($image !== 'Empty') {
 								?>
 									<a href="ritual.php?ritual_id=<?php echo $ritual_id; ?>" class="crop-card py-3 px-1 d-flex justify-content-center align-items-end" style="
 									background-image: url('<?php echo $image; ?>');

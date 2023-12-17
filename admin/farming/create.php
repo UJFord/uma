@@ -65,7 +65,7 @@
                             </tr>
                             <tr>
                                 <th class="table-secondary w-25">Role in Maintaning Upland Ecosystems</th>
-                                <td><textarea class="w-100 border p-1" name="role_in_maintaning_upland_ecosystem" placeholder="Enter Role in Maintaning Upland Ecosystems" rows="5"></textarea></td>
+                                <td><textarea class="w-100 border p-1" name="role_in_maintaining_upland_ecosystem" placeholder="Enter Role in Maintaning Upland Ecosystems" rows="5"></textarea></td>
                             </tr>
                             <tr>
                                 <th class="table-secondary w-25">Timing</th>

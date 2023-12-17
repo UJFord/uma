@@ -5,37 +5,53 @@ $con = pg_connect("host=localhost dbname=farm_crops user=postgres password=123")
 
 if (isset($_POST['save'])) {
     // Escape user inputs for data in Ritual table
-    $ritual_name = empty($_POST['ritual_name']) ? 'NULL' : "'" . $_POST['ritual_name'] . "'";
-    $description = empty($_POST['description']) ? 'NULL' : "'" . $_POST['description'] . "'";
-    $image = empty($_POST['image']) ? 'NULL' : "'" . $_POST['image'] . "'";
-    $purpose = empty($_POST['purpose']) ? 'NULL' : "'" . $_POST['purpose'] . "'";
-    $timing = empty($_POST['timing']) ? 'NULL' : "'" . $_POST['timing'] . "'";
-    $participants = empty($_POST['participants']) ? 'NULL' : "'" . $_POST['participants'] . "'";
-    $items_used = empty($_POST['items_used']) ? 'NULL' : "'" . $_POST['items_used'] . "'";
-    $other_info = empty($_POST['other_info']) ? 'NULL' : "'" . $_POST['other_info'] . "'";
+    $emptyValue = 'Empty';
 
-    // Inserting into Ritual table
+    $ritual_name = empty($_POST['ritual_name']) ? $emptyValue : $_POST['ritual_name'];
+    $description = empty($_POST['description']) ? $emptyValue : $_POST['description'];
+    $image = empty($_POST['image']) ? $emptyValue : $_POST['image'];
+    $purpose = empty($_POST['purpose']) ? $emptyValue : $_POST['purpose'];
+    $timing = empty($_POST['timing']) ? $emptyValue : $_POST['timing'];
+    $participants = empty($_POST['participants']) ? $emptyValue : $_POST['participants'];
+    $items_used = empty($_POST['items_used']) ? $emptyValue : $_POST['items_used'];
+    $other_info = empty($_POST['other_info']) ? $emptyValue : $_POST['other_info'];
+
+    // Inserting into Ritual table using parameterized query
     $query = "INSERT INTO ritual 
         (ritual_name, description, image, purpose, timing, participants, items_used, other_info) 
         VALUES 
-        ($ritual_name, $description, $image, $purpose, $timing, $participants, $items_used, $other_info) 
+        ($1, $2, $3, $4, $5, $6, $7, $8) 
         RETURNING ritual_id";
 
-    $query_run = pg_query($con, $query);
+    $result = pg_prepare($con, "insert_ritual", $query);
 
-    if ($query_run) {
-        $row = pg_fetch_row($query_run);
-        $ritual_id = $row[0];
+    if ($result) {
+        $query_run = pg_execute($con, "insert_ritual", array(
+            $ritual_name,
+            $description,
+            $image,
+            $purpose,
+            $timing,
+            $participants,
+            $items_used,
+            $other_info
+        ));
 
-        $_SESSION['message'] = "ritual Created Successfully";
-        header("Location: list.php");
-        exit(0);
+        if ($query_run) {
+            $row = pg_fetch_row($query_run);
+            $ritual_id = $row[0];
+
+            $_SESSION['message'] = "ritual Created Successfully";
+            header("Location: list.php");
+            exit(0);
+        } else {
+            echo "Error: " . pg_last_error($con);
+            // Handle the error, if needed
+            exit(0);
+        }
     } else {
-        echo "Error: " . pg_last_error($con);
-        // $_SESSION['message'] = "Tribe Not Created";
-        // $_SESSION['message_type'] = 'error';
-        // $_SESSION['error_details'] = pg_last_error($con);
-        // header("Location: create.php");
+        echo "Error preparing query: " . pg_last_error($con);
+        // Handle the error, if needed
         exit(0);
     }
 }
@@ -55,7 +71,8 @@ if (isset($_POST['update'])) {
     function handleValue($value)
     {
         if ($value === '') {
-            return 'NULL';  // Set to NULL if empty
+            $emptyValue = 'Empty';
+            return $emptyValue;  // Set to NULL if empty
         } else {
             return "'" . $value . "'";  // Wrap in single quotes for non-empty values
         }

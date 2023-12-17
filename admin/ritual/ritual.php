@@ -32,16 +32,18 @@
                 $query = "SELECT * from ritual WHERE ritual_id='$ritual_id'";
                 $query_run = pg_query($connection, $query);
 
+                $emptyValue = 'Empty';
+
                 if (pg_num_rows($query_run) > 0) {
                     $ritual = pg_fetch_assoc($query_run);
-                    $ritual_name = isset($ritual['ritual_name']) ? $ritual['ritual_name'] : null;
-                    $description = isset($ritual['description']) ? $ritual['description'] : null;
-                    $image = isset($ritual['image']) ? $ritual['image'] : null;
-                    $purpose = isset($ritual['purpose']) ? $ritual['purpose'] : null;
-                    $timing = isset($ritual['timing']) ? $ritual['timing'] : null;
-                    $participants = isset($ritual['participants']) ? $ritual['participants'] : null;
-                    $items_used = isset($ritual['items_used']) ? $ritual['items_used'] : null;
-                    $other_info = isset($ritual['other_info']) ? $ritual['other_info'] : null;
+                    $ritual_name = isset($ritual['ritual_name']) ? $ritual['ritual_name'] : $emptyValue;
+                    $description = isset($ritual['description']) ? $ritual['description'] : $emptyValue;
+                    $image = isset($ritual['image']) ? $ritual['image'] : $emptyValue;
+                    $purpose = isset($ritual['purpose']) ? $ritual['purpose'] : $emptyValue;
+                    $timing = isset($ritual['timing']) ? $ritual['timing'] : $emptyValue;
+                    $participants = isset($ritual['participants']) ? $ritual['participants'] : $emptyValue;
+                    $items_used = isset($ritual['items_used']) ? $ritual['items_used'] : $emptyValue;
+                    $other_info = isset($ritual['other_info']) ? $ritual['other_info'] : $emptyValue;
             ?>
 
                     <!-- form for submitting -->
@@ -52,17 +54,9 @@
                         <!-- title-->
                         <div class="row d-flex justify-content-between my-3">
                             <div class="col-6">
-                                <?php
-                                if ($ritual_name !== null) {
-                                ?>
-                                    <h3 id="crops-title"><input type="text" name="ritual_name" value="<?= $ritual_name; ?>" class="fw-semibold w-100 border-0 py-1 px-2" disabled></h3>
-                                <?php
-                                } else {
-                                ?>
-                                    <h3 id="crops-title"><input type="text" name="ritual_name" placeholder="No Name" class="fw-semibold w-100 border-0 py-1 px-2" disabled></h3>
-                                <?php
-                                }
-                                ?>
+                                <h3 id="crops-title">
+                                    <input type="text" name="ritual_name" <?php echo ($ritual_name != $emptyValue) ? 'value="' . $ritual_name . '"' : 'placeholder="Empty"'; ?> class="fw-semibold w-100 border-0 py-1 px-2" disabled>
+                                </h3>
                             </div>
                         </div>
 
@@ -75,131 +69,51 @@
                             <!-- Ritual Information -->
                             <table id="info-table" class="table table-hover table-sm">
                                 <tbody>
-                                    <?php
-                                    if ($description !== null) {
-                                    ?>
-                                        <tr>
-                                            <th class="table-secondary w-25">Description</th>
-                                            <td><textarea class="w-100 border-0 p-1" name="description" rows="5" disabled><?= $description; ?></textarea></td>
-                                        </tr>
-                                    <?php
-                                    } else {
-                                    ?>
-                                        <tr>
-                                            <th class="table-secondary w-25">Description</th>
-                                            <td><textarea class="w-100 border-0 p-1" name="description" rows="5" placeholder="Empty" disabled></textarea></td>
-                                        </tr>
-                                    <?php
-                                    }
+                                    <tr>
+                                        <th class="table-secondary w-25">Description</th>
+                                        <td>
+                                            <textarea class="w-100 border-0 p-1" name="description" rows="5" disabled <?php echo ($description !== $emptyValue) ? '>' . $description : 'placeholder="Empty">'; ?></textarea>
+                                        </td>
+                                    </tr>
 
-                                    if ($image !== null) {
-                                    ?>
-                                        <tr>
-                                            <th class="table-secondary w-25">Image Link</th>
-                                            <td><textarea class="w-100 border-0 p-1" name="image" rows="5" disabled><?= $image; ?></textarea></td>
-                                        </tr>
-                                    <?php
-                                    } else {
-                                    ?>
-                                        <tr>
-                                            <th class="table-secondary w-25">Image Link</th>
-                                            <td><textarea class="w-100 border-0 p-1" name="image" rows="5" placeholder="Empty" disabled></textarea></td>
-                                        </tr>
-                                    <?php
-                                    }
-                                    ?>
+                                    <tr>
+                                        <th class="table-secondary w-25">Image Link</th>
+                                        <td>
+                                            <textarea class="w-100 border-0 p-1" name="image" rows="5" disabled <?php echo ($image !== $emptyValue) ? '>' . $image : 'placeholder="Empty">'; ?></textarea>
+                                        </td>
+                                    </tr>
                                 </tbody>
                             </table>
 
                             <table class="table table-hover table-sm">
                                 <tbody>
-                                    <?php
-                                    if ($purpose !== null) {
-                                    ?>
-                                        <tr>
-                                            <th class="table-secondary w-25">Purpose</th>
-                                            <td><textarea class="w-100 border-0 p-1" name="purpose" rows="5" disabled><?= $purpose; ?></textarea></td>
-                                        </tr>
-                                    <?php
-                                    } else {
-                                    ?>
-                                        <tr>
-                                            <th class="table-secondary w-25">Purpose</th>
-                                            <td><textarea class="w-100 border-0 p-1" name="purpose" rows="5" placeholder="Empty" disabled></textarea></td>
-                                        </tr>
-                                    <?php
-                                    }
-
-                                    if ($timing !== null) {
-                                    ?>
-                                        <tr>
-                                            <th class="table-secondary w-25">Timing</th>
-                                            <td><textarea class="w-100 border-0 p-1" name="timing" rows="5" disabled><?= $timing; ?></textarea></td>
-                                        </tr>
-                                    <?php
-                                    } else {
-                                    ?>
-                                        <tr>
-                                            <th class="table-secondary w-25">Timing</th>
-                                            <td><textarea class="w-100 border-0 p-1" name="timing" rows="5" placeholder="Empty" disabled></textarea></td>
-                                        </tr>
-                                    <?php
-                                    }
-
-                                    if ($participants !== null) {
-                                    ?>
-                                        <tr>
-                                            <th class="table-secondary w-25">Participants</th>
-                                            <td><textarea class="w-100 border-0 p-1" name="participants" rows="5" disabled><?= $participants; ?></textarea></td>
-                                        </tr>
-                                    <?php
-                                    } else {
-                                    ?>
-                                        <tr>
-                                            <th class="table-secondary w-25">Participants</th>
-                                            <td><textarea class="w-100 border-0 p-1" name="participants" rows="5" placeholder="Empty" disabled></textarea></td>
-                                        </tr>
-                                    <?php
-                                    }
-                                    if ($items_used !== null) {
-                                    ?>
-                                        <tr>
-                                            <th class="table-secondary w-25">Items used</th>
-                                            <td><textarea class="w-100 border-0 p-1" name="items_used" rows="5" disabled><?= $items_used; ?></textarea></td>
-                                        </tr>
-                                    <?php
-                                    } else {
-                                    ?>
-                                        <tr>
-                                            <th class="table-secondary w-25">Items used</th>
-                                            <td><textarea class="w-100 border-0 p-1" name="items_used" rows="5" placeholder="Empty" disabled></textarea></td>
-                                        </tr>
-                                    <?php
-                                    }
-                                    ?>
+                                    <tr>
+                                        <th class="table-secondary w-25">Purpose</th>
+                                        <td><textarea class="w-100 border-0 p-1" name="purpose" rows="5" disabled <?php echo ($purpose !== $emptyValue) ? '>' . $purpose : 'placeholder="Empty">'; ?></textarea></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="table-secondary w-25">Timing</th>
+                                        <td><textarea class="w-100 border-0 p-1" name="timing" rows="5" disabled <?php echo ($timing !== $emptyValue) ? '>' . $timing : 'placeholder="Empty">'; ?></textarea></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="table-secondary w-25">Participants</th>
+                                        <td><textarea class="w-100 border-0 p-1" name="participants" rows="5" disabled <?php echo ($participants !== $emptyValue) ? '>' . $participants : 'placeholder="Empty">'; ?></textarea></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="table-secondary w-25">Items used</th>
+                                        <td><textarea class="w-100 border-0 p-1" name="items_used" rows="5" disabled <?php echo ($items_used !== $emptyValue) ? '>' . $items_used : 'placeholder="Empty">'; ?></textarea></td>
+                                    </tr>
                                 </tbody>
                             </table>
 
                             <!-- other info -->
                             <table class="table table-hover table-sm mb-0">
                                 <tbody>
-                                    <?php
-                                    if ($other_info !== null) {
-                                    ?>
-                                        <tr>
-                                            <th class="table-secondary w-25">Other Info</th>
-                                            <td><textarea class="w-100 border-0 p-1" rows="5" name="other_info" disabled><?= $other_info; ?></textarea></td>
-                                        </tr>
-                                    <?php
-                                    } else {
-                                    ?>
-                                        <tr>
-                                            <th class="table-secondary w-25">Other Info</th>
-                                            <td><textarea class="w-100 border-0 p-1" rows="5" name="other_info" placeholder="Empty" disabled></textarea></td>
-                                        </tr>
-                                    <?php
-                                    }
-                                    ?>
+
+                                    <tr>
+                                        <th class="table-secondary w-25">Other Info</th>
+                                        <td><textarea class="w-100 border-0 p-1" rows="5" name="other_info" disabled <?php echo ($other_info !== $emptyValue) ? '>' . $other_info : 'placeholder="Empty">'; ?></textarea></td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
