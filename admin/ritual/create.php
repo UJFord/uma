@@ -34,7 +34,7 @@
                 <!-- title-->
                 <div class="row d-flex justify-content-between my-3">
                     <div class="col-6">
-                        <h3 id="crops-title"><input type="text" name="ritual_name" placeholder="Enter Ritual Name" class="fw-semibold w-100 border py-1 px-2"></h3>
+                        <h3 id="crops-title"><input type="text" name="ritual_name" placeholder="Display Title" class="fw-semibold w-100 border py-1 px-2"></h3>
                     </div>
                 </div>
 
