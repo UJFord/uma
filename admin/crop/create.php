@@ -32,10 +32,10 @@
 				<!-- back button -->
 				<a href="list.php" class="link-offset-2"><i class="bi bi-chevron-left"></i>Go Back</a>
 
-				<!-- title-->
+				<!-- display name-->
 				<div class="row d-flex justify-content-between my-3">
 					<div class="col-6">
-						<h3 id="crops-title"><input type="text" name="crop_name" placeholder="Enter Crop Name..." class="fw-semibold w-100 border py-1 px-2"></h3>
+						<h3 id="crops-title"><input type="text" name="crop_name" placeholder="Display Title" class="fw-semibold w-100 border py-1 px-2"></h3>
 					</div>
 				</div>
 
