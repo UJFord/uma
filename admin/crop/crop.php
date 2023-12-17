@@ -47,22 +47,22 @@
 
 					// Get the data from crops table
 					// Define default values for each field if they are $emptyValue
-					$crop_name = isset($crops['crop_name']) ? $crops['crop_name'] : $emptyValue;
-					$upland_or_lowland = isset($crops['upland_or_lowland']) ? $crops['upland_or_lowland'] : $emptyValue;
-					$season = isset($crops['season']) ? $crops['season'] : $emptyValue;
-					$category = isset($crops['category']) ? $crops['category'] : $emptyValue;
-					$links = isset($crops['links']) ? $crops['links'] : $emptyValue;
-					$description = isset($crops['description']) ? $crops['description'] : $emptyValue;
-					$image = isset($crops['image']) ? $crops['image'] : $emptyValue;
-					$local_name = isset($crops['local_name']) ? $crops['local_name'] : $emptyValue;
-					$planting_techniques = isset($crops['planting_techniques']) ? $crops['planting_techniques'] : $emptyValue;
-					$cultural_and_spiritual_significance = isset($crops['cultural_and_spiritual_significance']) ? $crops['cultural_and_spiritual_significance'] : $emptyValue;
-					$rice_biodiversity_uplift = isset($crops['rice_biodiversity_uplift']) ? $crops['rice_biodiversity_uplift'] : $emptyValue;
-					$economic_importance = isset($crops['economic_importance']) ? $crops['economic_importance'] : $emptyValue;
-					$traditional_knowledge_and_practices = isset($crops['traditional_knowledge_and_practices']) ? $crops['traditional_knowledge_and_practices'] : $emptyValue;
-					$breeding_potential = isset($crops['breeding_potential']) ? $crops['breeding_potential'] : $emptyValue;
-					$threats = isset($crops['threats']) ? $crops['threats'] : $emptyValue;
-					$other_info = isset($crops['other_info']) ? $crops['other_info'] : $emptyValue;
+					$crop_name = isset($crops['crop_name']) ? htmlspecialchars($crops['crop_name'], ENT_QUOTES) : $emptyValue;
+					$upland_or_lowland = isset($crops['upland_or_lowland']) ? htmlspecialchars($crops['upland_or_lowland'], ENT_QUOTES) : $emptyValue;
+					$season = isset($crops['season']) ? htmlspecialchars($crops['season'], ENT_QUOTES) : $emptyValue;
+					$category = isset($crops['category']) ? htmlspecialchars($crops['category'], ENT_QUOTES) : $emptyValue;
+					$links = isset($crops['links']) ? htmlspecialchars($crops['links'], ENT_QUOTES) : $emptyValue;
+					$description = isset($crops['description']) ? htmlspecialchars($crops['description'], ENT_QUOTES) : $emptyValue;
+					$image = isset($crops['image']) ? htmlspecialchars($crops['image'], ENT_QUOTES) : $emptyValue;
+					$local_name = isset($crops['local_name']) ? htmlspecialchars($crops['local_name'], ENT_QUOTES) : $emptyValue;
+					$planting_techniques = isset($crops['planting_techniques']) ? htmlspecialchars($crops['planting_techniques'], ENT_QUOTES) : $emptyValue;
+					$cultural_and_spiritual_significance = isset($crops['cultural_and_spiritual_significance']) ? htmlspecialchars($crops['cultural_and_spiritual_significance'], ENT_QUOTES) : $emptyValue;
+					$rice_biodiversity_uplift = isset($crops['rice_biodiversity_uplift']) ? htmlspecialchars($crops['rice_biodiversity_uplift'], ENT_QUOTES) : $emptyValue;
+					$economic_importance = isset($crops['economic_importance']) ? htmlspecialchars($crops['economic_importance'], ENT_QUOTES) : $emptyValue;
+					$traditional_knowledge_and_practices = isset($crops['traditional_knowledge_and_practices']) ? htmlspecialchars($crops['traditional_knowledge_and_practices'], ENT_QUOTES) : $emptyValue;
+					$breeding_potential = isset($crops['breeding_potential']) ? htmlspecialchars($crops['breeding_potential'], ENT_QUOTES) : $emptyValue;
+					$threats = isset($crops['threats']) ? htmlspecialchars($crops['threats'], ENT_QUOTES) : $emptyValue;
+					$other_info = isset($crops['other_info']) ? htmlspecialchars($crops['other_info'], ENT_QUOTES) : $emptyValue;
 
 			?>
 					<!-- form for submitting -->
@@ -534,9 +534,9 @@
 									</tr>
 								</thead>
 								<tbody>
-										<tr>
-											<th class="table-secondary w-25">Description</th>
-											<td><textarea name="threats" class="w-100 border-0 p-1" rows="5" disabled <?php echo ($threats !== $emptyValue) ? '>' . $threats : 'placeholder="Empty">'; ?></textarea></td>
+									<tr>
+										<th class="table-secondary w-25">Description</th>
+										<td><textarea name="threats" class="w-100 border-0 p-1" rows="5" disabled <?php echo ($threats !== $emptyValue) ? '>' . $threats : 'placeholder="Empty">'; ?></textarea></td>
 										</tr>
 								</tbody>
 							</table>
@@ -552,7 +552,7 @@
 										<tr>
 											<th class="table-secondary w-25">Description</th>
 											<td><textarea name="other_info" class="w-100 border-0 p-1" rows="5" disabled <?php echo ($other_info !== $emptyValue) ? '>' . $other_info : 'placeholder="Empty">'; ?></textarea></td>
-										</tr>
+									</tr>
 								</tbody>
 							</table>
 
