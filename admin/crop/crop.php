@@ -174,7 +174,9 @@
 									?>
 										<tr>
 											<th class="table-secondary w-25">Description</th>
-											<td><input type="text" name="description" value="<?= $description; ?>" class="w-100 border-0 p-1" disabled></td>
+											<td>
+												<input type="text" name="description" value="<?= $description; ?>" class="w-100 border-0 p-1" disabled>
+											</td>
 										</tr>
 									<?php
 									} else {

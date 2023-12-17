@@ -23,9 +23,9 @@
 		require('../sidebar/side.php');
 		?>
 		<!-- space holder of side panel -->
-		<section class=" d-none d-md-block col col-4 col-lg-3 col-xl-2 p-0 m-0"></section>
+		<section class=" d-none d-md-block col col-3 col-xl-2 p-0 m-0"></section>
 		<!-- main panel -->
-		<section id="nav-cards" class="p-0 m-0 col col-md-8 col-lg-9 col-xl-10">
+		<section id="nav-cards" class="p-0 m-0 col col-md-9 col-xl-10">
 
 			<!-- form for submitting -->
 			<form id="form-panel" name="Form" action="code.php" autocomplete="off" onsubmit="return validateForm()" method="POST" class=" py-3 px-5">
