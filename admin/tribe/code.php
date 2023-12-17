@@ -8,7 +8,7 @@ if (isset($_POST['save'])) {
     function handleValue($value)
     {
         if ($value === '' || $value === 'NULL') {
-            $emptyValue = 'Empty';
+            $emptyValue = "'Empty'";
             return $emptyValue; // Set to the string "Empty" if empty or NULL
         } else {
             return pg_escape_literal($value);  // Use pg_escape_literal for proper handling of single quotes

@@ -39,18 +39,18 @@
 
 					// get the data from the tribe table
 					// Define default values for each field if they are Empty
-					$tribe_name = isset($tribe['tribe_name']) ? $tribe['tribe_name'] : $emptyValue;
-					$image = isset($tribe['image']) ? $tribe['image'] : $emptyValue;
-					$location = isset($tribe['location']) ? $tribe['location'] : $emptyValue;
-					$language_and_dialect = isset($tribe['language_and_dialect']) ? $tribe['language_and_dialect'] : $emptyValue;
-					$population = isset($tribe['population']) ? $tribe['population'] : $emptyValue;
-					$livelihood_and_practices = isset($tribe['livelihood_and_practices']) ? $tribe['livelihood_and_practices'] : $emptyValue;
-					$farming_practices = isset($tribe['farming_practices']) ? $tribe['farming_practices'] : $emptyValue;
-					$social_structure_and_kinship_system = isset($tribe['social_structure_and_kinship_system']) ? $tribe['social_structure_and_kinship_system'] : $emptyValue;
-					$beliefs_and_customs = isset($tribe['beliefs_and_customs']) ? $tribe['beliefs_and_customs'] : $emptyValue;
-					$challenges_and_threats = isset($tribe['challenges_and_threats']) ? $tribe['challenges_and_threats'] : $emptyValue;
-					$efforts_of_revitalization = isset($tribe['efforts_of_revitalization']) ? $tribe['efforts_of_revitalization'] : $emptyValue;
-					$other_info = isset($tribe['other_info']) ? $tribe['other_info'] : $emptyValue;
+					$tribe_name = isset($tribe['tribe_name']) ? htmlspecialchars($tribe['tribe_name'], ENT_QUOTES) : $emptyValue;
+					$image = isset($tribe['image']) ? htmlspecialchars($tribe['image'], ENT_QUOTES) : $emptyValue;
+					$location = isset($tribe['location']) ? htmlspecialchars($tribe['location'], ENT_QUOTES) : $emptyValue;
+					$language_and_dialect = isset($tribe['language_and_dialect']) ? htmlspecialchars($tribe['language_and_dialect'], ENT_QUOTES) : $emptyValue;
+					$population = isset($tribe['population']) ? htmlspecialchars($tribe['population'], ENT_QUOTES) : $emptyValue;
+					$livelihood_and_practices = isset($tribe['livelihood_and_practices']) ? htmlspecialchars($tribe['livelihood_and_practices'], ENT_QUOTES) : $emptyValue;
+					$farming_practices = isset($tribe['farming_practices']) ? htmlspecialchars($tribe['farming_practices'], ENT_QUOTES) : $emptyValue;
+					$social_structure_and_kinship_system = isset($tribe['social_structure_and_kinship_system']) ? htmlspecialchars($tribe['social_structure_and_kinship_system'], ENT_QUOTES) : $emptyValue;
+					$beliefs_and_customs = isset($tribe['beliefs_and_customs']) ? htmlspecialchars($tribe['beliefs_and_customs'], ENT_QUOTES) : $emptyValue;
+					$challenges_and_threats = isset($tribe['challenges_and_threats']) ? htmlspecialchars($tribe['challenges_and_threats'], ENT_QUOTES) : $emptyValue;
+					$efforts_of_revitalization = isset($tribe['efforts_of_revitalization']) ? htmlspecialchars($tribe['efforts_of_revitalization'], ENT_QUOTES) : $emptyValue;
+					$other_info = isset($tribe['other_info']) ? htmlspecialchars($tribe['other_info'], ENT_QUOTES) : $emptyValue;
 
 			?>
 					<!-- form for submitting -->
