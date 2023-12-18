@@ -81,7 +81,9 @@
                         ?>
 
                         <?php
-                        $result = pg_query($connection, "select * from farming where farming_name like '%$search%' OR DESCRIPTION LIKE '%$search%'");
+                        $search = pg_escape_string($connection, $_POST['search']);
+                        $query = "SELECT * FROM farming WHERE farming_name ILIKE $1";
+                        $result = pg_query_params($connection, $query, array("%$search%"));
                         $count = pg_num_rows($result);
 
                         if ($count > 0) {

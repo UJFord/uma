@@ -32,13 +32,13 @@
 					<!-- title -->
 					<div class="col-6">
 						<h2 id="crops-title" class="fw-semibold">Rituals</h2>
-                        <?php
-                        $search = pg_escape_string($connection, $_POST['search']);
-                        ?>
-                        <h2>
-                            <a href="#" class="text-black">"<?php echo $search; ?>"</a>
-                            <a href="list.php" class="text-black">( &times; )</a>
-                        </h2>
+						<?php
+						$search = pg_escape_string($connection, $_POST['search']);
+						?>
+						<h2>
+							<a href="#" class="text-black">"<?php echo $search; ?>"</a>
+							<a href="list.php" class="text-black">( &times; )</a>
+						</h2>
 					</div>
 
 					<!-- search -->
@@ -65,8 +65,8 @@
 								</li>
 							</ul>
 							<form action="search.php" method="POST">
-                                <input type="search" name="search" class="form-control" placeholder="Start typing to filter..." />
-                            </form>
+								<input type="search" name="search" class="form-control" placeholder="Start typing to filter..." />
+							</form>
 						</div>
 					</div>
 
@@ -81,7 +81,9 @@
 						?>
 
 						<?php
-						$result = pg_query($connection, "select * from ritual where ritual_name like '%$search%' OR DESCRIPTION LIKE '%$search%'");
+						$search = pg_escape_string($connection, $_POST['search']);
+						$query = "SELECT * FROM ritual WHERE ritual_name ILIKE $1";
+						$result = pg_query_params($connection, $query, array("%$search%"));
 						$count = pg_num_rows($result);
 
 						if ($count > 0) {

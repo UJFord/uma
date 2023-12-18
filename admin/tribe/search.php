@@ -79,7 +79,9 @@
                     ?>
 
                     <?php
-                    $result = pg_query($connection, "select * from tribe where tribe_name like '%$search%'");
+                    $search = pg_escape_string($connection, $_POST['search']);
+                    $query = "SELECT * FROM tribe WHERE tribe_name ILIKE $1";
+                    $result = pg_query_params($connection, $query, array("%$search%"));
                     $count = pg_num_rows($result);
 
                     if ($count > 0) {
