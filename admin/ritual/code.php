@@ -58,24 +58,19 @@ if (isset($_POST['save'])) {
 
 if (isset($_POST['update'])) {
     $ritual_id = pg_escape_string($con, $_POST['ritual_id']);
-    $description = pg_escape_string($con, $_POST['description']);
-    $ritual_name = pg_escape_string($con, $_POST['ritual_name']);
-    $image = pg_escape_string($con, $_POST['image']);
-    $purpose = pg_escape_string($con, $_POST['purpose']);
-    $timing = pg_escape_string($con, $_POST['timing']);
-    $participants = pg_escape_string($con, $_POST['participants']);
-    $items_used = pg_escape_string($con, $_POST['items_used']);
-    $other_info = pg_escape_string($con, $_POST['other_info']);
+    $description = $_POST['description'];
+    $ritual_name = $_POST['ritual_name'];
+    $image = $_POST['image'];
+    $purpose = $_POST['purpose'];
+    $timing = $_POST['timing'];
+    $participants = $_POST['participants'];
+    $items_used = $_POST['items_used'];
+    $other_info = $_POST['other_info'];
 
-    // Function to wrap non-empty values in single quotes and handle empty values
+    // Function to handle empty values
     function handleValue($value)
     {
-        if ($value === '') {
-            $emptyValue = 'Empty';
-            return $emptyValue;  // Set to NULL if empty
-        } else {
-            return "'" . $value . "'";  // Wrap in single quotes for non-empty values
-        }
+        return $value === '' ? 'Empty' : $value;
     }
 
     // Apply the function to each field
@@ -88,25 +83,28 @@ if (isset($_POST['update'])) {
     $items_used = handleValue($items_used);
     $other_info = handleValue($other_info);
 
+    // Update query with parameterized values
     $query = "UPDATE ritual SET 
-            ritual_name = $ritual_name,
-            description = $description,
-            image = $image,
-            purpose = $purpose,
-            timing = $timing,
-            participants = $participants,
-            items_used = $items_used,
-            other_info = $other_info
-            WHERE ritual_id = $ritual_id";
+            ritual_name = $1,
+            description = $2,
+            image = $3,
+            purpose = $4,
+            timing = $5,
+            participants = $6,
+            items_used = $7,
+            other_info = $8
+            WHERE ritual_id = $9";
 
-    $query_run = pg_query($con, $query);
+    // Execute parameterized query
+    $query_run = pg_query_params($con, $query, array(
+        $ritual_name, $description, $image, $purpose, $timing, $participants, $items_used, $other_info, $ritual_id
+    ));
 
     if ($query_run) {
         $_SESSION['message'] = "Ritual Updated Successfully";
         header("Location: ritual.php?ritual_id=" . $_POST['ritual_id']);
         exit(0);
     } else {
-        // echo "Error: " . pg_last_error($con);
         $_SESSION['message'] = "Ritual Not Updated";
         $_SESSION['message_type'] = 'error';
         $_SESSION['error_details'] = pg_last_error($con);

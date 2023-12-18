@@ -84,70 +84,70 @@ if (isset($_POST['save'])) {
 
 if (isset($_POST['update'])) {
     $farming_id = pg_escape_string($con, $_POST['farming_id']);
-    $farming_name = pg_escape_string($con, $_POST['farming_name']);
-    $description = pg_escape_string($con, $_POST['description']);
-    $image = pg_escape_string($con, $_POST['image']);
-    $importance = pg_escape_string($con, $_POST['importance']);
-    $role_in_maintaining_upland_ecosystem = pg_escape_string($con, $_POST['role_in_maintaining_upland_ecosystem']);
-    $timing = pg_escape_string($con, $_POST['timing']);
-    $benefits = pg_escape_string($con, $_POST['benefits']);
-    $environmental_impacts = pg_escape_string($con, $_POST['environmental_impacts']);
-    $considerations = pg_escape_string($con, $_POST['considerations']);
-    $sustainable_practices = pg_escape_string($con, $_POST['sustainable_practices']);
-    $history_development = pg_escape_string($con, $_POST['history_development']);
-    $construction_and_maintenance = pg_escape_string($con, $_POST['construction_and_maintenance']);
-    $challenges = pg_escape_string($con, $_POST['challenges']);
-    $principles = pg_escape_string($con, $_POST['principles']);
-    $other_info = pg_escape_string($con, $_POST['other_info']);
+    $farming_name = $_POST['farming_name'];
+    $description = $_POST['description'];
+    $image = $_POST['image'];
+    $importance = $_POST['importance'];
+    $role_in_maintaining_upland_ecosystem = $_POST['role_in_maintaining_upland_ecosystem'];
+    $timing = $_POST['timing'];
+    $benefits = $_POST['benefits'];
+    $environmental_impacts = $_POST['environmental_impacts'];
+    $considerations = $_POST['considerations'];
+    $sustainable_practices = $_POST['sustainable_practices'];
+    $history_development = $_POST['history_development'];
+    $construction_and_maintenance = $_POST['construction_and_maintenance'];
+    $challenges = $_POST['challenges'];
+    $principles = $_POST['principles'];
+    $other_info = $_POST['other_info'];
 
     // Function to handle empty values and NULL values
     function handleValue($value)
     {
-        if ($value === '') {
-            $emptyValue = 'Empty';
-            return $emptyValue;  // Set to NULL if empty
-        } else {
-            return "'" . pg_escape_string($value) . "'";  // Wrap in single quotes and escape for non-empty values
-        }
+        return $value === '' ? 'Empty' : $value;
     }
 
     // Apply the function to each field
-    $farming_name = handleValue($_POST['farming_name']);
-    $description = handleValue($_POST['description']);
-    $image = handleValue($_POST['image']);
-    $importance = handleValue($_POST['importance']);
-    $role_in_maintaining_upland_ecosystem = handleValue($_POST['role_in_maintaining_upland_ecosystem']);
-    $timing = handleValue($_POST['timing']);
-    $benefits = handleValue($_POST['benefits']);
-    $environmental_impacts = handleValue($_POST['environmental_impacts']);
-    $considerations = handleValue($_POST['considerations']);
-    $sustainable_practices = handleValue($_POST['sustainable_practices']);
-    $history_development = handleValue($_POST['history_development']);
-    $construction_and_maintenance = handleValue($_POST['construction_and_maintenance']);
-    $challenges = handleValue($_POST['challenges']);
-    $principles = handleValue($_POST['principles']);
-    $other_info = handleValue($_POST['other_info']);
-    $farming_id = handleValue($_POST['farming_id']);
+    $farming_name = handleValue($farming_name);
+    $description = handleValue($description);
+    $image = handleValue($image);
+    $importance = handleValue($importance);
+    $role_in_maintaining_upland_ecosystem = handleValue($role_in_maintaining_upland_ecosystem);
+    $timing = handleValue($timing);
+    $benefits = handleValue($benefits);
+    $environmental_impacts = handleValue($environmental_impacts);
+    $considerations = handleValue($considerations);
+    $sustainable_practices = handleValue($sustainable_practices);
+    $history_development = handleValue($history_development);
+    $construction_and_maintenance = handleValue($construction_and_maintenance);
+    $challenges = handleValue($challenges);
+    $principles = handleValue($principles);
+    $other_info = handleValue($other_info);
 
+    // Update query with parameterized values
     $query = "UPDATE farming SET 
-        farming_name = $farming_name,
-        description = $description,
-        image = $image,
-        importance = $importance,
-        role_in_maintaining_upland_ecosystem = $role_in_maintaining_upland_ecosystem,
-        timing = $timing,
-        benefits = $benefits,
-        environmental_impacts = $environmental_impacts,
-        considerations = $considerations,
-        sustainable_practices = $sustainable_practices,
-        history_development = $history_development,
-        construction_and_maintenance = $construction_and_maintenance,
-        challenges = $challenges,
-        principles = $principles,
-        other_info = $other_info
-        WHERE farming_id = $farming_id";
+        farming_name = $1,
+        description = $2,
+        image = $3,
+        importance = $4,
+        role_in_maintaining_upland_ecosystem = $5,
+        timing = $6,
+        benefits = $7,
+        environmental_impacts = $8,
+        considerations = $9,
+        sustainable_practices = $10,
+        history_development = $11,
+        construction_and_maintenance = $12,
+        challenges = $13,
+        principles = $14,
+        other_info = $15
+        WHERE farming_id = $16";
 
-    $query_run = pg_query($con, $query);
+    // Execute parameterized query
+    $query_run = pg_query_params($con, $query, array(
+        $farming_name, $description, $image, $importance, $role_in_maintaining_upland_ecosystem, $timing,
+        $benefits, $environmental_impacts, $considerations, $sustainable_practices, $history_development,
+        $construction_and_maintenance, $challenges, $principles, $other_info, $farming_id
+    ));
 
     if ($query_run) {
         $_SESSION['message'] = "Farming Updated Successfully";

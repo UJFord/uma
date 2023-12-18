@@ -36,14 +36,14 @@
 
                 if (pg_num_rows($query_run) > 0) {
                     $ritual = pg_fetch_assoc($query_run);
-                    $ritual_name = isset($ritual['ritual_name']) ? $ritual['ritual_name'] : $emptyValue;
-                    $description = isset($ritual['description']) ? $ritual['description'] : $emptyValue;
-                    $image = isset($ritual['image']) ? $ritual['image'] : $emptyValue;
-                    $purpose = isset($ritual['purpose']) ? $ritual['purpose'] : $emptyValue;
-                    $timing = isset($ritual['timing']) ? $ritual['timing'] : $emptyValue;
-                    $participants = isset($ritual['participants']) ? $ritual['participants'] : $emptyValue;
-                    $items_used = isset($ritual['items_used']) ? $ritual['items_used'] : $emptyValue;
-                    $other_info = isset($ritual['other_info']) ? $ritual['other_info'] : $emptyValue;
+                    $ritual_name = isset($ritual['ritual_name']) ? htmlspecialchars($ritual['ritual_name'], ENT_QUOTES) : $emptyValue;
+                    $description = isset($ritual['description']) ? htmlspecialchars($ritual['description'], ENT_QUOTES) : $emptyValue;
+                    $image = isset($ritual['image']) ? htmlspecialchars($ritual['image'], ENT_QUOTES) : $emptyValue;
+                    $purpose = isset($ritual['purpose']) ? htmlspecialchars($ritual['purpose'], ENT_QUOTES) : $emptyValue;
+                    $timing = isset($ritual['timing']) ? htmlspecialchars($ritual['timing'], ENT_QUOTES) : $emptyValue;
+                    $participants = isset($ritual['participants']) ? htmlspecialchars($ritual['participants'], ENT_QUOTES) : $emptyValue;
+                    $items_used = isset($ritual['items_used']) ? htmlspecialchars($ritual['items_used'], ENT_QUOTES) : $emptyValue;
+                    $other_info = isset($ritual['other_info']) ? htmlspecialchars($ritual['other_info'], ENT_QUOTES) : $emptyValue;
             ?>
 
                     <!-- form for submitting -->

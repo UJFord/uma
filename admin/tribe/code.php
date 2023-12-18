@@ -59,28 +59,23 @@ if (isset($_POST['save'])) {
 
 if (isset($_POST['update'])) {
     $tribe_id = pg_escape_string($con, $_POST['tribe_id']);
-    $tribe_name = pg_escape_string($con, $_POST['tribe_name']);
-    $image = pg_escape_string($con, $_POST['image']);
-    $location = pg_escape_string($con, $_POST['location']);
-    $language_and_dialect = pg_escape_string($con, $_POST['language_and_dialect']);
-    $population = pg_escape_string($con, $_POST['population']);
-    $livelihood_and_practices = pg_escape_string($con, $_POST['livelihood_and_practices']);
-    $farming_practices = pg_escape_string($con, $_POST['farming_practices']);
-    $social_structure_and_kinship_system = pg_escape_string($con, $_POST['social_structure_and_kinship_system']);
-    $beliefs_and_customs = pg_escape_string($con, $_POST['beliefs_and_customs']);
-    $challenges_and_threats = pg_escape_string($con, $_POST['challenges_and_threats']);
-    $efforts_of_revitalization = pg_escape_string($con, $_POST['efforts_of_revitalization']);
-    $other_info = pg_escape_string($con, $_POST['other_info']);
+    $tribe_name = $_POST['tribe_name'];
+    $image = $_POST['image'];
+    $location = $_POST['location'];
+    $language_and_dialect = $_POST['language_and_dialect'];
+    $population = $_POST['population'];
+    $livelihood_and_practices = $_POST['livelihood_and_practices'];
+    $farming_practices = $_POST['farming_practices'];
+    $social_structure_and_kinship_system = $_POST['social_structure_and_kinship_system'];
+    $beliefs_and_customs = $_POST['beliefs_and_customs'];
+    $challenges_and_threats = $_POST['challenges_and_threats'];
+    $efforts_of_revitalization = $_POST['efforts_of_revitalization'];
+    $other_info = $_POST['other_info'];
 
-    // Function to wrap non-empty values in single quotes and handle empty values
+    // Function to handle empty values
     function handleValue($value)
     {
-        if ($value === '') {
-            $emptyValue = 'Empty';
-            return $emptyValue;  // Set to NULL if empty
-        } else {
-            return "'" . $value . "'";  // Wrap in single quotes for non-empty values
-        }
+        return $value === '' ? 'Empty' : $value;
     }
 
     // Apply the function to each field
@@ -97,33 +92,35 @@ if (isset($_POST['update'])) {
     $efforts_of_revitalization = handleValue($efforts_of_revitalization);
     $other_info = handleValue($other_info);
 
+    // Update query with parameterized values
     $query = "UPDATE tribe SET 
-            tribe_name = $tribe_name,
-            image = $image,
-            location = $location,
-            language_and_dialect = $language_and_dialect,
-            population = $population,
-            livelihood_and_practices = $livelihood_and_practices,
-            farming_practices = $farming_practices,
-            social_structure_and_kinship_system = $social_structure_and_kinship_system,
-            beliefs_and_customs = $beliefs_and_customs,
-            challenges_and_threats = $challenges_and_threats,
-            efforts_of_revitalization = $efforts_of_revitalization,
-            other_info = $other_info
-            WHERE tribe_id = $tribe_id";
+            tribe_name = $1,
+            image = $2,
+            location = $3,
+            language_and_dialect = $4,
+            population = $5,
+            livelihood_and_practices = $6,
+            farming_practices = $7,
+            social_structure_and_kinship_system = $8,
+            beliefs_and_customs = $9,
+            challenges_and_threats = $10,
+            efforts_of_revitalization = $11,
+            other_info = $12
+            WHERE tribe_id = $13";
 
-    $query_run = pg_query($con, $query);
+    // Execute parameterized query
+    $query_run = pg_query_params($con, $query, array(
+        $tribe_name, $image, $location, $language_and_dialect, $population, $livelihood_and_practices,
+        $farming_practices, $social_structure_and_kinship_system, $beliefs_and_customs, $challenges_and_threats,
+        $efforts_of_revitalization, $other_info, $tribe_id
+    ));
 
     if ($query_run) {
         $_SESSION['message'] = "Tribe Updated Successfully";
-        header("Location: tribe.php?tribe_id=" . $_POST['tribe_id']); // Assuming your update page is named 'update.php'
+        header("Location: tribe.php?tribe_id=" . $_POST['tribe_id']);
         exit(0);
     } else {
-        // echo "Error: " . pg_last_error($con);
-        $_SESSION['message'] = "Tribe Not Updated";
-        $_SESSION['message_type'] = 'error';
-        $_SESSION['error_details'] = pg_last_error($con);
-        header("Location: tribe.php");
+        echo "Error: " . pg_last_error($con);
         exit(0);
     }
 }
