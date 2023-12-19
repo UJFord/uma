@@ -28,14 +28,6 @@ require('../../html/navfoot/connection.php');
                     Crops
                 </a>
             </li>
-            <!-- tribes sidebar nav -->
-            <li>
-                <a href="../tribe/list.php" <?php echo (strpos($current_page, '/uma/admin/tribe/list.php') === 0 || strpos($current_page, '/uma/admin/tribe/tribe.php') === 0 || strpos($current_page, '/uma/admin/tribe/create.php') === 0)
-                                                ? 'class="nav-link text-dark fw-semibold rounded-start-pill active-nav"'
-                                                : 'class="nav-link text-white"'; ?>>
-                    <i class="fa-solid fa-people-group" style="width: 1.5rem;"></i>
-                    Tribes
-                </a>
 
             </li>
             <!-- rituals sidebar nav -->
