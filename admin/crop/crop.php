@@ -39,27 +39,20 @@
 					$crops = pg_fetch_assoc($query_run);
 
 					// get the id for the roreign tables
-					$current_agronomic_information_id = $crops['agronomic_information_id'];
-					$current_botanical_information_id = $crops['botanical_information_id'];
-					$current_morphological_characteristic_id = $crops['morphological_characteristic_id'];
 					$current_traditional_crop_traits_id = $crops['traditional_crop_traits_id'];
-					$current_relationship_among_cultivars_id = $crops['relationship_among_cultivars_id'];
 
 					// Get the data from crops table
 					// Define default values for each field if they are $emptyValue
 					$crop_name = isset($crops['crop_name']) ? htmlspecialchars($crops['crop_name'], ENT_QUOTES) : $emptyValue;
 					$upland_or_lowland = isset($crops['upland_or_lowland']) ? htmlspecialchars($crops['upland_or_lowland'], ENT_QUOTES) : $emptyValue;
-					$season = isset($crops['season']) ? htmlspecialchars($crops['season'], ENT_QUOTES) : $emptyValue;
 					$category = isset($crops['category']) ? htmlspecialchars($crops['category'], ENT_QUOTES) : $emptyValue;
-					$links = isset($crops['links']) ? htmlspecialchars($crops['links'], ENT_QUOTES) : $emptyValue;
 					$description = isset($crops['description']) ? htmlspecialchars($crops['description'], ENT_QUOTES) : $emptyValue;
 					$image = isset($crops['image']) ? htmlspecialchars($crops['image'], ENT_QUOTES) : $emptyValue;
 					$local_name = isset($crops['local_name']) ? htmlspecialchars($crops['local_name'], ENT_QUOTES) : $emptyValue;
 					$planting_techniques = isset($crops['planting_techniques']) ? htmlspecialchars($crops['planting_techniques'], ENT_QUOTES) : $emptyValue;
 					$cultural_and_spiritual_significance = isset($crops['cultural_and_spiritual_significance']) ? htmlspecialchars($crops['cultural_and_spiritual_significance'], ENT_QUOTES) : $emptyValue;
 					$rice_biodiversity_uplift = isset($crops['rice_biodiversity_uplift']) ? htmlspecialchars($crops['rice_biodiversity_uplift'], ENT_QUOTES) : $emptyValue;
-					$economic_importance = isset($crops['economic_importance']) ? htmlspecialchars($crops['economic_importance'], ENT_QUOTES) : $emptyValue;
-					$traditional_knowledge_and_practices = isset($crops['traditional_knowledge_and_practices']) ? htmlspecialchars($crops['traditional_knowledge_and_practices'], ENT_QUOTES) : $emptyValue;
+					$cultural_importance_and_traditional_knowledge = isset($crops['cultural_importance_and_traditional_knowledge']) ? htmlspecialchars($crops['cultural_importance_and_traditional_knowledge'], ENT_QUOTES) : $emptyValue;
 					$breeding_potential = isset($crops['breeding_potential']) ? htmlspecialchars($crops['breeding_potential'], ENT_QUOTES) : $emptyValue;
 					$threats = isset($crops['threats']) ? htmlspecialchars($crops['threats'], ENT_QUOTES) : $emptyValue;
 					$other_info = isset($crops['other_info']) ? htmlspecialchars($crops['other_info'], ENT_QUOTES) : $emptyValue;
@@ -83,11 +76,7 @@
 						<div id="" class="row form-control p-3">
 
 							<input type="hidden" name="crop_id" value="<?= $crops['crop_id']; ?>">
-							<input type="hidden" name="botanical_information_id" value="<?= $crops['botanical_information_id']; ?>">
-							<input type="hidden" name="agronomic_information_id" value="<?= $crops['agronomic_information_id']; ?>">
-							<input type="hidden" name="morphological_characteristic_id" value="<?= $crops['morphological_characteristic_id']; ?>">
 							<input type="hidden" name="traditional_crop_traits_id" value="<?= $crops['traditional_crop_traits_id']; ?>">
-							<input type="hidden" name="relationship_among_cultivars_id" value="<?= $crops['relationship_among_cultivars_id']; ?>">
 
 							<!-- General Information -->
 							<table id="info-table" class="table table-hover table-sm">
@@ -102,16 +91,8 @@
 										<td><input type="text" name="upland_or_lowland" <?php echo ($upland_or_lowland != $emptyValue) ? 'value="' . $upland_or_lowland . '"' : 'placeholder="Empty"'; ?> class="w-100 border-0 p-1" disabled></td>
 									</tr>
 									<tr>
-										<th class="table-secondary w-25">Season</th>
-										<td><input type="text" name="season" <?php echo ($season != $emptyValue) ? 'value="' . $season . '"' : 'placeholder="Empty"'; ?> class="w-100 border-0 p-1" disabled></td>
-									</tr>
-									<tr>
-										<th class="table-secondary w-25">Category</th>
+										<th class="table-secondary w-25">Category (rice, rootcrop, etc...)</th>
 										<td><input type="text" name="category" <?php echo ($category != $emptyValue) ? 'value="' . $category . '"' : 'placeholder="Empty"'; ?> class="w-100 border-0 p-1" disabled></td>
-									</tr>
-									<tr>
-										<th class="table-secondary w-25">Links</th>
-										<td><input type="text" name="links" <?php echo ($links != $emptyValue) ? 'value="' . $links . '"' : 'placeholder="Empty"'; ?> class="w-100 border-0 p-1" disabled></td>
 									</tr>
 									<tr>
 										<th class="table-secondary w-25">Description</th>
@@ -125,46 +106,6 @@
 										<th class="table-secondary w-25">Local Name</th>
 										<td><input type="text" name="local_name" <?php echo ($local_name != $emptyValue) ? 'value="' . $local_name . '"' : 'placeholder="Empty"'; ?> class="w-100 border-0 p-1" disabled></td>
 									</tr>
-								</tbody>
-							</table>
-
-							<!-- botanical information -->
-							<table id="info-table" class="table table-hover table-sm">
-								<thead>
-									<tr>
-										<th colspan="2" class="table-dark">Botanical Information</th>
-									</tr>
-								</thead>
-								<tbody>
-									<?php
-									// PHP code to display available Botanical Information from the database
-
-									// Query to select all available Botanical Information in the database
-									$query2 = "SELECT * FROM botanical_information WHERE botanical_information_id='$current_botanical_information_id'";
-
-									// Executing query
-									$query_run2 = pg_query($connection, $query2);
-
-									// If count is greater than 0, we have Botanical Information; else, we do not have Botanical Information
-									if (pg_num_rows($query_run2) > 0) {
-										// We have Botanical Information
-										$row2 = pg_fetch_assoc($query_run2);
-
-										// Get the details of the Botanical Information
-										$scientific_name = isset($row2['scientific_name']) ? $row2['scientific_name'] : $emptyValue;
-										$common_names = isset($row2['common_names']) ? $row2['common_names'] : $emptyValue;
-									?>
-										<tr>
-											<th class="table-secondary w-25">Scientific Name</th>
-											<td><input type="text" name="scientific_name" <?php echo ($scientific_name != $emptyValue) ? 'value="' . $scientific_name . '"' : 'placeholder="Empty"'; ?> class="w-100 border-0 p-1" disabled></td>
-										</tr>
-										<tr>
-											<th class="table-secondary w-25">Common Name</th>
-											<td><input type="text" name="common_names" <?php echo ($common_names != $emptyValue) ? 'value="' . $common_names . '"' : 'placeholder="Empty"'; ?> class="w-100 border-0 p-1" disabled></td>
-										</tr>
-									<?php
-									}
-									?>
 								</tbody>
 							</table>
 
@@ -195,8 +136,6 @@
 										$maturation = isset($traditional_crop_traits['maturation']) ? $traditional_crop_traits['maturation'] : $emptyValue;
 										$drought_tolerance = isset($traditional_crop_traits['drought_tolerance']) ? $traditional_crop_traits['drought_tolerance'] : $emptyValue;
 										$environment_adaptability = isset($traditional_crop_traits['environment_adaptability']) ? $traditional_crop_traits['environment_adaptability'] : $emptyValue;
-										$culinary_quality = isset($traditional_crop_traits['culinary_quality']) ? $traditional_crop_traits['culinary_quality'] : $emptyValue;
-										$nutritional_value = isset($traditional_crop_traits['nutritional_value']) ? $traditional_crop_traits['nutritional_value'] : $emptyValue;
 										$disease_resistance = isset($traditional_crop_traits['disease_resistance']) ? $traditional_crop_traits['disease_resistance'] : $emptyValue;
 										$pest_resistance = isset($traditional_crop_traits['pest_resistance']) ? $traditional_crop_traits['pest_resistance'] : $emptyValue;
 									?>
@@ -219,14 +158,6 @@
 										<tr>
 											<th class="table-secondary w-25">Environment Adaptability</th>
 											<td><input type="text" name="environment_adaptability" <?php echo ($environment_adaptability != $emptyValue) ? 'value="' . $environment_adaptability . '"' : 'placeholder="Empty"'; ?> class="w-100 border-0 p-1" disabled></td>
-										</tr>
-										<tr>
-											<th class="table-secondary w-25">Culinary Quality</th>
-											<td><input type="text" name="culinary_quality" <?php echo ($culinary_quality != $emptyValue) ? 'value="' . $culinary_quality . '"' : 'placeholder="Empty"'; ?> class="w-100 border-0 p-1" disabled></td>
-										</tr>
-										<tr>
-											<th class="table-secondary w-25">Nutritional Value</th>
-											<td><input type="text" name="nutritional_value" <?php echo ($nutritional_value != $emptyValue) ? 'value="' . $nutritional_value . '"' : 'placeholder="Empty"'; ?> class="w-100 border-0 p-1" disabled></td>
 										</tr>
 										<tr>
 											<th class="table-secondary w-25">Disease Resistance</th>
@@ -272,42 +203,6 @@
 								</tbody>
 							</table>
 
-							<!-- Agronomic Characteristic -->
-							<table class="table table-hover table-sm">
-								<thead>
-									<tr>
-										<th colspan="2" class="table-dark">Agronomic Characteristic</th>
-									</tr>
-								</thead>
-								<tbody>
-									<?php
-									// PHP code to display available Agronomic Information from the database
-									// Query to select all available Agronomic Information in the database
-									$query5 = "SELECT * FROM agronomic_information WHERE agronomic_information_id='$current_agronomic_information_id'";
-									// Executing query
-									$query_run5 = pg_query($connection, $query5);
-
-									// If count is greater than 0, we have Agronomic Information; else, we do not have Agronomic Information
-									if (pg_num_rows($query_run5) > 0) {
-										$agronomic_information = pg_fetch_assoc($query_run5);
-										// Define default values for each field if they are $emptyValue
-										$days_to_mature = isset($agronomic_information['days_to_mature']) ? $agronomic_information['days_to_mature'] : $emptyValue;
-										$yield_potential = isset($agronomic_information['yield_potential']) ? $agronomic_information['yield_potential'] : $emptyValue;
-									?>
-										<tr>
-											<th class="table-secondary w-25">Days to Mature</th>
-											<td><input type="text" name="days_to_mature" <?php echo ($days_to_mature != $emptyValue) ? 'value="' . $days_to_mature . '"' : 'placeholder="Empty"'; ?> class="w-100 border-0 p-1" disabled></td>
-										</tr>
-										<tr>
-											<th class="table-secondary w-25">Yield Potential</th>
-											<td><input type="text" name="yield_potential" <?php echo ($yield_potential != $emptyValue) ? 'value="' . $yield_potential . '"' : 'placeholder="Empty"'; ?> class="w-100 border-0 p-1" disabled></td>
-										</tr>
-									<?php
-									}
-									?>
-								</tbody>
-							</table>
-
 							<!-- Role in maintaining upland ecosystems And biodiversity-->
 							<table class="table table-hover table-sm">
 								<thead>
@@ -323,32 +218,17 @@
 								</tbody>
 							</table>
 
-							<!-- Economic Importance-->
-							<table class="table table-hover table-sm">
-								<thead>
-									<tr>
-										<th colspan="2" class="table-dark">Economic Importance</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-											<th class="table-secondary w-25">Description</th>
-											<td><textarea name="economic_importance" class="w-100 border-0 p-1" rows="5" disabled <?php echo ($economic_importance !== $emptyValue) ? '>' . $economic_importance : 'placeholder="Empty">'; ?></textarea></td>
-									</tr>
-								</tbody>
-							</table>
-
 							<!-- Traditional Knowledge and Practices-->
 							<table class="table table-hover table-sm">
 								<thead>
 									<tr>
-										<th colspan="2" class="table-dark">Traditional Knowledge and Practices</th>
+										<th colspan="2" class="table-dark">Cultural Importance and Traditional Knowledge</th>
 									</tr>
 								</thead>
 								<tbody>
 									<tr>
 										<th class="table-secondary w-25">Description</th>
-										<td><textarea name="traditional_knowledge_and_practices" class="w-100 border-0 p-1" rows="5" disabled <?php echo ($traditional_knowledge_and_practices !== $emptyValue) ? '>' . $traditional_knowledge_and_practices : 'placeholder="Empty">'; ?></textarea></td>
+										<td><textarea name="cultural_importance_and_traditional_knowledge" class="w-100 border-0 p-1" rows="5" disabled <?php echo ($cultural_importance_and_traditional_knowledge !== $emptyValue) ? '>' . $cultural_importance_and_traditional_knowledge : 'placeholder="Empty">'; ?></textarea></td>
 										</tr>
 								</tbody>
 							</table>
@@ -365,149 +245,6 @@
 										<th class="table-secondary w-25">Map</th>
 										<td></td>
 									</tr>
-								</tbody>
-							</table>
-
-							<!-- morphological characteristics  -->
-							<table class="table table-hover table-sm">
-								<thead>
-									<tr>
-										<th colspan="2" class="table-dark">Morphological Characteristics</th>
-									</tr>
-								</thead>
-								<tbody>
-									<?php
-									// PHP code to display available Morphological Characteristics from the database
-									// Query to select all available Morphological Characteristics in the database
-									$query6 = "SELECT * FROM morphological_characteristic WHERE morphological_characteristic_id='$current_morphological_characteristic_id'";
-
-									// Executing query
-									$query_run6 = pg_query($connection, $query6);
-
-									// If count is greater than 0, we have Morphological Characteristics; else, we do not have Morphological Characteristics
-									if (pg_num_rows($query_run6) > 0) {
-										$morphological_characteristic = pg_fetch_assoc($query_run6);
-
-										// Define default values for each field if they are $emptyValue
-										$plant_height = isset($morphological_characteristic['plant_height']) ? $morphological_characteristic['plant_height'] : $emptyValue;
-										$panicle_length = isset($morphological_characteristic['panicle_length']) ? $morphological_characteristic['panicle_length'] : $emptyValue;
-										$grain_quality = isset($morphological_characteristic['grain_quality']) ? $morphological_characteristic['grain_quality'] : $emptyValue;
-										$grain_color = isset($morphological_characteristic['grain_color']) ? $morphological_characteristic['grain_color'] : $emptyValue;
-										$grain_length = isset($morphological_characteristic['grain_length']) ? $morphological_characteristic['grain_length'] : $emptyValue;
-										$grain_width = isset($morphological_characteristic['grain_width']) ? $morphological_characteristic['grain_width'] : $emptyValue;
-										$grain_shape = isset($morphological_characteristic['grain_shape']) ? $morphological_characteristic['grain_shape'] : $emptyValue;
-										$awn_length = isset($morphological_characteristic['awn_length']) ? $morphological_characteristic['awn_length'] : $emptyValue;
-										$leaf_length = isset($morphological_characteristic['leaf_length']) ? $morphological_characteristic['leaf_length'] : $emptyValue;
-										$leaf_width = isset($morphological_characteristic['leaf_width']) ? $morphological_characteristic['leaf_width'] : $emptyValue;
-										$leaf_shape = isset($morphological_characteristic['leaf_shape']) ? $morphological_characteristic['leaf_shape'] : $emptyValue;
-										$stem_color = isset($morphological_characteristic['stem_color']) ? $morphological_characteristic['stem_color'] : $emptyValue;
-										$another_color = isset($morphological_characteristic['another_color']) ? $morphological_characteristic['another_color'] : $emptyValue;
-									?>
-												<tr>
-													<th class="table-secondary w-25">Plant Height</th>
-													<td><input type="text" name="plant_height" <?php echo ($plant_height != $emptyValue) ? 'value="' . $plant_height . '"' : 'placeholder="Empty"'; ?> class="w-100 border-0 p-1" disabled></td>
-												</tr>
-												<tr>
-													<th class="table-secondary w-25">Panicle Length</th>
-													<td><input type="text" name="panicle_length" <?php echo ($panicle_length != $emptyValue) ? 'value="' . $panicle_length . '"' : 'placeholder="Empty"'; ?> class="w-100 border-0 p-1" disabled></td>
-												</tr>
-												<tr>
-													<th class="table-secondary w-25">Grain Quality</th>
-													<td><input type="text" name="grain_quality" <?php echo ($grain_quality != $emptyValue) ? 'value="' . $grain_quality . '"' : 'placeholder="Empty"'; ?> class="w-100 border-0 p-1" disabled></td>
-												</tr>
-												<tr>
-													<th class="table-secondary w-25">Grain Color</th>
-													<td><input type="text" name="grain_color" <?php echo ($grain_color != $emptyValue) ? 'value="' . $grain_color . '"' : 'placeholder="Empty"'; ?> class="w-100 border-0 p-1" disabled></td>
-												</tr>
-												<tr>
-													<th class="table-secondary w-25">Grain Length</th>
-													<td><input type="text" name="grain_length" <?php echo ($grain_length != $emptyValue) ? 'value="' . $grain_length . '"' : 'placeholder="Empty"'; ?> class="w-100 border-0 p-1" disabled></td>
-												</tr>
-												<tr>
-													<th class="table-secondary w-25">Grain Width</th>
-													<td><input type="text" name="grain_width" <?php echo ($grain_width != $emptyValue) ? 'value="' . $grain_width . '"' : 'placeholder="Empty"'; ?> class="w-100 border-0 p-1" disabled></td>
-												</tr>
-												<tr>
-													<th class="table-secondary w-25">Grain Shape</th>
-													<td><input type="text" name="grain_shape" <?php echo ($grain_shape != $emptyValue) ? 'value="' . $grain_shape . '"' : 'placeholder="Empty"'; ?> class="w-100 border-0 p-1" disabled></td>
-												</tr>
-												<tr>
-													<th class="table-secondary w-25">Awn Length</th>
-													<td><input type="text" name="awn_length" <?php echo ($awn_length != $emptyValue) ? 'value="' . $awn_length . '"' : 'placeholder="Empty"'; ?> class="w-100 border-0 p-1" disabled></td>
-												</tr>
-												<tr>
-													<th class="table-secondary w-25">Leaf Length</th>
-													<td><input type="text" name="leaf_length" <?php echo ($leaf_length != $emptyValue) ? 'value="' . $leaf_length . '"' : 'placeholder="Empty"'; ?> class="w-100 border-0 p-1" disabled></td>
-												</tr>
-												<tr>
-													<th class="table-secondary w-25">Leaf Width</th>
-													<td><input type="text" name="leaf_width" <?php echo ($leaf_width != $emptyValue) ? 'value="' . $leaf_width . '"' : 'placeholder="Empty"'; ?> class="w-100 border-0 p-1" disabled></td>
-												</tr>
-												<tr>
-													<th class="table-secondary w-25">Leaf Shape</th>
-													<td><input type="text" name="leaf_shape" <?php echo ($leaf_shape != $emptyValue) ? 'value="' . $leaf_shape . '"' : 'placeholder="Empty"'; ?> class="w-100 border-0 p-1" disabled></td>
-												</tr>
-												<tr>
-													<th class="table-secondary w-25">Stem Color</th>
-													<td><input type="text" name="stem_color" <?php echo ($stem_color != $emptyValue) ? 'value="' . $stem_color . '"' : 'placeholder="Empty"'; ?> class="w-100 border-0 p-1" disabled></td>
-												</tr>
-												<tr>
-													<th class="table-secondary w-25">Another Color</th>
-													<td><input type="text" name="another_color" <?php echo ($another_color != $emptyValue) ? 'value="' . $another_color . '"' : 'placeholder="Empty"'; ?> class="w-100 border-0 p-1" disabled></td>
-												</tr>
-										<?php
-									}
-										?>
-								</tbody>
-							</table>
-
-							<!-- relationship among cultivars  -->
-							<table class="table table-hover table-sm">
-								<thead>
-									<tr>
-										<th colspan="2" class="table-dark">Relationship Among Cultivars</th>
-									</tr>
-								</thead>
-								<tbody>
-									<?php
-									// PHP code to display available Relationship Among Cultivars from the database
-
-									// Query to select all available Relationship Among Cultivars in the database
-									$query7 = "SELECT * FROM relationship_among_cultivars WHERE relationship_among_cultivars_id='$current_relationship_among_cultivars_id'";
-
-									// Executing query
-									$query_run7 = pg_query($connection, $query7);
-
-									// If count is greater than 0, we have Relationship Among Cultivars; else, we do not have Relationship Among Cultivars
-									if (pg_num_rows($query_run7) > 0) {
-										$relationship_among_cultivars = pg_fetch_assoc($query_run7);
-
-										// Define default values for each field if they are $emptyValue
-										$distinct_cultivar_groups_morph_gen = isset($relationship_among_cultivars['distinct_cultivar_groups_morph_gen']) ? $relationship_among_cultivars['distinct_cultivar_groups_morph_gen'] : $emptyValue;
-										$cultivar_relations_cluster_and_pca = isset($relationship_among_cultivars['cultivar_relations_cluster_and_pca']) ? $relationship_among_cultivars['cultivar_relations_cluster_and_pca'] : $emptyValue;
-										$hybridization_potential = isset($relationship_among_cultivars['hybridization_potential']) ? $relationship_among_cultivars['hybridization_potential'] : $emptyValue;
-										$conservation_and_breeding_implications = isset($relationship_among_cultivars['conservation_and_breeding_implications']) ? $relationship_among_cultivars['conservation_and_breeding_implications'] : $emptyValue;
-
-									?>
-
-												<tr>
-													<th class="table-secondary w-25">Distinct Groups of Cultivars based on Morphological and Genetic Characteristics</th>
-													<td><input type="text" name="distinct_cultivar_groups_morph_gen" <?php echo ($distinct_cultivar_groups_morph_gen != $emptyValue) ? 'value="' . $distinct_cultivar_groups_morph_gen . '"' : 'placeholder="Empty"'; ?> class="w-100 border-0 p-1" disabled></td>
-												</tr>
-												<tr>
-													<th class="table-secondary w-25">Relationships Among Cultivars based on Cluster Analysis and Principal Component Analysis</th>
-													<td><input type="text" name="cultivar_relations_cluster_and_pca" <?php echo ($cultivar_relations_cluster_and_pca != $emptyValue) ? 'value="' . $cultivar_relations_cluster_and_pca . '"' : 'placeholder="Empty"'; ?> class="w-100 border-0 p-1" disabled></td>
-												</tr>												<tr>
-													<th class="table-secondary w-25">Potential for Hybridization and Breeding Among Cultivars</th>
-													<td><input type="text" name="hybridization_potential" <?php echo ($hybridization_potential != $emptyValue) ? 'value="' . $hybridization_potential . '"' : 'placeholder="Empty"'; ?> class="w-100 border-0 p-1" disabled></td>
-												</tr>
-												<tr>
-													<th class="table-secondary w-25">Implications for Conservation and Breeding Efforts</th>
-													<td><input type="text" name="conservation_and_breeding_implications" <?php echo ($conservation_and_breeding_implications != $emptyValue) ? 'value="' . $conservation_and_breeding_implications . '"' : 'placeholder="Empty"'; ?> class="w-100 border-0 p-1" disabled></td>
-												</tr>
-										<?php
-									}
-										?>
 								</tbody>
 							</table>
 
@@ -530,7 +267,7 @@
 							<table class="table table-hover table-sm">
 								<thead>
 									<tr>
-										<th colspan="2" class="table-dark">Threats from Lowland-Associated Influences</th>
+										<th colspan="2" class="table-dark">Threats to the Upland Farms</th>
 									</tr>
 								</thead>
 								<tbody>

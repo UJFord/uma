@@ -61,16 +61,8 @@
 								<td><input type="text" name="upland_or_lowland" class="w-100 border p-1"></td>
 							</tr>
 							<tr>
-								<th class="table-secondary w-25" scope="row">Season</th>
-								<td><input type="text" name="season" class="w-100 border"></td>
-							</tr>
-							<tr>
-								<th class="table-secondary w-25" scope="row">Category</th>
+								<th class="table-secondary w-25" scope="row">Category (rice, rootcrop, etc...)</th>
 								<td><input type="text" name="category"  class="w-100 border"></td>
-							</tr>
-							<tr>
-								<th class="table-secondary w-25" scope="row">Links</th>
-								<td><input type="text" name="links"  class="w-100 border"></td>
 							</tr>
 							<tr>
 								<th class="table-secondary w-25" scope="row">Link to Image</th>
@@ -79,25 +71,6 @@
 							<tr>
 								<th class="table-secondary w-25" scope="row">Local Name</th>
 								<td><input type="text" name="local_name" class="w-100 border"></td>
-							</tr>
-						</tbody>
-					</table>
-
-					<!-- botanical information -->
-					<table id="info-table" class="table table-hover table-sm">
-						<thead>
-							<tr>
-								<th colspan="2" class="table-dark">Botanical Information</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<th class="table-secondary w-25" scope="row">Scientific Name</th>
-								<td><input type="text" name="scientific_name" class="w-100 border"></td>
-							</tr>
-							<tr>
-								<th class="table-secondary">Common Names</th>
-								<td><input type="text" name="common_names" class="w-100 border"></td>
 							</tr>
 						</tbody>
 					</table>
@@ -138,14 +111,6 @@
 								<th class="table-secondary">Adaptability to Different Environments</th>
 								<td><input type="text" name="environment_adaptability" class="w-100 border"></td>
 							</tr>
-							<tr>
-								<th class="table-secondary">Cooking and Eating Quality</th>
-								<td><input type="text" name="culinary_quality" class="w-100 border"></td>
-							</tr>
-							<tr>
-								<th class="table-secondary">Nutritional Value</th>
-								<td><input type="text" name="nutritional_value" class="w-100 border"></td>
-							</tr>
 						</tbody>
 					</table>
 
@@ -179,26 +144,6 @@
 						</tbody>
 					</table>
 
-					<!-- Agronomic Characteristic -->
-
-					<table class="table table-hover table-sm">
-						<thead>
-							<tr>
-								<th colspan="2" class="table-dark">Agronomic Characteristic</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<th class="table-secondary w-25">Days to Maturity</th>
-								<td><input type="text" name="days_to_mature" class="w-100 border"></td>
-							</tr>
-							<tr>
-								<th class="table-secondary w-25">Yield per Plant</th>
-								<td><input type="text" name="yield_potential" class="w-100 border"></td>
-							</tr>
-						</tbody>
-					</table>
-
 					<!-- Role in maintaining upland ecosystems And biodiversity-->
 					<table class="table table-hover table-sm">
 						<thead>
@@ -214,32 +159,17 @@
 						</tbody>
 					</table>
 
-					<!-- Economic Importance-->
-					<table class="table table-hover table-sm">
-						<thead>
-							<tr>
-								<th colspan="2" class="table-dark">Economic Importance</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<th class="table-secondary w-25">Description</th>
-								<td><textarea name="economic_importance" class="w-100 border" rows="2"></textarea></td>
-							</tr>
-						</tbody>
-					</table>
-
 					<!-- Traditional Knowledge and Practices-->
 					<table class="table table-hover table-sm">
 						<thead>
 							<tr>
-								<th colspan="2" class="table-dark">Traditional Knowledge and Practices</th>
+								<th colspan="2" class="table-dark">Cultural Importance and Traditional Knowledge</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
 								<th class="table-secondary w-25">Description</th>
-								<td><textarea name="traditional_knowledge_and_practices" class="w-100 border" rows="2"></textarea></td>
+								<td><textarea name="cultural_importance_and_traditional_knowledge" class="w-100 border" rows="2"></textarea></td>
 							</tr>
 						</tbody>
 					</table>
@@ -263,96 +193,6 @@
 						</tbody>
 					</table>
 
-					<!-- morphological characteristics  -->
-					<table class="table table-hover table-sm">
-						<thead>
-							<tr>
-								<th colspan="2" class="table-dark">Morphological Characteristics</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<th class="table-secondary w-25">Plant Height</th>
-								<td><input type="text" name="plant_height"class="w-100 border"></td>
-							</tr>
-							<tr>
-								<th class="table-secondary">Panicle Length</th>
-								<td><input type="text" name="panicle_length" class="w-100 border"></td>
-							</tr>
-							<tr>
-								<th class="table-secondary">Grain Quality</th>
-								<td><input type="text" name="grain_quality" class="w-100 border"></td>
-							</tr>
-							<tr>
-								<th class="table-secondary">Grain Color</th>
-								<td><input type="text" name="grain_color" class="w-100 border"></td>
-							</tr>
-							<tr>
-								<th class="table-secondary">Grain Length</th>
-								<td><input type="text" name="grain_length" class="w-100 border"></td>
-							</tr>
-							<tr>
-								<th class="table-secondary">Grain Width</th>
-								<td><input type="text" name="grain_width" class="w-100 border"></td>
-							</tr>
-							<tr>
-								<th class="table-secondary">Grain Shape</th>
-								<td><input type="text" name="grain_shape" class="w-100 border"></td>
-							</tr>
-							<tr>
-								<th class="table-secondary">Awn Length</th>
-								<td><input type="text" name="awn_length" class="w-100 border"></td>
-							</tr>
-							<tr>
-								<th class="table-secondary">Leaf Length</th>
-								<td><input type="text" name="leaf_length" class="w-100 border"></td>
-							</tr>
-							<tr>
-								<th class="table-secondary">Leaf Width</th>
-								<td><input type="text" name="leaf_width" class="w-100 border"></td>
-							</tr>
-							<tr>
-								<th class="table-secondary">Leaf Shape</th>
-								<td><input type="text" name="leaf_shape" class="w-100 border"></td>
-							</tr>
-							<tr>
-								<th class="table-secondary">Stem Color</th>
-								<td><input type="text" name="stem_color" class="w-100 border"></td>
-							</tr>
-							<tr>
-								<th class="table-secondary">Another Color</th>
-								<td><input type="text" name="another_color" class="w-100 border"></td>
-							</tr>
-						</tbody>
-					</table>
-
-					<!-- relationship among cultivars  -->
-					<table class="table table-hover table-sm">
-						<thead>
-							<tr>
-								<th colspan="2" class="table-dark">Relationship Among Cultivars</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<th class="table-secondary w-25">Distinct Groups of Cultivars based on Morphological and Genetic Characteristics</th>
-								<td><textarea name="distinct_cultivar_groups_morph_gen" class="w-100 border" rows="2"></textarea></td>
-							</tr>
-							<tr>
-								<th class="table-secondary">Relationships Among Cultivars based on Cluster Analysis and Principal Component Analysis</th>
-								<td><textarea name="cultivar_relations_cluster_and_pca" class="w-100 border" rows="2"></textarea></td>
-							</tr>
-							<tr>
-								<th class="table-secondary">Potential for Hybridization and Breeding Among Cultivars</th>
-								<td><textarea name="hybridization_potential" class="w-100 border" rows="2"></textarea></td>
-							</tr>
-							<tr>
-								<th class="table-secondary">Implications for Conservation and Breeding Efforts</th>
-								<td><textarea name="conservation_and_breeding_implications" class="w-100 border" rows="2"></textarea></td>
-							</tr>
-						</tbody>
-					</table>
-
 					<!-- potential for breeding -->
 					<table class="table table-hover table-sm">
 						<thead>
@@ -372,7 +212,7 @@
 					<table class="table table-hover table-sm">
 						<thead>
 							<tr>
-								<th colspan="2" class="table-dark">Threats from Lowland-Associated Influences</th>
+								<th colspan="2" class="table-dark">Threats to the Upland Farms</th>
 							</tr>
 						</thead>
 						<tbody>
