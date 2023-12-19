@@ -17,19 +17,16 @@ if (isset($_POST['save'])) {
         $taste = handleEmpty($_POST['taste']);
         $aroma = handleEmpty($_POST['aroma']);
         $maturation = handleEmpty($_POST['maturation']);
-        $drought_tolerance = handleEmpty($_POST['drought_tolerance']);
-        $environment_adaptability = handleEmpty($_POST['environment_adaptability']);
-        $disease_resistance = handleEmpty($_POST['disease_resistance']);
-        $pest_resistance = handleEmpty($_POST['pest_resistance']);
+        $pest_and_disease_resistance = handleEmpty($_POST['pest_and_disease_resistance']);
 
         // Inserting into Traditional Crop Traits table using parameterized query
-        $query_traits = "INSERT INTO traditional_crop_traits (taste, aroma, maturation, drought_tolerance, environment_adaptability,
-        disease_resistance, pest_resistance) 
-        VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING traditional_crop_traits_id";
+        $query_traits = "INSERT INTO traditional_crop_traits (taste, aroma, maturation,
+        pest_and_disease_resistance) 
+        VALUES ($1, $2, $3, $4) RETURNING traditional_crop_traits_id";
 
         $query_run_traits = pg_query_params($con, $query_traits, array(
-            $taste, $aroma, $maturation, $drought_tolerance, $environment_adaptability,
-            $disease_resistance, $pest_resistance
+            $taste, $aroma, $maturation,
+            $pest_and_disease_resistance
         ));
 
         if ($query_run_traits) {
@@ -45,11 +42,11 @@ if (isset($_POST['save'])) {
         traditional_crop_traits_id,
         \"image\", crop_name, \"description\", upland_or_lowland,
         category, local_name, planting_techniques,
-        cultural_and_spiritual_significance, breeding_potential, threats,
+        cultural_and_spiritual_significance, threats,
         other_info, rice_biodiversity_uplift, cultural_importance_and_traditional_knowledge
     ) VALUES (
         $1, $2, $3, $4, $5, $6, $7, $8, $9, $10,
-        $11, $12, $13, $14
+        $11, $12, $13
     ) RETURNING crop_id";
 
         $query_run_crop = pg_query_params($con, $query_crop, array(
@@ -62,7 +59,6 @@ if (isset($_POST['save'])) {
             handleEmpty($_POST['local_name']),
             handleEmpty($_POST['planting_techniques']),
             handleEmpty($_POST['cultural_and_spiritual_significance']),
-            handleEmpty($_POST['breeding_potential']),
             handleEmpty($_POST['threats']),
             handleEmpty($_POST['other_info']),
             handleEmpty($_POST['rice_biodiversity_uplift']),
@@ -93,7 +89,6 @@ if (isset($_POST['update'])) {
     $upland_or_lowland = pg_escape_string($con, $_POST['upland_or_lowland']);
     $local_name = pg_escape_string($con, $_POST['local_name']);
     $cultural_and_spiritual_significance = pg_escape_string($con, $_POST['cultural_and_spiritual_significance']);
-    $breeding_potential = pg_escape_string($con, $_POST['breeding_potential']);
     $threats = pg_escape_string($con, $_POST['threats']);
     $other_info = pg_escape_string($con, $_POST['other_info']);
     $rice_biodiversity_uplift = pg_escape_string($con, $_POST['rice_biodiversity_uplift']);
@@ -105,10 +100,7 @@ if (isset($_POST['update'])) {
     $taste = pg_escape_string($con, $_POST['taste']);
     $aroma = pg_escape_string($con, $_POST['aroma']);
     $maturation = pg_escape_string($con, $_POST['maturation']);
-    $drought_tolerance = pg_escape_string($con, $_POST['drought_tolerance']);
-    $environment_adaptability = pg_escape_string($con, $_POST['environment_adaptability']);
-    $disease_resistance = pg_escape_string($con, $_POST['disease_resistance']);
-    $pest_resistance = pg_escape_string($con, $_POST['pest_resistance']);
+    $pest_and_disease_resistance = pg_escape_string($con, $_POST['pest_and_disease_resistance']);
 
     // Function to handle values, including NULL
     function handleValue($value)
@@ -131,7 +123,6 @@ if (isset($_POST['update'])) {
     $upland_or_lowland = handleValue($_POST['upland_or_lowland']);
     $local_name = handleValue($_POST['local_name']);
     $cultural_and_spiritual_significance = handleValue($_POST['cultural_and_spiritual_significance']);
-    $breeding_potential = handleValue($_POST['breeding_potential']);
     $threats = handleValue($_POST['threats']);
     $other_info = handleValue($_POST['other_info']);
     $rice_biodiversity_uplift = handleValue($_POST['rice_biodiversity_uplift']);
@@ -143,15 +134,11 @@ if (isset($_POST['update'])) {
     $taste = handleValue($_POST['taste']);
     $aroma = handleValue($_POST['aroma']);
     $maturation = handleValue($_POST['maturation']);
-    $drought_tolerance = handleValue($_POST['drought_tolerance']);
-    $environment_adaptability = handleValue($_POST['environment_adaptability']);
-    $disease_resistance = handleValue($_POST['disease_resistance']);
-    $pest_resistance = handleValue($_POST['pest_resistance']);
+    $pest_and_disease_resistance = handleValue($_POST['pest_and_disease_resistance']);
 
     // Update traditional_crop_traits table
-    $query = "UPDATE traditional_crop_traits SET taste = $taste, aroma = $aroma, maturation = $maturation, drought_tolerance = $drought_tolerance,
-        environment_adaptability = $environment_adaptability,
-        disease_resistance = $disease_resistance, pest_resistance = $pest_resistance WHERE traditional_crop_traits_id = $traditional_crop_traits_id";
+    $query = "UPDATE traditional_crop_traits SET taste = $taste, aroma = $aroma, maturation = $maturation,
+        pest_and_disease_resistance = $pest_and_disease_resistance WHERE traditional_crop_traits_id = $traditional_crop_traits_id";
     $query_run_traits = pg_query($con, $query);
     if (!$query_run_traits) {
         echo "Error updating traditional crop traits: " . pg_last_error($con);
@@ -161,7 +148,7 @@ if (isset($_POST['update'])) {
     // Update Crop table
     $query = "UPDATE crops SET
     image = $image, crop_name = $crop_name, description = $description, upland_or_lowland = $upland_or_lowland,
-    cultural_and_spiritual_significance = $cultural_and_spiritual_significance, breeding_potential = $breeding_potential, threats = $threats,
+    cultural_and_spiritual_significance = $cultural_and_spiritual_significance, threats = $threats,
     other_info = $other_info, rice_biodiversity_uplift = $rice_biodiversity_uplift, cultural_importance_and_traditional_knowledge = $cultural_importance_and_traditional_knowledge
     WHERE crop_id = $crop_id";
 

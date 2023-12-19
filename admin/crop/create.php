@@ -97,19 +97,7 @@
 							</tr>
 							<tr>
 								<th class="table-secondary">Disease Resistance</th>
-								<td><input type="text" name="disease_resistance" class="w-100 border"></td>
-							</tr>
-							<tr>
-								<th class="table-secondary">Pest Resistance</th>
-								<td><input type="text" name="pest_resistance" class="w-100 border"></td>
-							</tr>
-							<tr>
-								<th class="table-secondary">Drought Tolerance</th>
-								<td><input type="text" name="drought_tolerance" class="w-100 border"></td>
-							</tr>
-							<tr>
-								<th class="table-secondary">Adaptability to Different Environments</th>
-								<td><input type="text" name="environment_adaptability" class="w-100 border"></td>
+								<td><input type="text" name="pest_and_disease_resistance" class="w-100 border"></td>
 							</tr>
 						</tbody>
 					</table>
@@ -189,21 +177,6 @@
 							<tr>
 								<th></th>
 								<td></td>
-							</tr>
-						</tbody>
-					</table>
-
-					<!-- potential for breeding -->
-					<table class="table table-hover table-sm">
-						<thead>
-							<tr>
-								<th colspan="2" class="table-dark">Potential for Breeding</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<th class="table-secondary w-25">Description</th>
-								<td><textarea name="breeding_potential" class="w-100 border" rows="2"></textarea></td>
 							</tr>
 						</tbody>
 					</table>

@@ -53,7 +53,6 @@
 					$cultural_and_spiritual_significance = isset($crops['cultural_and_spiritual_significance']) ? htmlspecialchars($crops['cultural_and_spiritual_significance'], ENT_QUOTES) : $emptyValue;
 					$rice_biodiversity_uplift = isset($crops['rice_biodiversity_uplift']) ? htmlspecialchars($crops['rice_biodiversity_uplift'], ENT_QUOTES) : $emptyValue;
 					$cultural_importance_and_traditional_knowledge = isset($crops['cultural_importance_and_traditional_knowledge']) ? htmlspecialchars($crops['cultural_importance_and_traditional_knowledge'], ENT_QUOTES) : $emptyValue;
-					$breeding_potential = isset($crops['breeding_potential']) ? htmlspecialchars($crops['breeding_potential'], ENT_QUOTES) : $emptyValue;
 					$threats = isset($crops['threats']) ? htmlspecialchars($crops['threats'], ENT_QUOTES) : $emptyValue;
 					$other_info = isset($crops['other_info']) ? htmlspecialchars($crops['other_info'], ENT_QUOTES) : $emptyValue;
 
@@ -134,10 +133,7 @@
 										$taste = isset($traditional_crop_traits['taste']) ? $traditional_crop_traits['taste'] : $emptyValue;
 										$aroma = isset($traditional_crop_traits['aroma']) ? $traditional_crop_traits['aroma'] : $emptyValue;
 										$maturation = isset($traditional_crop_traits['maturation']) ? $traditional_crop_traits['maturation'] : $emptyValue;
-										$drought_tolerance = isset($traditional_crop_traits['drought_tolerance']) ? $traditional_crop_traits['drought_tolerance'] : $emptyValue;
-										$environment_adaptability = isset($traditional_crop_traits['environment_adaptability']) ? $traditional_crop_traits['environment_adaptability'] : $emptyValue;
-										$disease_resistance = isset($traditional_crop_traits['disease_resistance']) ? $traditional_crop_traits['disease_resistance'] : $emptyValue;
-										$pest_resistance = isset($traditional_crop_traits['pest_resistance']) ? $traditional_crop_traits['pest_resistance'] : $emptyValue;
+										$pest_and_disease_resistance = isset($traditional_crop_traits['pest_and_disease_resistance']) ? $traditional_crop_traits['pest_and_disease_resistance'] : $emptyValue;
 									?>
 										<tr>
 											<th class="table-secondary w-25">Taste</th>
@@ -152,20 +148,8 @@
 											<td><input type="text" name="maturation" <?php echo ($maturation != $emptyValue) ? 'value="' . $maturation . '"' : 'placeholder="Empty"'; ?> class="w-100 border-0 p-1" disabled></td>
 										</tr>
 										<tr>
-											<th class="table-secondary w-25">Drought Tolerance</th>
-											<td><input type="text" name="drought_tolerance" <?php echo ($drought_tolerance != $emptyValue) ? 'value="' . $drought_tolerance . '"' : 'placeholder="Empty"'; ?> class="w-100 border-0 p-1" disabled></td>
-										</tr>
-										<tr>
-											<th class="table-secondary w-25">Environment Adaptability</th>
-											<td><input type="text" name="environment_adaptability" <?php echo ($environment_adaptability != $emptyValue) ? 'value="' . $environment_adaptability . '"' : 'placeholder="Empty"'; ?> class="w-100 border-0 p-1" disabled></td>
-										</tr>
-										<tr>
 											<th class="table-secondary w-25">Disease Resistance</th>
-											<td><input type="text" name="disease_resistance" <?php echo ($disease_resistance != $emptyValue) ? 'value="' . $disease_resistance . '"' : 'placeholder="Empty"'; ?> class="w-100 border-0 p-1" disabled></td>
-										</tr>
-										<tr>
-											<th class="table-secondary w-25">Pest Resistance</th>
-											<td><input type="text" name="pest_resistance" <?php echo ($pest_resistance != $emptyValue) ? 'value="' . $pest_resistance . '"' : 'placeholder="Empty"'; ?> class="w-100 border-0 p-1" disabled></td>
+											<td><input type="text" name="pest_and_disease_resistance" <?php echo ($pest_and_disease_resistance != $emptyValue) ? 'value="' . $pest_and_disease_resistance . '"' : 'placeholder="Empty"'; ?> class="w-100 border-0 p-1" disabled></td>
 										</tr>
 									<?php
 									}
@@ -244,21 +228,6 @@
 									<tr>
 										<th class="table-secondary w-25">Map</th>
 										<td></td>
-									</tr>
-								</tbody>
-							</table>
-
-							<!-- potential for breeding -->
-							<table class="table table-hover table-sm">
-								<thead>
-									<tr>
-										<th colspan="2" class="table-dark">Potential for Breeding</th>
-									</tr>
-								</thead>
-								<tbody>
-										<tr>
-											<th class="table-secondary w-25">Description</th>
-											<td><textarea name="breeding_potential" class="w-100 border-0 p-1" rows="5" disabled <?php echo ($breeding_potential !== $emptyValue) ? '>' . $breeding_potential : 'placeholder="Empty">'; ?></textarea></td>
 									</tr>
 								</tbody>
 							</table>
