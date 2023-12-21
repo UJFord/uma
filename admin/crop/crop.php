@@ -56,9 +56,9 @@
 					$cultural_importance_and_traditional_knowledge = isset($crops['cultural_importance_and_traditional_knowledge']) ? htmlspecialchars($crops['cultural_importance_and_traditional_knowledge'], ENT_QUOTES) : $emptyValue;
 					$threats = isset($crops['threats']) ? htmlspecialchars($crops['threats'], ENT_QUOTES) : $emptyValue;
 					$other_info = isset($crops['other_info']) ? htmlspecialchars($crops['other_info'], ENT_QUOTES) : $emptyValue;
-					$unique_features  = isset($crops['unique_features ']) ? htmlspecialchars($crops['unique_features '], ENT_QUOTES) : $emptyValue;
-					$cultural_use  = isset($crops['cultural_use ']) ? htmlspecialchars($crops['cultural_use '], ENT_QUOTES) : $emptyValue;
-					$associated_vegetation  = isset($crops['associated_vegetation ']) ? htmlspecialchars($crops['associated_vegetation '], ENT_QUOTES) : $emptyValue;
+					$unique_features = isset($crops['unique_features']) ? htmlspecialchars($crops['unique_features'], ENT_QUOTES) : $emptyValue;
+					$cultural_use = isset($crops['cultural_use']) ? htmlspecialchars($crops['cultural_use'], ENT_QUOTES) : $emptyValue;
+					$associated_vegetation = isset($crops['associated_vegetation']) ? htmlspecialchars($crops['associated_vegetation'], ENT_QUOTES) : $emptyValue;
 
 			?>
 					<!-- form for submitting -->
@@ -261,7 +261,9 @@
 								<tbody>
 									<tr>
 										<th class="table-secondary w-25">Description</th>
-										<td><textarea name="unique_features" class="w-100 border" rows="5" disabled <?php echo ($unique_features !== $emptyValue) ? '>' . $unique_features : 'placeholder="Empty">'; ?></textarea></td>
+										<td>
+											<textarea name="unique_features" class="w-100 border" rows="5" disabled><?php echo ($unique_features !== $emptyValue) ? $unique_features : 'Empty'; ?></textarea>
+										</td>
 									</tr>
 								</tbody>
 							</table>
@@ -276,7 +278,9 @@
 								<tbody>
 									<tr>
 										<th class="table-secondary w-25">Description</th>
-										<td><textarea name="cultural_use" class="w-100 border" rows="5" disabled <?php echo ($cultural_use !== $emptyValue) ? '>' . $cultural_use : 'placeholder="Empty">'; ?></textarea></td>
+										<td>
+											<textarea name="cultural_use" class="w-100 border" rows="5" disabled><?php echo ($cultural_use !== $emptyValue) ? $cultural_use : 'Empty'; ?></textarea>
+										</td>
 									</tr>
 								</tbody>
 							</table>
@@ -291,7 +295,9 @@
 								<tbody>
 									<tr>
 										<th class="table-secondary w-25">Description</th>
-										<td><textarea name="associated_vegetation" class="w-100 border" rows="5" disabled <?php echo ($associated_vegetation !== $emptyValue) ? '>' . $associated_vegetation : 'placeholder="Empty">'; ?></textarea></td>
+										<td>
+											<textarea name="associated_vegetation" class="w-100 border" rows="5" disabled><?php echo ($associated_vegetation !== $emptyValue) ? $associated_vegetation : 'Empty'; ?></textarea>
+										</td>
 									</tr>
 								</tbody>
 							</table>
