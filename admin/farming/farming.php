@@ -153,6 +153,14 @@
                 }
                 ?>
 
+                <br>
+                
+                <div>
+                    <h1>
+                        Ritual Section
+                    </h1>
+                </div>
+
                 <?php
                 if (isset($_GET['farming_id'])) {
                     $ritual_id = pg_escape_string($connection, $_GET['farming_id']);
