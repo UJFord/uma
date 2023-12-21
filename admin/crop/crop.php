@@ -40,6 +40,7 @@
 
 					// get the id for the roreign tables
 					$current_traditional_crop_traits_id = $crops['traditional_crop_traits_id'];
+					$current_farming_id = $crops['farming_id'];
 
 					// Get the data from crops table
 					// Define default values for each field if they are $emptyValue
@@ -55,6 +56,9 @@
 					$cultural_importance_and_traditional_knowledge = isset($crops['cultural_importance_and_traditional_knowledge']) ? htmlspecialchars($crops['cultural_importance_and_traditional_knowledge'], ENT_QUOTES) : $emptyValue;
 					$threats = isset($crops['threats']) ? htmlspecialchars($crops['threats'], ENT_QUOTES) : $emptyValue;
 					$other_info = isset($crops['other_info']) ? htmlspecialchars($crops['other_info'], ENT_QUOTES) : $emptyValue;
+					$unique_features  = isset($crops['unique_features ']) ? htmlspecialchars($crops['unique_features '], ENT_QUOTES) : $emptyValue;
+					$cultural_use  = isset($crops['cultural_use ']) ? htmlspecialchars($crops['cultural_use '], ENT_QUOTES) : $emptyValue;
+					$associated_vegetation  = isset($crops['associated_vegetation ']) ? htmlspecialchars($crops['associated_vegetation '], ENT_QUOTES) : $emptyValue;
 
 			?>
 					<!-- form for submitting -->
@@ -213,7 +217,7 @@
 									<tr>
 										<th class="table-secondary w-25">Description</th>
 										<td><textarea name="cultural_importance_and_traditional_knowledge" class="w-100 border-0 p-1" rows="5" disabled <?php echo ($cultural_importance_and_traditional_knowledge !== $emptyValue) ? '>' . $cultural_importance_and_traditional_knowledge : 'placeholder="Empty">'; ?></textarea></td>
-										</tr>
+									</tr>
 								</tbody>
 							</table>
 
@@ -247,6 +251,106 @@
 								</tbody>
 							</table>
 
+							<!-- Unique Features -->
+							<table class="table table-hover table-sm">
+								<thead>
+									<tr>
+										<th colspan="2" class="table-dark">Unique Features</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<th class="table-secondary w-25">Description</th>
+										<td><textarea name="unique_features" class="w-100 border" rows="5" disabled <?php echo ($unique_features !== $emptyValue) ? '>' . $unique_features : 'placeholder="Empty">'; ?></textarea></td>
+									</tr>
+								</tbody>
+							</table>
+
+							<!-- Cultural Use -->
+							<table class="table table-hover table-sm">
+								<thead>
+									<tr>
+										<th colspan="2" class="table-dark">Cultural Use</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<th class="table-secondary w-25">Description</th>
+										<td><textarea name="cultural_use" class="w-100 border" rows="5" disabled <?php echo ($cultural_use !== $emptyValue) ? '>' . $cultural_use : 'placeholder="Empty">'; ?></textarea></td>
+									</tr>
+								</tbody>
+							</table>
+
+							<!-- Associated Vegetation -->
+							<table class="table table-hover table-sm">
+								<thead>
+									<tr>
+										<th colspan="2" class="table-dark">Associated Vegetation</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<th class="table-secondary w-25">Description</th>
+										<td><textarea name="associated_vegetation" class="w-100 border" rows="5" disabled <?php echo ($associated_vegetation !== $emptyValue) ? '>' . $associated_vegetation : 'placeholder="Empty">'; ?></textarea></td>
+									</tr>
+								</tbody>
+							</table>
+
+							<!-- Associated Farming Practices -->
+							<table class="table table-hover table-sm  mb-0">
+								<input type="hidden" name="farming_id" value="<?= $farming_id; ?>">
+								<thead>
+									<tr>
+										<th colspan="2" class="table-dark">Associated Farming Practices</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<th class="table-secondary w-25">Farming Practice Name</th>
+										<td>
+											<select name="farming_id" class="w-100 border" rows="2" disabled>
+												<?php
+												// php code to display available schedules from the database
+												// query to select all available schedules in the database
+												$query = "SELECT * FROM farming";
+
+												// Executing query
+												$query_run = pg_query($connection, $query);
+
+												// count rows to check whether we have a schedule or not
+												$count = pg_num_rows($query_run);
+
+												// if count is greater than 0 we have a schedule else we do not have a schedule
+												if ($count > 0) {
+													// we have a schedule
+													while ($row = pg_fetch_assoc($query_run)) {
+														// get the detail of the schedule
+														$farming_id = $row['farming_id'];
+														$farming_name = $row['farming_name'];
+												?>
+														<option <?php
+																if ($current_farming_id === null) {
+																	echo "selected";
+																} elseif ($current_farming_id == $farming_id) {
+																	echo "selected";
+																}
+																?> value="<?php echo $farming_id; ?>"><?php echo $farming_name; ?>
+														</option>
+													<?php
+													}
+												} else {
+													// we do not have a schedule
+													?>
+													<option value="0">No Farming name Found</option>
+												<?php
+												}
+												?>
+											</select>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+
 							<!-- other info-->
 							<table class="table table-hover table-sm  mb-0">
 								<thead>
@@ -255,9 +359,9 @@
 									</tr>
 								</thead>
 								<tbody>
-										<tr>
-											<th class="table-secondary w-25">Description</th>
-											<td><textarea name="other_info" class="w-100 border-0 p-1" rows="5" disabled <?php echo ($other_info !== $emptyValue) ? '>' . $other_info : 'placeholder="Empty">'; ?></textarea></td>
+									<tr>
+										<th class="table-secondary w-25">Description</th>
+										<td><textarea name="other_info" class="w-100 border-0 p-1" rows="5" disabled <?php echo ($other_info !== $emptyValue) ? '>' . $other_info : 'placeholder="Empty">'; ?></textarea></td>
 									</tr>
 								</tbody>
 							</table>

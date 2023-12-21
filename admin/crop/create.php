@@ -62,7 +62,7 @@
 							</tr>
 							<tr>
 								<th class="table-secondary w-25" scope="row">Category (rice, rootcrop, etc...)</th>
-								<td><input type="text" name="category"  class="w-100 border"></td>
+								<td><input type="text" name="category" class="w-100 border"></td>
 							</tr>
 							<tr>
 								<th class="table-secondary w-25" scope="row">Link to Image</th>
@@ -147,7 +147,7 @@
 						</tbody>
 					</table>
 
-					<!-- Traditional Knowledge and Practices-->
+					<!-- Cultural Importance and Traditional Knowledge -->
 					<table class="table table-hover table-sm">
 						<thead>
 							<tr>
@@ -194,6 +194,99 @@
 								<td><textarea name="threats" class="w-100 border" rows="2"></textarea></td>
 							</tr>
 						</tbody>
+					</table>
+
+					<!-- Unique Features -->
+					<table class="table table-hover table-sm">
+						<thead>
+							<tr>
+								<th colspan="2" class="table-dark">Unique Features</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<th class="table-secondary w-25">Description</th>
+								<td><textarea name="unique_features" class="w-100 border" rows="5"></textarea></td>
+							</tr>
+						</tbody>
+					</table>
+
+					<!-- Cultural Use -->
+					<table class="table table-hover table-sm">
+						<thead>
+							<tr>
+								<th colspan="2" class="table-dark">Cultural Use</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<th class="table-secondary w-25">Description</th>
+								<td><textarea name="cultural_use" class="w-100 border" rows="5"></textarea></td>
+							</tr>
+						</tbody>
+					</table>
+
+					<!-- Associated Vegetation -->
+					<table class="table table-hover table-sm">
+						<thead>
+							<tr>
+								<th colspan="2" class="table-dark">Associated Vegetation</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<th class="table-secondary w-25">Description</th>
+								<td><textarea name="associated_vegetation" class="w-100 border" rows="5"></textarea></td>
+							</tr>
+						</tbody>
+					</table>
+
+					<!-- Associated Farming Practices -->
+					<table class="table table-hover table-sm  mb-0">
+							<thead>
+								<tr>
+									<th colspan="2" class="table-dark">Associated Farming Practices</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+								<th class="table-secondary w-25">Farming Practice Name</th>
+								<td>
+									<select name="farming_id" class="w-100 border" rows="2">
+										<?php
+										// php code to display available schedules from the database
+										// query to select all available schedules in the database
+										$query = "SELECT * FROM farming";
+
+										// Executing query
+										$query_run = pg_query($connection, $query);
+
+										// count rows to check whether we have a schedule or not
+										$count = pg_num_rows($query_run);
+
+										// if count is greater than 0 we have a schedule else we do not have a schedule
+										if ($count > 0) {
+											// we have a schedule
+											while ($row = pg_fetch_assoc($query_run)) {
+												// get the detail of the schedule
+												$farming_id = $row['farming_id'];
+												$farming_name = $row['farming_name'];
+										?>
+												<option value="<?php echo $farming_id; ?>"><?php echo $farming_name; ?></option>
+												<option value="">None</option>
+											<?php
+											}
+										} else {
+											// we do not have a schedule
+											?>
+											<option value="0">No Farming name Found</option>
+										<?php
+										}
+										?>
+									</select>
+								</td>
+								</tr>
+							</tbody>
 					</table>
 
 					<!-- other info-->

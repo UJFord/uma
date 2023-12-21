@@ -12,6 +12,8 @@ if (isset($_POST['save'])) {
         return empty($value) ? $emptyValue : $value;
     }
 
+    $emptyValue = 'Empty';
+
     $ritual_name = empty($_POST['ritual_name']) ? $emptyValue : $_POST['ritual_name'];
     $description = empty($_POST['description']) ? $emptyValue : $_POST['description'];
     $image = empty($_POST['image']) ? $emptyValue : $_POST['image'];

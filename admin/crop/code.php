@@ -11,70 +11,74 @@ if (isset($_POST['save'])) {
         return empty($value) ? 'Empty' : $value;
     }
 
-    if (isset($_POST['save'])) {
+    // Escape user inputs for data in Traditional Crop Traits table
+    $taste = handleEmpty($_POST['taste']);
+    $aroma = handleEmpty($_POST['aroma']);
+    $maturation = handleEmpty($_POST['maturation']);
+    $pest_and_disease_resistance = handleEmpty($_POST['pest_and_disease_resistance']);
 
-        // Escape user inputs for data in Traditional Crop Traits table
-        $taste = handleEmpty($_POST['taste']);
-        $aroma = handleEmpty($_POST['aroma']);
-        $maturation = handleEmpty($_POST['maturation']);
-        $pest_and_disease_resistance = handleEmpty($_POST['pest_and_disease_resistance']);
-
-        // Inserting into Traditional Crop Traits table using parameterized query
-        $query_traits = "INSERT INTO traditional_crop_traits (taste, aroma, maturation,
+    // Inserting into Traditional Crop Traits table using parameterized query
+    $query_traits = "INSERT INTO traditional_crop_traits (taste, aroma, maturation,
         pest_and_disease_resistance) 
         VALUES ($1, $2, $3, $4) RETURNING traditional_crop_traits_id";
 
-        $query_run_traits = pg_query_params($con, $query_traits, array(
-            $taste, $aroma, $maturation,
-            $pest_and_disease_resistance
-        ));
+    $query_run_traits = pg_query_params($con, $query_traits, array(
+        $taste, $aroma, $maturation,
+        $pest_and_disease_resistance
+    ));
 
-        if ($query_run_traits) {
-            $row_traits = pg_fetch_row($query_run_traits);
-            $traditional_crop_traits_id = $row_traits[0];
-        } else {
-            echo "Error: " . pg_last_error($con);
-            exit(0);
-        }
+    if ($query_run_traits) {
+        $row_traits = pg_fetch_row($query_run_traits);
+        $traditional_crop_traits_id = $row_traits[0];
+    } else {
+        echo "Error: " . pg_last_error($con);
+        exit(0);
+    }
 
-        // Inserting into Crop table using parameterized query
-        $query_crop = "INSERT INTO crops (
-        traditional_crop_traits_id,
+    // Inserting into Crop table using parameterized query
+    $query_crop = "INSERT INTO crops (
+        traditional_crop_traits_id, farming_id,
         \"image\", crop_name, \"description\", upland_or_lowland,
         category, local_name, planting_techniques,
         cultural_and_spiritual_significance, threats,
-        other_info, rice_biodiversity_uplift, cultural_importance_and_traditional_knowledge
+        other_info, rice_biodiversity_uplift, cultural_importance_and_traditional_knowledge,
+        unique_features, cultural_use, associated_vegetation
     ) VALUES (
         $1, $2, $3, $4, $5, $6, $7, $8, $9, $10,
-        $11, $12, $13
+        $11, $12, $13, $14, $15, $16, $17
     ) RETURNING crop_id";
 
-        $query_run_crop = pg_query_params($con, $query_crop, array(
-            $traditional_crop_traits_id,
-            handleEmpty($_POST['image']),
-            handleEmpty($_POST['crop_name']),
-            handleEmpty($_POST['description']),
-            handleEmpty($_POST['upland_or_lowland']),
-            handleEmpty($_POST['category']),
-            handleEmpty($_POST['local_name']),
-            handleEmpty($_POST['planting_techniques']),
-            handleEmpty($_POST['cultural_and_spiritual_significance']),
-            handleEmpty($_POST['threats']),
-            handleEmpty($_POST['other_info']),
-            handleEmpty($_POST['rice_biodiversity_uplift']),
-            handleEmpty($_POST['cultural_importance_and_traditional_knowledge'])
-        ));
+    $farming_id_input = $_POST['farming_id'];
+    $farming_id = empty($farming_id_input) ? null : $farming_id_input;
 
-        if ($query_run_crop) {
-            $row_crop = pg_fetch_row($query_run_crop);
-            $crop_id = $row_crop[0];
-            $_SESSION['message'] = "Crop Created Successfully";
-            header("Location: list.php");
-            exit(0);
-        } else {
-            echo "Error: " . pg_last_error($con);
-            exit(0);
-        }
+    $query_run_crop = pg_query_params($con, $query_crop, array(
+        $traditional_crop_traits_id, $farming_id,
+        handleEmpty($_POST['image']),
+        handleEmpty($_POST['crop_name']),
+        handleEmpty($_POST['description']),
+        handleEmpty($_POST['upland_or_lowland']),
+        handleEmpty($_POST['category']),
+        handleEmpty($_POST['local_name']),
+        handleEmpty($_POST['planting_techniques']),
+        handleEmpty($_POST['cultural_and_spiritual_significance']),
+        handleEmpty($_POST['threats']),
+        handleEmpty($_POST['other_info']),
+        handleEmpty($_POST['rice_biodiversity_uplift']),
+        handleEmpty($_POST['cultural_importance_and_traditional_knowledge']),
+        handleEmpty($_POST['unique_features']),
+        handleEmpty($_POST['cultural_use']),
+        handleEmpty($_POST['associated_vegetation'])
+    ));
+
+    if ($query_run_crop) {
+        $row_crop = pg_fetch_row($query_run_crop);
+        $crop_id = $row_crop[0];
+        $_SESSION['message'] = "Crop Created Successfully";
+        header("Location: list.php");
+        exit(0);
+    } else {
+        echo "Error: " . pg_last_error($con);
+        exit(0);
     }
 }
 
@@ -83,6 +87,7 @@ if (isset($_POST['update'])) {
     // crops table
     $crop_id = pg_escape_string($con, $_POST['crop_id']);
     $traditional_crop_traits_id = pg_escape_string($con, $_POST['traditional_crop_traits_id']);
+    $farming_id = pg_escape_string($con, $_POST['farming_id']);
     $image = pg_escape_string($con, $_POST['image']);
     $crop_name = pg_escape_string($con, $_POST['crop_name']);
     $description = pg_escape_string($con, $_POST['description']);
@@ -95,6 +100,9 @@ if (isset($_POST['update'])) {
     $cultural_importance_and_traditional_knowledge = pg_escape_string($con, $_POST['cultural_importance_and_traditional_knowledge']);
     $category = pg_escape_string($con, $_POST['category']);
     $planting_techniques = pg_escape_string($con, $_POST['planting_techniques']);
+    $unique_features = pg_escape_string($con, $_POST['unique_features']);
+    $cultural_use = pg_escape_string($con, $_POST['cultural_use']);
+    $associated_vegetation = pg_escape_string($con, $_POST['associated_vegetation']);
 
     //Traditional Traits Table
     $taste = pg_escape_string($con, $_POST['taste']);
@@ -115,8 +123,18 @@ if (isset($_POST['update'])) {
         }
     }
 
+    // Function to handle integer values, including NULL
+    function handleInteger($value)
+    {
+        if ($value === '' || $value === null) {
+            return 'Null';  // Return null for empty values
+        } else {
+            return $value;
+        }
+    }
     // Apply the function to each field
     // crops table
+    $farming_id = handleInteger(isset($_POST['farming_id']) ? $_POST['farming_id'] : null);
     $image = handleValue($_POST['image']);
     $crop_name = handleValue($_POST['crop_name']);
     $description = handleValue($_POST['description']);
@@ -129,6 +147,9 @@ if (isset($_POST['update'])) {
     $cultural_importance_and_traditional_knowledge = handleValue($_POST['cultural_importance_and_traditional_knowledge']);
     $category = handleValue($_POST['category']);
     $planting_techniques = handleValue($_POST['planting_techniques']);
+    $unique_features = handleValue($_POST['unique_features']);
+    $cultural_use = handleValue($_POST['cultural_use']);
+    $associated_vegetation = handleValue($_POST['associated_vegetation']);
 
     // Traditional Traits Table
     $taste = handleValue($_POST['taste']);
@@ -147,9 +168,10 @@ if (isset($_POST['update'])) {
 
     // Update Crop table
     $query = "UPDATE crops SET
-    image = $image, crop_name = $crop_name, description = $description, upland_or_lowland = $upland_or_lowland,
+    farming_id=$farming_id, image = $image, crop_name = $crop_name, description = $description, upland_or_lowland = $upland_or_lowland,
     cultural_and_spiritual_significance = $cultural_and_spiritual_significance, threats = $threats,
-    other_info = $other_info, rice_biodiversity_uplift = $rice_biodiversity_uplift, cultural_importance_and_traditional_knowledge = $cultural_importance_and_traditional_knowledge
+    other_info = $other_info, rice_biodiversity_uplift = $rice_biodiversity_uplift, cultural_importance_and_traditional_knowledge = $cultural_importance_and_traditional_knowledge,
+    unique_features=$unique_features, cultural_use=$cultural_use, associated_vegetation=$associated_vegetation
     WHERE crop_id = $crop_id";
 
     $query_run_crop = pg_query($con, $query);

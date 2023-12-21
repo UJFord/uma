@@ -7,7 +7,7 @@ let cancelBtn = document.querySelector('#cancel-btn');
 // edit
 editBtn.addEventListener('click', () => {
     // form panel input disabled
-    let inputDisabled = document.querySelectorAll('#form-panel input[disabled], #form-panel textarea[disabled]');
+    let inputDisabled = document.querySelectorAll('#form-panel input[disabled], #form-panel textarea[disabled], #form-panel select[disabled');
 
     // edit box
     let editBox = document.querySelector('#edit-btn-box');
@@ -15,9 +15,6 @@ editBtn.addEventListener('click', () => {
     let applyCancelBox = document.querySelector('#apply-cancel-box');
     // delete button
     let deleteBox = document.querySelector('#delete-box');
-
-    
-
 
     inputDisabled.forEach(input => {
         // enable form panel input
