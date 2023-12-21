@@ -40,23 +40,53 @@
 							<button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
 								<i class="bi bi-funnel"></i>
 							</button>
-							<ul class="dropdown-menu">
-								<li>
-									<a class="dropdown-item" href="#">Action</a>
-								</li>
-								<li>
-									<a class="dropdown-item" href="#">Another action</a>
-								</li>
-								<li>
-									<a class="dropdown-item" href="#">Something else here</a>
-								</li>
-								<li>
-									<hr class="dropdown-divider" />
-								</li>
-								<li>
-									<a class="dropdown-item" href="#">Separated link</a>
-								</li>
-							</ul>
+							<form action="" method="GET">
+								<ul class="dropdown-menu">
+									<div class="filter-header">
+										<h5>Filter
+											<button type="submit" class="btn btn-primary py-1 px-1 ">Search</button>
+										</h5>
+									</div>
+
+									<li>
+										<h5 class="filter-title">Category</h5>
+										<?php
+										$category_query = pg_query($connection, "SELECT * FROM crops");
+										if (pg_num_rows($category_query) > 0) {
+											while ($category_name = pg_fetch_assoc($category_query)) {
+												$checked = [];
+												if (isset($_GET['category'])) {
+													$checked = $_GET['category'];
+												}
+										?>
+												<div>
+													<input type="checkbox" name="category[]" value="<?= $category_name['category'] ?>" <?php if (in_array($category_name['category'], $checked)) {
+																																			echo "checked";
+																																		} ?>>
+													<?= $category_name['category'] ?>
+												</div>
+										<?php
+											}
+										}
+										?>
+									</li>
+									<li>
+										<hr class="dropdown-divider" />
+									</li>
+									<li>
+										<a class="dropdown-item" href="#">Another action</a>
+									</li>
+									<li>
+										<a class="dropdown-item" href="#">Something else here</a>
+									</li>
+									<li>
+										<hr class="dropdown-divider" />
+									</li>
+									<li>
+										<a class="dropdown-item" href="#">Separated link</a>
+									</li>
+								</ul>
+							</form>
 							<form action="search.php" method="POST">
 								<input type="search" name="search" class="form-control" placeholder="Start typing to filter..." />
 							</form>
@@ -73,7 +103,16 @@
 					?>
 
 					<?php
-					$result = pg_query($connection, "select * from crops order by crop_id");
+
+					if (isset($_GET['category'])) {
+						$categoryChecked = array_map('strtolower', $_GET['category']);
+
+						// Convert category names to lowercase in the SQL query
+						$result = pg_query($connection, "SELECT DISTINCT * FROM crops WHERE LOWER(category) IN ('" . implode("','", $categoryChecked) . "') ORDER BY crop_id");
+					} else {
+						$result = pg_query($connection, "SELECT * FROM crops ORDER BY crop_id");
+					}
+
 					$count = pg_num_rows($result);
 
 					if ($count > 0) {
@@ -122,6 +161,7 @@
 					<?php
 						}
 					}
+
 					?>
 				</div>
 			</div>

@@ -226,7 +226,7 @@
 								</thead>
 								<tbody>
 									<tr>
-										<th class="table-secondary w-25">Map</th>
+										<th class="table-secondary w-25">Location Where Last Seen</th>
 										<td></td>
 									</tr>
 								</tbody>
