@@ -60,9 +60,7 @@
 												}
 										?>
 												<div>
-													<input type="checkbox" name="category[]" value="<?= $category_name['category'] ?>" <?php if (in_array($category_name['category'], $checked)) {
-																																			echo "checked";
-																																		} ?>>
+													<input type="checkbox" name="category[]" value="<?= $category_name['category'] ?>" <?php if (in_array($category_name['category'], $checked)) {echo "checked";} ?>>
 													<?= $category_name['category'] ?>
 												</div>
 										<?php

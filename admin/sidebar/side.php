@@ -28,17 +28,6 @@ require('../../html/navfoot/connection.php');
                     Crops
                 </a>
             </li>
-
-            </li>
-            <!-- rituals sidebar nav -->
-            <li>
-                <a href="../ritual/list.php" <?php echo (strpos($current_page, '/uma/admin/ritual/list.php') === 0 || strpos($current_page, '/uma/admin/ritual/ritual.php') === 0 || strpos($current_page, '/uma/admin/ritual/create.php') === 0)
-                                                    ? 'class="nav-link text-dark fw-semibold rounded-start-pill active-nav"'
-                                                    : 'class="nav-link text-white"'; ?>>
-                    <i class="fa-solid fa-book-open" style="width: 1.5rem;"></i>
-                    Rituals
-                </a>
-            </li>
             </li>
             <!-- farming sidebar nav -->
             <li>
@@ -46,7 +35,7 @@ require('../../html/navfoot/connection.php');
                                                     ? 'class="nav-link text-dark fw-semibold rounded-start-pill active-nav"'
                                                     : 'class="nav-link text-white"'; ?>>
                     <i class="fa-solid fa-mountain-sun" style="width: 1.5rem;"></i>
-                    Farming
+                    Farming and Ritual Practices
                 </a>
             </li>
         </ul>
