@@ -35,7 +35,7 @@ require('../../html/navfoot/connection.php');
                                                     ? 'class="nav-link text-dark fw-semibold rounded-start-pill active-nav"'
                                                     : 'class="nav-link text-white"'; ?>>
                     <i class="fa-solid fa-mountain-sun" style="width: 1.5rem;"></i>
-                    Farming and Ritual Practices
+                    Practices
                 </a>
             </li>
         </ul>
