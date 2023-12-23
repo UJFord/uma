@@ -2,7 +2,13 @@ let editBtn = document.querySelector('#edit-btn');
 let applyBtn = document.querySelector('#apply-btn');
 let cancelBtn = document.querySelector('#cancel-btn');
 
-
+// Function to remove hidden attribute from an element
+function showElement(elementId) {
+    let element = document.getElementById(elementId);
+    if (element) {
+        element.removeAttribute('hidden');
+    }
+}
 
 // edit
 editBtn.addEventListener('click', () => {
@@ -30,6 +36,9 @@ editBtn.addEventListener('click', () => {
     applyCancelBox.classList.remove('d-none');
     // delete box
     deleteBox.classList.remove('d-none');
+
+    // Example: Remove hidden attribute from an element with ID 'exampleElement'
+    showElement('image');
 });
 
 // cancel

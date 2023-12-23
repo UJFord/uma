@@ -35,10 +35,58 @@ if (isset($_POST['save'])) {
         exit(0);
     }
 
+    // Check if the image is selected
+    if (isset($_FILES['image']['name'])) {
+        // Upload image
+        $image = $_FILES['image']['name'];
+
+        // Upload the image only if selected
+        if ($image != "") {
+            // Auto rename image
+            $ext = pathinfo($image, PATHINFO_EXTENSION);
+            $image = "Crop_image_" . rand(000, 999) . '.' . $ext;
+
+            // Check if the image name already exists in the database
+            while (true) {
+                $query = "SELECT image FROM crops WHERE image = $1";
+                $result = pg_query_params($con, $query, array($image));
+
+                if ($result === false) {
+                    break;
+                }
+
+                $count = pg_num_rows($result);
+
+                if ($count == 0) {
+                    break;
+                } else {
+                    // If the image name exists, generate a new one
+                    $image = "Crop_image_" . rand(000, 999) . '.' . $ext;
+                }
+            }
+
+            $source_path = $_FILES['image']['tmp_name'];
+            $destination_path = "../img/crop/" . $image;
+
+            // Upload the image
+            $upload = move_uploaded_file($source_path, $destination_path);
+
+            // Check whether the image is uploaded or not
+            if (!$upload) {
+                $_SESSION['message'] = "Failed to upload image";
+                header("Location: create.php");
+                die();
+            }
+        }
+    } else {
+        // Don't upload image and set the image value as blank
+        $image = "";
+    }
+
     // Inserting into Crop table using parameterized query
     $query_crop = "INSERT INTO crops (
         traditional_crop_traits_id, farming_id,
-        \"image\", crop_name, \"description\", upland_or_lowland,
+        image, crop_name, \"description\", upland_or_lowland,
         category, local_name, planting_techniques,
         cultural_and_spiritual_significance, threats,
         other_info, rice_biodiversity_uplift, cultural_importance_and_traditional_knowledge,
@@ -52,8 +100,7 @@ if (isset($_POST['save'])) {
     $farming_id = empty($farming_id_input) ? null : $farming_id_input;
 
     $query_run_crop = pg_query_params($con, $query_crop, array(
-        $traditional_crop_traits_id, $farming_id,
-        handleEmpty($_POST['image']),
+        $traditional_crop_traits_id, $farming_id, $image,
         handleEmpty($_POST['crop_name']),
         handleEmpty($_POST['description']),
         handleEmpty($_POST['upland_or_lowland']),
@@ -86,9 +133,9 @@ if (isset($_POST['update'])) {
     // Assuming you have a variable $_POST['crop_id'] containing the ID of the crop to update
     // crops table
     $crop_id = pg_escape_string($con, $_POST['crop_id']);
+    $current_image = pg_escape_string($con, $_POST['current_image']);
     $traditional_crop_traits_id = pg_escape_string($con, $_POST['traditional_crop_traits_id']);
     $farming_id = pg_escape_string($con, $_POST['farming_id']);
-    $image = pg_escape_string($con, $_POST['image']);
     $crop_name = pg_escape_string($con, $_POST['crop_name']);
     $description = pg_escape_string($con, $_POST['description']);
     $upland_or_lowland = pg_escape_string($con, $_POST['upland_or_lowland']);
@@ -135,7 +182,6 @@ if (isset($_POST['update'])) {
     // Apply the function to each field
     // crops table
     $farming_id = handleInteger(isset($_POST['farming_id']) ? $_POST['farming_id'] : null);
-    $image = handleValue($_POST['image']);
     $crop_name = handleValue($_POST['crop_name']);
     $description = handleValue($_POST['description']);
     $upland_or_lowland = handleValue($_POST['upland_or_lowland']);
@@ -164,6 +210,69 @@ if (isset($_POST['update'])) {
     if (!$query_run_traits) {
         echo "Error updating traditional crop traits: " . pg_last_error($con);
         exit(0);
+    }
+
+    // Function to generate a unique image name
+    function generate_unique_image_name($ext)
+    {
+        return "flight_image_" . rand(000, 999) . '.' . $ext;
+    }
+
+    // Check if the image is selected or not
+    if (isset($_FILES['image']['name'])) {
+        $image = $_FILES['image']['name'];
+
+        // Check if a new image is available
+        if ($image != "") {
+            $ext = pathinfo($image, PATHINFO_EXTENSION);
+            $image = generate_unique_image_name($ext);
+
+            // Check if the new image name already exists in the database
+            $query = "SELECT image FROM crops WHERE image = $1";
+            $result = pg_query_params($con, $query, array($image));
+
+            // Check for errors
+            if ($result === false) {
+                echo "Error: " . pg_last_error($con);
+                die();
+            }
+
+            $count = pg_num_rows($result);
+
+            if ($count > 0) {
+                // If the image name exists, generate a new one
+                $image = generate_unique_image_name($ext);
+            } else {
+                // Upload the new image
+                $source_path = $_FILES['image']['tmp_name'];
+                $destination_path = "../img/crop/" . $image;
+
+                // Upload the image
+                $upload = move_uploaded_file($source_path, $destination_path);
+
+                // Check whether the image is uploaded or not
+                if (!$upload) {
+                    echo "wala na upload";
+                    die();
+                }
+
+                // Remove the current image if available
+                if ($current_image != "") {
+                    $remove_path = "../img/crop/" . $current_image;
+                    $remove = unlink($remove_path);
+
+                    // Check whether the current image is removed or not
+                    if (!$remove) {
+                        echo "wala na remove";
+                        die();
+                    }
+                }
+            }
+        } else {
+            $image = $current_image;
+        }
+    } else {
+        $image = $current_image;
     }
 
     // Update Crop table

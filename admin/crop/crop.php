@@ -41,6 +41,8 @@
 					// get the id for the roreign tables
 					$current_traditional_crop_traits_id = $crops['traditional_crop_traits_id'];
 					$current_farming_id = $crops['farming_id'];
+					$current_image = $crops['image'];
+
 
 					// Get the data from crops table
 					// Define default values for each field if they are $emptyValue
@@ -62,7 +64,7 @@
 
 			?>
 					<!-- form for submitting -->
-					<form id="form-panel" name="Form" action="code.php" autocomplete="off" onsubmit="return validateForm()" method="POST" class="h-100 py-3 px-5">
+					<form id="form-panel" name="Form" action="try.php" autocomplete="off" onsubmit="return validateForm()" method="POST" enctype="multipart/form-data" class="h-100 py-3 px-5">
 						<!-- back button -->
 						<a href="list.php" class="link-offset-2"><i class="bi bi-chevron-left"></i>Go Back</a>
 
@@ -80,6 +82,7 @@
 
 							<input type="hidden" name="crop_id" value="<?= $crops['crop_id']; ?>">
 							<input type="hidden" name="traditional_crop_traits_id" value="<?= $crops['traditional_crop_traits_id']; ?>">
+							<input type="hidden" name="current_image" value="<?= $current_image; ?>">
 
 							<!-- General Information -->
 							<table id="info-table" class="table table-hover table-sm">
@@ -102,8 +105,21 @@
 										<td><input type="text" name="description" <?php echo ($description != $emptyValue) ? 'value="' . $description . '"' : 'placeholder="Empty"'; ?> class="w-100 border-0 p-1" disabled></td>
 									</tr>
 									<tr>
-										<th class="table-secondary w-25">Link to Image</th>
-										<td><input type="text" name="image" <?php echo ($image != $emptyValue) ? 'value="' . $image . '"' : 'placeholder="Empty"'; ?> class="w-100 border-0 p-1" disabled></td>
+										<th class="table-secondary w-25">Image</th>
+										<td>
+											<?php
+											if ($current_image != "") {
+												// Display the image
+											?>
+												<img src="<?php echo 'http://localhost/incognito-capstone/admin/'; ?>img/crop/<?php echo $current_image; ?>" width="150px">
+												<input id="image" type="file" name="image" Hidden>
+											<?php
+											} else {
+												// display message
+												echo "Image not added";
+											}
+											?>
+										</td>
 									</tr>
 									<tr>
 										<th class="table-secondary w-25">Local Name</th>

@@ -28,7 +28,7 @@
 		<section id="nav-cards" class="p-0 m-0 col col-md-9 col-xl-10">
 
 			<!-- form for submitting -->
-			<form id="form-panel" name="Form" action="code.php" autocomplete="off" onsubmit="return validateForm()" method="POST" class=" py-3 px-5">
+			<form id="form-panel" name="Form" action="code.php" autocomplete="off" onsubmit="return validateForm()" method="POST" enctype="multipart/form-data" class=" py-3 px-5">
 				<!-- back button -->
 				<a href="list.php" class="link-offset-2"><i class="bi bi-chevron-left"></i>Go Back</a>
 
@@ -65,8 +65,8 @@
 								<td><input type="text" name="category" class="w-100 border"></td>
 							</tr>
 							<tr>
-								<th class="table-secondary w-25" scope="row">Link to Image</th>
-								<td><input type="text" name="image" class="w-100 border"></td>
+								<th class="table-secondary w-25" scope="row">Image</th>
+								<td><input type="file" name="image" class="w-100 border"></td>
 							</tr>
 							<tr>
 								<th class="table-secondary w-25" scope="row">Local Name</th>
