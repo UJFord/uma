@@ -27,7 +27,7 @@
         <!-- main panel -->
         <section id="nav-cards" class="p-0 m-0 col col-md-9 col-xl-10 min-vh-100">
             <!-- form for submitting -->
-            <form id="form-panel" name="Form" action="code.php" autocomplete="off" onsubmit="return validateForm()" method="POST" class="h-100 py-3 px-5">
+            <form id="form-panel" name="Form" action="code.php" autocomplete="off" onsubmit="return validateForm()" method="POST" enctype="multipart/form-data" class="h-100 py-3 px-5">
                 <!-- back button -->
                 <a href="list.php" class="link-offset-2"><i class="bi bi-chevron-left"></i>Go Back</a>
 
@@ -41,6 +41,8 @@
 
                     if (pg_num_rows($query_run) > 0) {
                         $farming = pg_fetch_assoc($query_run);
+                        $current_farming_image = $farming['image'];
+
                         $farming_name = isset($farming['farming_name']) ? htmlspecialchars($farming['farming_name'], ENT_QUOTES) : $emptyValue;
                         $description = isset($farming['description']) ? htmlspecialchars($farming['description'], ENT_QUOTES) : $emptyValue;
                         $image = isset($farming['image']) ? htmlspecialchars($farming['image'], ENT_QUOTES) : $emptyValue;
@@ -70,6 +72,7 @@
 
                             <!-- to get farming_id -->
                             <input type="hidden" name="farming_id" value="<?= $farming['farming_id']; ?>">
+                            <input type="hidden" name="current_farming_image" value="<?= $current_farming_image; ?>">
 
                             <!-- Farming information -->
                             <table id="info-table" class="table table-hover table-sm">
@@ -80,7 +83,23 @@
                                         </tr>
                                         <tr>
                                             <th class="table-secondary w-25">Image Link</th>
-                                            <td><textarea class="w-100 border-0 p-1" name="image" rows="5" disabled <?php echo ($image !== $emptyValue) ? '>' . $image : 'placeholder="Empty">'; ?></textarea></td>
+                                            <td>
+                                                <?php
+                                                if ($current_farming_image != "") {
+                                                    // Display the image
+                                                ?>
+                                                    <img src="<?php echo 'http://localhost/incognito-capstone/admin/'; ?>img/farming/<?php echo $current_farming_image; ?>" width="150px">
+                                                    <input id="image" type="file" name="image" Hidden>
+                                                <?php
+                                                } else {
+                                                    // display message
+                                                    echo "Image not added";
+                                                ?>
+                                                    <input id="image" type="file" name="image" Hidden>
+                                                <?php
+                                                }
+                                                ?>
+                                            </td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -90,60 +109,61 @@
                                     <tr>
                                         <th class="table-secondary w-25">Importance</th>
                                         <td><textarea class="w-100 border-0 p-1" name="importance" rows="5" disabled <?php echo ($importance !== $emptyValue) ? '>' . $importance : 'placeholder="Empty">'; ?></textarea></td>
-                                        </tr>
-                                        <tr>
-                                            <th class="table-secondary w-25">Role in Maintaning pland Ecosystem</th>
-                                            <td><textarea class="w-100 border-0 p-1" name="role_in_maintaining_upland_ecosystem" rows="5" disabled <?php echo ($role_in_maintaining_upland_ecosystem !== $emptyValue) ? '>' . $role_in_maintaining_upland_ecosystem : 'placeholder="Empty">'; ?></textarea></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="table-secondary w-25">Role in Maintaning pland Ecosystem</th>
+                                        <td><textarea class="w-100 border-0 p-1" name="role_in_maintaining_upland_ecosystem" rows="5" disabled <?php echo ($role_in_maintaining_upland_ecosystem !== $emptyValue) ? '>' . $role_in_maintaining_upland_ecosystem : 'placeholder="Empty">'; ?></textarea></td>
                                     </tr>
                                     <tr>
                                         <th class="table-secondary w-25">Timing</th>
                                         <td><textarea class="w-100 border-0 p-1" name="timing" rows="5" disabled <?php echo ($timing !== $emptyValue) ? '>' . $timing : 'placeholder="Empty">'; ?></textarea></td>
-                                        </tr>
-                                        <tr>
-                                            <th class="table-secondary w-25">Benefits</th>
-                                            <td><textarea class="w-100 border-0 p-1" name="benefits" rows="5" disabled <?php echo ($benefits !== $emptyValue) ? '>' . $benefits : 'placeholder="Empty">'; ?></textarea></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="table-secondary w-25">Benefits</th>
+                                        <td><textarea class="w-100 border-0 p-1" name="benefits" rows="5" disabled <?php echo ($benefits !== $emptyValue) ? '>' . $benefits : 'placeholder="Empty">'; ?></textarea></td>
                                     </tr>
                                     <tr>
                                         <th class="table-secondary w-25">Environmetal Impacts</th>
                                         <td><textarea class="w-100 border-0 p-1" name="environmental_impacts" rows="5" disabled <?php echo ($environmental_impacts !== $emptyValue) ? '>' . $environmental_impacts : 'placeholder="Empty">'; ?></textarea></td>
-                                        </tr>
+                                    </tr>
                                 </tbody>
                             </table>
 
                             <table class="table table-hover table-sm">
+
                                 <body>
-                                        <tr>
-                                            <th class="table-secondary w-25">Considerations</th>
-                                            <td><textarea class="w-100 border-0 p-1" name="considerations" rows="5" disabled <?php echo ($considerations !== $emptyValue) ? '>' . $considerations : 'placeholder="Empty">'; ?></textarea></td>
+                                    <tr>
+                                        <th class="table-secondary w-25">Considerations</th>
+                                        <td><textarea class="w-100 border-0 p-1" name="considerations" rows="5" disabled <?php echo ($considerations !== $emptyValue) ? '>' . $considerations : 'placeholder="Empty">'; ?></textarea></td>
                                     </tr>
                                     <tr>
                                         <th class="table-secondary w-25">Sustainable Practices</th>
                                         <td><textarea class="w-100 border-0 p-1" name="sustainable_practices" rows="5" disabled <?php echo ($sustainable_practices !== $emptyValue) ? '>' . $sustainable_practices : 'placeholder="Empty">'; ?></textarea></td>
-                                        </tr>
-                                        <tr>
-                                            <th class="table-secondary w-25">History Development</th>
-                                            <td><textarea class="w-100 border-0 p-1" name="history_development" rows="5" disabled <?php echo ($history_development !== $emptyValue) ? '>' . $history_development : 'placeholder="Empty">'; ?></textarea></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="table-secondary w-25">History Development</th>
+                                        <td><textarea class="w-100 border-0 p-1" name="history_development" rows="5" disabled <?php echo ($history_development !== $emptyValue) ? '>' . $history_development : 'placeholder="Empty">'; ?></textarea></td>
                                     </tr>
                                     <tr>
                                         <th class="table-secondary w-25">Construction and Maintenance</th>
                                         <td><textarea class="w-100 border-0 p-1" name="construction_and_maintenance" rows="5" disabled <?php echo ($construction_and_maintenance !== $emptyValue) ? '>' . $construction_and_maintenance : 'placeholder="Empty">'; ?></textarea></td>
-                                        </tr>
-                                        <tr>
-                                            <th class="table-secondary w-25">Challenges</th>
-                                            <td><textarea class="w-100 border-0 p-1" name="challenges" rows="5" disabled <?php echo ($challenges !== $emptyValue) ? '>' . $challenges : 'placeholder="Empty">'; ?></textarea></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="table-secondary w-25">Challenges</th>
+                                        <td><textarea class="w-100 border-0 p-1" name="challenges" rows="5" disabled <?php echo ($challenges !== $emptyValue) ? '>' . $challenges : 'placeholder="Empty">'; ?></textarea></td>
                                     </tr>
                                     <tr>
                                         <th class="table-secondary w-25">Principles</th>
                                         <td><textarea class="w-100 border-0 p-1" name="principles" rows="5" disabled <?php echo ($principles !== $emptyValue) ? '>' . $principles : 'placeholder="Empty">'; ?></textarea></td>
-                                        </tr>
+                                    </tr>
                                 </body>
                             </table>
 
                             <table class="table table-hover table-sm mb-0">
                                 <tbody>
-                                        <tr>
-                                            <th class="table-secondary w-25">Other Info</th>
-                                            <td><textarea class="w-100 border-0 p-1" name="other_info" rows="5" disabled <?php echo ($other_info !== $emptyValue) ? '>' . $other_info : 'placeholder="Empty">'; ?></textarea></td>
+                                    <tr>
+                                        <th class="table-secondary w-25">Other Info</th>
+                                        <td><textarea class="w-100 border-0 p-1" name="other_info" rows="5" disabled <?php echo ($other_info !== $emptyValue) ? '>' . $other_info : 'placeholder="Empty">'; ?></textarea></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -160,10 +180,9 @@
                         Ritual Section
                     </h1>
                 </div>
-
                 <?php
                 if (isset($_GET['farming_id'])) {
-                    $ritual_id = pg_escape_string($connection, $_GET['farming_id']);
+                    $farming_id = pg_escape_string($connection, $_GET['farming_id']);
                     $query = "SELECT ritual.* from farming left join ritual on ritual.ritual_id = farming.ritual_id WHERE farming_id='$farming_id'";
                     $query_run = pg_query($connection, $query);
 
@@ -171,6 +190,8 @@
 
                     if (pg_num_rows($query_run) > 0) {
                         $ritual = pg_fetch_assoc($query_run);
+                        $current_ritual_image = $ritual['ritual_image'];
+
                         $ritual_name = isset($ritual['ritual_name']) ? htmlspecialchars($ritual['ritual_name'], ENT_QUOTES) : $emptyValue;
                         $description = isset($ritual['description']) ? htmlspecialchars($ritual['description'], ENT_QUOTES) : $emptyValue;
                         $image = isset($ritual['image']) ? htmlspecialchars($ritual['image'], ENT_QUOTES) : $emptyValue;
@@ -195,6 +216,8 @@
 
                             <!-- to get the ritual id -->
                             <input type="hidden" name="ritual_id" value="<?= $ritual['ritual_id']; ?>">
+                            <input type="hidden" name="current_ritual_image" value="<?= $current_ritual_image; ?>">
+
 
                             <!-- Ritual Information -->
                             <table id="info-table" class="table table-hover table-sm">
@@ -207,9 +230,23 @@
                                     </tr>
 
                                     <tr>
-                                        <th class="table-secondary w-25">Image Link</th>
+                                        <th class="table-secondary w-25">Image</th>
                                         <td>
-                                            <textarea class="w-100 border-0 p-1" name="image" rows="5" disabled <?php echo ($image !== $emptyValue) ? '>' . $image : 'placeholder="Empty">'; ?></textarea>
+                                            <?php
+                                            if ($current_ritual_image != "") {
+                                                // Display the image
+                                            ?>
+                                                <img src="<?php echo 'http://localhost/incognito-capstone/admin/'; ?>img/rituals/<?php echo $current_ritual_image; ?>" width="150px">
+                                                <input id="ritual_image" type="file" name="ritual_image" Hidden>
+                                            <?php
+                                            } else {
+                                                // display message
+                                                echo "Image not added";
+                                            ?>
+                                                <input id="ritual_image" type="file" name="ritual_image" Hidden>
+                                            <?php
+                                            }
+                                            ?>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -219,7 +256,8 @@
                                 <tbody>
                                     <tr>
                                         <th class="table-secondary w-25">Purpose</th>
-                                        <td><textarea class="w-100 border-0 p-1" name="purpose" rows="5" disabled <?php echo ($purpose !== $emptyValue) ? '>' . $purpose : 'placeholder="Empty">'; ?></textarea></td>
+                                        <td><textarea class="w-100 border-0 p-1" name="purpose" rows="5" disabled <?php echo ($purpose !== $emptyValue) ? '>' . $purpose : 'placeholder="Empty">'; ?></textarea>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <th class="table-secondary w-25">Timing</th>
@@ -247,14 +285,14 @@
                                 </tbody>
                             </table>
                         </div>
-            <?php
+                <?php
                     }
                 }
-            ?>
-            <!-- editting buttons -->
-            <?php
-            require('../edit-btn/edit-btn.php');
-            ?>
+                ?>
+                <!-- editting buttons -->
+                <?php
+                require('../edit-btn/edit-btn.php');
+                ?>
             </form>
         </section>
 

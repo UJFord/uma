@@ -28,7 +28,7 @@
         <section id="nav-cards" class="p-0 m-0 col col-md-9 col-xl-10 min-vh-100">
 
             <!-- form for submitting -->
-            <form id="form-panel" name="Form" action="code.php" autocomplete="off" onsubmit="return validateForm()" method="POST" class="h-100 py-3 px-5">
+            <form id="form-panel" name="Form" action="code.php" autocomplete="off" onsubmit="return validateForm()" method="POST" enctype="multipart/form-data" class="h-100 py-3 px-5">
                 <!-- back button -->
                 <a href="list.php" class="link-offset-2"><i class="bi bi-chevron-left"></i>Go Back</a>
 
@@ -50,8 +50,8 @@
                                 <td><textarea class="w-100 border p-1" name="description" placeholder="Enter Description" rows="5"></textarea></td>
                             </tr>
                             <tr>
-                                <th class="table-secondary w-25">Image Link</th>
-                                <td><input type="text" name="image" placeholder="Enter Image Link" class="w-100 border p-1"></td>
+                                <th class="table-secondary w-25">Image</th>
+                                <td><input type="file" name="image" class="w-100 border p-1"></td>
                             </tr>
                         </tbody>
 
@@ -143,8 +143,8 @@
                                 <td><textarea class="w-100 border p-1" name="description" placeholder="Enter Description" rows="5"></textarea></td>
                             </tr>
                             <tr>
-                                <th class="table-secondary w-25">Image Link</th>
-                                <td><input type="text" name="image" placeholder="Enter Image Link" class="w-100 border p-1"></td>
+                                <th class="table-secondary w-25">Image</th>
+                                <td><input type="file" name="ritual_image" class="w-100 border p-1"></td>
                             </tr>
                         </tbody>
                     </table>

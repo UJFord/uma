@@ -215,7 +215,7 @@ if (isset($_POST['update'])) {
     // Function to generate a unique image name
     function generate_unique_image_name($ext)
     {
-        return "flight_image_" . rand(000, 999) . '.' . $ext;
+        return "Crop_Image_" . rand(000, 999) . '.' . $ext;
     }
 
     // Check if the image is selected or not
@@ -259,12 +259,16 @@ if (isset($_POST['update'])) {
                 // Remove the current image if available
                 if ($current_image != "") {
                     $remove_path = "../img/crop/" . $current_image;
-                    $remove = unlink($remove_path);
 
-                    // Check whether the current image is removed or not
-                    if (!$remove) {
-                        echo "wala na remove";
-                        die();
+                    // Check if the file exists before attempting to remove
+                    if (file_exists($remove_path)) {
+                        $remove = unlink($remove_path);
+
+                        // Check whether the current image is removed or not
+                        if (!$remove) {
+                            echo "wala na remove";
+                            die();
+                        }
                     }
                 }
             }
@@ -277,7 +281,7 @@ if (isset($_POST['update'])) {
 
     // Update Crop table
     $query = "UPDATE crops SET
-    farming_id=$farming_id, image = $image, crop_name = $crop_name, description = $description, upland_or_lowland = $upland_or_lowland,
+    farming_id=$farming_id, image = '$image', crop_name = $crop_name, description = $description, upland_or_lowland = $upland_or_lowland,
     cultural_and_spiritual_significance = $cultural_and_spiritual_significance, threats = $threats,
     other_info = $other_info, rice_biodiversity_uplift = $rice_biodiversity_uplift, cultural_importance_and_traditional_knowledge = $cultural_importance_and_traditional_knowledge,
     unique_features=$unique_features, cultural_use=$cultural_use, associated_vegetation=$associated_vegetation

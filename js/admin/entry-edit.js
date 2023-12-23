@@ -39,6 +39,8 @@ editBtn.addEventListener('click', () => {
 
     // Example: Remove hidden attribute from an element with ID 'exampleElement'
     showElement('image');
+    showElement('ritual_image');
+    showElement('new_image');
 });
 
 // cancel

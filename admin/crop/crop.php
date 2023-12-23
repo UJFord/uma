@@ -43,7 +43,6 @@
 					$current_farming_id = $crops['farming_id'];
 					$current_image = $crops['image'];
 
-
 					// Get the data from crops table
 					// Define default values for each field if they are $emptyValue
 					$crop_name = isset($crops['crop_name']) ? htmlspecialchars($crops['crop_name'], ENT_QUOTES) : $emptyValue;
@@ -64,7 +63,7 @@
 
 			?>
 					<!-- form for submitting -->
-					<form id="form-panel" name="Form" action="try.php" autocomplete="off" onsubmit="return validateForm()" method="POST" enctype="multipart/form-data" class="h-100 py-3 px-5">
+					<form id="form-panel" name="Form" action="code.php" autocomplete="off" onsubmit="return validateForm()" method="POST" enctype="multipart/form-data" class="h-100 py-3 px-5">
 						<!-- back button -->
 						<a href="list.php" class="link-offset-2"><i class="bi bi-chevron-left"></i>Go Back</a>
 
@@ -117,6 +116,9 @@
 											} else {
 												// display message
 												echo "Image not added";
+											?>
+												<input id="image" type="file" name="image" Hidden>
+											<?php
 											}
 											?>
 										</td>
