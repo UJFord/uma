@@ -32,277 +32,199 @@
 				<!-- back button -->
 				<a href="list.php" class="link-offset-2"><i class="bi bi-chevron-left"></i>Go Back</a>
 
-				<!-- display name-->
-				<div class="row d-flex justify-content-between my-3">
-					<div class="col-6">
-						<h3 id="crops-title"><input type="text" name="crop_name" placeholder="Display Title" class="fw-semibold w-100 border py-1 px-2"></h3>
+
+
+				<!-- main form -->
+				<div class="form-control p-3 mt-3">
+
+					<!-- general information -->
+					<h3>General Information</h3>
+					<div class="row">
+						<div class="col-4">
+							<!-- crop name -->
+							<label for="crop-name">Crop <span class="text-danger">*</span></label>
+							<input id="crop-name" type="text" class="form-control form-control-lg mb-2" required>
+
+						</div>
+						<!-- image -->
+						<div class="col-4">
+							<label for="image-input" class="">Images <span class="text-danger">*</span></label>
+							<input type="file" class="form-control" id="image-input" multiple required accept="image/*">
+						</div>
 					</div>
-				</div>
 
-				<!-- crop information -->
-				<div id="" class="row form-control p-3">
+					<div class="row">
+						<div class="col-4">
+							<!-- category -->
+							<label for="category">Category <span class="text-danger">*</span></label>
+							<select id="category" class="form-select mb-2" required>
+								<option value="rice" selected>Rice</option>
+								<option value="root">Rootcrop</option>
+								<option value="fly">Flying</option>
+								<option value="">Rock</option>
+								<option value="">Fire</option>
+								<option value="">Grass</option>
+								<option value="">Steel</option>
+							</select>
 
-					<?php include('../message.php'); ?>
+							<!-- local name -->
+							<label for="local">Local Name <span class="text-danger">*</span></label>
+							<input id="local" type="text" class="form-control mb-2" required>
+							<!-- upland or lowland -->
 
-					<!-- Crop Info -->
-					<table id="info-table" class="table table-hover table-sm">
-						<thead>
-							<tr>
-								<th colspan="2" class="table-dark">General Information</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<th class="table-secondary w-25" scope="row">Description</th>
-								<td><textarea name="description" rows="2" class="border w-100 p-1"></textarea></td>
-							</tr>
-							<tr>
-								<th class="table-secondary">Upland or Lowand</th>
-								<td><input type="text" name="upland_or_lowland" class="w-100 border p-1"></td>
-							</tr>
-							<tr>
-								<th class="table-secondary w-25" scope="row">Category (rice, rootcrop, etc...)</th>
-								<td><input type="text" name="category" class="w-100 border"></td>
-							</tr>
-							<tr>
-								<th class="table-secondary w-25" scope="row">Image</th>
-								<td><input type="file" name="image" class="w-100 border"></td>
-							</tr>
-							<tr>
-								<th class="table-secondary w-25" scope="row">Local Name</th>
-								<td><input type="text" name="local_name" class="w-100 border"></td>
-							</tr>
-						</tbody>
-					</table>
+							<label for="">Type <span class="text-danger">*</span></label>
+							<div class="m-2">
+								<div class="form-check form-check-inline">
+									<label class="form-check-label" for="inlineRadio1">Upland</label>
+									<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="Upland" required>
+								</div>
+								<div class="form-check form-check-inline">
+									<label class="form-check-label" for="inlineRadio2">Lowland</label>
+									<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="Lowland" required>
+								</div>
+							</div>
 
-					<!-- characteristics of traditional rice -->
-					<table class="table table-hover table-sm">
-						<thead>
-							<tr>
-								<th colspan="2" class="table-dark">Characteristics of Traditional Rice</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<th class="table-secondary w-25">Taste</th>
-								<td><input type="text" name="taste" class="w-100 border"></td>
-							</tr>
-							<tr>
-								<th class="table-secondary">Aroma</th>
-								<td><input type="text" name="aroma" class="w-100 border"></td>
-							</tr>
-							<tr>
-								<th class="table-secondary">Maturity Period</th>
-								<td><input type="text" name="maturation" class="w-100 border"></td>
-							</tr>
-							<tr>
-								<th class="table-secondary">Disease Resistance</th>
-								<td><input type="text" name="pest_and_disease_resistance" class="w-100 border"></td>
-							</tr>
-						</tbody>
-					</table>
 
-					<!-- planting techniques -->
-					<table class="table table-hover table-sm">
-						<thead>
-							<tr>
-								<th colspan="2" class="table-dark">Planting Techniques</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<th class="table-secondary w-25">Description</th>
-								<td><textarea name="planting_techniques" class="w-100 border" rows="2"></textarea></td>
-							</tr>
-						</tbody>
-					</table>
+						</div>
 
-					<!-- Cultural and Spiritual Significance-->
-					<table class="table table-hover table-sm">
-						<thead>
-							<tr>
-								<th colspan="2" class="table-dark">Cultural and Spiritual Significance</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<th class="table-secondary w-25">Description</th>
-								<td><textarea name="cultural_and_spiritual_significance" class="w-100 border" rows="2"></textarea></td>
-							</tr>
-						</tbody>
-					</table>
+						<div class="col">
+							<!-- images chosen not yet uploaded i think i dont know -->
+							<div id="image-previews" class="overflow-x-scroll h-100 border d-flex flex-row"></div>
+						</div>
+					</div>
 
-					<!-- Role in maintaining upland ecosystems And biodiversity-->
-					<table class="table table-hover table-sm">
-						<thead>
-							<tr>
-								<th colspan="2" class="table-dark">Role in Maintaining Upland Ecosystems</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<th class="table-secondary w-25">Description</th>
-								<td><textarea name="rice_biodiversity_uplift" class="w-100 border" rows="2"></textarea></td>
-							</tr>
-						</tbody>
-					</table>
+					<div class="col">
+						<!-- Descrition -->
+						<label for="gen-desc">Description <span class="text-danger">*</span></label>
+						<textarea name="" id="gen-desc" class="form-control" rows="3" required></textarea>
+					</div>
 
-					<!-- Cultural Importance and Traditional Knowledge -->
-					<table class="table table-hover table-sm">
-						<thead>
-							<tr>
-								<th colspan="2" class="table-dark">Cultural Importance and Traditional Knowledge</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<th class="table-secondary w-25">Description</th>
-								<td><textarea name="cultural_importance_and_traditional_knowledge" class="w-100 border" rows="2"></textarea></td>
-							</tr>
-						</tbody>
-					</table>
+					<!-- Characteristics -->
+					<h3 class="mt-4">Characteristics</h5>
+						<div class="row">
+							<div class="col-2">
+								<!-- taste -->
+								<label for="taste">Taste</label>
+								<input id="taste" type="text" class="form-control mb-2">
+							</div>
+							<div class="col-2">
+								<!-- aroma -->
+								<label for="aroma">Aroma</label>
+								<input id="aroma" type="text" class="form-control mb-2">
+							</div>
+							<div class="col-2">
+								<!-- maturation -->
+								<label for="matur">Maturation</label>
+								<input id="matur" type="text" class="form-control mb-2">
+							</div>
+							<div class="col">
+								<!-- disease resistance -->
+								<label for="resist">Disease Resistance</label>
+								<input id="resist" type="text" class="form-control">
+							</div>
+						</div>
 
-					<!-- Location  -->
-					<table class="table table-hover table-sm">
-						<thead>
-							<tr>
-								<th colspan="2" class="table-dark">Location</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<th class="table-secondary w-25">Map</th>
-								<td></td>
-							</tr>
-							<tr>
-								<th></th>
-								<td></td>
-							</tr>
-						</tbody>
-					</table>
+						<!-- More -->
+						<h3 class="mt-4">More</h5>
 
-					<!-- threats from lowland-associated influences-->
-					<table class="table table-hover table-sm">
-						<thead>
-							<tr>
-								<th colspan="2" class="table-dark">Threats to the Upland Farms</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<th class="table-secondary w-25">Description</th>
-								<td><textarea name="threats" class="w-100 border" rows="2"></textarea></td>
-							</tr>
-						</tbody>
-					</table>
+							<!-- Planting Techniques -->
+							<label class="mt-2">Planting Techniques</label>
+							<div class="row">
+								<div class="col">
+									<!-- Descrition -->
+									<textarea name="" id="tech-desc" class="form-control" rows="2"></textarea>
+								</div>
+							</div>
 
-					<!-- Unique Features -->
-					<table class="table table-hover table-sm">
-						<thead>
-							<tr>
-								<th colspan="2" class="table-dark">Unique Features</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<th class="table-secondary w-25">Description</th>
-								<td><textarea name="unique_features" class="w-100 border" rows="5"></textarea></td>
-							</tr>
-						</tbody>
-					</table>
+							<!-- Cultural and Spiritual Significance -->
+							<label class="mt-2">Cultural and Spiritual Significance</label>
+							<div class="row">
+								<div class="col">
+									<!-- Descrition -->
+									<textarea name="" id="signif-desc" class="form-control" rows="2"></textarea>
+								</div>
+							</div>
 
-					<!-- Cultural Use -->
-					<table class="table table-hover table-sm">
-						<thead>
-							<tr>
-								<th colspan="2" class="table-dark">Cultural Use</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<th class="table-secondary w-25">Description</th>
-								<td><textarea name="cultural_use" class="w-100 border" rows="5"></textarea></td>
-							</tr>
-						</tbody>
-					</table>
+							<!-- Role in Maintaining Upland Ecosystems -->
+							<label class="mt-2">Role in Maintaining Upland Ecosystems</label>
+							<div class="row">
+								<div class="col">
+									<!-- Descrition -->
+									<textarea name="" id="role-desc" class="form-control" rows="2"></textarea>
+								</div>
+							</div>
 
-					<!-- Associated Vegetation -->
-					<table class="table table-hover table-sm">
-						<thead>
-							<tr>
-								<th colspan="2" class="table-dark">Associated Vegetation</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<th class="table-secondary w-25">Description</th>
-								<td><textarea name="associated_vegetation" class="w-100 border" rows="5"></textarea></td>
-							</tr>
-						</tbody>
-					</table>
+							<!-- Cultural Importance and Traditional Knowledge -->
+							<label class="mt-2">Cultural Importance and Traditional Knowledge</label>
+							<div class="row">
+								<div class="col">
+									<!-- Descrition -->
+									<textarea name="" id="impotance-desc" class="form-control" rows="2"></textarea>
+								</div>
+							</div>
 
-					<!-- Associated Farming Practices -->
-					<table class="table table-hover table-sm  mb-0">
-							<thead>
-								<tr>
-									<th colspan="2" class="table-dark">Associated Farming Practices</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-								<th class="table-secondary w-25">Farming Practice Name</th>
-								<td>
-									<select name="farming_id" class="w-100 border" rows="2">
-										<?php
-										// php code to display available schedules from the database
-										// query to select all available schedules in the database
-										$query = "SELECT * FROM farming";
+							<!-- Unique Features -->
+							<label class="mt-2">Unique Features</label>
+							<div class="row">
+								<div class="col">
+									<!-- Descrition -->
+									<textarea name="" id="feat-desc" class="form-control" rows="2"></textarea>
+								</div>
+							</div>
 
-										// Executing query
-										$query_run = pg_query($connection, $query);
+							<!-- Cultural Use -->
+							<label class="mt-2">Cultural Use</label>
+							<div class="row">
+								<div class="col">
+									<!-- Descrition -->
+									<textarea name="" id="use-desc" class="form-control" rows="2"></textarea>
+								</div>
+							</div>
 
-										// count rows to check whether we have a schedule or not
-										$count = pg_num_rows($query_run);
+							<!-- Associated Farming Practice -->
+							<label class="mt-2">Associated Farming Practice</label>
+							<div class="row">
+								<div class="col">
+									<!-- Descrition -->
+									<textarea name="" id="prac-desc" class="form-control" rows="2"></textarea>
+								</div>
+							</div>
 
-										// if count is greater than 0 we have a schedule else we do not have a schedule
-										if ($count > 0) {
-											// we have a schedule
-											while ($row = pg_fetch_assoc($query_run)) {
-												// get the detail of the schedule
-												$farming_id = $row['farming_id'];
-												$farming_name = $row['farming_name'];
-										?>
-												<option value="<?php echo $farming_id; ?>"><?php echo $farming_name; ?></option>
-												<option value="">None</option>
-											<?php
-											}
-										} else {
-											// we do not have a schedule
-											?>
-											<option value="0">No Farming name Found</option>
-										<?php
-										}
-										?>
-									</select>
-								</td>
-								</tr>
-							</tbody>
-					</table>
+							<!-- Associated Vegetation -->
+							<label class="mt-2">Associated Vegetation</label>
+							<div class="row">
+								<div class="col">
+									<!-- Descrition -->
+									<textarea name="" id="veg-desc" class="form-control" rows="2"></textarea>
+								</div>
+							</div>
 
-					<!-- other info-->
-					<table class="table table-hover table-sm  mb-0">
-						<thead>
-							<tr>
-								<th colspan="2" class="table-dark">Other Info</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<th class="table-secondary w-25">Description</th>
-								<td><textarea name="other_info" class="w-100 border" rows="2"></textarea></td>
-							</tr>
-						</tbody>
-					</table>
+							<!-- Last Seen Location -->
+							<label class="mt-2">Last Seen Location</label>
+							<div class="row">
+								<div class="col">
+									<!-- Descrition -->
+									<textarea name="" id="loc-desc" class="form-control" rows="2"></textarea>
+								</div>
+							</div>
+
+							<!-- Threats to Upland Farms -->
+							<label class="mt-2">Threats to Upland Farms</label>
+							<div class="row">
+								<div class="col">
+									<!-- Descrition -->
+									<textarea name="" id="threat-desc" class="form-control" rows="2"></textarea>
+								</div>
+							</div>
+
+							<!-- Other Information -->
+							<label class="mt-2">Other Information</label>
+							<div class="row">
+								<div class="col">
+									<!-- Descrition -->
+									<textarea name="" id="more-desc" class="form-control" rows="2"></textarea>
+								</div>
+							</div>
 				</div>
 				<!-- editting buttons -->
 				<?php
