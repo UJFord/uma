@@ -162,6 +162,8 @@ if (isset($_POST['update'])) {
     $unique_features = pg_escape_string($con, $_POST['unique_features']);
     $cultural_use = pg_escape_string($con, $_POST['cultural_use']);
     $associated_vegetation = pg_escape_string($con, $_POST['associated_vegetation']);
+    $last_seen_location = pg_escape_string($con, $_POST['last_seen_location']);
+
 
     // Validate data before insertion
     if (empty($crop_name) || empty($local_name) || empty($category) || empty($description) || empty($current_image)) {
@@ -170,19 +172,12 @@ if (isset($_POST['update'])) {
         exit();
     }
 
-
-    // Function to handle values, including NULL
+    // Function to handle empty values and NULL values
     function handleValue($value)
     {
-        global $con;
-
-        if ($value === '' || $value === null) {
-            return "'Empty'";
-        } else {
-            // Wrap in single quotes for non-empty values
-            return "'" . pg_escape_string($con, $value) . "'";
-        }
+        return $value === '' ? 'Empty' : htmlspecialchars($value, ENT_QUOTES);
     }
+
 
     // Function to handle integer values, including NULL
     function handleInteger($value)
@@ -293,27 +288,21 @@ if (isset($_POST['update'])) {
 
     // Update Crop table using parameterized query
     $query_crop = "UPDATE crops SET
-    farming_id = $1, image = $2, crop_name = $3, description = $4, upland_or_lowland = $5,
+    last_seen_location = $1, image = $2, crop_name = $3, description = $4, upland_or_lowland = $5,
     cultural_and_spiritual_significance = $6, threats = $7,
     other_info = $8, role_in_maintaining_upland_ecosystem = $9, cultural_importance_and_traditional_knowledge = $10,
-    unique_features = $11, cultural_use = $12, associated_vegetation = $13
-    WHERE crop_id = $14";
+    unique_features = $11, cultural_use = $12, associated_vegetation = $13, planting_techniques = $14, category = $15,
+    local_name = $16
+    WHERE crop_id = $17";
 
     // Parameters for the query
     $params_crop = array(
-        $farming_id, $image, $crop_name, $description, $upland_or_lowland,
+        $last_seen_location, $image, $crop_name, $description, $upland_or_lowland,
         $cultural_and_spiritual_significance, $threats,
         $other_info, $role_in_maintaining_upland_ecosystem, $cultural_importance_and_traditional_knowledge,
-        $unique_features, $cultural_use, $associated_vegetation,
-        $crop_id
+        $unique_features, $cultural_use, $associated_vegetation, $planting_techniques, $category,
+        $local_name, $crop_id
     );
-
-    // Convert 'Null' strings to actual NULL values
-    foreach ($params_crop as &$param) {
-        if ($param === 'Null') {
-            $param = null;
-        }
-    }
 
     // Prepare the statement
     $query_prepare_crop = pg_prepare($con, "update_crop", $query_crop);
