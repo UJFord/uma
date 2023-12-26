@@ -38,7 +38,7 @@ editBtn.addEventListener('click', () => {
     deleteBox.classList.remove('d-none');
 
     // Example: Remove hidden attribute from an element with ID 'exampleElement'
-    showElement('image');
+    showElement('image-input');
     showElement('ritual_image');
     showElement('new_image');
 });

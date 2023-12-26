@@ -4,7 +4,7 @@ session_start();
 
 $con = pg_connect("host=localhost dbname=farm_crops user=postgres password=123") or die("Could not connect to server\n");
 
-if (isset($_POST['save'])) {
+if (isset($_POST['save_crop'])) {
     // Function to handle empty values
     function handleEmpty($value)
     {
@@ -73,8 +73,7 @@ if (isset($_POST['save'])) {
 
             // Check whether the image is uploaded or not
             if (!$upload) {
-                $_SESSION['message'] = "Failed to upload image";
-                header("Location: create.php");
+                echo "Image uploaded";
                 die();
             }
         }
@@ -83,17 +82,29 @@ if (isset($_POST['save'])) {
         $image = "";
     }
 
+    $crop_name = $_POST['crop_name'];
+    $local_name = $_POST['local_name'];
+    $category = $_POST['category'];
+    $description = $_POST['description'];
+
+    // Validate data before insertion
+    if (empty($crop_name) || empty($local_name) || empty($category) || empty($description) || empty($image)) {
+        // Handle the case where any required field is empty
+        echo "naay empty";
+        exit();
+    }
+
     // Inserting into Crop table using parameterized query
     $query_crop = "INSERT INTO crops (
         traditional_crop_traits_id, farming_id,
         image, crop_name, \"description\", upland_or_lowland,
         category, local_name, planting_techniques,
         cultural_and_spiritual_significance, threats,
-        other_info, rice_biodiversity_uplift, cultural_importance_and_traditional_knowledge,
-        unique_features, cultural_use, associated_vegetation
+        other_info, role_in_maintaining_upland_ecosystem, cultural_importance_and_traditional_knowledge,
+        unique_features, cultural_use, associated_vegetation, last_seen_location
     ) VALUES (
         $1, $2, $3, $4, $5, $6, $7, $8, $9, $10,
-        $11, $12, $13, $14, $15, $16, $17
+        $11, $12, $13, $14, $15, $16, $17, $18
     ) RETURNING crop_id";
 
     $farming_id_input = $_POST['farming_id'];
@@ -110,11 +121,12 @@ if (isset($_POST['save'])) {
         handleEmpty($_POST['cultural_and_spiritual_significance']),
         handleEmpty($_POST['threats']),
         handleEmpty($_POST['other_info']),
-        handleEmpty($_POST['rice_biodiversity_uplift']),
+        handleEmpty($_POST['role_in_maintaining_upland_ecosystem']),
         handleEmpty($_POST['cultural_importance_and_traditional_knowledge']),
         handleEmpty($_POST['unique_features']),
         handleEmpty($_POST['cultural_use']),
-        handleEmpty($_POST['associated_vegetation'])
+        handleEmpty($_POST['associated_vegetation']),
+        handleEmpty($_POST['last_seen_location'])
     ));
 
     if ($query_run_crop) {
@@ -135,7 +147,7 @@ if (isset($_POST['update'])) {
     $crop_id = pg_escape_string($con, $_POST['crop_id']);
     $current_image = pg_escape_string($con, $_POST['current_image']);
     $traditional_crop_traits_id = pg_escape_string($con, $_POST['traditional_crop_traits_id']);
-    $farming_id = pg_escape_string($con, $_POST['farming_id']);
+    // $farming_id = pg_escape_string($con, $_POST['farming_id']);
     $crop_name = pg_escape_string($con, $_POST['crop_name']);
     $description = pg_escape_string($con, $_POST['description']);
     $upland_or_lowland = pg_escape_string($con, $_POST['upland_or_lowland']);
@@ -143,7 +155,7 @@ if (isset($_POST['update'])) {
     $cultural_and_spiritual_significance = pg_escape_string($con, $_POST['cultural_and_spiritual_significance']);
     $threats = pg_escape_string($con, $_POST['threats']);
     $other_info = pg_escape_string($con, $_POST['other_info']);
-    $rice_biodiversity_uplift = pg_escape_string($con, $_POST['rice_biodiversity_uplift']);
+    $role_in_maintaining_upland_ecosystem = pg_escape_string($con, $_POST['role_in_maintaining_upland_ecosystem']);
     $cultural_importance_and_traditional_knowledge = pg_escape_string($con, $_POST['cultural_importance_and_traditional_knowledge']);
     $category = pg_escape_string($con, $_POST['category']);
     $planting_techniques = pg_escape_string($con, $_POST['planting_techniques']);
@@ -151,11 +163,13 @@ if (isset($_POST['update'])) {
     $cultural_use = pg_escape_string($con, $_POST['cultural_use']);
     $associated_vegetation = pg_escape_string($con, $_POST['associated_vegetation']);
 
-    //Traditional Traits Table
-    $taste = pg_escape_string($con, $_POST['taste']);
-    $aroma = pg_escape_string($con, $_POST['aroma']);
-    $maturation = pg_escape_string($con, $_POST['maturation']);
-    $pest_and_disease_resistance = pg_escape_string($con, $_POST['pest_and_disease_resistance']);
+    // Validate data before insertion
+    if (empty($crop_name) || empty($local_name) || empty($category) || empty($description) || empty($current_image)) {
+        // Handle the case where any required field is empty
+        echo "naay empty";
+        exit();
+    }
+
 
     // Function to handle values, including NULL
     function handleValue($value)
@@ -182,20 +196,16 @@ if (isset($_POST['update'])) {
     // Apply the function to each field
     // crops table
     $farming_id = handleInteger(isset($_POST['farming_id']) ? $_POST['farming_id'] : null);
-    $crop_name = handleValue($_POST['crop_name']);
-    $description = handleValue($_POST['description']);
-    $upland_or_lowland = handleValue($_POST['upland_or_lowland']);
-    $local_name = handleValue($_POST['local_name']);
     $cultural_and_spiritual_significance = handleValue($_POST['cultural_and_spiritual_significance']);
     $threats = handleValue($_POST['threats']);
     $other_info = handleValue($_POST['other_info']);
-    $rice_biodiversity_uplift = handleValue($_POST['rice_biodiversity_uplift']);
+    $role_in_maintaining_upland_ecosystem = handleValue($_POST['role_in_maintaining_upland_ecosystem']);
     $cultural_importance_and_traditional_knowledge = handleValue($_POST['cultural_importance_and_traditional_knowledge']);
-    $category = handleValue($_POST['category']);
     $planting_techniques = handleValue($_POST['planting_techniques']);
     $unique_features = handleValue($_POST['unique_features']);
     $cultural_use = handleValue($_POST['cultural_use']);
     $associated_vegetation = handleValue($_POST['associated_vegetation']);
+    $last_seen_location = handleValue($_POST['last_seen_location']);
 
     // Traditional Traits Table
     $taste = handleValue($_POST['taste']);
@@ -204,9 +214,11 @@ if (isset($_POST['update'])) {
     $pest_and_disease_resistance = handleValue($_POST['pest_and_disease_resistance']);
 
     // Update traditional_crop_traits table
-    $query = "UPDATE traditional_crop_traits SET taste = $taste, aroma = $aroma, maturation = $maturation,
-        pest_and_disease_resistance = $pest_and_disease_resistance WHERE traditional_crop_traits_id = $traditional_crop_traits_id";
-    $query_run_traits = pg_query($con, $query);
+    $query_traits = "UPDATE traditional_crop_traits SET taste = $1, aroma = $2, maturation = $3,
+        pest_and_disease_resistance = $4 WHERE traditional_crop_traits_id = $5";
+    $params_traits = array($taste, $aroma, $maturation, $pest_and_disease_resistance, $traditional_crop_traits_id);
+    $query_run_traits = pg_query_params($con, $query_traits, $params_traits);
+
     if (!$query_run_traits) {
         echo "Error updating traditional crop traits: " . pg_last_error($con);
         exit(0);
@@ -279,20 +291,39 @@ if (isset($_POST['update'])) {
         $image = $current_image;
     }
 
-    // Update Crop table
-    $query = "UPDATE crops SET
-    farming_id=$farming_id, image = '$image', crop_name = $crop_name, description = $description, upland_or_lowland = $upland_or_lowland,
-    cultural_and_spiritual_significance = $cultural_and_spiritual_significance, threats = $threats,
-    other_info = $other_info, rice_biodiversity_uplift = $rice_biodiversity_uplift, cultural_importance_and_traditional_knowledge = $cultural_importance_and_traditional_knowledge,
-    unique_features=$unique_features, cultural_use=$cultural_use, associated_vegetation=$associated_vegetation
-    WHERE crop_id = $crop_id";
+    // Update Crop table using parameterized query
+    $query_crop = "UPDATE crops SET
+    farming_id = $1, image = $2, crop_name = $3, description = $4, upland_or_lowland = $5,
+    cultural_and_spiritual_significance = $6, threats = $7,
+    other_info = $8, role_in_maintaining_upland_ecosystem = $9, cultural_importance_and_traditional_knowledge = $10,
+    unique_features = $11, cultural_use = $12, associated_vegetation = $13
+    WHERE crop_id = $14";
 
-    $query_run_crop = pg_query($con, $query);
+    // Parameters for the query
+    $params_crop = array(
+        $farming_id, $image, $crop_name, $description, $upland_or_lowland,
+        $cultural_and_spiritual_significance, $threats,
+        $other_info, $role_in_maintaining_upland_ecosystem, $cultural_importance_and_traditional_knowledge,
+        $unique_features, $cultural_use, $associated_vegetation,
+        $crop_id
+    );
+
+    // Convert 'Null' strings to actual NULL values
+    foreach ($params_crop as &$param) {
+        if ($param === 'Null') {
+            $param = null;
+        }
+    }
+
+    // Prepare the statement
+    $query_prepare_crop = pg_prepare($con, "update_crop", $query_crop);
+
+    // Execute the statement with parameters
+    $query_run_crop = pg_execute($con, "update_crop", $params_crop);
 
     if ($query_run_crop) {
-        // echo "Query: $query";
         $_SESSION['message'] = "Crop Updated Successfully";
-        header("Location: crop.php?crop_id=" . $_POST['crop_id']); // Assuming your update page is named 'update.php'
+        header("Location: crop.php?crop_id=" . $_POST['crop_id']);
         exit(0);
     } else {
         echo "Error: " . pg_last_error($con);
@@ -302,36 +333,58 @@ if (isset($_POST['update'])) {
 
 if (isset($_POST['delete'])) {
     $crop_id = $_POST['crop_id'];
-    $result = pg_query($con, "select * from crops where crop_id='$crop_id'");
-    $count = pg_num_rows($result);
+    $current_image = $_POST['current_image'];
+    $traditional_crop_traits_id = $_POST['traditional_crop_traits_id'];
 
-    if ($count > 0) {
-        while ($row = pg_fetch_assoc($result)) {
-            $traditional_crop_traits_id = $row['traditional_crop_traits_id'];
-        }
+    // Validation Checks
+    if (empty($crop_id) || empty($current_image) || empty($traditional_crop_traits_id)) {
+        // Handle the case where parameters are missing
+        echo "Invalid parameters";
+        exit(0);
     }
-    // Delete from Crop table
-    $query_delete_crop = "DELETE FROM crops WHERE crop_id = $1";
-    $query_run_delete_crop = pg_query_params($con, $query_delete_crop, [$crop_id]);
 
-    if ($query_run_delete_crop) {
+    // Start a database transaction
+    pg_query($con, "BEGIN");
+
+    try {
+        // Check if the current image is available
+        if ($current_image != "") {
+            // IT has an image and needs to remove from the folder
+            $path = "../img/crop/" . $current_image;
+            $remove = unlink($path);
+
+            if ($remove == false) {
+                throw new Exception("Failed to remove image");
+            }
+        }
+
+        // Delete from Crop table
+        $query_delete_crop = "DELETE FROM crops WHERE crop_id = $1";
+        $query_run_delete_crop = pg_query_params($con, $query_delete_crop, [$crop_id]);
+
+        if (!$query_run_delete_crop) {
+            throw new Exception("Failed to delete from Crop table");
+        }
+
         // Delete from Traditional Crop Traits table
         $query_delete_traits = "DELETE FROM traditional_crop_traits WHERE traditional_crop_traits_id = $1";
         $query_run_delete_traits = pg_query_params($con, $query_delete_traits, [$traditional_crop_traits_id]);
 
-        // Check if all deletions were successful
-        if (
-            $query_run_delete_traits
-        ) {
-            $_SESSION['message'] = "Crop and associated records deleted successfully";
-            header("Location: list.php");
-            exit(0);
-        } else {
-            echo "Error: " . pg_last_error($con);
-            exit(0);
+        if (!$query_run_delete_traits) {
+            throw new Exception("Failed to delete from Traditional Crop Traits table");
         }
-    } else {
-        echo "Error: " . pg_last_error($con);
+
+        // If everything is successful, commit the transaction
+        pg_query($con, "COMMIT");
+
+        $_SESSION['message'] = "Crop and associated records deleted successfully";
+        header("Location: list.php");
+        exit(0);
+    } catch (Exception $e) {
+        // If any step fails, roll back the transaction
+        pg_query($con, "ROLLBACK");
+
+        echo "Error: " . $e->getMessage();
         exit(0);
     }
 }

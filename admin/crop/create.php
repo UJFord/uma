@@ -28,11 +28,9 @@
 		<section id="nav-cards" class="p-0 m-0 col col-md-9 col-xl-10">
 
 			<!-- form for submitting -->
-			<form id="form-panel" name="Form" action="code.php" autocomplete="off" onsubmit="return validateForm()" method="POST" enctype="multipart/form-data" class=" py-3 px-5">
+			<form id="form-panel" name="Form" action="code.php" autocomplete="off" method="POST" enctype="multipart/form-data" class=" py-3 px-5">
 				<!-- back button -->
 				<a href="list.php" class="link-offset-2"><i class="bi bi-chevron-left"></i>Go Back</a>
-
-
 
 				<!-- main form -->
 				<div class="form-control p-3 mt-3">
@@ -43,13 +41,13 @@
 						<div class="col-4">
 							<!-- crop name -->
 							<label for="crop-name">Crop <span class="text-danger">*</span></label>
-							<input id="crop-name" type="text" class="form-control form-control-lg mb-2" required>
+							<input id="crop-name" type="text" name="crop_name" class="form-control form-control-lg mb-2">
 
 						</div>
 						<!-- image -->
 						<div class="col-4">
 							<label for="image-input" class="">Images <span class="text-danger">*</span></label>
-							<input type="file" class="form-control" id="image-input" multiple required accept="image/*">
+							<input type="file" name="image" class="form-control" id="image-input" multiple accept="image/*">
 						</div>
 					</div>
 
@@ -57,7 +55,7 @@
 						<div class="col-4">
 							<!-- category -->
 							<label for="category">Category <span class="text-danger">*</span></label>
-							<select id="category" class="form-select mb-2" required>
+							<select id="category" name="category" class="form-select mb-2">
 								<option value="rice" selected>Rice</option>
 								<option value="root">Rootcrop</option>
 								<option value="fly">Flying</option>
@@ -69,34 +67,35 @@
 
 							<!-- local name -->
 							<label for="local">Local Name <span class="text-danger">*</span></label>
-							<input id="local" type="text" class="form-control mb-2" required>
+							<input id="local" type="text" name="local_name" class="form-control mb-2">
 							<!-- upland or lowland -->
 
-							<label for="">Type <span class="text-danger">*</span></label>
+							<label>Type <span class="text-danger">*</span></label>
 							<div class="m-2">
 								<div class="form-check form-check-inline">
 									<label class="form-check-label" for="inlineRadio1">Upland</label>
-									<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="Upland" required>
+									<input class="form-check-input" type="radio" name="upland_or_lowland" id="inlineRadio1" value="Upland">
 								</div>
 								<div class="form-check form-check-inline">
 									<label class="form-check-label" for="inlineRadio2">Lowland</label>
-									<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="Lowland" required>
+									<input class="form-check-input" type="radio" name="upland_or_lowland" id="inlineRadio2" value="Lowland">
 								</div>
 							</div>
-
 
 						</div>
 
 						<div class="col">
 							<!-- images chosen not yet uploaded i think i dont know -->
-							<div id="image-previews" class="overflow-x-scroll h-100 border d-flex flex-row"></div>
+							<div id="image-previews" class="overflow-x-scroll h-100 border d-flex flex-row">
+
+							</div>
 						</div>
 					</div>
 
 					<div class="col">
 						<!-- Descrition -->
 						<label for="gen-desc">Description <span class="text-danger">*</span></label>
-						<textarea name="" id="gen-desc" class="form-control" rows="3" required></textarea>
+						<textarea name="description" id="gen-desc" class="form-control" rows="3"></textarea>
 					</div>
 
 					<!-- Characteristics -->
@@ -105,22 +104,22 @@
 							<div class="col-2">
 								<!-- taste -->
 								<label for="taste">Taste</label>
-								<input id="taste" type="text" class="form-control mb-2">
+								<input id="taste" type="text" name="taste" class="form-control mb-2">
 							</div>
 							<div class="col-2">
 								<!-- aroma -->
 								<label for="aroma">Aroma</label>
-								<input id="aroma" type="text" class="form-control mb-2">
+								<input id="aroma" type="text" name="aroma" class="form-control mb-2">
 							</div>
 							<div class="col-2">
 								<!-- maturation -->
 								<label for="matur">Maturation</label>
-								<input id="matur" type="text" class="form-control mb-2">
+								<input id="matur" type="text" name="maturation" class="form-control mb-2">
 							</div>
 							<div class="col">
 								<!-- disease resistance -->
-								<label for="resist">Disease Resistance</label>
-								<input id="resist" type="text" class="form-control">
+								<label for="resist">Pest and Disease Resistance</label>
+								<input id="resist" type="text" name="pest_and_disease_resistance" class="form-control">
 							</div>
 						</div>
 
@@ -132,7 +131,7 @@
 							<div class="row">
 								<div class="col">
 									<!-- Descrition -->
-									<textarea name="" id="tech-desc" class="form-control" rows="2"></textarea>
+									<textarea name="planting_techniques" id="tech-desc" class="form-control" rows="2"></textarea>
 								</div>
 							</div>
 
@@ -141,7 +140,7 @@
 							<div class="row">
 								<div class="col">
 									<!-- Descrition -->
-									<textarea name="" id="signif-desc" class="form-control" rows="2"></textarea>
+									<textarea name="cultural_and_spiritual_significance" id="signif-desc" class="form-control" rows="2"></textarea>
 								</div>
 							</div>
 
@@ -150,7 +149,7 @@
 							<div class="row">
 								<div class="col">
 									<!-- Descrition -->
-									<textarea name="" id="role-desc" class="form-control" rows="2"></textarea>
+									<textarea name="role_in_maintaining_upland_ecosystem" id="role-desc" class="form-control" rows="2"></textarea>
 								</div>
 							</div>
 
@@ -159,7 +158,7 @@
 							<div class="row">
 								<div class="col">
 									<!-- Descrition -->
-									<textarea name="" id="impotance-desc" class="form-control" rows="2"></textarea>
+									<textarea name="cultural_importance_and_traditional_knowledge" id="impotance-desc" class="form-control" rows="2"></textarea>
 								</div>
 							</div>
 
@@ -168,7 +167,7 @@
 							<div class="row">
 								<div class="col">
 									<!-- Descrition -->
-									<textarea name="" id="feat-desc" class="form-control" rows="2"></textarea>
+									<textarea name="unique_features" id="feat-desc" class="form-control" rows="2"></textarea>
 								</div>
 							</div>
 
@@ -177,7 +176,7 @@
 							<div class="row">
 								<div class="col">
 									<!-- Descrition -->
-									<textarea name="" id="use-desc" class="form-control" rows="2"></textarea>
+									<textarea name="cultural_use" id="use-desc" class="form-control" rows="2"></textarea>
 								</div>
 							</div>
 
@@ -195,7 +194,7 @@
 							<div class="row">
 								<div class="col">
 									<!-- Descrition -->
-									<textarea name="" id="veg-desc" class="form-control" rows="2"></textarea>
+									<textarea name="associated_vegetation" id="veg-desc" class="form-control" rows="2"></textarea>
 								</div>
 							</div>
 
@@ -204,7 +203,7 @@
 							<div class="row">
 								<div class="col">
 									<!-- Descrition -->
-									<textarea name="" id="loc-desc" class="form-control" rows="2"></textarea>
+									<textarea name="last_seen_location" id="loc-desc" class="form-control" rows="2"></textarea>
 								</div>
 							</div>
 
@@ -213,7 +212,7 @@
 							<div class="row">
 								<div class="col">
 									<!-- Descrition -->
-									<textarea name="" id="threat-desc" class="form-control" rows="2"></textarea>
+									<textarea name="threats" id="threat-desc" class="form-control" rows="2"></textarea>
 								</div>
 							</div>
 
@@ -222,7 +221,7 @@
 							<div class="row">
 								<div class="col">
 									<!-- Descrition -->
-									<textarea name="" id="more-desc" class="form-control" rows="2"></textarea>
+									<textarea name="other_info" id="more-desc" class="form-control" rows="2"></textarea>
 								</div>
 							</div>
 				</div>
