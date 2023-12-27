@@ -59,10 +59,10 @@
 								<option value="rice" selected>Rice</option>
 								<option value="root">Rootcrop</option>
 								<option value="fly">Flying</option>
-								<option value="">Rock</option>
-								<option value="">Fire</option>
-								<option value="">Grass</option>
-								<option value="">Steel</option>
+								<option value="rock">Rock</option>
+								<option value="fire">Fire</option>
+								<option value="grass">Grass</option>
+								<option value="steel">Steel</option>
 							</select>
 
 							<!-- local name -->
@@ -199,13 +199,33 @@
 							</div>
 
 							<!-- Last Seen Location -->
-							<label class="mt-2">Last Seen Location</label>
+							<label class="mt-2">Last Seen Location (Municipality)</label>
 							<div class="row">
 								<div class="col">
-									<!-- Descrition -->
-									<textarea name="last_seen_location" id="loc-desc" class="form-control" rows="2"></textarea>
+									<select id="last_seen_location" name="last_seen_location" class="form-select mb-2">
+										<option value="alabel" selected>Alabel</option>
+										<option value="glan">Glan</option>
+										<option value="kiamba">Kiamba</option>
+										<option value="maasim">Maasim</option>
+										<option value="maitum">Maitum</option>
+										<option value="malapatan">Malapatan</option>
+										<option value="malungon">Malungon</option>
+									</select>
 								</div>
 							</div>
+
+							<!-- Province -->
+							<!-- <label class="mt-2">Province</label>
+							<div class="row">
+								<div class="col">
+									<select id="province" name="province" class="form-select mb-2">
+										<option value="sarangani" selected>Alabel</option>
+										<option value="davao">Davao</option>
+										<option value="south_cotabato">South Cotabato</option>
+										<option value="cotabato">Cotabato</option>
+									</select>
+								</div>
+							</div> -->
 
 							<!-- Threats to Upland Farms -->
 							<label class="mt-2">Threats to Upland Farms</label>

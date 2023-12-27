@@ -106,18 +106,22 @@
 
 									<!-- local name -->
 									<label for="local">Local Name <span class="text-danger">*</span></label>
-									<input id="local" type="text" name="local_name" value="<?= $local_name?>" class="form-control mb-2" disabled>
+									<input id="local" type="text" name="local_name" value="<?= $local_name ?>" class="form-control mb-2" disabled>
 									<!-- upland or lowland -->
 
 									<label for="">Type <span class="text-danger">*</span></label>
 									<div class="m-2">
 										<div class="form-check form-check-inline">
 											<label class="form-check-label" for="inlineRadio1">Upland</label>
-											<input class="form-check-input" <?php if($upland_or_lowland=="Upland"){echo "checked";} ?> type="radio" name="upland_or_lowland" id="inlineRadio1" value="Upland" disabled>
+											<input class="form-check-input" <?php if ($upland_or_lowland == "Upland") {
+																				echo "checked";
+																			} ?> type="radio" name="upland_or_lowland" id="inlineRadio1" value="Upland" disabled>
 										</div>
 										<div class="form-check form-check-inline">
 											<label class="form-check-label" for="inlineRadio2">Lowland</label>
-											<input class="form-check-input" <?php if($upland_or_lowland=="Lowland"){echo "checked";} ?> type="radio" name="upland_or_lowland" id="inlineRadio2" value="Lowland" disabled>
+											<input class="form-check-input" <?php if ($upland_or_lowland == "Lowland") {
+																				echo "checked";
+																			} ?> type="radio" name="upland_or_lowland" id="inlineRadio2" value="Lowland" disabled>
 										</div>
 									</div>
 
@@ -126,17 +130,17 @@
 								<div class="col">
 									<!-- images chosen not yet uploaded i think i dont know -->
 									<div id="image-previews" class="overflow-x-scroll h-100 border d-flex flex-row">
-									<?php
-											if ($current_image != "") {
-												// Display the image
-											?>
-												<img src="<?php echo 'http://localhost/incognito-capstone/admin/'; ?>img/crop/<?php echo $current_image; ?>" width="100%">
-											<?php
-											} else {
-												// display message
-												echo "Image not added";
-											}
-											?>
+										<?php
+										if ($current_image != "") {
+											// Display the image
+										?>
+											<img src="<?php echo 'http://localhost/incognito-capstone/admin/'; ?>img/crop/<?php echo $current_image; ?>" width="100%">
+										<?php
+										} else {
+											// display message
+											echo "Image not added";
+										}
+										?>
 									</div>
 								</div>
 							</div>
@@ -194,15 +198,15 @@
 										?>
 								</div>
 
-						<!-- More -->
-						<h3 class="mt-4">More</h5>
+							<!-- More -->
+							<h3 class="mt-4">More</h5>
 
-						<!-- Planting Techniques -->
-						<label class="mt-2">Planting Techniques</label>
-						<div class="row">
-							<div class="col">
-								<!-- Descrition -->
-								<textarea name="planting_techniques" id="tech-desc" class="form-control" rows="2" disabled <?php echo ($planting_techniques !== $emptyValue) ? '>' . $planting_techniques : 'placeholder="Empty">'; ?></textarea>
+							<!-- Planting Techniques -->
+							<label class="mt-2">Planting Techniques</label>
+							<div class="row">
+								<div class="col">
+									<!-- Descrition -->
+									<textarea name="planting_techniques" id="tech-desc" class="form-control" rows="2" disabled <?php echo ($planting_techniques !== $emptyValue) ? '>' . $planting_techniques : 'placeholder="Empty">'; ?></textarea>
 							</div>
 						</div>
 
@@ -212,15 +216,15 @@
 							<div class="col">
 								<!-- Descrition -->
 								<textarea name="cultural_and_spiritual_significance" id="signif-desc" class="form-control" rows="2" disabled <?php echo ($cultural_and_spiritual_significance !== $emptyValue) ? '>' . $cultural_and_spiritual_significance : 'placeholder="Empty">'; ?></textarea>
+								</div>
 							</div>
-						</div>
 
-						<!-- Role in Maintaining Upland Ecosystems -->
-						<label class="mt-2">Role in Maintaining Upland Ecosystems</label>
-						<div class="row">
-							<div class="col">
-								<!-- Descrition -->
-								<textarea name="role_in_maintaining_upland_ecosystem" id="role-desc" class="form-control" rows="2" disabled <?php echo ($role_in_maintaining_upland_ecosystem !== $emptyValue) ? '>' . $role_in_maintaining_upland_ecosystem : 'placeholder="Empty">'; ?></textarea>
+							<!-- Role in Maintaining Upland Ecosystems -->
+							<label class="mt-2">Role in Maintaining Upland Ecosystems</label>
+							<div class="row">
+								<div class="col">
+									<!-- Descrition -->
+									<textarea name="role_in_maintaining_upland_ecosystem" id="role-desc" class="form-control" rows="2" disabled <?php echo ($role_in_maintaining_upland_ecosystem !== $emptyValue) ? '>' . $role_in_maintaining_upland_ecosystem : 'placeholder="Empty">'; ?></textarea>
 							</div>
 						</div>
 
@@ -230,15 +234,15 @@
 							<div class="col">
 								<!-- Descrition -->
 								<textarea name="cultural_importance_and_traditional_knowledge" id="impotance-desc" class="form-control" rows="2" disabled <?php echo ($cultural_importance_and_traditional_knowledge !== $emptyValue) ? '>' . $cultural_importance_and_traditional_knowledge : 'placeholder="Empty">'; ?></textarea>
+								</div>
 							</div>
-						</div>
 
-						<!-- Unique Features -->
-						<label class="mt-2">Unique Features</label>
-						<div class="row">
-							<div class="col">
-								<!-- Descrition -->
-								<textarea name="unique_features" id="feat-desc" class="form-control" rows="2" disabled <?php echo ($unique_features !== $emptyValue) ? '>' . $unique_features : 'placeholder="Empty">'; ?></textarea>
+							<!-- Unique Features -->
+							<label class="mt-2">Unique Features</label>
+							<div class="row">
+								<div class="col">
+									<!-- Descrition -->
+									<textarea name="unique_features" id="feat-desc" class="form-control" rows="2" disabled <?php echo ($unique_features !== $emptyValue) ? '>' . $unique_features : 'placeholder="Empty">'; ?></textarea>
 							</div>
 						</div>
 
@@ -248,15 +252,15 @@
 							<div class="col">
 								<!-- Descrition -->
 								<textarea name="cultural_use" id="use-desc" class="form-control" rows="2" disabled <?php echo ($cultural_use !== $emptyValue) ? '>' . $cultural_use : 'placeholder="Empty">'; ?></textarea>
+								</div>
 							</div>
-						</div>
 
-						<!-- Associated Farming Practice -->
-						<label class="mt-2">Associated Farming Practice</label>
-						<div class="row">
-							<div class="col">
-								<!-- Descrition -->
-								<textarea name="" id="prac-desc" class="form-control" rows="2" disabled ></textarea>
+							<!-- Associated Farming Practice -->
+							<label class="mt-2">Associated Farming Practice</label>
+							<div class="row">
+								<div class="col">
+									<!-- Descrition -->
+									<textarea name="" id="prac-desc" class="form-control" rows="2" disabled ></textarea>
 							</div>
 						</div>
 
@@ -266,24 +270,44 @@
 							<div class="col">
 								<!-- Descrition -->
 								<textarea name="associated_vegetation" id="veg-desc" class="form-control" rows="2" disabled <?php echo ($associated_vegetation !== $emptyValue) ? '>' . $associated_vegetation : 'placeholder="Empty">'; ?></textarea>
+								</div>
 							</div>
-						</div>
 
-						<!-- Last Seen Location -->
-						<label class="mt-2">Last Seen Location</label>
-						<div class="row">
-							<div class="col">
-								<!-- Descrition -->
-								<textarea name="last_seen_location" id="loc-desc" class="form-control" rows="2" disabled <?php echo ($last_seen_location !== $emptyValue) ? '>' . $last_seen_location : 'placeholder="Empty">'; ?></textarea>
+							<!-- Last Seen Location -->
+							<label class="mt-2">Last Seen Location (Municipality)</label>
+							<div class="row">
+								<div class="col">
+								<select id="last_seen_location" name="last_seen_location" class="form-select mb-2" disabled>
+									<option value="alabel" <?php echo ($last_seen_location === 'alabel') ? 'selected' : ''; ?>>Alabel</option>
+									<option value="glan" <?php echo ($last_seen_location === 'glan') ? 'selected' : ''; ?>>Glan</option>
+									<option value="kiamba" <?php echo ($last_seen_location === 'kiamba') ? 'selected' : ''; ?>>Kiamba</option>
+									<option value="maasim" <?php echo ($last_seen_location === 'maasim') ? 'selected' : ''; ?>>Maasim</option>
+									<option value="maitum" <?php echo ($last_seen_location === 'maitum') ? 'selected' : ''; ?>>Maitum</option>
+									<option value="malapatan" <?php echo ($last_seen_location === 'malapatan') ? 'selected' : ''; ?>>Malapatan</option>
+									<option value="malungon" <?php echo ($last_seen_location === 'malungon') ? 'selected' : ''; ?>>Malungon</option>
+								</select>							
+								</div>
 							</div>
-						</div>
 
-						<!-- Threats to Upland Farms -->
-						<label class="mt-2">Threats to Upland Farms</label>
-						<div class="row">
-							<div class="col">
-								<!-- Descrition -->
-								<textarea name="threats" id="threat-desc" class="form-control" rows="2" disabled <?php echo ($threats !== $emptyValue) ? '>' . $threats : 'placeholder="Empty">'; ?></textarea>
+							<!-- Province -->
+								<!-- <label class="mt-2">Province</label>
+								<div class="row">
+									<div class="col">
+										<select id="province" name="province" class="form-select mb-2">
+											<option value="sarangani" selected>Alabel</option>
+											<option value="davao">Davao</option>
+											<option value="south_cotabato">South Cotabato</option>
+											<option value="cotabato">Cotabato</option>
+										</select>
+									</div>
+								</div> -->
+
+							<!-- Threats to Upland Farms -->
+							<label class="mt-2">Threats to Upland Farms</label>
+							<div class="row">
+								<div class="col">
+									<!-- Descrition -->
+									<textarea name="threats" id="threat-desc" class="form-control" rows="2" disabled <?php echo ($threats !== $emptyValue) ? '>' . $threats : 'placeholder="Empty">'; ?></textarea>
 							</div>
 						</div>
 
@@ -293,29 +317,28 @@
 							<div class="col">
 								<!-- Descrition -->
 								<textarea name="other_info" id="more-desc" class="form-control" rows="2" disabled <?php echo ($other_info !== $emptyValue) ? '>' . $other_info : 'placeholder="Empty">'; ?></textarea>
+								</div>
 							</div>
-						</div>
-	</div>
-	<!-- editting buttons -->
-	<?php
-					require('../edit-btn/edit-btn.php');
-	?>
-	</form>
-<?php
+							</div>
+							<!-- editting buttons -->
+							<?php
+							require('../edit-btn/edit-btn.php');
+							?>
+							</form>
+						<?php
+					}
 				}
-			}
-?>
-</section>
-</div>
-
-<!-- scipts -->
-<!-- custom -->
-<script src="../../js/admin/entry-edit.js"></script>
-<script src="../../js/admin/crop-image.js"></script>
-<!-- bootstrap -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
-<!-- font awesome -->
-<script src="https://kit.fontawesome.com/57e83eb6e4.js" crossorigin="anonymous"></script>
+						?>
+		</section>
+	</div>
+	<!-- scipts -->
+	<!-- custom -->
+	<script src="../../js/admin/entry-edit.js"></script>
+	<script src="../../js/admin/crop-image.js"></script>
+	<!-- bootstrap -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+	<!-- font awesome -->
+	<script src="https://kit.fontawesome.com/57e83eb6e4.js" crossorigin="anonymous"></script>
 </body>
 
 </html>
