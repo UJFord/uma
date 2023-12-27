@@ -237,13 +237,38 @@
 							</div>
 
 							<!-- Other Information -->
-							<label class="mt-2">Other Information</label>
-							<div class="row">
+							<!-- <a href="#" role="button" aria-expanded="false" id="toggleLink">
+								<label class="mt-2">Other Information</label>
+							</a>
+							<div class="row" style="display: none" id="toggleDiv">
 								<div class="col">
-									<!-- Descrition -->
 									<textarea name="other_info" id="more-desc" class="form-control" rows="2"></textarea>
 								</div>
-							</div>
+							</div> -->
+							<!-- <script>
+								// Wait for the DOM to be ready
+								document.addEventListener("DOMContentLoaded", function() {
+									// Get the link and div elements by their IDs
+									var toggleLink = document.getElementById("toggleLink");
+									var toggleDiv = document.getElementById("toggleDiv");
+
+									// Add a click event listener to the link
+									toggleLink.addEventListener("click", function(event) {
+										// Prevent the default behavior (e.g., following the link)
+										event.preventDefault();
+
+										// Toggle the aria-expanded attribute
+										var isExpandedtrue = toggleLink.getAttribute("aria-expanded") === "true";
+										var isExpandedfalse = toggleLink.getAttribute("aria-expanded") === "false";
+										toggleLink.setAttribute("aria-expanded", isExpandedtrue ? "false" : "true");
+										toggleLink.setAttribute("aria-expanded", isExpandedfalse ? "true" : "false");
+
+										// Toggle the style display property of the div
+										toggleDiv.style.display = isExpandedtrue ? "none" : "block";
+										toggleDiv.style.display = isExpandedfalse ? "block" : "none";
+									});
+								});
+							</script> -->
 				</div>
 				<!-- editting buttons -->
 				<?php
