@@ -1,3 +1,9 @@
+<!-- sidebar -->
+<?php
+session_start();
+require('../sidebar/side.php');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,10 +24,6 @@
 	<!-- container of everything -->
 	<div class="row ">
 
-		<!-- sidebar -->
-		<?php
-		require('../sidebar/side.php');
-		?>
 		<!-- space holder of side panel -->
 		<section class=" d-none d-md-block col col-4 col-lg-3 col-xl-2 p-0 m-0"></section>
 		<!-- main panel -->
@@ -60,7 +62,9 @@
 												}
 										?>
 												<div>
-													<input type="checkbox" name="category[]" value="<?= $category_name['category'] ?>" <?php if (in_array($category_name['category'], $checked)) {echo "checked";} ?>>
+													<input type="checkbox" name="category[]" value="<?= $category_name['category'] ?>" <?php if (in_array($category_name['category'], $checked)) {
+																																			echo "checked";
+																																		} ?>>
 													<?= $category_name['category'] ?>
 												</div>
 										<?php
@@ -95,6 +99,10 @@
 				<!-- crop cards -->
 				<div id="crop-cards" class="row">
 					<?php
+					// if (isset($_SESSION['user'])){
+					// 	$username = $_SESSION['user'];
+					// 	echo $username;
+					// }
 					include('../message.php');
 					// add entry button
 					require('../add/add.php');

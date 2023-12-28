@@ -1,3 +1,9 @@
+<!-- sidebar -->
+<?php
+session_start();
+require('../sidebar/side.php');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,10 +24,6 @@
 	<!-- container of everything -->
 	<div class="row ">
 
-		<!-- sidebar -->
-		<?php
-		require('../sidebar/side.php');
-		?>
 		<!-- space holder of side panel -->
 		<section class=" d-none d-md-block col col-4 col-lg-3 col-xl-2 p-0 m-0"></section>
 		<!-- main panel -->

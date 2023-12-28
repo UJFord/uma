@@ -1,3 +1,8 @@
+<!-- sidebar -->
+<?php
+session_start();
+require('../sidebar/side.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,10 +23,6 @@
     <!-- container of everything -->
     <div class="row">
 
-        <!-- sidebar -->
-        <?php
-        require('../sidebar/side.php');
-        ?>
         <!-- space holder of side panel -->
         <section class=" d-none d-md-block col col-3 col-xl-2 p-0 m-0"></section>
         <!-- main panel -->
@@ -31,6 +32,10 @@
                 <!-- back button -->
                 <a href="list.php" class="link-offset-2"><i class="bi bi-chevron-left"></i>Go Back</a>
 
+                <?php
+                include('../message.php');
+                ?>
+                
                 <?php
                 if (isset($_GET['farming_id'])) {
                     $farming_id = pg_escape_string($connection, $_GET['farming_id']);
