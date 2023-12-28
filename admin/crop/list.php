@@ -2,8 +2,9 @@
 <?php
 session_start();
 require('../sidebar/side.php');
+include '../access.php';
+access('ADMIN');
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -99,13 +100,12 @@ require('../sidebar/side.php');
 				<!-- crop cards -->
 				<div id="crop-cards" class="row">
 					<?php
-					// if (isset($_SESSION['user'])){
-					// 	$username = $_SESSION['user'];
-					// 	echo $username;
-					// }
-					include('../message.php');
+					if (isset($_SESSION['user'])) {
+						$username = $_SESSION['user'];
+					}
+					include '../message.php';
 					// add entry button
-					require('../add/add.php');
+					require '../add/add.php';
 					?>
 
 					<?php

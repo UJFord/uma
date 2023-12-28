@@ -64,14 +64,22 @@ if (isset($_POST['submit'])) {
     //3. Execute the Query
     $res = pg_query($connection, $sql);
 
+    if (pg_num_rows($res) > 0) {
+        $user = pg_fetch_assoc($res);
+
+        $rank = $user['rank'];
+    }
+
+
     //4. Count rows to check whether the user exists or not
     $count = pg_num_rows($res);
 
     if ($count == 1) {
         //User Available and Login Success
-        $_SESSION['message'] = "<div class='success'>Login Successful.</div>";
+        $_SESSION['message'] = "<div class='success'>Login Successful. Welcome, $username.</div>";
         $_SESSION['user'] = $username; //TO check whether the user is logged in or not and logout will unset it
-
+        $_SESSION['rank'] = $rank;
+        
         //Redirect to Home Page/Dashboard
         header('location: ../crop/list.php');
 
