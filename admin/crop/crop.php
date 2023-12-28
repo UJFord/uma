@@ -17,6 +17,9 @@ require('../sidebar/side.php');
 	<!-- favicon -->
 	<link rel="shortcut icon" href="img/logo/Uma logo.svg" type="image/x-icon" />
 	<title>Crops as Editor</title>
+
+	<!-- script fort access level -->
+	<script src="../../js/admin/access.js" defer></script>
 </head>
 
 <body class="overflow-x-hidden">
@@ -73,6 +76,7 @@ require('../sidebar/side.php');
 						<?php
 						include('../message.php');
 						?>
+
 						<!-- main form -->
 						<div class="form-control p-3 mt-3">
 							<input id="crop-id" type="hidden" name="crop_id" value="<?= $crops['crop_id']; ?>">
@@ -86,7 +90,6 @@ require('../sidebar/side.php');
 									<!-- crop name -->
 									<label for="crop-name">Crop <span class="text-danger">*</span></label>
 									<input id="crop-name" type="text" name="crop_name" value="<?= $crop_name; ?>" class="form-control form-control-lg mb-2" disabled>
-
 								</div>
 								<!-- image -->
 								<div class="col-4">
@@ -114,7 +117,7 @@ require('../sidebar/side.php');
 									<input id="local" type="text" name="local_name" value="<?= $local_name ?>" class="form-control mb-2" disabled>
 									<!-- upland or lowland -->
 
-									<label for="">Type <span class="text-danger">*</span></label>
+									<label>Type <span class="text-danger">*</span></label>
 									<div class="m-2">
 										<div class="form-check form-check-inline">
 											<label class="form-check-label" for="inlineRadio1">Upland</label>
@@ -344,6 +347,38 @@ require('../sidebar/side.php');
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 	<!-- font awesome -->
 	<script src="https://kit.fontawesome.com/57e83eb6e4.js" crossorigin="anonymous"></script>
+
+	<script>
+	// script for access levels in admin
+	// hide or show based on account type
+	document.addEventListener("DOMContentLoaded", function () {
+    // Use PHP to set the user role dynamically
+    var userRole = "<?php echo $_SESSION['rank']; ?>";
+
+    // Elements to show/hide based on user role
+    var adminElements = document.querySelectorAll(".admin-only");
+    var viewerElements = document.querySelectorAll(".viewer-only");
+
+    // Function to set visibility based on user role
+    function setVisibility(elements, isVisible) {
+        elements.forEach(function (element) {
+            element.style.display = isVisible ? "block" : "none";
+        });
+    }
+
+    // Check user role and set visibility
+    if (userRole === "admin") {
+        setVisibility(adminElements, true);
+        setVisibility(viewerElements, false);
+    } else if (userRole === "user") {
+        setVisibility(adminElements, false);
+        setVisibility(viewerElements, true);
+    } else {
+        console.error("Unexpected user role:", userRole);
+    }
+});
+	</script>
+	
 </body>
 
 </html>

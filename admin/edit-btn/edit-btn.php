@@ -1,7 +1,7 @@
 <div id="button-div" class="fixed-bottom d-flex justify-content-end">
     <!-- show in view mode -->
     <div id="edit-btn-box" class="m-3">
-        <button id="edit-btn" type="button" class="btn btn-primary py-3 px-4 "><i class="fa-solid fa-pen-to-square me-1"></i>Edit</button>
+        <button id="edit-btn" type="button" class="btn btn-primary py-3 px-4 admin-only"><i class="fa-solid fa-pen-to-square me-1"></i>Edit</button>
     </div>
     <!-- shoe in edit mode -->
     <div id="apply-cancel-box" class="d-none m-3">

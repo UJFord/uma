@@ -2,8 +2,8 @@
 <?php
 session_start();
 require('../sidebar/side.php');
-include '../access.php';
-access('ADMIN');
+// include '../access.php';
+// access('ADMIN');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,6 +18,9 @@ access('ADMIN');
 	<!-- favicon -->
 	<link rel="shortcut icon" href="img/logo/Uma logo.svg" type="image/x-icon" />
 	<title>Uma | AdminPage</title>
+
+	<!-- script fort access level -->
+	<script src="../../js/admin/access.js"></script>
 </head>
 
 <body class="overflow-hidden">
@@ -103,13 +106,15 @@ access('ADMIN');
 					if (isset($_SESSION['user'])) {
 						$username = $_SESSION['user'];
 					}
+					if (isset($_SESSION['rank'])) {
+						$rank = $_SESSION['rank'];
+					}
 					include '../message.php';
 					// add entry button
 					require '../add/add.php';
 					?>
 
 					<?php
-
 					if (isset($_GET['category'])) {
 						$categoryChecked = array_map('strtolower', $_GET['category']);
 
@@ -179,6 +184,40 @@ access('ADMIN');
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 	<!-- font awesome -->
 	<script src="https://kit.fontawesome.com/57e83eb6e4.js" crossorigin="anonymous"></script>
+
+	<script>
+		// script for access levels in admin
+		// hide or show based on account type
+		document.addEventListener("DOMContentLoaded", function() {
+			// Use PHP to set the user role dynamically
+			var userRole = "<?php echo $_SESSION['rank']; ?>";
+			var addEntryCard = document.getElementById("add-entry-card");
+
+			// Elements to show/hide based on user role
+			var adminElements = document.querySelectorAll(".admin-only");
+			var viewerElements = document.querySelectorAll(".viewer-only");
+
+			// Function to set visibility based on user role
+			function setVisibility(elements, isVisible) {
+				elements.forEach(function(element) {
+					element.style.display = isVisible ? "block" : "none";
+				});
+			}
+
+			// Check user role and set visibility
+			if (userRole === "admin") {
+				setVisibility(adminElements, true);
+				setVisibility(viewerElements, false);
+				addEntryCard.hidden = false;
+			} else if (userRole === "user") {
+				setVisibility(adminElements, false);
+				setVisibility(viewerElements, true);
+				addEntryCard.hidden = true;
+			} else {
+				console.error("Unexpected user role:", userRole);
+			}
+		});
+	</script>
 </body>
 
 </html>
