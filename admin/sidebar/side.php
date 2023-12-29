@@ -8,6 +8,9 @@ require('../../html/navfoot/connection.php');
 <!-- custom css -->
 <link rel="stylesheet" href="../../css/admin/side.css">
 
+<!--========== BOX ICONS ==========-->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+
 <!-- main nav -->
 <nav id="main-nav" class="d-none d-md-block col col-3 col-lg-3 col-xl-2 fixed-top h-100 m-0 p-0">
     <div class="d-flex flex-column flex-shrink-0 text-white h-100">
@@ -36,6 +39,16 @@ require('../../html/navfoot/connection.php');
                                                     : 'class="nav-link text-white"'; ?>>
                     <i class="fa-solid fa-mountain-sun" style="width: 1.5rem;"></i>
                     Practices
+                </a>
+            </li>
+            </li>
+            <!-- approval sidebar nav -->
+            <li>
+                <a href="../approval/approval.php" <?php echo (strpos($current_page, '/uma/admin/approval/approval.php') === 0 || strpos($current_page, '/uma/admin/approval/approval.php') === 0)
+                                                    ? 'class="nav-link text-dark fw-semibold rounded-start-pill active-nav"'
+                                                    : 'class="nav-link text-white"'; ?>>
+                    <i class='bx bx-list-check' style="width: 1.5rem; font-size: 1.5rem;"></i>
+                    Approval
                 </a>
             </li>
         </ul>

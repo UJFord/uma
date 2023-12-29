@@ -2,6 +2,7 @@
 <?php
 session_start();
 require('../sidebar/side.php');
+// include('../login/login-check.php');
 // include '../access.php';
 // access('ADMIN');
 ?>
@@ -20,6 +21,7 @@ require('../sidebar/side.php');
 	<title>Uma | AdminPage</title>
 
 	<!-- script fort access level -->
+	<!-- wala pani gagana nga js ambot nganuman gi inline ra sa nako -->
 	<script src="../../js/admin/access.js"></script>
 </head>
 
@@ -103,12 +105,6 @@ require('../sidebar/side.php');
 				<!-- crop cards -->
 				<div id="crop-cards" class="row">
 					<?php
-					if (isset($_SESSION['user'])) {
-						$username = $_SESSION['user'];
-					}
-					if (isset($_SESSION['rank'])) {
-						$rank = $_SESSION['rank'];
-					}
 					include '../message.php';
 					// add entry button
 					require '../add/add.php';
