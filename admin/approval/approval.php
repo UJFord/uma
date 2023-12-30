@@ -1,4 +1,3 @@
-<!-- sidebar -->
 <?php
 session_start();
 require('../sidebar/side.php');
@@ -8,7 +7,6 @@ require('../sidebar/side.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -19,17 +17,14 @@ require('../sidebar/side.php');
     <!-- favicon -->
     <link rel="shortcut icon" href="img/logo/Uma logo.svg" type="image/x-icon" />
     <title>Uma | AdminPage</title>
-
     <!-- script fort access level -->
     <!-- wala pani gagana nga js ambot nganuman gi inline ra sa nako -->
     <script src="../../js/admin/access.js"></script>
 </head>
-
 <body class="overflow-hidden">
 
     <!-- container of everything -->
     <div class="row ">
-
         <!-- space holder of side panel -->
         <section class=" d-none d-md-block col col-4 col-lg-3 col-xl-2 p-0 m-0"></section>
         <!-- main panel -->
@@ -57,7 +52,6 @@ require('../sidebar/side.php');
                         </thead>
 
                         <?php
-
                         $query = "SELECT crops.*, users.username FROM crops
                                 JOIN users ON crops.user_id = users.user_id
                                 WHERE status = 'pending'
@@ -73,34 +67,28 @@ require('../sidebar/side.php');
                                     <td><?php echo $row['local_name']; ?></td>
                                     <td><?php echo $row['description']; ?></td>
                                     <td><?php echo $row['status']; ?></td>
-
                                     <td class="curator-only">
-                                        <form action="approved.php" method="POST">
+                                        <form action="" method="POST">
                                             <input type="hidden" name="crop_id" value="<?php echo $row['crop_id']; ?>" />
                                             <input type="submit" name="approve" value="approve"> &nbsp &nbsp <br>
                                             <input type="submit" name="delete" value="delete">
                                         </form>
                                     </td>
                                 </tr>
-
                             </tbody>
                         <?php
                         }
                         ?>
                     </table>
 
-
                     <?php
                     if (isset($_POST['approve'])) {
-
                         $crop_id = $_POST['crop_id'];
                         $select = "UPDATE crops SET status = 'approved' WHERE crop_id = '$crop_id' ";
                         $resut = pg_query($connection, $select);
                         header("location:approval.php");
                     }
-
                     if (isset($_POST['delete'])) {
-
                         $crop_id = $_POST['crop_id'];
                         $select = "DELETE  FROM crops  WHERE crop_id = '$crop_id' ";
                         $resut = pg_query($connection, $select);
@@ -110,11 +98,7 @@ require('../sidebar/side.php');
 
                     <!-- ================================================================== -->
 
-
-
-
                     &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-
 
                     <h1 class="text-center  text-white bg-success col-md-12
                     ">APPROVED LIST </h1>
@@ -152,7 +136,6 @@ require('../sidebar/side.php');
                         <?php
                         }
                         ?>
-
 
                     </table>
                 </div>
@@ -208,5 +191,4 @@ require('../sidebar/side.php');
         });
     </script>
 </body>
-
 </html>
