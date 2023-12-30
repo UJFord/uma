@@ -1,12 +1,10 @@
 <?php
+ob_start(); // Start output buffering
 session_start();
 require('../sidebar/side.php');
-// include('../login/login-check.php');
-// include '../access.php';
-// access('ADMIN');
-error_reporting(E_ALL);
-ini_set('display_errors', '1');
+ob_end_flush(); // Send output to the browser
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -52,8 +50,6 @@ ini_set('display_errors', '1');
                             </tr>
                         </thead>
 
-                        <?php echo $_SESSION['rank']; ?>
-
                         <?php
                         $query = "SELECT crops.*, users.username FROM crops
                                 JOIN users ON crops.user_id = users.user_id
@@ -71,7 +67,7 @@ ini_set('display_errors', '1');
                                     <td><?php echo $row['description']; ?></td>
                                     <td><?php echo $row['status']; ?></td>
                                     <td class="curator-only">
-                                        <form action="" method="POST">
+                                        <form action="code.php" method="POST">
                                             <input type="hidden" name="crop_id" value="<?php echo $row['crop_id']; ?>" />
                                             <input type="submit" name="approve" value="approve"> &nbsp &nbsp <br>
                                             <input type="submit" name="delete" value="delete">
@@ -83,38 +79,8 @@ ini_set('display_errors', '1');
                         }
                         ?>
                     </table>
-
-                    <?php
-                    if (isset($_POST['approve'])) {
-                        $crop_id = $_POST['crop_id'];
-                        $select = "UPDATE crops SET status = 'approved' WHERE crop_id = '$crop_id' ";
-                        $result = pg_query($connection, $select);
-                        if ($result) {
-                            header("location: approval.php");
-                            exit; // Ensure that the script stops executing after the redirect header
-                        } else {
-                            echo "Error updating record"; // Display an error message if the query fails
-                        }
-                    }
-
-                    if (isset($_POST['delete'])) {
-                        $crop_id = $_POST['crop_id'];
-                        $select = "DELETE FROM crops WHERE crop_id = '$crop_id' ";
-                        $result = pg_query($connection, $select);
-
-                        if ($result) {
-                            header("location: approval.php");
-                            exit; // Ensure that the script stops executing after the redirect header
-                        } else {
-                            echo "Error deleting record"; // Display an error message if the query fails
-                        }
-                    }
-                    ?>
-
                     <!-- ================================================================== -->
-
                     &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-
                     <h1 class="text-center  text-white bg-success col-md-12
                     ">APPROVED LIST </h1>
                     <table class="table table-bordered col-md-12">

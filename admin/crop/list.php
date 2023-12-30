@@ -1,4 +1,3 @@
-<!-- sidebar -->
 <?php
 session_start();
 require('../sidebar/side.php');
@@ -19,10 +18,6 @@ require('../sidebar/side.php');
 	<!-- favicon -->
 	<link rel="shortcut icon" href="img/logo/Uma logo.svg" type="image/x-icon" />
 	<title>Uma | AdminPage</title>
-
-	<!-- script fort access level -->
-	<!-- wala pani gagana nga js ambot nganuman gi inline ra sa nako -->
-	<!-- <script src="../../js/admin/access.js"></script> -->
 </head>
 
 <body class="overflow-hidden">

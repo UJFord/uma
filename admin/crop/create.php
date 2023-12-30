@@ -1,10 +1,9 @@
-<!-- sidebar -->
 <?php
 session_start();
+// sidebar
 require('../sidebar/side.php');
 // include('../login/login-check.php');
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -264,7 +263,6 @@ require('../sidebar/side.php');
 				?>
 			</form>
 		</section>
-
 	</div>
 
 	<!-- scipts -->

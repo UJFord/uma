@@ -1,23 +1,17 @@
 <!-- get current page -->
 <?php
 $current_page = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-
 require('../../html/navfoot/connection.php');
 ?>
-
 <!-- custom css -->
 <link rel="stylesheet" href="../../css/admin/side.css">
-
 <!--========== BOX ICONS ==========-->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
-
 <!-- script for access js -->
 <script>
     var userRole = "<?php echo $_SESSION['rank']; ?>";
 </script>
 <script src="../../js/admin/access.js"></script>
-
-
 <!-- main nav -->
 <nav id="main-nav" class="d-none d-md-block col col-3 col-lg-3 col-xl-2 fixed-top h-100 m-0 p-0">
     <div class="d-flex flex-column flex-shrink-0 text-white h-100">
@@ -67,7 +61,6 @@ require('../../html/navfoot/connection.php');
                             $user = $_SESSION['user'];
                             $query = "select * from users where user_id = $user";
                             $res = pg_query($connection, $query);
-
                             if (pg_num_rows($res) > 0) {
                                 $user = pg_fetch_assoc($res);
                                 $username = $user['username'];
@@ -87,7 +80,6 @@ require('../../html/navfoot/connection.php');
             </ul>
         </div>
     </div>
-
     <!-- font awesome script -->
     <script src="https://kit.fontawesome.com/57e83eb6e4.js" crossorigin="anonymous"></script>
 </nav>
