@@ -4,9 +4,12 @@ require('../sidebar/side.php');
 // include('../login/login-check.php');
 // include '../access.php';
 // access('ADMIN');
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -17,10 +20,8 @@ require('../sidebar/side.php');
     <!-- favicon -->
     <link rel="shortcut icon" href="img/logo/Uma logo.svg" type="image/x-icon" />
     <title>Uma | AdminPage</title>
-    <!-- script fort access level -->
-    <!-- wala pani gagana nga js ambot nganuman gi inline ra sa nako -->
-    <script src="../../js/admin/access.js"></script>
 </head>
+
 <body class="overflow-hidden">
 
     <!-- container of everything -->
@@ -50,6 +51,8 @@ require('../sidebar/side.php');
                                 <th scope="col" class="curator-only">ACTION</th>
                             </tr>
                         </thead>
+
+                        <?php echo $_SESSION['rank']; ?>
 
                         <?php
                         $query = "SELECT crops.*, users.username FROM crops
@@ -85,14 +88,26 @@ require('../sidebar/side.php');
                     if (isset($_POST['approve'])) {
                         $crop_id = $_POST['crop_id'];
                         $select = "UPDATE crops SET status = 'approved' WHERE crop_id = '$crop_id' ";
-                        $resut = pg_query($connection, $select);
-                        header("location:approval.php");
+                        $result = pg_query($connection, $select);
+                        if ($result) {
+                            header("location: approval.php");
+                            exit; // Ensure that the script stops executing after the redirect header
+                        } else {
+                            echo "Error updating record"; // Display an error message if the query fails
+                        }
                     }
+
                     if (isset($_POST['delete'])) {
                         $crop_id = $_POST['crop_id'];
-                        $select = "DELETE  FROM crops  WHERE crop_id = '$crop_id' ";
-                        $resut = pg_query($connection, $select);
-                        header("location:approval.php");
+                        $select = "DELETE FROM crops WHERE crop_id = '$crop_id' ";
+                        $result = pg_query($connection, $select);
+
+                        if ($result) {
+                            header("location: approval.php");
+                            exit; // Ensure that the script stops executing after the redirect header
+                        } else {
+                            echo "Error deleting record"; // Display an error message if the query fails
+                        }
                     }
                     ?>
 
@@ -102,7 +117,6 @@ require('../sidebar/side.php');
 
                     <h1 class="text-center  text-white bg-success col-md-12
                     ">APPROVED LIST </h1>
-
                     <table class="table table-bordered col-md-12">
                         <thead>
                             <tr>
@@ -113,7 +127,6 @@ require('../sidebar/side.php');
                                 <th scope="col">STATUS</th>
                             </tr>
                         </thead>
-
                         <?php
                         $query = "SELECT crops.*, users.username
                                 FROM crops
@@ -121,7 +134,6 @@ require('../sidebar/side.php');
                                 WHERE crops.status = 'approved'
                                 AND users.rank != 'curator'";
                         $result = pg_query($connection, $query);
-
                         while ($row = pg_fetch_array($result)) {
                         ?>
                             <tbody>
@@ -148,7 +160,7 @@ require('../sidebar/side.php');
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
     <!-- font awesome -->
     <script src="https://kit.fontawesome.com/57e83eb6e4.js" crossorigin="anonymous"></script>
-
+    <!-- script fort access level -->
     <script>
         // script for access levels in admin
         // hide or show based on account type
@@ -174,21 +186,19 @@ require('../sidebar/side.php');
                 setVisibility(curatorElements, true);
                 setVisibility(adminElements, true);
                 setVisibility(viewerElements, false);
-                addEntryCard.hidden = false;
             } else if (userRole === "admin") {
                 setVisibility(curatorElements, false);
                 setVisibility(adminElements, true);
                 setVisibility(viewerElements, false);
-                addEntryCard.hidden = false;
             } else if (userRole === "user") {
                 setVisibility(curatorElements, false);
                 setVisibility(adminElements, false);
                 setVisibility(viewerElements, true);
-                addEntryCard.hidden = true;
             } else {
                 console.error("Unexpected user role:", userRole);
             }
         });
     </script>
 </body>
+
 </html>
