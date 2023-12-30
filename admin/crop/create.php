@@ -18,6 +18,15 @@ require('../sidebar/side.php');
 	<!-- favicon -->
 	<link rel="shortcut icon" href="img/logo/Uma logo.svg" type="image/x-icon" />
 	<title>Crop sa Editor</title>
+
+	<!-- include libraries(jQuery, bootstrap) -->
+	<script type="text/javascript" src="//code.jquery.com/jquery-3.6.0.min.js"></script>
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" />
+	<script type="text/javascript" src="cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+	<!-- include summernote css/js-->
+	<link href="../../imports/summernote/" rel="stylesheet">
+	<script src="summernote-bs5.js"></script>
 </head>
 
 <body class="overflow-x-hidden">
@@ -38,7 +47,7 @@ require('../sidebar/side.php');
 				<?php
 				include('../message.php');
 
-				if(isset($_SESSION['user'])){
+				if (isset($_SESSION['user'])) {
 					$user_id = $_SESSION["user"];
 				}
 				?>
@@ -108,6 +117,14 @@ require('../sidebar/side.php');
 						<!-- Descrition -->
 						<label for="gen-desc">Description <span class="text-danger">*</span></label>
 						<textarea name="description" id="gen-desc" class="form-control" rows="3"></textarea>
+						<div id="summernote"></div>
+						<script>
+							$('#summernote').summernote({
+								placeholder: 'Hello Bootstrap 5',
+								tabsize: 2,
+								height: 100
+							});
+						</script>
 					</div>
 
 					<!-- Characteristics -->
