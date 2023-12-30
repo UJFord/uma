@@ -1,16 +1,17 @@
 <!-- get current page -->
 <?php
 $current_page = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-
 require('../../html/navfoot/connection.php');
 ?>
-
 <!-- custom css -->
 <link rel="stylesheet" href="../../css/admin/side.css">
-
 <!--========== BOX ICONS ==========-->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
-
+<!-- script for access js -->
+<script>
+    var userRole = "<?php echo $_SESSION['rank']; ?>";
+</script>
+<script src="../../js/admin/access.js"></script>
 <!-- main nav -->
 <nav id="main-nav" class="d-none d-md-block col col-3 col-lg-3 col-xl-2 fixed-top h-100 m-0 p-0">
     <div class="d-flex flex-column flex-shrink-0 text-white h-100">
@@ -45,8 +46,8 @@ require('../../html/navfoot/connection.php');
             <!-- approval sidebar nav -->
             <li>
                 <a href="../approval/approval.php" <?php echo (strpos($current_page, '/uma/admin/approval/approval.php') === 0 || strpos($current_page, '/uma/admin/approval/approval.php') === 0)
-                                                    ? 'class="nav-link text-dark fw-semibold rounded-start-pill active-nav"'
-                                                    : 'class="nav-link text-white"'; ?>>
+                                                        ? 'class="nav-link text-dark fw-semibold rounded-start-pill active-nav"'
+                                                        : 'class="nav-link text-white"'; ?>>
                     <i class='bx bx-list-check' style="width: 1.5rem; font-size: 1.5rem;"></i>
                     Approval
                 </a>
@@ -56,18 +57,16 @@ require('../../html/navfoot/connection.php');
         <div class="dropdown mx-3 mt-0 mb-3">
             <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                 <img src="https://source.unsplash.com/32x32/?nature,water" alt="" width="32" height="32" class="rounded-circle me-2">
-                <strong 
-                <?php if(isset($_SESSION['user'])){ 
-                    $user = $_SESSION['user'];
-                    $query = "select * from users where user_id = $user";
-                    $res = pg_query($connection, $query);
-
-                    if(pg_num_rows($res) > 0){
-                        $user = pg_fetch_assoc($res);
-                        $username = $user['username'];
-                    }
-                } 
-                    ?>><?= $username; ?>
+                <strong <?php if (isset($_SESSION['user'])) {
+                            $user = $_SESSION['user'];
+                            $query = "select * from users where user_id = $user";
+                            $res = pg_query($connection, $query);
+                            if (pg_num_rows($res) > 0) {
+                                $user = pg_fetch_assoc($res);
+                                $username = $user['username'];
+                            }
+                        }
+                        ?>><?= $username; ?>
                 </strong>
             </a>
             <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
@@ -81,7 +80,6 @@ require('../../html/navfoot/connection.php');
             </ul>
         </div>
     </div>
-
     <!-- font awesome script -->
     <script src="https://kit.fontawesome.com/57e83eb6e4.js" crossorigin="anonymous"></script>
 </nav>

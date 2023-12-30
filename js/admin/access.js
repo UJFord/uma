@@ -2,10 +2,10 @@
 // hide or show based on account type
 document.addEventListener("DOMContentLoaded", function () {
     // Use PHP to set the user role dynamically
-    var userRole = "<?php echo $_SESSION['rank']; ?>";
     var addEntryCard = document.getElementById("add-entry-card");
 
     // Elements to show/hide based on user role
+    var curatorElements = document.querySelectorAll(".curator-only");
     var adminElements = document.querySelectorAll(".admin-only");
     var viewerElements = document.querySelectorAll(".viewer-only");
 
@@ -17,14 +17,18 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Check user role and set visibility
-    if (userRole === "admin") {
+    if (userRole === "curator") {
+        setVisibility(curatorElements, true);
         setVisibility(adminElements, true);
         setVisibility(viewerElements, false);
-        addEntryCard.hidden = false;
+    } else if (userRole === "admin") {
+        setVisibility(curatorElements, false);
+        setVisibility(adminElements, true);
+        setVisibility(viewerElements, false);
     } else if (userRole === "user") {
+        setVisibility(curatorElements, false);
         setVisibility(adminElements, false);
         setVisibility(viewerElements, true);
-        addEntryCard.hidden = true;
     } else {
         console.error("Unexpected user role:", userRole);
     }

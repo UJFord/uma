@@ -278,7 +278,7 @@ if (isset($_POST['save_crop']) && $_SESSION['rank'] == 'curator') {
         if ($query_run_crop) {
             $row_crop = pg_fetch_row($query_run_crop);
             $crop_id = $row_crop[0];
-            $_SESSION['message'] = "Crop Created Successfully";
+            $_SESSION['message'] = "Crop Created Successfully Waitinng for approval";
             header("Location: list.php");
             exit(0);
         } else {

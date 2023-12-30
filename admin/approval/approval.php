@@ -1,11 +1,10 @@
-<!-- sidebar -->
 <?php
+ob_start(); // Start output buffering
 session_start();
 require('../sidebar/side.php');
-// include('../login/login-check.php');
-// include '../access.php';
-// access('ADMIN');
+ob_end_flush(); // Send output to the browser
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,17 +18,12 @@ require('../sidebar/side.php');
     <!-- favicon -->
     <link rel="shortcut icon" href="img/logo/Uma logo.svg" type="image/x-icon" />
     <title>Uma | AdminPage</title>
-
-    <!-- script fort access level -->
-    <!-- wala pani gagana nga js ambot nganuman gi inline ra sa nako -->
-    <script src="../../js/admin/access.js"></script>
 </head>
 
 <body class="overflow-hidden">
 
     <!-- container of everything -->
     <div class="row ">
-
         <!-- space holder of side panel -->
         <section class=" d-none d-md-block col col-4 col-lg-3 col-xl-2 p-0 m-0"></section>
         <!-- main panel -->
@@ -57,7 +51,6 @@ require('../sidebar/side.php');
                         </thead>
 
                         <?php
-
                         $query = "SELECT crops.*, users.username FROM crops
                                 JOIN users ON crops.user_id = users.user_id
                                 WHERE status = 'pending'
@@ -73,52 +66,23 @@ require('../sidebar/side.php');
                                     <td><?php echo $row['local_name']; ?></td>
                                     <td><?php echo $row['description']; ?></td>
                                     <td><?php echo $row['status']; ?></td>
-
                                     <td class="curator-only">
-                                        <form action="approved.php" method="POST">
+                                        <form action="code.php" method="POST">
                                             <input type="hidden" name="crop_id" value="<?php echo $row['crop_id']; ?>" />
                                             <input type="submit" name="approve" value="approve"> &nbsp &nbsp <br>
                                             <input type="submit" name="delete" value="delete">
                                         </form>
                                     </td>
                                 </tr>
-
                             </tbody>
                         <?php
                         }
                         ?>
                     </table>
-
-
-                    <?php
-                    if (isset($_POST['approve'])) {
-
-                        $crop_id = $_POST['crop_id'];
-                        $select = "UPDATE crops SET status = 'approved' WHERE crop_id = '$crop_id' ";
-                        $resut = pg_query($connection, $select);
-                        header("location:approval.php");
-                    }
-
-                    if (isset($_POST['delete'])) {
-
-                        $crop_id = $_POST['crop_id'];
-                        $select = "DELETE  FROM crops  WHERE crop_id = '$crop_id' ";
-                        $resut = pg_query($connection, $select);
-                        header("location:approval.php");
-                    }
-                    ?>
-
                     <!-- ================================================================== -->
-
-
-
-
                     &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-
-
                     <h1 class="text-center  text-white bg-success col-md-12
                     ">APPROVED LIST </h1>
-
                     <table class="table table-bordered col-md-12">
                         <thead>
                             <tr>
@@ -129,7 +93,6 @@ require('../sidebar/side.php');
                                 <th scope="col">STATUS</th>
                             </tr>
                         </thead>
-
                         <?php
                         $query = "SELECT crops.*, users.username
                                 FROM crops
@@ -137,7 +100,6 @@ require('../sidebar/side.php');
                                 WHERE crops.status = 'approved'
                                 AND users.rank != 'curator'";
                         $result = pg_query($connection, $query);
-
                         while ($row = pg_fetch_array($result)) {
                         ?>
                             <tbody>
@@ -153,7 +115,6 @@ require('../sidebar/side.php');
                         }
                         ?>
 
-
                     </table>
                 </div>
             </div>
@@ -165,7 +126,7 @@ require('../sidebar/side.php');
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
     <!-- font awesome -->
     <script src="https://kit.fontawesome.com/57e83eb6e4.js" crossorigin="anonymous"></script>
-
+    <!-- script fort access level -->
     <script>
         // script for access levels in admin
         // hide or show based on account type
@@ -191,17 +152,14 @@ require('../sidebar/side.php');
                 setVisibility(curatorElements, true);
                 setVisibility(adminElements, true);
                 setVisibility(viewerElements, false);
-                addEntryCard.hidden = false;
             } else if (userRole === "admin") {
                 setVisibility(curatorElements, false);
                 setVisibility(adminElements, true);
                 setVisibility(viewerElements, false);
-                addEntryCard.hidden = false;
             } else if (userRole === "user") {
                 setVisibility(curatorElements, false);
                 setVisibility(adminElements, false);
                 setVisibility(viewerElements, true);
-                addEntryCard.hidden = true;
             } else {
                 console.error("Unexpected user role:", userRole);
             }

@@ -1,10 +1,9 @@
-<!-- sidebar -->
 <?php
 session_start();
+// sidebar
 require('../sidebar/side.php');
 // include('../login/login-check.php');
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -40,7 +39,7 @@ require('../sidebar/side.php');
 		<section id="nav-cards" class="p-0 m-0 col col-md-9 col-xl-10">
 
 			<!-- form for submitting -->
-			<form id="form-panel" name="Form" action="try.php" autocomplete="off" method="POST" enctype="multipart/form-data" class=" py-3 px-5">
+			<form id="form-panel" name="Form" action="code.php" autocomplete="off" method="POST" enctype="multipart/form-data" class=" py-3 px-5">
 				<!-- back button -->
 				<a href="list.php" class="link-offset-2"><i class="bi bi-chevron-left"></i>Go Back</a>
 
@@ -274,30 +273,6 @@ require('../sidebar/side.php');
 									<textarea name="other_info" id="more-desc" class="form-control" rows="2"></textarea>
 								</div>
 							</div> -->
-							<!-- <script>
-								// Wait for the DOM to be ready
-								document.addEventListener("DOMContentLoaded", function() {
-									// Get the link and div elements by their IDs
-									var toggleLink = document.getElementById("toggleLink");
-									var toggleDiv = document.getElementById("toggleDiv");
-
-									// Add a click event listener to the link
-									toggleLink.addEventListener("click", function(event) {
-										// Prevent the default behavior (e.g., following the link)
-										event.preventDefault();
-
-										// Toggle the aria-expanded attribute
-										var isExpandedtrue = toggleLink.getAttribute("aria-expanded") === "true";
-										var isExpandedfalse = toggleLink.getAttribute("aria-expanded") === "false";
-										toggleLink.setAttribute("aria-expanded", isExpandedtrue ? "false" : "true");
-										toggleLink.setAttribute("aria-expanded", isExpandedfalse ? "true" : "false");
-
-										// Toggle the style display property of the div
-										toggleDiv.style.display = isExpandedtrue ? "none" : "block";
-										toggleDiv.style.display = isExpandedfalse ? "block" : "none";
-									});
-								});
-							</script> -->
 				</div>
 				<!-- editting buttons -->
 				<?php
@@ -305,7 +280,6 @@ require('../sidebar/side.php');
 				?>
 			</form>
 		</section>
-
 	</div>
 
 	<!-- scipts -->
