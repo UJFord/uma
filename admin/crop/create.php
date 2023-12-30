@@ -18,14 +18,12 @@ require('../sidebar/side.php');
 	<link rel="shortcut icon" href="img/logo/Uma logo.svg" type="image/x-icon" />
 	<title>Crop sa Editor</title>
 
-	<!-- include libraries(jQuery, bootstrap) -->
-	<script type="text/javascript" src="//code.jquery.com/jquery-3.6.0.min.js"></script>
-	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" />
-	<script type="text/javascript" src="cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 
-	<!-- include summernote css/js-->
-	<link href="../../imports/summernote/" rel="stylesheet">
-	<script src="summernote-bs5.js"></script>
+
+	<!-- summernote -->
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 </head>
 
 <body class="overflow-x-hidden">
@@ -115,15 +113,9 @@ require('../sidebar/side.php');
 					<div class="col">
 						<!-- Descrition -->
 						<label for="gen-desc">Description <span class="text-danger">*</span></label>
-						<textarea name="description" id="gen-desc" class="form-control" rows="3"></textarea>
-						<div id="summernote"></div>
-						<script>
-							$('#summernote').summernote({
-								placeholder: 'Hello Bootstrap 5',
-								tabsize: 2,
-								height: 100
-							});
-						</script>
+						<textarea name="description" id="gen-desc" class="txtarea form-control" rows="3"></textarea>
+
+
 					</div>
 
 					<!-- Characteristics -->
@@ -159,7 +151,7 @@ require('../sidebar/side.php');
 							<div class="row">
 								<div class="col">
 									<!-- Descrition -->
-									<textarea name="planting_techniques" id="tech-desc" class="form-control" rows="2"></textarea>
+									<textarea name="planting_techniques" id="tech-desc" class="txtarea form-control" rows="2"></textarea>
 								</div>
 							</div>
 
@@ -168,7 +160,7 @@ require('../sidebar/side.php');
 							<div class="row">
 								<div class="col">
 									<!-- Descrition -->
-									<textarea name="cultural_and_spiritual_significance" id="signif-desc" class="form-control" rows="2"></textarea>
+									<textarea name="cultural_and_spiritual_significance" id="signif-desc" class="txtarea form-control" rows="2"></textarea>
 								</div>
 							</div>
 
@@ -177,7 +169,7 @@ require('../sidebar/side.php');
 							<div class="row">
 								<div class="col">
 									<!-- Descrition -->
-									<textarea name="role_in_maintaining_upland_ecosystem" id="role-desc" class="form-control" rows="2"></textarea>
+									<textarea name="role_in_maintaining_upland_ecosystem" id="role-desc" class="txtarea form-control" rows="2"></textarea>
 								</div>
 							</div>
 
@@ -186,7 +178,7 @@ require('../sidebar/side.php');
 							<div class="row">
 								<div class="col">
 									<!-- Descrition -->
-									<textarea name="cultural_importance_and_traditional_knowledge" id="impotance-desc" class="form-control" rows="2"></textarea>
+									<textarea name="cultural_importance_and_traditional_knowledge" id="impotance-desc" class="txtarea form-control" rows="2"></textarea>
 								</div>
 							</div>
 
@@ -195,7 +187,7 @@ require('../sidebar/side.php');
 							<div class="row">
 								<div class="col">
 									<!-- Descrition -->
-									<textarea name="unique_features" id="feat-desc" class="form-control" rows="2"></textarea>
+									<textarea name="unique_features" id="feat-desc" class="txtarea form-control" rows="2"></textarea>
 								</div>
 							</div>
 
@@ -204,7 +196,7 @@ require('../sidebar/side.php');
 							<div class="row">
 								<div class="col">
 									<!-- Descrition -->
-									<textarea name="cultural_use" id="use-desc" class="form-control" rows="2"></textarea>
+									<textarea name="cultural_use" id="use-desc" class="txtarea form-control" rows="2"></textarea>
 								</div>
 							</div>
 
@@ -213,7 +205,7 @@ require('../sidebar/side.php');
 							<div class="row">
 								<div class="col">
 									<!-- Descrition -->
-									<textarea name="" id="prac-desc" class="form-control" rows="2"></textarea>
+									<textarea name="" id="prac-desc" class="txtarea form-control" rows="2"></textarea>
 								</div>
 							</div>
 
@@ -222,7 +214,7 @@ require('../sidebar/side.php');
 							<div class="row">
 								<div class="col">
 									<!-- Descrition -->
-									<textarea name="associated_vegetation" id="veg-desc" class="form-control" rows="2"></textarea>
+									<textarea name="associated_vegetation" id="veg-desc" class="txtarea form-control" rows="2"></textarea>
 								</div>
 							</div>
 
@@ -260,19 +252,18 @@ require('../sidebar/side.php');
 							<div class="row">
 								<div class="col">
 									<!-- Descrition -->
-									<textarea name="threats" id="threat-desc" class="form-control" rows="2"></textarea>
+									<textarea name="threats" id="threat-desc" class="txtarea form-control" rows="2"></textarea>
 								</div>
 							</div>
 
 							<!-- Other Information -->
-							<!-- <a href="#" role="button" aria-expanded="false" id="toggleLink">
-								<label class="mt-2">Other Information</label>
-							</a>
-							<div class="row" style="display: none" id="toggleDiv">
+							<label class="mt-2">Other Info</label>
+							<div class="row">
 								<div class="col">
-									<textarea name="other_info" id="more-desc" class="form-control" rows="2"></textarea>
+									<!-- Descrition -->
+									<textarea name="threats" id="threat-desc" class="txtarea form-control" rows="2"></textarea>
 								</div>
-							</div> -->
+							</div>
 				</div>
 				<!-- editting buttons -->
 				<?php
@@ -283,6 +274,21 @@ require('../sidebar/side.php');
 	</div>
 
 	<!-- scipts -->
+	<script>
+		$('.txtarea').summernote({
+			tabsize: 2,
+			height: 120,
+			toolbar: [
+				['style', ['style']],
+				['font', ['bold', 'underline', 'clear']],
+				['color', ['color']],
+				['para', ['ul', 'ol', 'paragraph']],
+				['table', ['table']],
+				['insert', ['link', 'picture', 'video']],
+				['view', ['fullscreen', 'codeview', 'help']]
+			]
+		});
+	</script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 	<!-- font awesome -->
 	<script src="https://kit.fontawesome.com/57e83eb6e4.js" crossorigin="anonymous"></script>
