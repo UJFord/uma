@@ -4,6 +4,11 @@ session_start();
 
 $con = pg_connect("host=localhost dbname=farm_crops user=postgres password=123") or die("Could not connect to server\n");
 
+if(isset($_SESSION['rank'])){
+    $username = $_SESSION['rank'];
+    echo "username: " . $username;
+}
+
 if (isset($_POST['save_crop'])) {
     // Function to handle empty values
     function handleEmpty($value)

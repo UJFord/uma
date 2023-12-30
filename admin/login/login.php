@@ -54,7 +54,6 @@ if (isset($_POST['submit'])) {
     // $username = $_POST['username'];
     // $password = md5($_POST['password']);
     $username = pg_escape_string($connection, $_POST['username']);
-
     $raw_password = md5($_POST['password']);
     $password = pg_escape_string($connection, $raw_password);
 
@@ -68,6 +67,7 @@ if (isset($_POST['submit'])) {
         $user = pg_fetch_assoc($res);
 
         $rank = $user['rank'];
+        $user_id = $user['user_id'];
     }
 
 
@@ -77,7 +77,7 @@ if (isset($_POST['submit'])) {
     if ($count == 1) {
         //User Available and Login Success
         $_SESSION['message'] = "<div class='success'>Login Successful. Welcome, $username.</div>";
-        $_SESSION['user'] = $username; //TO check whether the user is logged in or not and logout will unset it
+        $_SESSION['user'] = $user_id; //TO check whether the user is logged in or not and logout will unset it
         $_SESSION['rank'] = $rank;
         
         //Redirect to Home Page/Dashboard

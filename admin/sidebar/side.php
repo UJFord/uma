@@ -56,7 +56,19 @@ require('../../html/navfoot/connection.php');
         <div class="dropdown mx-3 mt-0 mb-3">
             <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                 <img src="https://source.unsplash.com/32x32/?nature,water" alt="" width="32" height="32" class="rounded-circle me-2">
-                <strong <?php if(isset($_SESSION['user'])){ $username = $_SESSION['user'];} ?>><?=$username?></strong>
+                <strong 
+                <?php if(isset($_SESSION['user'])){ 
+                    $user = $_SESSION['user'];
+                    $query = "select * from users where user_id = $user";
+                    $res = pg_query($connection, $query);
+
+                    if(pg_num_rows($res) > 0){
+                        $user = pg_fetch_assoc($res);
+                        $username = $user['username'];
+                    }
+                } 
+                    ?>><?= $username; ?>
+                </strong>
             </a>
             <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
                 <li><a class="dropdown-item" href="#">New project...</a></li>

@@ -31,14 +31,19 @@ require('../sidebar/side.php');
 		<section id="nav-cards" class="p-0 m-0 col col-md-9 col-xl-10">
 
 			<!-- form for submitting -->
-			<form id="form-panel" name="Form" action="code.php" autocomplete="off" method="POST" enctype="multipart/form-data" class=" py-3 px-5">
+			<form id="form-panel" name="Form" action="try.php" autocomplete="off" method="POST" enctype="multipart/form-data" class=" py-3 px-5">
 				<!-- back button -->
 				<a href="list.php" class="link-offset-2"><i class="bi bi-chevron-left"></i>Go Back</a>
 
 				<?php
 				include('../message.php');
+
+				if(isset($_SESSION['user'])){
+					$user_id = $_SESSION["user"];
+				}
 				?>
-				
+				<input type="hidden" name="user_id" value="<?= $user_id ?>">
+
 				<!-- main form -->
 				<div class="form-control p-3 mt-3">
 

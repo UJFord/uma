@@ -40,71 +40,121 @@ require('../sidebar/side.php');
                     <!-- title -->
                     <div class="col-6">
                         <h2 id="crops-title" class="fw-semibold">Approval</h2>
-
-                        <h1 class="text-center  text-white bg-dark col-md-12">PENDING LIST</h1>
-
-                        <table class="table table-bordered col-md-12">
-                            <thead>
-                                <tr>
-                                    <th scope="col">ID</th>
-                                    <th scope="col">SUBJECT</th>
-                                    <th scope="col">CONTENT</th>
-                                    <th scope="col">STATUS</th>
-                                    <th scope="col">ACTION</th>
-                                </tr>
-                            </thead>
-
-                            <!-- <?php
-
-                            $query = "SELECT * FROM  crops WHERE status = 'pending' ORDER BY id ASC";
-                            $result = mysqli_query($conn, $query);
-                            while ($row = mysqli_fetch_array($result)) { ?>
-
-
-                                <tbody>
-                                    <tr>
-                                        <th scope="row"><?php echo $row['id']; ?></th>
-                                        <td><?php echo $row['subject']; ?></td>
-                                        <td><?php echo $row['content']; ?></td>
-                                        <td><?php echo $row['status']; ?></td>
-
-
-                                        <td>
-                                            <form action="approved.php" method="POST">
-                                                <input type="hidden" name="id" value="<?php echo $row['id']; ?>" />
-                                                <input type="submit" name="approve" value="approve"> &nbsp &nbsp <br>
-                                                <input type="submit" name="delete" value="delete">
-
-                                            </form>
-                                        </td>
-                                    </tr>
-
-                                </tbody>
-                            <?php } ?> -->
-                        </table>
-
-
-                        <!-- <?php
-                        if (isset($_POST['approve'])) {
-
-                            $id = $_POST['id'];
-                            $select = "UPDATE pending_list SET status = 'approved' WHERE id = '$id' ";
-                            $resut = mysqli_query($conn, $select);
-                            header("location:approved.php");
-                        }
-
-
-                        if (isset($_POST['delete'])) {
-
-                            $id = $_POST['id'];
-                            $select = "DELETE  FROM pending_list  WHERE id = '$id' ";
-                            $resut = mysqli_query($conn, $select);
-                            header("location:approved.php");
-                        }
-                        ?> -->
-
                     </div>
 
+                    <h1 class="text-center  text-white bg-dark col-md-12">PENDING LIST</h1>
+
+                    <table class="table table-bordered col-md-12">
+                        <thead>
+                            <tr>
+                                <th scope="col">Sent By</th>
+                                <th scope="col">Crop Name</th>
+                                <th scope="col">local Name</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">STATUS</th>
+                                <th scope="col" class="curator-only">ACTION</th>
+                            </tr>
+                        </thead>
+
+                        <?php
+
+                        $query = "SELECT crops.*, users.username FROM crops
+                                JOIN users ON crops.user_id = users.user_id
+                                WHERE status = 'pending'
+                                AND users.rank != 'curator'
+                                ORDER BY crop_id ASC";
+                        $result = pg_query($connection, $query);
+                        while ($row = pg_fetch_array($result)) {
+                        ?>
+                            <tbody>
+                                <tr>
+                                    <th scope="row"><?php echo $row['username']; ?></th>
+                                    <td><?php echo $row['crop_name']; ?></td>
+                                    <td><?php echo $row['local_name']; ?></td>
+                                    <td><?php echo $row['description']; ?></td>
+                                    <td><?php echo $row['status']; ?></td>
+
+                                    <td class="curator-only">
+                                        <form action="approved.php" method="POST">
+                                            <input type="hidden" name="crop_id" value="<?php echo $row['crop_id']; ?>" />
+                                            <input type="submit" name="approve" value="approve"> &nbsp &nbsp <br>
+                                            <input type="submit" name="delete" value="delete">
+                                        </form>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        <?php
+                        }
+                        ?>
+                    </table>
+
+
+                    <?php
+                    if (isset($_POST['approve'])) {
+
+                        $crop_id = $_POST['crop_id'];
+                        $select = "UPDATE crops SET status = 'approved' WHERE crop_id = '$crop_id' ";
+                        $resut = pg_query($connection, $select);
+                        header("location:approval.php");
+                    }
+
+                    if (isset($_POST['delete'])) {
+
+                        $crop_id = $_POST['crop_id'];
+                        $select = "DELETE  FROM crops  WHERE crop_id = '$crop_id' ";
+                        $resut = pg_query($connection, $select);
+                        header("location:approval.php");
+                    }
+                    ?>
+
+                    <!-- ================================================================== -->
+
+
+
+
+                    &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+
+
+                    <h1 class="text-center  text-white bg-success col-md-12
+                    ">APPROVED LIST </h1>
+
+                    <table class="table table-bordered col-md-12">
+                        <thead>
+                            <tr>
+                                <th scope="col">Sent By</th>
+                                <th scope="col">Crop Name</th>
+                                <th scope="col">local Name</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">STATUS</th>
+                            </tr>
+                        </thead>
+
+                        <?php
+                        $query = "SELECT crops.*, users.username
+                                FROM crops
+                                JOIN users ON crops.user_id = users.user_id
+                                WHERE crops.status = 'approved'
+                                AND users.rank != 'curator'";
+                        $result = pg_query($connection, $query);
+
+                        while ($row = pg_fetch_array($result)) {
+                        ?>
+                            <tbody>
+                                <tr>
+                                    <th scope="row"><?php echo $row['username']; ?></th>
+                                    <td><?php echo $row['crop_name']; ?></td>
+                                    <td><?php echo $row['local_name']; ?></td>
+                                    <td><?php echo $row['description']; ?></td>
+                                    <td><?php echo $row['status']; ?></td>
+                                </tr>
+                            </tbody>
+                        <?php
+                        }
+                        ?>
+
+
+                    </table>
                 </div>
             </div>
         </section>
@@ -125,6 +175,7 @@ require('../sidebar/side.php');
             var addEntryCard = document.getElementById("add-entry-card");
 
             // Elements to show/hide based on user role
+            var curatorElements = document.querySelectorAll(".curator-only");
             var adminElements = document.querySelectorAll(".admin-only");
             var viewerElements = document.querySelectorAll(".viewer-only");
 
@@ -136,11 +187,18 @@ require('../sidebar/side.php');
             }
 
             // Check user role and set visibility
-            if (userRole === "admin") {
+            if (userRole === "curator") {
+                setVisibility(curatorElements, true);
+                setVisibility(adminElements, true);
+                setVisibility(viewerElements, false);
+                addEntryCard.hidden = false;
+            } else if (userRole === "admin") {
+                setVisibility(curatorElements, false);
                 setVisibility(adminElements, true);
                 setVisibility(viewerElements, false);
                 addEntryCard.hidden = false;
             } else if (userRole === "user") {
+                setVisibility(curatorElements, false);
                 setVisibility(adminElements, false);
                 setVisibility(viewerElements, true);
                 addEntryCard.hidden = true;

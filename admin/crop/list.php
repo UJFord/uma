@@ -190,6 +190,7 @@ require('../sidebar/side.php');
 			var addEntryCard = document.getElementById("add-entry-card");
 
 			// Elements to show/hide based on user role
+			var curatorElements = document.querySelectorAll(".curator-only");
 			var adminElements = document.querySelectorAll(".admin-only");
 			var viewerElements = document.querySelectorAll(".viewer-only");
 
@@ -201,11 +202,18 @@ require('../sidebar/side.php');
 			}
 
 			// Check user role and set visibility
-			if (userRole === "admin") {
+			if (userRole === "curator") {
+				setVisibility(curatorElements, true);
 				setVisibility(adminElements, true);
 				setVisibility(viewerElements, false);
 				addEntryCard.hidden = false;
-			} else if (userRole === "user") {
+			} else if (userRole === "admin") {
+				setVisibility(curatorElements, false);
+				setVisibility(adminElements, true);
+				setVisibility(viewerElements, false);
+				addEntryCard.hidden = false;
+			}else if (userRole === "user") {
+				setVisibility(curatorElements, false);
 				setVisibility(adminElements, false);
 				setVisibility(viewerElements, true);
 				addEntryCard.hidden = true;
