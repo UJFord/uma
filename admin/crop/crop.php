@@ -141,15 +141,21 @@ require('../sidebar/side.php');
 									<div id="image-previews" class="overflow-x-scroll h-100 border d-flex flex-row">
 										<?php
 										if ($current_image != "") {
-											// Display the image
+											// Split the image names by comma
+											$imageNames = explode(',', $current_image);
+
+											// Display each image
+											foreach ($imageNames as $imageName) {
 										?>
-											<img src="<?php echo 'http://localhost/incognito-capstone/admin/'; ?>img/crop/<?php echo $current_image; ?>" width="100%">
+												<img src="<?php echo 'http://localhost/incognito-capstone/admin/'; ?>img/crop/<?php echo trim($imageName); ?>" width="100%">
 										<?php
+											}
 										} else {
 											// display message
 											echo "Image not added";
 										}
 										?>
+
 									</div>
 								</div>
 							</div>

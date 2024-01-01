@@ -65,7 +65,7 @@ require('../sidebar/side.php');
 						<!-- image -->
 						<div class="col-4">
 							<label for="image-input" class="">Images <span class="text-danger">*</span></label>
-							<input type="file" name="image" class="form-control" id="image-input" multiple accept="image/*">
+							<input type="file" name="image[]" class="form-control" id="image-input" multiple accept="image/*">
 						</div>
 					</div>
 
@@ -105,7 +105,6 @@ require('../sidebar/side.php');
 						<div class="col">
 							<!-- images chosen not yet uploaded i think i dont know -->
 							<div id="image-previews" class="overflow-x-scroll h-100 border d-flex flex-row">
-
 							</div>
 						</div>
 					</div>
@@ -114,8 +113,6 @@ require('../sidebar/side.php');
 						<!-- Descrition -->
 						<label for="gen-desc">Description <span class="text-danger">*</span></label>
 						<textarea name="description" id="gen-desc" class="txtarea form-control" rows="3"></textarea>
-
-
 					</div>
 
 					<!-- Characteristics -->
@@ -205,7 +202,7 @@ require('../sidebar/side.php');
 							<div class="row">
 								<div class="col">
 									<!-- Descrition -->
-									<textarea name="" id="prac-desc" class="txtarea form-control" rows="2"></textarea>
+									<textarea name="farming_id" id="prac-desc" class="txtarea form-control" rows="2"></textarea>
 								</div>
 							</div>
 
@@ -261,7 +258,7 @@ require('../sidebar/side.php');
 							<div class="row">
 								<div class="col">
 									<!-- Descrition -->
-									<textarea name="threats" id="threat-desc" class="txtarea form-control" rows="2"></textarea>
+									<textarea name="other_info" id="threat-desc" class="txtarea form-control" rows="2"></textarea>
 								</div>
 							</div>
 				</div>
@@ -274,6 +271,30 @@ require('../sidebar/side.php');
 	</div>
 
 	<!-- scipts -->
+
+	<!-- JavaScript to handle file input change event and update image previews -->
+	<script>
+		document.addEventListener("DOMContentLoaded", function() {
+			var imageInput = document.getElementById("image-input");
+			var imagePreviews = document.getElementById("image-previews");
+
+			imageInput.addEventListener("change", function() {
+				// Clear existing image previews
+				imagePreviews.innerHTML = "";
+
+				// Display selected images
+				for (var i = 0; i < imageInput.files.length; i++) {
+					var img = document.createElement("img");
+					img.src = URL.createObjectURL(imageInput.files[i]);
+					img.className = "m-2 img-thumbnail";
+					img.style.height = "200px";
+					imagePreviews.appendChild(img);
+				}
+			});
+		});
+	</script>
+
+
 	<script>
 		$('.txtarea').summernote({
 			tabsize: 2,
