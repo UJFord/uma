@@ -95,7 +95,7 @@ require('../sidebar/side.php');
 								<!-- image -->
 								<div class="col-4">
 									<label for="image-input" class="">Images <span class="text-danger">*</span></label>
-									<input type="file" class="form-control" name="image" id="image-input" multiple accept="image/*" hidden>
+									<input type="file" class="form-control" name="image[]" id="image-input" multiple accept="image/*" hidden>
 								</div>
 							</div>
 
@@ -137,7 +137,7 @@ require('../sidebar/side.php');
 								</div>
 
 								<div class="col">
-									<!-- images chosen not yet uploaded i think i dont know -->
+									<!-- current images -->
 									<div id="image-previews" class="overflow-x-scroll h-100 border d-flex flex-row">
 										<?php
 										if ($current_image != "") {
@@ -155,7 +155,6 @@ require('../sidebar/side.php');
 											echo "Image not added";
 										}
 										?>
-
 									</div>
 								</div>
 							</div>
