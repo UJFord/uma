@@ -36,7 +36,7 @@ require('../sidebar/side.php');
 			<?php
 			if (isset($_GET['crop_id'])) {
 				$crop_id = pg_escape_string($connection, $_GET['crop_id']);
-				$query = "SELECT * from crops WHERE crop_id='$crop_id'";
+				$query = "SELECT * from crop WHERE crop_id='$crop_id'";
 				$query_run = pg_query($connection, $query);
 
 				$emptyValue = 'Empty';
@@ -45,9 +45,9 @@ require('../sidebar/side.php');
 					$crops = pg_fetch_assoc($query_run);
 
 					// get the id for the roreign tables
-					$current_traditional_crop_traits_id = $crops['traditional_crop_traits_id'];
-					$current_farming_id = $crops['farming_id'];
-					$current_image = $crops['image'];
+					$current_crop_location_id = $crops['crop_location_id'];
+					$current_crop_farming_practice_id = $crops['crop_farming_practice_id'];
+					$current_crop_image = $crops['crop_image'];
 
 					// Get the data from crops table
 					// Define default values for each field if they are $emptyValue
@@ -81,8 +81,8 @@ require('../sidebar/side.php');
 						<!-- main form -->
 						<div class="form-control p-3 mt-3">
 							<input id="crop-id" type="hidden" name="crop_id" value="<?= $crops['crop_id']; ?>">
-							<input type="hidden" name="traditional_crop_traits_id" value="<?= $crops['traditional_crop_traits_id']; ?>">
-							<input type="hidden" name="current_image" value="<?= $current_image; ?>">
+							<input type="hidden" name="crop_location_id" value="<?= $crops['crop_location_id']; ?>">
+							<input type="hidden" name="current_crop_image" value="<?= $current_crop_image; ?>">
 
 							<!-- general information -->
 							<h3>General Information</h3>
@@ -140,9 +140,9 @@ require('../sidebar/side.php');
 									<!-- current images -->
 									<div id="image-previews" class="overflow-x-scroll h-100 border d-flex flex-row">
 										<?php
-										if ($current_image != "") {
+										if ($current_crop_image != "") {
 											// Split the image names by comma
-											$imageNames = explode(',', $current_image);
+											$imageNames = explode(',', $current_crop_image);
 
 											// Display each image
 											foreach ($imageNames as $imageName) {

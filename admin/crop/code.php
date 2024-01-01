@@ -6,7 +6,7 @@ session_start();
 
 $con = pg_connect("host=localhost dbname=farm_crops user=postgres password=123") or die("Could not connect to server\n");
 
-if (isset($_POST['save_crop']) && $_SESSION['rank'] == 'curator') {
+if (isset($_POST['save']) && $_SESSION['rank'] == 'curator') {
     // Function to handle empty values
     function handleEmpty($value)
     {
@@ -163,7 +163,7 @@ if (isset($_POST['save_crop']) && $_SESSION['rank'] == 'curator') {
         exit(0);
     }
 } else {
-    if (isset($_POST['save_crop']) && $_SESSION['rank'] == 'admin') {
+    if (isset($_POST['save']) && $_SESSION['rank'] == 'admin') {
         // Function to handle empty values
         function handleEmpty($value)
         {
@@ -589,4 +589,3 @@ if (isset($_POST['delete']) && $_SESSION['rank'] == 'curator') {
         exit(0);
     }
 }
-

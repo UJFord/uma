@@ -26,7 +26,7 @@ require('../../html/navfoot/connection.php');
         <form action="" method="POST" class="text-center">
 
             Email: <br>
-            <input class="input" type="text" name="username" placeholder="Enter username"> <br><br>
+            <input class="input" type="email" name="email" placeholder="Enter email"> <br><br>
 
             Password: <br>
             <input class="input" type="password" name="password" placeholder="Enter password"> <br><br>
@@ -53,12 +53,12 @@ if (isset($_POST['submit'])) {
     //1. Get the Data from Login form
     // $username = $_POST['username'];
     // $password = md5($_POST['password']);
-    $username = pg_escape_string($connection, $_POST['username']);
+    $email = pg_escape_string($connection, $_POST['email']);
     $raw_password = md5($_POST['password']);
     $password = pg_escape_string($connection, $raw_password);
 
-    //2. SQL to check whether the user with username and password exists or not
-    $sql = "SELECT * FROM users WHERE username='$username' AND password='$password'";
+    //2. SQL to check whether the user with email and password exists or not
+    $sql = "SELECT * FROM \"user\" WHERE \"email\"='$email' AND \"password\"='$password'";
 
     //3. Execute the Query
     $res = pg_query($connection, $sql);
@@ -66,8 +66,9 @@ if (isset($_POST['submit'])) {
     if (pg_num_rows($res) > 0) {
         $user = pg_fetch_assoc($res);
 
-        $rank = $user['rank'];
+        $account_type_id = $user['account_type_id'];
         $user_id = $user['user_id'];
+        $first_name = $user['first_name'];
     }
 
 
@@ -76,16 +77,14 @@ if (isset($_POST['submit'])) {
 
     if ($count == 1) {
         //User Available and Login Success
-        $_SESSION['message'] = "<div class='success'>Login Successful. Welcome, $username.</div>";
+        $_SESSION['message'] = "<div class='success'>Login Successful. Welcome, $first_name.</div>";
         $_SESSION['user'] = $user_id; //TO check whether the user is logged in or not and logout will unset it
-        $_SESSION['rank'] = $rank;
-        
         //Redirect to Home Page/Dashboard
         header('location: ../crop/list.php');
 
     } else {
         //User not Available and Login Fail
-        $_SESSION['message'] = "<div class='error text-center'>Username or Password did not match.</div>";
+        $_SESSION['message'] = "<div class='error text-center'>Email or Password did not match.</div>";
         //Redirect to login page
         header('location: login.php');
         exit();

@@ -37,7 +37,7 @@ require('../sidebar/side.php');
 		<section id="nav-cards" class="p-0 m-0 col col-md-9 col-xl-10">
 
 			<!-- form for submitting -->
-			<form id="form-panel" name="Form" action="code.php" autocomplete="off" method="POST" enctype="multipart/form-data" class=" py-3 px-5">
+			<form id="form-panel" name="Form" action="try.php" autocomplete="off" method="POST" enctype="multipart/form-data" class=" py-3 px-5">
 				<!-- back button -->
 				<a href="list.php" class="link-offset-2"><i class="bi bi-chevron-left"></i>Go Back</a>
 
@@ -59,13 +59,13 @@ require('../sidebar/side.php');
 						<div class="col-4">
 							<!-- crop name -->
 							<label for="crop-name">Crop <span class="text-danger">*</span></label>
-							<input id="crop-name" type="text" name="crop_name" class="form-control form-control-lg mb-2">
+							<input id="crop-name" type="text" name="crop_name" class="form-control form-control-lg mb-2" required>
 
 						</div>
 						<!-- image -->
 						<div class="col-4">
 							<label for="image-input" class="">Images <span class="text-danger">*</span></label>
-							<input type="file" name="image[]" class="form-control" id="image-input" multiple accept="image/*">
+							<input type="file" name="crop_image[]" class="form-control" id="image-input" multiple accept="image/*" required>
 						</div>
 					</div>
 
@@ -73,7 +73,7 @@ require('../sidebar/side.php');
 						<div class="col-4">
 							<!-- category -->
 							<label for="category">Category <span class="text-danger">*</span></label>
-							<select id="category" name="category" class="form-select mb-2">
+							<select id="category" name="category" class="form-select mb-2" required>
 								<option value="rice" selected>Rice</option>
 								<option value="root">Rootcrop</option>
 								<option value="fly">Flying</option>
@@ -84,12 +84,24 @@ require('../sidebar/side.php');
 							</select>
 
 							<!-- local name -->
-							<label for="local">Local Name <span class="text-danger">*</span></label>
-							<input id="local" type="text" name="local_name" class="form-control mb-2">
-							<!-- upland or lowland -->
+							<label for="crop_local_name">Local Name <span class="text-danger">*</span></label>
+							<input id="crop_local_name" type="text" name="crop_local_name" class="form-control mb-2" required>
 
+							<!-- scientific name -->
+							<label for="crop_scientific_name">Scientific Name <span class="text-danger"></span></label>
+							<input id="crop_scientific_name" type="text" name="crop_scientific_name" class="form-control mb-2">
+
+							<!-- Crop Variety -->
+							<label for="crop_variety">Crop Variety <span class="text-danger"></span></label>
+							<input id="crop_variety" type="text" name="crop_variety" class="form-control mb-2">
+
+							<!-- Crop Origin -->
+							<label for="crop_origin">Crop Origin <span class="text-danger"></span></label>
+							<input id="crop_origin" type="text" name="crop_origin" class="form-control mb-2">
+
+							<!-- upland or lowland -->
 							<label>Type <span class="text-danger">*</span></label>
-							<div class="m-2">
+							<div class="m-2" required>
 								<div class="form-check form-check-inline">
 									<label class="form-check-label" for="inlineRadio1">Upland</label>
 									<input class="form-check-input" type="radio" name="upland_or_lowland" id="inlineRadio1" value="Upland">
@@ -112,114 +124,19 @@ require('../sidebar/side.php');
 					<div class="col">
 						<!-- Descrition -->
 						<label for="gen-desc">Description <span class="text-danger">*</span></label>
-						<textarea name="description" id="gen-desc" class="txtarea form-control" rows="3"></textarea>
+						<textarea name="crop_description" id="gen-desc" class="txtarea form-control" rows="3" required></textarea>
 					</div>
 
-					<!-- Characteristics -->
-					<h3 class="mt-4">Characteristics</h5>
-						<div class="row">
-							<div class="col-2">
-								<!-- taste -->
-								<label for="taste">Taste</label>
-								<input id="taste" type="text" name="taste" class="form-control mb-2">
-							</div>
-							<div class="col-2">
-								<!-- aroma -->
-								<label for="aroma">Aroma</label>
-								<input id="aroma" type="text" name="aroma" class="form-control mb-2">
-							</div>
-							<div class="col-2">
-								<!-- maturation -->
-								<label for="matur">Maturation</label>
-								<input id="matur" type="text" name="maturation" class="form-control mb-2">
-							</div>
-							<div class="col">
-								<!-- disease resistance -->
-								<label for="resist">Pest and Disease Resistance</label>
-								<input id="resist" type="text" name="pest_and_disease_resistance" class="form-control">
-							</div>
-						</div>
+					<!-- More -->
+					<h3 class="mt-4">More</h5>
 
-						<!-- More -->
-						<h3 class="mt-4">More</h5>
-
-							<!-- Planting Techniques -->
-							<label class="mt-2">Planting Techniques</label>
+						<!-- Location -->
+						<h3 class="mt-4">Location</h5>
 							<div class="row">
-								<div class="col">
-									<!-- Descrition -->
-									<textarea name="planting_techniques" id="tech-desc" class="txtarea form-control" rows="2"></textarea>
-								</div>
-							</div>
-
-							<!-- Cultural and Spiritual Significance -->
-							<label class="mt-2">Cultural and Spiritual Significance</label>
-							<div class="row">
-								<div class="col">
-									<!-- Descrition -->
-									<textarea name="cultural_and_spiritual_significance" id="signif-desc" class="txtarea form-control" rows="2"></textarea>
-								</div>
-							</div>
-
-							<!-- Role in Maintaining Upland Ecosystems -->
-							<label class="mt-2">Role in Maintaining Upland Ecosystems</label>
-							<div class="row">
-								<div class="col">
-									<!-- Descrition -->
-									<textarea name="role_in_maintaining_upland_ecosystem" id="role-desc" class="txtarea form-control" rows="2"></textarea>
-								</div>
-							</div>
-
-							<!-- Cultural Importance and Traditional Knowledge -->
-							<label class="mt-2">Cultural Importance and Traditional Knowledge</label>
-							<div class="row">
-								<div class="col">
-									<!-- Descrition -->
-									<textarea name="cultural_importance_and_traditional_knowledge" id="impotance-desc" class="txtarea form-control" rows="2"></textarea>
-								</div>
-							</div>
-
-							<!-- Unique Features -->
-							<label class="mt-2">Unique Features</label>
-							<div class="row">
-								<div class="col">
-									<!-- Descrition -->
-									<textarea name="unique_features" id="feat-desc" class="txtarea form-control" rows="2"></textarea>
-								</div>
-							</div>
-
-							<!-- Cultural Use -->
-							<label class="mt-2">Cultural Use</label>
-							<div class="row">
-								<div class="col">
-									<!-- Descrition -->
-									<textarea name="cultural_use" id="use-desc" class="txtarea form-control" rows="2"></textarea>
-								</div>
-							</div>
-
-							<!-- Associated Farming Practice -->
-							<label class="mt-2">Associated Farming Practice</label>
-							<div class="row">
-								<div class="col">
-									<!-- Descrition -->
-									<textarea name="farming_id" id="prac-desc" class="txtarea form-control" rows="2"></textarea>
-								</div>
-							</div>
-
-							<!-- Associated Vegetation -->
-							<label class="mt-2">Associated Vegetation</label>
-							<div class="row">
-								<div class="col">
-									<!-- Descrition -->
-									<textarea name="associated_vegetation" id="veg-desc" class="txtarea form-control" rows="2"></textarea>
-								</div>
-							</div>
-
-							<!-- Last Seen Location -->
-							<label class="mt-2">Last Seen Location (Municipality)</label>
-							<div class="row">
-								<div class="col">
-									<select id="last_seen_location" name="last_seen_location" class="form-select mb-2">
+								<div class="col-2">
+									<!-- Municipality -->
+									<label for="municipality">Municipality</label>
+									<select id="municipality" name="municipality_name" class="form-select mb-2">
 										<option value="alabel" selected>Alabel</option>
 										<option value="glan">Glan</option>
 										<option value="kiamba">Kiamba</option>
@@ -229,27 +146,63 @@ require('../sidebar/side.php');
 										<option value="malungon">Malungon</option>
 									</select>
 								</div>
-							</div>
-
-							<!-- Province -->
-							<!-- <label class="mt-2">Province</label>
-							<div class="row">
-								<div class="col">
-									<select id="province" name="province" class="form-select mb-2">
-										<option value="sarangani" selected>Alabel</option>
+								<div class="col-2">
+									<!-- Province -->
+									<label for="province">Province</label>
+									<select id="province" name="province_name" class="form-select mb-2">
+										<option value="sarangani" selected>Davao Del Norte</option>
 										<option value="davao">Davao</option>
 										<option value="south_cotabato">South Cotabato</option>
 										<option value="cotabato">Cotabato</option>
 									</select>
 								</div>
-							</div> -->
+								<div class="col-2">
+									<!-- Longtitude -->
+									<label for="longtitude">Longtitude</label>
+									<input id="longtitude" type="text" name="longtitude" class="form-control mb-2">
+								</div>
+								<div class="col">
+									<!-- Latitude -->
+									<label for="latitude">Latitude</label>
+									<input id="latitude" type="text" name="latitude" class="form-control">
+								</div>
+							</div>
 
-							<!-- Threats to Upland Farms -->
-							<label class="mt-2">Threats to Upland Farms</label>
+							<!-- Associated Farming Practice -->
+							<label class="mt-2">Associated Farming Practice</label>
 							<div class="row">
 								<div class="col">
-									<!-- Descrition -->
-									<textarea name="threats" id="threat-desc" class="txtarea form-control" rows="2"></textarea>
+									<select id="farming_practice_id" name="farming_practice_id" class="form-select mb-2">
+										<?php
+										// php code to display available schedules from the database
+										// query to select all available schedules in the database
+										$query = "SELECT * FROM farming_practice";
+
+										// Executing query
+										$query_run = pg_query($connection, $query);
+
+										// count rows to check whether we have a schedule or not
+										$count = pg_num_rows($query_run);
+
+										// if count is greater than 0 we have a schedule else we do not have a schedule
+										if ($count > 0) {
+											// we have a schedule
+											while ($row = pg_fetch_assoc($query_run)) {
+												// get the detail of the schedule
+												$farming_practice_id = $row['farming_practice_id'];
+												$farming_practice_name = $row['farming_practice_name'];
+										?>
+												<option value="<?php echo $farming_practice_id; ?>" <?php echo ($farming_practice_name === 'none') ? 'selected' : ''; ?>><?php echo $farming_practice_name; ?></option>
+											<?php
+											}
+										} else {
+											// we do not have a schedule
+											?>
+											<option value="0">No Farming Practices Found</option>
+										<?php
+										}
+										?>
+									</select>
 								</div>
 							</div>
 

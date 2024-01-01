@@ -1,7 +1,7 @@
 <div id="button-div" class="fixed-bottom d-flex justify-content-end">
     <!-- show in view mode -->
     <div id="edit-btn-box" class="m-3">
-        <button id="apply-btn" type="submit" name="save_crop" class="btn btn-success px-3 py-2 me-1 admin-only curator-only" onclick="validateAndSubmitForm()"><i class="fa-solid fa-check me-1"></i>Add</button>
+        <button id="apply-btn" type="submit" name="save" class="btn btn-success px-3 py-2 me-1 admin-only curator-only" onclick="validateAndSubmitForm()"><i class="fa-solid fa-check me-1"></i>Add</button>
     </div>
 </div>
 

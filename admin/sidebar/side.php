@@ -59,14 +59,14 @@ require('../../html/navfoot/connection.php');
                 <img src="https://source.unsplash.com/32x32/?nature,water" alt="" width="32" height="32" class="rounded-circle me-2">
                 <strong <?php if (isset($_SESSION['user'])) {
                             $user = $_SESSION['user'];
-                            $query = "select * from users where user_id = $user";
+                            $query = "select * from \"user\" where user_id = $user";
                             $res = pg_query($connection, $query);
                             if (pg_num_rows($res) > 0) {
                                 $user = pg_fetch_assoc($res);
-                                $username = $user['username'];
+                                $first_name = $user['first_name'];
                             }
                         }
-                        ?>><?= $username; ?>
+                        ?>><?= $first_name; ?>
                 </strong>
             </a>
             <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">

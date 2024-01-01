@@ -54,7 +54,7 @@ require('../sidebar/side.php');
 									<li>
 										<h5 class="filter-title">Category</h5>
 										<?php
-										$category_query = pg_query($connection, "SELECT * FROM crops");
+										$category_query = pg_query($connection, "SELECT * FROM crop");
 										if (pg_num_rows($category_query) > 0) {
 											while ($category_name = pg_fetch_assoc($category_query)) {
 												$checked = [];
@@ -110,9 +110,9 @@ require('../sidebar/side.php');
 						$categoryChecked = array_map('strtolower', $_GET['category']);
 
 						// Convert category names to lowercase in the SQL query
-						$result = pg_query($connection, "SELECT DISTINCT * FROM crops WHERE LOWER(category) IN ('" . implode("','", $categoryChecked) . "') ORDER BY crop_id");
+						$result = pg_query($connection, "SELECT DISTINCT * FROM crop WHERE LOWER(category) IN ('" . implode("','", $categoryChecked) . "') ORDER BY crop_id");
 					} else {
-						$result = pg_query($connection, "SELECT * FROM crops ORDER BY crop_id");
+						$result = pg_query($connection, "SELECT * FROM crop ORDER BY crop_id");
 					}
 
 					$count = pg_num_rows($result);
@@ -120,17 +120,17 @@ require('../sidebar/side.php');
 					if ($count > 0) {
 						while ($row = pg_fetch_assoc($result)) {
 							$crop_id = $row['crop_id'];
-							$image = $row['image'];
+							$crop_image = $row['crop_image'];
 							$crop_name = $row['crop_name'];
 
 					?>
 							<!-- crop -->
 							<div class="card-container col-6 col-md-4 col-lg-2 p-2">
 								<?php
-								if ($image !== null) {
+								if ($crop_image !== null) {
 								?>
 									<a href="crop.php?crop_id=<?php echo $crop_id; ?>" class="crop-card py-3 px-1 d-flex justify-content-center align-items-end" style="
-									background-image: url('<?php echo $image; ?>');
+									background-image: url('<?php echo $crop_image; ?>');
 								">
 										<div class="crop-card-text row w-100 d-flex flex-row justify-content-between align-items-center">
 											<!-- crop name -->
