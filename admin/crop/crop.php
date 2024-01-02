@@ -43,7 +43,7 @@ require('../sidebar/side.php');
 
 				if (pg_num_rows($query_run) > 0) {
 					$crops = pg_fetch_assoc($query_run);
-					// get the id for the roreign tables
+					// get the id for the foreign tables
 					$location_id = $crops['location_id'];
 					$current_crop_location_id = $crops['crop_location_id'];
 					$current_crop_farming_practice_id = $crops['crop_farming_practice_id'];
@@ -224,43 +224,103 @@ require('../sidebar/side.php');
 										?>
 								</div>
 
-							<!-- Associated Farming Practice -->
-							<label class="mt-2">Associated Farming Practice</label>
-							<div class="row">
-								<div class="col">
-									<!-- Descrition -->
-									<textarea name="" id="prac-desc" class="form-control" rows="2" disabled ></textarea>
-								</div>
-							</div>
+								<!-- Associated Farming Practice -->
+								<label class="mt-2">Associated Farming Practice</label>
+								<div class="row">
+									<div class="col">
+									<select id="farming_practice_id" name="farming_practice_id" class="form-select mb-2" disabled>
+										<?php
+										// php code to display available schedules from the database
+										// query to select all available schedules in the database
+										$query = "SELECT crop_farming_practice.*, farming_practice.* FROM crop_farming_practice left join farming_practice on crop_farming_practice.farming_practice_id = farming_practice.farming_practice_id where crop_farming_practice_id = $current_crop_farming_practice_id";
 
-						<!-- Other Information -->
-						<label class="mt-2">Other Information</label>
-						<div class="row">
-							<div class="col">
-								<!-- Descrition -->
-								<textarea name="other_info" id="more-desc" class="form-control" rows="2" disabled <?php echo ($other_info !== $emptyValue) ? '>' . $other_info : 'placeholder="Empty">'; ?></textarea>
+										// Executing query
+										$query_run = pg_query($connection, $query);
+
+										// count rows to check whether we have a schedule or not
+										$count = pg_num_rows($query_run);
+
+										// if count is greater than 0 we have a schedule else we do not have a schedule
+										if ($count > 0) {
+											// we have a schedule
+											while ($row = pg_fetch_assoc($query_run)) {
+												// get the detail of the schedule
+												$farming_practice_id = $row['farming_practice_id'];
+												$farming_practice_name = $row['farming_practice_name'];
+										?>
+												<option value="<?php echo $current_crop_farming_practice_id; ?>"><?php echo $farming_practice_name; ?></option>
+											<?php
+											}
+										} else {
+											// we do not have a Farming practices
+											?>
+											<option value="0">No Farming Practices Found</option>
+											<?php
+										}
+											?>
+
+										<!-- to display all the available farming practices in case of update -->
+										<?php
+										// php code to display available schedules from the database
+										// query to select all available schedules in the database
+										$query = "SELECT * FROM farming_practice";
+
+										// Executing query
+										$query_run = pg_query($connection, $query);
+
+										// count rows to check whether we have a schedule or not
+										$count = pg_num_rows($query_run);
+
+										// if count is greater than 0 we have a schedule else we do not have a schedule
+										if ($count > 0) {
+											// we have a schedule
+											while ($row = pg_fetch_assoc($query_run)) {
+												// get the detail of the schedule
+												$farming_practice_id = $row['farming_practice_id'];
+												$farming_practice_name = $row['farming_practice_name'];
+										?>
+												<option value="<?php echo $farming_practice_id; ?>"><?php echo $farming_practice_name; ?></option>
+											<?php
+											}
+										} else {
+											// we do not have a schedule
+											?>
+											<option value="0">No Farming Practices Found</option>
+											<?php
+										}
+											?>
+									</select>
+									</div>
 								</div>
+
+								<!-- Other Information -->
+								<label class="mt-2">Other Information</label>
+								<div class="row">
+									<div class="col">
+										<!-- Descrition -->
+										<textarea name="other_info" id="more-desc" class="form-control" rows="2" disabled <?php echo ($other_info !== $emptyValue) ? '>' . $other_info : 'placeholder="Empty">'; ?></textarea>
 							</div>
-							</div>
-							<!-- editting buttons -->
-							<?php
-							require('../edit-btn/edit-btn.php');
-							?>
-							</form>
-						<?php
-					}
-				}
-						?>
-		</section>
+						</div>
 	</div>
-	<!-- scipts -->
-	<!-- custom -->
-	<script src="../../js/admin/entry-edit.js"></script>
-	<script src="../../js/admin/crop-image.js"></script>
-	<!-- bootstrap -->
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
-	<!-- font awesome -->
-	<script src="https://kit.fontawesome.com/57e83eb6e4.js" crossorigin="anonymous"></script>
+	<!-- editting buttons -->
+	<?php
+					require('../edit-btn/edit-btn.php');
+	?>
+	</form>
+<?php
+				}
+			}
+?>
+</section>
+</div>
+<!-- scipts -->
+<!-- custom -->
+<script src="../../js/admin/entry-edit.js"></script>
+<script src="../../js/admin/crop-image.js"></script>
+<!-- bootstrap -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+<!-- font awesome -->
+<script src="https://kit.fontawesome.com/57e83eb6e4.js" crossorigin="anonymous"></script>
 </body>
 
 </html>

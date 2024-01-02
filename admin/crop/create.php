@@ -59,7 +59,7 @@ require('../sidebar/side.php');
 						<div class="col-4">
 							<!-- crop name -->
 							<label for="crop-name">Crop <span class="text-danger">*</span></label>
-							<input id="crop-name" type="text" name="crop_name" class="form-control form-control-lg mb-2" required>
+							<input id="crop-name" type="text" name="crop_name" placeholder="Enter Crop Name" class="form-control form-control-lg mb-2" required>
 
 						</div>
 						<!-- image -->
@@ -85,19 +85,19 @@ require('../sidebar/side.php');
 
 							<!-- local name -->
 							<label for="crop_local_name">Local Name <span class="text-danger">*</span></label>
-							<input id="crop_local_name" type="text" name="crop_local_name" class="form-control mb-2" required>
+							<input id="crop_local_name" type="text" name="crop_local_name" placeholder="Enter Crop Local Name" class="form-control mb-2" required>
 
 							<!-- scientific name -->
 							<label for="crop_scientific_name">Scientific Name <span class="text-danger"></span></label>
-							<input id="crop_scientific_name" type="text" name="crop_scientific_name" class="form-control mb-2">
+							<input id="crop_scientific_name" type="text" name="crop_scientific_name" placeholder="Enter Crop Scientific Name" class="form-control mb-2">
 
 							<!-- Crop Variety -->
 							<label for="crop_variety">Crop Variety <span class="text-danger"></span></label>
-							<input id="crop_variety" type="text" name="crop_variety" class="form-control mb-2">
+							<input id="crop_variety" type="text" name="crop_variety" placeholder="Enter Crop Variety" class="form-control mb-2">
 
 							<!-- Crop Origin -->
 							<label for="crop_origin">Crop Origin <span class="text-danger"></span></label>
-							<input id="crop_origin" type="text" name="crop_origin" class="form-control mb-2">
+							<input id="crop_origin" type="text" name="crop_origin" placeholder="Enter Crop Origin" class="form-control mb-2">
 
 							<!-- upland or lowland -->
 							<label>Type <span class="text-danger">*</span></label>
@@ -133,11 +133,12 @@ require('../sidebar/side.php');
 						<!-- Location -->
 						<h3 class="mt-4">Location</h5>
 							<div class="row">
-								<div class="col-2">
+								<div class="col">
 									<!-- Municipality -->
 									<label for="municipality">Municipality</label>
 									<select id="municipality" name="municipality_name" class="form-select mb-2">
-										<option value="alabel" selected>Alabel</option>
+										<option value="alabel" selected>None</option>
+										<option value="alabel">Alabel</option>
 										<option value="glan">Glan</option>
 										<option value="kiamba">Kiamba</option>
 										<option value="maasim">Maasim</option>
@@ -146,11 +147,12 @@ require('../sidebar/side.php');
 										<option value="malungon">Malungon</option>
 									</select>
 								</div>
-								<div class="col-2">
+								<div class="col">
 									<!-- Province -->
 									<label for="province">Province</label>
 									<select id="province" name="province_name" class="form-select mb-2">
-										<option value="sarangani" selected>Davao Del Norte</option>
+										<option value="sarangani" selected>None</option>
+										<option value="sarangani">Davao Del Norte</option>
 										<option value="davao">Davao</option>
 										<option value="south_cotabato">South Cotabato</option>
 										<option value="cotabato">Cotabato</option>
@@ -161,7 +163,7 @@ require('../sidebar/side.php');
 									<label for="longtitude">Longtitude</label>
 									<input id="longtitude" type="text" name="longtitude" class="form-control mb-2">
 								</div>
-								<div class="col">
+								<div class="col-2">
 									<!-- Latitude -->
 									<label for="latitude">Latitude</label>
 									<input id="latitude" type="text" name="latitude" class="form-control">
@@ -192,7 +194,7 @@ require('../sidebar/side.php');
 												$farming_practice_id = $row['farming_practice_id'];
 												$farming_practice_name = $row['farming_practice_name'];
 										?>
-												<option value="<?php echo $farming_practice_id; ?>" <?php echo ($farming_practice_name === 'none') ? 'selected' : ''; ?>><?php echo $farming_practice_name; ?></option>
+												<option value="<?php echo $farming_practice_id; ?>"><?php echo $farming_practice_name; ?></option>
 											<?php
 											}
 										} else {
@@ -207,11 +209,29 @@ require('../sidebar/side.php');
 							</div>
 
 							<!-- Other Information -->
-							<label class="mt-2">Other Info</label>
-							<div class="row">
-								<div class="col">
-									<!-- Descrition -->
-									<textarea name="other_info" id="threat-desc" class="txtarea form-control" rows="2"></textarea>
+							<div class="other_info">
+								<h3 class="mt-4 d-flex align-items-center" id="otherInfoTitle">Other Info <i class='bx bx-plus ml-2' id="toggleOtherInfo" style="color: blue;"></i> <i class='bx bx-minus ml-2' id="toggleOtherInfoMinus" style="display: none; color:red"></i></h3>
+								<div class="other-info-content" hidden>
+									<div class="col">
+										<!-- Other Info Type -->
+										<label for="other_info_type">Other Info Type</label>
+										<input id="other_info_type" type="text" name="other_info_type" placeholder="Enter Other Info Type" class="form-control mb-2">
+									</div>
+									<div class="col">
+										<!-- Other Info Name -->
+										<label for="other_info_name">Other Info Name</label>
+										<input id="other_info_name" type="text" name="other_info_name" placeholder="Enter Other Info Name" class="form-control mb-2">
+									</div>
+									<div class="col">
+										<!-- Other Info Description -->
+										<label for="gen-desc">Description <span class="text-danger">*</span></label>
+										<textarea name="other_info_description" id="gen-desc" class="txtarea form-control" rows="3"></textarea>
+									</div>
+									<div class="col">
+										<!-- Other Info Url -->
+										<label for="other_info_url">Links</label>
+										<input id="other_info_url" type="text" name="other_info_url" placeholder="Enter links if available" class="form-control">
+									</div>
 								</div>
 							</div>
 				</div>
@@ -224,6 +244,26 @@ require('../sidebar/side.php');
 	</div>
 
 	<!-- scipts -->
+
+	<!-- script to handle visibility for the other info -->
+	<script>
+		var toggleOtherInfo = document.getElementById('toggleOtherInfo');
+		var toggleOtherInfoMinus = document.getElementById('toggleOtherInfoMinus');
+		var otherInfoContent = document.querySelector('.other-info-content');
+
+		toggleOtherInfo.addEventListener('click', function() {
+			otherInfoContent.hidden = !otherInfoContent.hidden;
+			toggleOtherInfo.style.display = otherInfoContent.hidden ? 'inline-block' : 'none';
+			toggleOtherInfoMinus.style.display = otherInfoContent.hidden ? 'none' : 'inline-block';
+		});
+
+		toggleOtherInfoMinus.addEventListener('click', function() {
+			otherInfoContent.hidden = true;
+			toggleOtherInfo.style.display = 'inline-block';
+			toggleOtherInfoMinus.style.display = 'none';
+		});
+	</script>
+
 
 	<!-- JavaScript to handle file input change event and update image previews -->
 	<script>
