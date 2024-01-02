@@ -43,10 +43,6 @@ require('../sidebar/side.php');
 
 				<?php
 				include('../message.php');
-
-				if (isset($_SESSION['user'])) {
-					$user_id = $_SESSION["user"];
-				}
 				?>
 				<input type="hidden" name="user_id" value="<?= $user_id ?>">
 
@@ -172,68 +168,68 @@ require('../sidebar/side.php');
 
 							<!-- Associated Farming Practice -->
 							<h3 class="mt-4">Associated Farming Practice</h5>
-							<div class="row">
-								<div class="col-4">
-									<select id="farming_practice_id" name="farming_practice_id" class="form-select mb-2">
-										<?php
-										// php code to display available schedules from the database
-										// query to select all available schedules in the database
-										$query = "SELECT * FROM farming_practice";
+								<div class="row">
+									<div class="col-4">
+										<select id="farming_practice_id" name="farming_practice_id" class="form-select mb-2">
+											<?php
+											// php code to display available schedules from the database
+											// query to select all available schedules in the database
+											$query = "SELECT * FROM farming_practice";
 
-										// Executing query
-										$query_run = pg_query($connection, $query);
+											// Executing query
+											$query_run = pg_query($connection, $query);
 
-										// count rows to check whether we have a schedule or not
-										$count = pg_num_rows($query_run);
+											// count rows to check whether we have a schedule or not
+											$count = pg_num_rows($query_run);
 
-										// if count is greater than 0 we have a schedule else we do not have a schedule
-										if ($count > 0) {
-											// we have a schedule
-											while ($row = pg_fetch_assoc($query_run)) {
-												// get the detail of the schedule
-												$farming_practice_id = $row['farming_practice_id'];
-												$farming_practice_name = $row['farming_practice_name'];
-										?>
-												<option value="<?php echo $farming_practice_id; ?>"><?php echo $farming_practice_name; ?></option>
+											// if count is greater than 0 we have a schedule else we do not have a schedule
+											if ($count > 0) {
+												// we have a schedule
+												while ($row = pg_fetch_assoc($query_run)) {
+													// get the detail of the schedule
+													$farming_practice_id = $row['farming_practice_id'];
+													$farming_practice_name = $row['farming_practice_name'];
+											?>
+													<option value="<?php echo $farming_practice_id; ?>"><?php echo $farming_practice_name; ?></option>
+												<?php
+												}
+											} else {
+												// we do not have a schedule
+												?>
+												<option value="0">No Farming Practices Found</option>
 											<?php
 											}
-										} else {
-											// we do not have a schedule
 											?>
-											<option value="0">No Farming Practices Found</option>
-										<?php
-										}
-										?>
-									</select>
+										</select>
+									</div>
 								</div>
-							</div>
 
-							<!-- Other Information -->
-							<div class="other_info">
-								<h3 class="mt-4 d-flex align-items-center" id="otherInfoTitle">Other Info <i class='bx bx-plus ml-2' id="toggleOtherInfo" style="color: blue;"></i> <i class='bx bx-minus ml-2' id="toggleOtherInfoMinus" style="display: none; color:red"></i></h3>
-								<div class="other-info-content" hidden>
-									<div class="col">
-										<!-- Other Info Type -->
-										<label for="other_info_type">Type</label>
-										<input id="other_info_type" type="text" name="other_info_type" placeholder="Enter Other Info Type" class="form-control mb-2">
-									</div>
-									<div class="col">
-										<!-- Other Info Name -->
-										<label for="other_info_name">Name</label>
-										<input id="other_info_name" type="text" name="other_info_name" placeholder="Enter Other Info Name" class="form-control mb-2">
-									</div>
-									<div class="col">
-										<!-- Other Info Description -->
-										<label for="other_info-desc">Description <span class="text-danger">*</span></label>
-										<textarea name="other_info_description" id="other_info-desc" class="txtarea form-control" rows="3"></textarea>
-									</div>
-									<div class="col">
-										<!-- Other Info Url -->
-										<label for="other_info_url">Links</label>
-										<input id="other_info_url" type="text" name="other_info_url" placeholder="Enter links if available" class="form-control">
+								<!-- Other Information -->
+								<div class="other_info">
+									<h3 class="mt-4 d-flex align-items-center" id="otherInfoTitle">Other Info <i class='bx bx-plus ml-2' id="toggleOtherInfo" style="color: blue;"></i> <i class='bx bx-minus ml-2' id="toggleOtherInfoMinus" style="display: none; color:red"></i></h3>
+									<div class="other-info-content" hidden>
+										<div class="col">
+											<!-- Other Info Type -->
+											<label for="other_info_type">Type</label>
+											<input id="other_info_type" type="text" name="other_info_type" placeholder="Enter Other Info Type" class="form-control mb-2">
+										</div>
+										<div class="col">
+											<!-- Other Info Name -->
+											<label for="other_info_name">Name</label>
+											<input id="other_info_name" type="text" name="other_info_name" placeholder="Enter Other Info Name" class="form-control mb-2">
+										</div>
+										<div class="col">
+											<!-- Other Info Description -->
+											<label for="other_info-desc">Description <span class="text-danger">*</span></label>
+											<textarea name="other_info_description" id="other_info-desc" class="txtarea form-control" rows="3"></textarea>
+										</div>
+										<div class="col">
+											<!-- Other Info Url -->
+											<label for="other_info_url">Links</label>
+											<input id="other_info_url" type="text" name="other_info_url" placeholder="Enter links if available" class="form-control">
+										</div>
 									</div>
 								</div>
-							</div>
 				</div>
 				<!-- editting buttons -->
 				<?php

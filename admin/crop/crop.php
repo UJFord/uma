@@ -66,7 +66,7 @@ require('../sidebar/side.php');
 
 			?>
 					<!-- form for submitting -->
-					<form id="form-panel" name="Form" action="code.php" autocomplete="off" method="POST" enctype="multipart/form-data" class="h-100 py-3 px-5">
+					<form id="form-panel" name="Form" action="try.php" autocomplete="off" method="POST" enctype="multipart/form-data" class="h-100 py-3 px-5">
 						<!-- back button -->
 						<a href="list.php" class="link-offset-2"><i class="bi bi-chevron-left"></i>Go Back</a>
 
@@ -77,10 +77,14 @@ require('../sidebar/side.php');
 						<!-- main form -->
 						<div class="form-control p-3 mt-3">
 							<input id="crop-id" type="hidden" name="crop_id" value="<?= $crops['crop_id']; ?>">
+							<input type="hidden" name="user_id" value="<?= $user_id; ?>">
 							<input type="hidden" name="crop_location_id" value="<?= $crops['crop_location_id']; ?>">
 							<input type="hidden" name="crop_farming_practice_id" value="<?= $crops['crop_farming_practice_id']; ?>">
 							<input type="hidden" name="crop_other_info_id" value="<?= $crops['crop_other_info_id']; ?>">
 							<input type="hidden" name="current_crop_image" value="<?= $current_crop_image; ?>">
+
+							<input type="hidden" name="other_info_id" value="<?= $other_info_id; ?>">
+							<input type="hidden" name="location_id" value="<?= $location_id; ?>">
 
 							<!-- general information -->
 							<h3>General Information</h3>

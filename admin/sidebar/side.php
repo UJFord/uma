@@ -64,6 +64,7 @@ require('../../html/navfoot/connection.php');
                             if (pg_num_rows($res) > 0) {
                                 $user = pg_fetch_assoc($res);
                                 $first_name = $user['first_name'];
+                                $user_id = $user['user_id'];
                             }
                         }
                         ?>><?= $first_name; ?>
