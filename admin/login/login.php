@@ -58,7 +58,7 @@ if (isset($_POST['submit'])) {
     $password = pg_escape_string($connection, $raw_password);
 
     //2. SQL to check whether the user with email and password exists or not
-    $sql = "SELECT * FROM \"user\" WHERE \"email\"='$email' AND \"password\"='$password'";
+    $sql = "select \"user\".*, account_type.* from \"user\" LEFT JOIN account_type on \"user\".account_type_id = account_type.account_type_id WHERE \"email\"='$email' AND \"password\"='$password'";
 
     //3. Execute the Query
     $res = pg_query($connection, $sql);
@@ -66,9 +66,9 @@ if (isset($_POST['submit'])) {
     if (pg_num_rows($res) > 0) {
         $user = pg_fetch_assoc($res);
 
-        $account_type_id = $user['account_type_id'];
         $user_id = $user['user_id'];
         $first_name = $user['first_name'];
+        $type_name = $user['type_name'];
     }
 
 
@@ -79,6 +79,7 @@ if (isset($_POST['submit'])) {
         //User Available and Login Success
         $_SESSION['message'] = "<div class='success'>Login Successful. Welcome, $first_name.</div>";
         $_SESSION['user'] = $user_id; //TO check whether the user is logged in or not and logout will unset it
+        $_SESSION['type_name'] = $type_name;
         //Redirect to Home Page/Dashboard
         header('location: ../crop/list.php');
 

@@ -9,7 +9,7 @@ require('../../html/navfoot/connection.php');
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
 <!-- script for access js -->
 <script>
-    var userRole = "<?php echo $_SESSION['rank']; ?>";
+    var userRole = "<?php echo $_SESSION['type_name']; ?>";
 </script>
 <script src="../../js/admin/access.js"></script>
 <!-- main nav -->

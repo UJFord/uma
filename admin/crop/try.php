@@ -13,7 +13,7 @@ if (isset($_POST['save'])) {
             return empty($value) ? 'Empty' : $value;
         }
 
-        // Escape user inputs for data in crop Location table
+        // Get user inputs for data in crop Location table
         $province_name = handleEmpty($_POST['province_name']);
         $municipality_name = handleEmpty($_POST['municipality_name']);
         $longtitude = handleEmpty($_POST['longtitude']);
@@ -32,6 +32,30 @@ if (isset($_POST['save'])) {
         if ($query_run_location) {
             $row_location = pg_fetch_row($query_run_location);
             $location_id = $row_location[0];
+        } else {
+            echo "Error: " . pg_last_error($con);
+            exit(0);
+        }
+
+        // Get user inputs for data in crop Location table
+        $other_info_type = handleEmpty($_POST['other_info_type']);
+        $other_info_name = handleEmpty($_POST['other_info_name']);
+        $other_info_description = handleEmpty($_POST['other_info_description']);
+        $other_info_url = handleEmpty($_POST['other_info_url']);
+
+        // Inserting into location table using parameterized query
+        $query_other_info = "INSERT INTO other_info (other_info_type, other_info_name, other_info_description,
+        other_info_url) 
+        VALUES ($1, $2, $3, $4) RETURNING other_info_id";
+
+        $query_run_other_info = pg_query_params($con, $query_other_info, array(
+            $other_info_type, $other_info_name, $other_info_description,
+            $other_info_url
+        ));
+
+        if ($query_run_other_info) {
+            $row_other_info = pg_fetch_row($query_run_other_info);
+            $other_info_id = $row_other_info[0];
         } else {
             echo "Error: " . pg_last_error($con);
             exit(0);
@@ -176,20 +200,32 @@ if (isset($_POST['save'])) {
         if ($query_run_farm_prac) {
             $row_farm_prac = pg_fetch_row($query_run_farm_prac);
             $crop_farming_practice_id = $row_farm_prac[0];
-            // $_SESSION['message'] = "Crop Created Successfully";
-            // header("Location: list.php");
-            // exit(0);
+        } else {
+            echo "Error: " . pg_last_error($con);
+            exit(0);
+        }
+
+        // Inserting into crop_other_info table using parameterized query
+        $query_crop_other_info = "INSERT INTO crop_other_info (crop_id, other_info_id) VALUES ($1, $2) RETURNING crop_other_info_id";
+        $stmt_crop_other_info = pg_prepare($con, "insert_crop_other_info", $query_crop_other_info);
+        $query_run_crop_other_info = pg_execute($con, "insert_crop_other_info", array(
+            $crop_id, $other_info_id
+        ));
+
+        if ($query_run_crop_other_info) {
+            $row_crop_other_info = pg_fetch_row($query_run_crop_other_info);
+            $crop_other_info_id = $row_crop_other_info[0];
         } else {
             echo "Error: " . pg_last_error($con);
             exit(0);
         }
 
         // Updating Crop table using parameterized query
-        $query_combine_crop = "UPDATE crop SET crop_location_id = $1, crop_farming_practice_id = $2 WHERE crop_id = $3 RETURNING crop_id";
+        $query_combine_crop = "UPDATE crop SET crop_location_id = $1, crop_farming_practice_id = $2, crop_other_info_id = $3 WHERE crop_id = $4 RETURNING crop_id";
 
         $stmt_combine_crop = pg_prepare($con, "update_combine_crop", $query_combine_crop);
         $query_run_combine_crop = pg_execute($con, "update_combine_crop", array(
-            $crop_location_id, $crop_farming_practice_id, $crop_id
+            $crop_location_id, $crop_farming_practice_id, $crop_other_info_id, $crop_id
         ));
 
         if ($query_run_combine_crop) {

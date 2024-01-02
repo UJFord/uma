@@ -36,7 +36,7 @@ require('../sidebar/side.php');
 			<?php
 			if (isset($_GET['crop_id'])) {
 				$crop_id = pg_escape_string($connection, $_GET['crop_id']);
-				$query = "SELECT crop.*, crop_location.* FROM crop LEFT JOIN crop_location ON crop.crop_id = crop_location.crop_id WHERE crop.crop_id = $1";
+				$query = "SELECT crop.*, crop_location.*, crop_other_info.* FROM crop LEFT JOIN crop_location ON crop.crop_id = crop_location.crop_id left join crop_other_info on crop.crop_id = crop_other_info.crop_id WHERE crop.crop_id = $1";
 				$query_run = pg_query_params($connection, $query, array($crop_id));
 
 				$emptyValue = 'Empty';
@@ -44,9 +44,11 @@ require('../sidebar/side.php');
 				if (pg_num_rows($query_run) > 0) {
 					$crops = pg_fetch_assoc($query_run);
 					// get the id for the foreign tables
+					$other_info_id = $crops['other_info_id'];
 					$location_id = $crops['location_id'];
 					$current_crop_location_id = $crops['crop_location_id'];
 					$current_crop_farming_practice_id = $crops['crop_farming_practice_id'];
+					$current_crop_other_info_id = $crops['crop_other_info_id'];
 					$current_crop_image = $crops['crop_image'];
 
 					// Get the data from crops table
@@ -77,6 +79,7 @@ require('../sidebar/side.php');
 							<input id="crop-id" type="hidden" name="crop_id" value="<?= $crops['crop_id']; ?>">
 							<input type="hidden" name="crop_location_id" value="<?= $crops['crop_location_id']; ?>">
 							<input type="hidden" name="crop_farming_practice_id" value="<?= $crops['crop_farming_practice_id']; ?>">
+							<input type="hidden" name="crop_other_info_id" value="<?= $crops['crop_other_info_id']; ?>">
 							<input type="hidden" name="current_crop_image" value="<?= $current_crop_image; ?>">
 
 							<!-- general information -->
@@ -111,8 +114,20 @@ require('../sidebar/side.php');
 									<!-- local name -->
 									<label for="local">Local Name <span class="text-danger">*</span></label>
 									<input id="local" type="text" name="crop_local_name" value="<?= $crop_local_name ?>" class="form-control mb-2" disabled>
-									<!-- upland or lowland -->
 
+									<!-- scientific name -->
+									<label for="crop_scientific_name">Scientific Name <span class="text-danger"></span></label>
+									<input id="crop_scientific_name" type="text" name="crop_scientific_name" value="<?= $crop_scientific_name ?>" class="form-control mb-2" disabled>
+
+									<!-- Crop Variety -->
+									<label for="crop_variety">Crop Variety <span class="text-danger"></span></label>
+									<input id="crop_variety" type="text" name="crop_variety" value="<?= $crop_variety ?>" class="form-control mb-2" disabled>
+
+									<!-- Crop Origin -->
+									<label for="crop_origin">Crop Origin <span class="text-danger"></span></label>
+									<input id="crop_origin" type="text" name="crop_origin" value="<?= $crop_origin ?>" class="form-control mb-2" disabled>
+
+									<!-- upland or lowland -->
 									<label>Type <span class="text-danger">*</span></label>
 									<div class="m-2">
 										<div class="form-check form-check-inline">
@@ -138,7 +153,6 @@ require('../sidebar/side.php');
 										if ($current_crop_image != "") {
 											// Split the image names by comma
 											$imageNames = explode(',', $current_crop_image);
-
 											// Display each image
 											foreach ($imageNames as $imageName) {
 										?>
@@ -187,14 +201,14 @@ require('../sidebar/side.php');
 
 								?>
 									<div class="row">
-										<div class="col-2">
+										<div class="col-3">
 											<!-- Province Name -->
 											<label for="province_name">Province Name</label>
 											<input id="province_name" name="province_name" type="text" value="<?= $province_name; ?>" class="form-control mb-2" disabled>
 										</div>
-										<div class="col-2">
+										<div class="col-3">
 											<!-- MUnicipality Name -->
-											<label for="municipality_name">MUnicipality Name</label>
+											<label for="municipality_name">Municipality Name</label>
 											<input id="municipality_name" name="municipality_name" type="text" value="<?= $municipality_name; ?>" class="form-control mb-2" disabled>
 										</div>
 										<div class="col-2">
@@ -202,7 +216,7 @@ require('../sidebar/side.php');
 											<label for="latitude">Latitude</label>
 											<input id="latitude" name="latitude" type="text" value="<?= $latitude; ?>" class="form-control mb-2" disabled>
 										</div>
-										<div class="col">
+										<div class="col-2">
 											<!-- Longtitude -->
 											<label for="longtitude">Longtitude</label>
 											<input id="longtitude" name="longtitude" type="text" value="<?= $longtitude; ?>" class="form-control" disabled>
@@ -214,7 +228,7 @@ require('../sidebar/side.php');
 										// Format the date to display up to the minute
 										$formatted_date = $date->format('Y-m-d H:i');
 										?>
-										<div class="col">
+										<div class="col-3">
 											<!-- Input Date -->
 											<label for="input_date">Input Date</label>
 											<input id="input_date" name="input_date" type="text" value="<?= $formatted_date; ?>" class="form-control" disabled>
@@ -292,26 +306,64 @@ require('../sidebar/side.php');
 									</select>
 									</div>
 								</div>
+							
+							<!-- Other Information -->
+							<div class="other_info">
+							<h3 class="mt-4 d-flex align-items-center" id="otherInfoTitle">Other Info</h3>
+									<?php
+									// PHP code to display available crop other info from the database
+									// Query to select all available crop other info in the database
+									$query4 = "SELECT crop_other_info.*, other_info.* FROM crop_other_info left join other_info on crop_other_info.other_info_id = other_info.other_info_id WHERE other_info.other_info_id='$other_info_id'";
 
-								<!-- Other Information -->
-								<label class="mt-2">Other Information</label>
-								<div class="row">
-									<div class="col">
-										<!-- Descrition -->
-										<textarea name="other_info" id="more-desc" class="form-control" rows="2" disabled <?php echo ($other_info !== $emptyValue) ? '>' . $other_info : 'placeholder="Empty">'; ?></textarea>
+									// Executing query
+									$query_run4 = pg_query($connection, $query4);
+
+									// If count is greater than 0, we have other_info; else, we do not have other_info
+									if (pg_num_rows($query_run4) > 0) {
+										$other_info = pg_fetch_assoc($query_run4);
+
+										// Define default values for each field if they are $emptyValue
+										$other_info_type = isset($other_info['other_info_type']) ? $other_info['other_info_type'] : $emptyValue;
+										$other_info_name = isset($other_info['other_info_name']) ? $other_info['other_info_name'] : $emptyValue;
+										$other_info_description = isset($other_info['other_info_description']) ? $other_info['other_info_description'] : $emptyValue;
+										$other_info_url = isset($other_info['other_info_url']) ? $other_info['other_info_url'] : $emptyValue;
+
+									?>
+											<div class="col">
+												<!-- Other Info Type -->
+												<label for="other_info_type">Type</label>
+												<input id="other_info_type" name="other_info_type" type="text" value="<?= $other_info_type; ?>" class="form-control mb-2" disabled>
+											</div>
+											<div class="col">
+												<!-- Other Info Name -->
+												<label for="other_info_name">Name</label>
+												<input id="other_info_name" name="other_info_name" type="text" value="<?= $other_info_name; ?>" class="form-control mb-2" disabled>
+											</div>
+											<div class="col">
+												<!-- Other Info Description -->
+												<label for="other_info-desc">Description <span class="text-danger">*</span></label>
+												<textarea name="other_info_description" id="other_info-desc" class="form-control" rows="3" disabled <?php echo ($other_info_description !== $emptyValue) ? '>' . $other_info_description : 'placeholder="Empty">'; ?></textarea>
+											</div>
+											<div class="col">
+												<!-- Other Info Urls -->
+												<label for="other_info_url">Links</label>
+												<input id="other_info_url" name="other_info_url" type="text" value="<?= $other_info_url; ?>" class="form-control" disabled>
+											</div>
+											<?php
+										}
+											?>
 							</div>
 						</div>
-	</div>
-	<!-- editting buttons -->
-	<?php
-					require('../edit-btn/edit-btn.php');
-	?>
-	</form>
-<?php
+						<!-- editting buttons -->
+						<?php
+						require('../edit-btn/edit-btn.php');
+						?>
+					</form>
+				<?php
 				}
 			}
-?>
-</section>
+			?>
+		</section>
 </div>
 <!-- scipts -->
 <!-- custom -->

@@ -133,7 +133,7 @@ require('../sidebar/side.php');
 						<!-- Location -->
 						<h3 class="mt-4">Location</h5>
 							<div class="row">
-								<div class="col">
+								<div class="col-4">
 									<!-- Municipality -->
 									<label for="municipality">Municipality</label>
 									<select id="municipality" name="municipality_name" class="form-select mb-2">
@@ -147,7 +147,7 @@ require('../sidebar/side.php');
 										<option value="malungon">Malungon</option>
 									</select>
 								</div>
-								<div class="col">
+								<div class="col-3">
 									<!-- Province -->
 									<label for="province">Province</label>
 									<select id="province" name="province_name" class="form-select mb-2">
@@ -158,22 +158,22 @@ require('../sidebar/side.php');
 										<option value="cotabato">Cotabato</option>
 									</select>
 								</div>
-								<div class="col-2">
+								<div class="col-3">
 									<!-- Longtitude -->
 									<label for="longtitude">Longtitude</label>
-									<input id="longtitude" type="text" name="longtitude" class="form-control mb-2">
+									<input id="longtitude" type="text" name="longtitude" placeholder="Enter Longtitude" class="form-control mb-2">
 								</div>
 								<div class="col-2">
 									<!-- Latitude -->
 									<label for="latitude">Latitude</label>
-									<input id="latitude" type="text" name="latitude" class="form-control">
+									<input id="latitude" type="text" name="latitude" placeholder="Enter Latitude" class="form-control">
 								</div>
 							</div>
 
 							<!-- Associated Farming Practice -->
-							<label class="mt-2">Associated Farming Practice</label>
+							<h3 class="mt-4">Associated Farming Practice</h5>
 							<div class="row">
-								<div class="col">
+								<div class="col-4">
 									<select id="farming_practice_id" name="farming_practice_id" class="form-select mb-2">
 										<?php
 										// php code to display available schedules from the database
@@ -214,18 +214,18 @@ require('../sidebar/side.php');
 								<div class="other-info-content" hidden>
 									<div class="col">
 										<!-- Other Info Type -->
-										<label for="other_info_type">Other Info Type</label>
+										<label for="other_info_type">Type</label>
 										<input id="other_info_type" type="text" name="other_info_type" placeholder="Enter Other Info Type" class="form-control mb-2">
 									</div>
 									<div class="col">
 										<!-- Other Info Name -->
-										<label for="other_info_name">Other Info Name</label>
+										<label for="other_info_name">Name</label>
 										<input id="other_info_name" type="text" name="other_info_name" placeholder="Enter Other Info Name" class="form-control mb-2">
 									</div>
 									<div class="col">
 										<!-- Other Info Description -->
-										<label for="gen-desc">Description <span class="text-danger">*</span></label>
-										<textarea name="other_info_description" id="gen-desc" class="txtarea form-control" rows="3"></textarea>
+										<label for="other_info-desc">Description <span class="text-danger">*</span></label>
+										<textarea name="other_info_description" id="other_info-desc" class="txtarea form-control" rows="3"></textarea>
 									</div>
 									<div class="col">
 										<!-- Other Info Url -->
