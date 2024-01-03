@@ -66,7 +66,7 @@ require('../sidebar/side.php');
 
 			?>
 					<!-- form for submitting -->
-					<form id="form-panel" name="Form" action="try.php" autocomplete="off" method="POST" enctype="multipart/form-data" class="h-100 py-3 px-5">
+					<form id="form-panel" name="Form" action="code.php" autocomplete="off" method="POST" enctype="multipart/form-data" class="h-100 py-3 px-5">
 						<!-- back button -->
 						<a href="list.php" class="link-offset-2"><i class="bi bi-chevron-left"></i>Go Back</a>
 
@@ -206,14 +206,31 @@ require('../sidebar/side.php');
 								?>
 									<div class="row">
 										<div class="col-3">
-											<!-- Province Name -->
-											<label for="province_name">Province Name</label>
-											<input id="province_name" name="province_name" type="text" value="<?= $province_name; ?>" class="form-control mb-2" disabled>
+											<!-- Province -->
+											<label for="province">Province</label>
+											<select id="province" name="province_name" class="form-select mb-2" disabled>
+												<option value="<?= $province_name; ?>" <?php echo ($province_name === 'province_name') ? 'selected' : ''; ?>><?= $province_name; ?></option>
+												<option value="sarangani">None</option>
+												<option value="sarangani">Davao Del Norte</option>
+												<option value="davao">Davao</option>
+												<option value="south_cotabato">South Cotabato</option>
+												<option value="cotabato">Cotabato</option>
+											</select>
 										</div>
 										<div class="col-3">
 											<!-- MUnicipality Name -->
-											<label for="municipality_name">Municipality Name</label>
-											<input id="municipality_name" name="municipality_name" type="text" value="<?= $municipality_name; ?>" class="form-control mb-2" disabled>
+											<label for="municipality">Municipality Name</label>
+											<select id="municipality" name="municipality_name" class="form-select mb-2" disabled>
+												<option value="<?= $municipality_name; ?>" <?php echo ($municipality_name === 'municipality_name') ? 'selected' : ''; ?>><?= $municipality_name; ?></option>
+												<option value="none">None</option>
+												<option value="alabel">Alabel</option>
+												<option value="glan">Glan</option>
+												<option value="kiamba">Kiamba</option>
+												<option value="maasim">Maasim</option>
+												<option value="maitum">Maitum</option>
+												<option value="malapatan">Malapatan</option>
+												<option value="malungon">Malungon</option>
+											</select>										
 										</div>
 										<div class="col-2">
 											<!-- Latitude -->
@@ -235,7 +252,7 @@ require('../sidebar/side.php');
 										<div class="col-3">
 											<!-- Input Date -->
 											<label for="input_date">Input Date</label>
-											<input id="input_date" name="input_date" type="text" value="<?= $formatted_date; ?>" class="form-control" disabled>
+											<input id="input_date" name="input_date" type="text" value="<?= $formatted_date; ?>" class="form-control disabled-input">
 										</div>
 										<?php
 									}
@@ -266,7 +283,7 @@ require('../sidebar/side.php');
 												$farming_practice_id = $row['farming_practice_id'];
 												$farming_practice_name = $row['farming_practice_name'];
 										?>
-												<option value="<?php echo $current_crop_farming_practice_id; ?>"><?php echo $farming_practice_name; ?></option>
+												<option value="<?php echo $farming_practice_id; ?>"><?php echo $farming_practice_name; ?></option>
 											<?php
 											}
 										} else {
@@ -334,6 +351,11 @@ require('../sidebar/side.php');
 
 									?>
 											<div class="col">
+												<!-- Submitted By -->
+												<label for="first_name">Submitted BY:</label>
+												<input id="first_name" name="first_name" type="text" value="<?= $first_name; ?>" class="form-control mb-2" disabled>
+											</div>
+											<div class="col">
 												<!-- Other Info Type -->
 												<label for="other_info_type">Type</label>
 												<input id="other_info_type" name="other_info_type" type="text" value="<?= $other_info_type; ?>" class="form-control mb-2" disabled>
@@ -344,30 +366,33 @@ require('../sidebar/side.php');
 												<input id="other_info_name" name="other_info_name" type="text" value="<?= $other_info_name; ?>" class="form-control mb-2" disabled>
 											</div>
 											<div class="col">
+												<!-- Other Info Urls -->
+												<label for="other_info_url">Links</label>
+												<a id="other_info_link" href="<?= $other_info_url; ?>">
+												<input id="other_info_url" name="other_info_url" type="text" <?php echo ($other_info_url != $emptyValue && $other_info_url != "") ? 'value="' . $other_info_url . '"' : 'placeholder="No Links"'; ?> class="form-control clickable" readonly>
+												</a>
+											</div>
+											<div class="col">
 												<!-- Other Info Description -->
 												<label for="other_info-desc">Description <span class="text-danger">*</span></label>
 												<textarea name="other_info_description" id="other_info-desc" class="form-control" rows="3" disabled <?php echo ($other_info_description !== $emptyValue) ? '>' . $other_info_description : 'placeholder="Empty">'; ?></textarea>
-											</div>
-											<div class="col">
-												<!-- Other Info Urls -->
-												<label for="other_info_url">Links</label>
-												<input id="other_info_url" name="other_info_url" type="text" value="<?= $other_info_url; ?>" class="form-control" disabled>
-											</div>
-											<?php
-										}
-											?>
 							</div>
-						</div>
-						<!-- editting buttons -->
+
 						<?php
-						require('../edit-btn/edit-btn.php');
+									}
 						?>
-					</form>
-				<?php
+						</div>
+	</div>
+	<!-- editting buttons -->
+	<?php
+					require('../edit-btn/edit-btn.php');
+	?>
+	</form>
+<?php
 				}
 			}
-			?>
-		</section>
+?>
+</section>
 </div>
 <!-- scipts -->
 <!-- custom -->

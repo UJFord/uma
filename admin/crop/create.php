@@ -37,7 +37,7 @@ require('../sidebar/side.php');
 		<section id="nav-cards" class="p-0 m-0 col col-md-9 col-xl-10">
 
 			<!-- form for submitting -->
-			<form id="form-panel" name="Form" action="try.php" autocomplete="off" method="POST" enctype="multipart/form-data" class=" py-3 px-5">
+			<form id="form-panel" name="Form" action="code.php" autocomplete="off" method="POST" enctype="multipart/form-data" class=" py-3 px-5">
 				<!-- back button -->
 				<a href="list.php" class="link-offset-2"><i class="bi bi-chevron-left"></i>Go Back</a>
 
@@ -56,7 +56,6 @@ require('../sidebar/side.php');
 							<!-- crop name -->
 							<label for="crop-name">Crop <span class="text-danger">*</span></label>
 							<input id="crop-name" type="text" name="crop_name" placeholder="Enter Crop Name" class="form-control form-control-lg mb-2" required>
-
 						</div>
 						<!-- image -->
 						<div class="col-4">

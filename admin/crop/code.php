@@ -505,77 +505,83 @@ if (isset($_POST['update'])) {
     // Assuming you have a variable $_POST['crop_id'] containing the ID of the crop to update
     // crops table
     $crop_id = pg_escape_string($con, $_POST['crop_id']);
-    $current_image = pg_escape_string($con, $_POST['current_image']);
-    $traditional_crop_traits_id = pg_escape_string($con, $_POST['traditional_crop_traits_id']);
-    // $farming_id = pg_escape_string($con, $_POST['farming_id']);
+    $current_crop_image = pg_escape_string($con, $_POST['current_crop_image']);
+    $crop_location_id = pg_escape_string($con, $_POST['crop_location_id']);
+    $crop_farming_practice_id = pg_escape_string($con, $_POST['crop_farming_practice_id']);
+    $crop_other_info_id = pg_escape_string($con, $_POST['crop_other_info_id']);
+    $user_id = pg_escape_string($con, $_POST['user_id']);
+
+    $location_id = pg_escape_string($con, $_POST['location_id']);
+    $other_info_id = pg_escape_string($con, $_POST['other_info_id']);
+
     $crop_name = pg_escape_string($con, $_POST['crop_name']);
-    $description = pg_escape_string($con, $_POST['description']);
+    $crop_description = pg_escape_string($con, $_POST['crop_description']);
     $upland_or_lowland = pg_escape_string($con, $_POST['upland_or_lowland']);
-    $local_name = pg_escape_string($con, $_POST['local_name']);
-    $cultural_and_spiritual_significance = pg_escape_string($con, $_POST['cultural_and_spiritual_significance']);
-    $threats = pg_escape_string($con, $_POST['threats']);
-    $other_info = pg_escape_string($con, $_POST['other_info']);
-    $role_in_maintaining_upland_ecosystem = pg_escape_string($con, $_POST['role_in_maintaining_upland_ecosystem']);
-    $cultural_importance_and_traditional_knowledge = pg_escape_string($con, $_POST['cultural_importance_and_traditional_knowledge']);
+    $crop_local_name = pg_escape_string($con, $_POST['crop_local_name']);
+    $crop_scientific_name = pg_escape_string($con, $_POST['crop_scientific_name']);
     $category = pg_escape_string($con, $_POST['category']);
-    $planting_techniques = pg_escape_string($con, $_POST['planting_techniques']);
-    $unique_features = pg_escape_string($con, $_POST['unique_features']);
-    $cultural_use = pg_escape_string($con, $_POST['cultural_use']);
-    $associated_vegetation = pg_escape_string($con, $_POST['associated_vegetation']);
-    $last_seen_location = pg_escape_string($con, $_POST['last_seen_location']);
+    $crop_variety = pg_escape_string($con, $_POST['crop_variety']);
+    $crop_origin = pg_escape_string($con, $_POST['crop_origin']);
 
-
-    // Validate data before insertion
-    if (empty($crop_name) || empty($local_name) || empty($category) || empty($description) || empty($current_image)) {
-        // Handle the case where any required field is empty
-        echo "naay empty";
-        exit();
-    }
-
-    // Function to handle empty values and NULL values
+    // Function to handle values and ensure they are strings
     function handleValue($value)
     {
-        return $value === '' ? 'Empty' : htmlspecialchars($value, ENT_QUOTES);
+        return is_string($value) ? $value : (string) $value;
     }
 
-
-    // Function to handle integer values, including NULL
-    function handleInteger($value)
-    {
-        if ($value === '' || $value === null) {
-            return 'Null';  // Return null for empty values
-        } else {
-            return $value;
-        }
-    }
     // Apply the function to each field
     // crops table
-    $farming_id = handleInteger(isset($_POST['farming_id']) ? $_POST['farming_id'] : null);
-    $cultural_and_spiritual_significance = handleValue($_POST['cultural_and_spiritual_significance']);
-    $threats = handleValue($_POST['threats']);
-    $other_info = handleValue($_POST['other_info']);
-    $role_in_maintaining_upland_ecosystem = handleValue($_POST['role_in_maintaining_upland_ecosystem']);
-    $cultural_importance_and_traditional_knowledge = handleValue($_POST['cultural_importance_and_traditional_knowledge']);
-    $planting_techniques = handleValue($_POST['planting_techniques']);
-    $unique_features = handleValue($_POST['unique_features']);
-    $cultural_use = handleValue($_POST['cultural_use']);
-    $associated_vegetation = handleValue($_POST['associated_vegetation']);
-    $last_seen_location = handleValue($_POST['last_seen_location']);
+    $crop_name = handleValue($_POST['crop_name']);
+    $crop_description = handleValue($_POST['crop_description']);
+    $upland_or_lowland = handleValue($_POST['upland_or_lowland']);
+    $crop_local_name = handleValue($_POST['crop_local_name']);
+    $crop_scientific_name = handleValue($_POST['crop_scientific_name']);
+    $category = handleValue($_POST['category']);
+    $crop_variety = handleValue($_POST['crop_variety']);
+    $crop_origin = handleValue($_POST['crop_origin']);
 
-    // Traditional Traits Table
-    $taste = handleValue($_POST['taste']);
-    $aroma = handleValue($_POST['aroma']);
-    $maturation = handleValue($_POST['maturation']);
-    $pest_and_disease_resistance = handleValue($_POST['pest_and_disease_resistance']);
+    // Location Table
+    $province_name = handleValue($_POST['province_name']);
+    $municipality_name = handleValue($_POST['municipality_name']);
+    $latitude = handleValue($_POST['latitude']);
+    $longtitude = handleValue($_POST['longtitude']);
 
-    // Update traditional_crop_traits table
-    $query_traits = "UPDATE traditional_crop_traits SET taste = $1, aroma = $2, maturation = $3,
-        pest_and_disease_resistance = $4 WHERE traditional_crop_traits_id = $5";
-    $params_traits = array($taste, $aroma, $maturation, $pest_and_disease_resistance, $traditional_crop_traits_id);
-    $query_run_traits = pg_query_params($con, $query_traits, $params_traits);
+    // Update location table
+    $query_location = "UPDATE location SET province_name = $1, municipality_name = $2, latitude = $3, longtitude = $4 WHERE location_id = $5";
+    $params_location = array($province_name, $municipality_name, $latitude, $longtitude, $location_id);
+    $query_run_location = pg_query_params($con, $query_location, $params_location);
 
-    if (!$query_run_traits) {
-        echo "Error updating traditional crop traits: " . pg_last_error($con);
+    if (!$query_run_location) {
+        echo "Error updating location: " . pg_last_error($con);
+        exit(0);
+    }
+
+    // Other Info Table
+    $other_info_type = handleValue($_POST['other_info_type']);
+    $other_info_name = handleValue($_POST['other_info_name']);
+    $other_info_description = handleValue($_POST['other_info_description']);
+    $other_info_url = handleValue($_POST['other_info_url']);
+
+    // Update Other Info table
+    $query_other_info = "UPDATE other_info SET other_info_type = $1, other_info_name = $2, other_info_description = $3,
+        other_info_url = $4 WHERE other_info_id = $5";
+    $params_other_info = array($other_info_type, $other_info_name, $other_info_description, $other_info_url, $other_info_id);
+    $query_run_other_info = pg_query_params($con, $query_other_info, $params_other_info);
+
+    if (!$query_run_other_info) {
+        echo "Error updating other_info: " . pg_last_error($con);
+        exit(0);
+    }
+    // Crop Farming Practice Table
+    $farming_practice_id = pg_escape_string($con, $_POST['farming_practice_id']);
+
+    // Update Crop Farming Practice table
+    $query_crop_farm_prac = "UPDATE crop_farming_practice SET farming_practice_id = $1 WHERE crop_farming_practice_id = $2";
+    $params_crop_farm_prac = array($farming_practice_id, $crop_farming_practice_id);
+    $query_run_crop_farm_prac = pg_query_params($con, $query_crop_farm_prac, $params_crop_farm_prac);
+
+    if (!$query_run_crop_farm_prac) {
+        echo "Error updating crop_farm_prac: " . pg_last_error($con);
         exit(0);
     }
 
@@ -585,69 +591,59 @@ if (isset($_POST['update'])) {
         return "Crop_Image_" . rand(000, 999) . '.' . $ext;
     }
 
-    // Check if the image files are selected
-    if (!empty($_FILES['image']['name'])) {
-        $images = $_FILES['image'];
-
+    if (isset($_FILES['crop_image']['name'][0]) && is_array($_FILES['crop_image']['name']) && $_FILES['crop_image']['name'][0] != "") {
+        $extension = array('jpg', 'jpeg', 'png', 'gif');
         $uploadedImages = array();
 
-        // Ensure $images['name'] is always an array
-        if (!is_array($images['name'])) {
-            $images['name'] = array($images['name']);
-            $images['type'] = array($images['type']);
-            $images['tmp_name'] = array($images['tmp_name']);
-            $images['error'] = array($images['error']);
-            $images['size'] = array($images['size']);
-        }
+        foreach ($_FILES['crop_image']['name'] as $key => $value) {
+            $filename = $_FILES['crop_image']['name'][$key];
+            $ext = pathinfo($filename, PATHINFO_EXTENSION);
 
-        // Loop through each image file
-        for ($i = 0; $i < count($images['name']); $i++) {
-            $image = $images['name'][$i];
-
-            // Check if a new image is available
-            if ($image != "") {
-                $ext = pathinfo($image, PATHINFO_EXTENSION);
+            if (in_array($ext, $extension)) {
+                // Auto rename image
                 $image = generate_unique_image_name($ext);
 
-                // Check if the new image name already exists in the database
-                $query = "SELECT image FROM crops WHERE image = $1";
-                $result = pg_query_params($con, $query, array($image));
+                // Check if the image name already exists in the database
+                while (true) {
+                    $query = "SELECT crop_image FROM crop WHERE crop_image = $1";
+                    $result = pg_query_params($con, $query, array($image));
 
-                // Check for errors
-                if ($result === false) {
-                    echo "Error: " . pg_last_error($con);
+                    if ($result === false) {
+                        break;
+                    }
+
+                    $count = pg_num_rows($result);
+
+                    if ($count == 0) {
+                        break;
+                    } else {
+                        // If the image name exists, generate a new one
+                        $image = generate_unique_image_name($ext);
+                    }
+                }
+
+                $source_path = $_FILES['crop_image']['tmp_name'][$key];
+                $destination_path = "../img/crop/" . $image;
+
+                // Upload the image
+                $upload = move_uploaded_file($source_path, $destination_path);
+
+                // Check whether the image is uploaded or not
+                if (!$upload) {
+                    echo "Image upload failed";
                     die();
                 }
 
-                $count = pg_num_rows($result);
+                $uploadedImages[] = $image; // Add image name to the array
 
-                if ($count > 0) {
-                    // If the image name exists, generate a new one
-                    $image = generate_unique_image_name($ext);
-                } else {
-                    // Upload the new image
-                    $source_path = $images['tmp_name'][$i];
-                    $destination_path = "../img/crop/" . $image;
-
-                    // Upload the image
-                    $upload = move_uploaded_file($source_path, $destination_path);
-
-                    // Check whether the image is uploaded or not
-                    if (!$upload) {
-                        echo "Failed to upload image";
-                        die();
-                    }
-
-                    // Add the uploaded image to the array
-                    $uploadedImages[] = $image;
-                }
+            } else {
+                // Display error message for invalid file format
             }
         }
 
-        $imageName = explode(',', $current_image);
-
         // Remove the current images if available
-        foreach ($imageName as $current) {
+        $currentImages = explode(',', $current_crop_image);
+        foreach ($currentImages as $current) {
             if ($current != "") {
                 $remove_path = "../img/crop/" . $current;
 
@@ -663,29 +659,23 @@ if (isset($_POST['update'])) {
                 }
             }
         }
+
+        $finalimg = implode(',', $uploadedImages);
     } else {
         // No new images selected, use the current ones
-        $uploadedImages = explode(',', $current_image);
+        $finalimg = $current_crop_image;
     }
 
-    $finalimg = implode(',', $uploadedImages);
-
     // Update Crop table using parameterized query
-    $query_crop = "UPDATE crops SET
-    last_seen_location = $1, image = $2, crop_name = $3, description = $4, upland_or_lowland = $5,
-    cultural_and_spiritual_significance = $6, threats = $7,
-    other_info = $8, role_in_maintaining_upland_ecosystem = $9, cultural_importance_and_traditional_knowledge = $10,
-    unique_features = $11, cultural_use = $12, associated_vegetation = $13, planting_techniques = $14, category = $15,
-    local_name = $16
-    WHERE crop_id = $17";
+    $query_crop = "UPDATE crop SET
+        crop_name = $1, crop_local_name = $2, crop_scientific_name = $3, crop_description = $4, crop_image = $5, crop_variety = $6,
+        crop_origin = $7, upland_or_lowland = $8, category = $9
+        WHERE crop_id = $10";
 
     // Parameters for the query
     $params_crop = array(
-        $last_seen_location, $finalimg, $crop_name, $description, $upland_or_lowland,
-        $cultural_and_spiritual_significance, $threats,
-        $other_info, $role_in_maintaining_upland_ecosystem, $cultural_importance_and_traditional_knowledge,
-        $unique_features, $cultural_use, $associated_vegetation, $planting_techniques, $category,
-        $local_name, $crop_id
+        $crop_name, $crop_local_name, $crop_scientific_name, $crop_description, $finalimg, $crop_variety,
+        $crop_origin, $upland_or_lowland, $category, $crop_id
     );
 
     // Prepare the statement
@@ -695,7 +685,6 @@ if (isset($_POST['update'])) {
     $query_run_crop = pg_execute($con, "update_crop", $params_crop);
 
     if ($query_run_crop) {
-        $_SESSION['message'] = "Crop Updated Successfully";
         header("Location: crop.php?crop_id=" . $_POST['crop_id']);
         exit(0);
     } else {
@@ -704,15 +693,22 @@ if (isset($_POST['update'])) {
     }
 }
 
-if (isset($_POST['delete']) && $_SESSION['rank'] == 'curator') {
+if (isset($_POST['delete'])) {
     $crop_id = $_POST['crop_id'];
-    $current_image = $_POST['current_image'];
-    $traditional_crop_traits_id = $_POST['traditional_crop_traits_id'];
+    $current_crop_image = $_POST['current_crop_image'];
+    $crop_location_id = $_POST['crop_location_id'];
+    $crop_farming_practice_id = $_POST['crop_farming_practice_id'];
+    $crop_other_info_id = $_POST['crop_other_info_id'];
+
+    $location_id = $_POST['location_id'];
+    $farming_practice_id = $_POST['farming_practice_id'];
+    $other_info_id = $_POST['crop_other_info_id'];
 
     // Validation Checks
-    if (empty($crop_id) || empty($current_image) || empty($traditional_crop_traits_id)) {
+    if (empty($crop_id) || empty($current_crop_image) || empty($crop_location_id) || empty($crop_farming_practice_id) || empty($crop_other_info_id)) {
         // Handle the case where parameters are missing
-        echo "Invalid parameters";
+        $_SESSION['message'] = "Some data is missing cannot proceed";
+        header("location: crop.php?crop_id=" . $crop_id);
         exit(0);
     }
 
@@ -720,10 +716,61 @@ if (isset($_POST['delete']) && $_SESSION['rank'] == 'curator') {
     pg_query($con, "BEGIN");
 
     try {
+        // Delete from Crop table
+        $query_delete_crop = "DELETE FROM crop WHERE crop_id = $1";
+        $query_run_delete_crop = pg_query_params($con, $query_delete_crop, [$crop_id]);
+
+        if (!$query_run_delete_crop) {
+            throw new Exception("Failed to delete from Crop table");
+        }
+
+        // Delete from Crop Location table
+        $query_delete_crop_loc = "DELETE FROM crop_location WHERE crop_location_id = $1";
+        $query_run_delete_crop_loc = pg_query_params($con, $query_delete_crop_loc, [$crop_location_id]);
+
+        if (!$query_run_delete_crop_loc) {
+            throw new Exception("Failed to delete from Crop Location table");
+        }
+
+        // Delete from Crop Farming Practice table
+        $query_delete_crop_farm = "DELETE FROM crop_farming_practice WHERE crop_farming_practice_id = $1";
+        $query_run_delete_crop_farm = pg_query_params($con, $query_delete_crop_farm, [$crop_farming_practice_id]);
+
+        if (!$query_run_delete_crop_farm) {
+            throw new Exception("Failed to delete from Crop Farming Practice table");
+        }
+
+        // Delete from Crop Othher Info table
+        $query_delete_crop_other_info = "DELETE FROM crop_other_info WHERE crop_other_info_id = $1";
+        $query_run_delete_crop_other_info = pg_query_params($con, $query_delete_crop_other_info, [$crop_other_info_id]);
+
+        if (!$query_run_delete_crop_other_info) {
+            throw new Exception("Failed to delete from Crop Othher Info table");
+        }
+
+        // Delete from Location table
+        $query_delete_location = "DELETE FROM location WHERE location_id = $1";
+        $query_run_delete_location = pg_query_params($con, $query_delete_location, [$location_id]);
+
+        if (!$query_run_delete_location) {
+            throw new Exception("Failed to delete from Location table");
+        }
+
+        // Delete from Other Info table
+        $query_delete_other_info = "DELETE FROM other_info WHERE other_info_id = $1";
+        $query_run_delete_other_info = pg_query_params($con, $query_delete_other_info, [$other_info_id]);
+
+        if (!$query_run_delete_other_info) {
+            throw new Exception("Failed to delete from Other Info table");
+        }
+
+        // If everything is successful, commit the transaction
+        pg_query($con, "COMMIT");
+
         // Check if the current image is available
-        if ($current_image != "") {
+        if ($current_crop_image != "") {
             // It has images, explode the string into an array
-            $imageNames = explode(',', $current_image);
+            $imageNames = explode(',', $current_crop_image);
 
             // Iterate through the array to remove each image
             foreach ($imageNames as $imageName) {
@@ -737,25 +784,6 @@ if (isset($_POST['delete']) && $_SESSION['rank'] == 'curator') {
                 }
             }
         }
-
-        // Delete from Crop table
-        $query_delete_crop = "DELETE FROM crops WHERE crop_id = $1";
-        $query_run_delete_crop = pg_query_params($con, $query_delete_crop, [$crop_id]);
-
-        if (!$query_run_delete_crop) {
-            throw new Exception("Failed to delete from Crop table");
-        }
-
-        // Delete from Traditional Crop Traits table
-        $query_delete_traits = "DELETE FROM traditional_crop_traits WHERE traditional_crop_traits_id = $1";
-        $query_run_delete_traits = pg_query_params($con, $query_delete_traits, [$traditional_crop_traits_id]);
-
-        if (!$query_run_delete_traits) {
-            throw new Exception("Failed to delete from Traditional Crop Traits table");
-        }
-
-        // If everything is successful, commit the transaction
-        pg_query($con, "COMMIT");
 
         $_SESSION['message'] = "Crop and associated records deleted successfully";
         header("Location: list.php");
