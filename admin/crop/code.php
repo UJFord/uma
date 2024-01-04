@@ -42,6 +42,27 @@ if (isset($_POST['save']) && $_SESSION['rank'] == 'curator') {
         }
 
         // Get user inputs for data in crop Location table
+        $farming_practice_type = handleEmpty($_POST['farming_practice_type']);
+        $farming_practice_name = handleEmpty($_POST['farming_practice_name']);
+        $farming_practice_description = handleEmpty($_POST['farming_practice_description']);
+
+        // Inserting into location table using parameterized query
+        $query_farming_practice = "INSERT INTO farming_practice (farming_practice_type, farming_practice_name, farming_practice_description) 
+        VALUES ($1, $2, $3) RETURNING farming_practice_id";
+
+        $query_run_farming_practice = pg_query_params($con, $query_farming_practice, array(
+            $farming_practice_type, $farming_practice_name, $farming_practice_description
+        ));
+
+        if ($query_run_farming_practice) {
+            $row_farming_practice = pg_fetch_row($query_run_farming_practice);
+            $farming_practice_id = $row_farming_practice[0];
+        } else {
+            echo "Error: " . pg_last_error($con);
+            exit(0);
+        }
+
+        // Get user inputs for data in crop Location table
         $other_info_type = handleEmpty($_POST['other_info_type']);
         $other_info_name = handleEmpty($_POST['other_info_name']);
         $other_info_description = handleEmpty($_POST['other_info_description']);
@@ -129,7 +150,6 @@ if (isset($_POST['save']) && $_SESSION['rank'] == 'curator') {
 
         // Convert the array to a comma-separated string
         $imageNamesString = implode(',', $imageNamesArray);
-        $farming_practice_id = $_POST['farming_practice_id'];
         $user_id = $_POST['user_id'];
         $status = 'approved';
         $crop_name = $_POST['crop_name'];
@@ -253,7 +273,7 @@ if (isset($_POST['save']) && $_SESSION['rank'] == 'curator') {
         exit(0);
     }
 } else {
-    if (isset($_POST['save'])) {
+    if (isset($_POST['save']) && $_SESSION['rank'] == 'admin') {
         // Begin the database transaction
         pg_query($con, "BEGIN");
         try {
@@ -271,8 +291,8 @@ if (isset($_POST['save']) && $_SESSION['rank'] == 'curator') {
 
             // Inserting into location table using parameterized query
             $query_location = "INSERT INTO location (province_name, municipality_name, longtitude,
-            latitude) 
-            VALUES ($1, $2, $3, $4) RETURNING location_id";
+        latitude) 
+        VALUES ($1, $2, $3, $4) RETURNING location_id";
 
             $query_run_location = pg_query_params($con, $query_location, array(
                 $province_name, $municipality_name, $longtitude,
@@ -288,6 +308,27 @@ if (isset($_POST['save']) && $_SESSION['rank'] == 'curator') {
             }
 
             // Get user inputs for data in crop Location table
+            $farming_practice_type = handleEmpty($_POST['farming_practice_type']);
+            $farming_practice_name = handleEmpty($_POST['farming_practice_name']);
+            $farming_practice_description = handleEmpty($_POST['farming_practice_description']);
+
+            // Inserting into location table using parameterized query
+            $query_farming_practice = "INSERT INTO farming_practice (farming_practice_type, farming_practice_name, farming_practice_description) 
+        VALUES ($1, $2, $3) RETURNING farming_practice_id";
+
+            $query_run_farming_practice = pg_query_params($con, $query_farming_practice, array(
+                $farming_practice_type, $farming_practice_name, $farming_practice_description
+            ));
+
+            if ($query_run_farming_practice) {
+                $row_farming_practice = pg_fetch_row($query_run_farming_practice);
+                $farming_practice_id = $row_farming_practice[0];
+            } else {
+                echo "Error: " . pg_last_error($con);
+                exit(0);
+            }
+
+            // Get user inputs for data in crop Location table
             $other_info_type = handleEmpty($_POST['other_info_type']);
             $other_info_name = handleEmpty($_POST['other_info_name']);
             $other_info_description = handleEmpty($_POST['other_info_description']);
@@ -295,8 +336,8 @@ if (isset($_POST['save']) && $_SESSION['rank'] == 'curator') {
 
             // Inserting into location table using parameterized query
             $query_other_info = "INSERT INTO other_info (other_info_type, other_info_name, other_info_description,
-            other_info_url) 
-            VALUES ($1, $2, $3, $4) RETURNING other_info_id";
+        other_info_url) 
+        VALUES ($1, $2, $3, $4) RETURNING other_info_id";
 
             $query_run_other_info = pg_query_params($con, $query_other_info, array(
                 $other_info_type, $other_info_name, $other_info_description,
@@ -375,7 +416,6 @@ if (isset($_POST['save']) && $_SESSION['rank'] == 'curator') {
 
             // Convert the array to a comma-separated string
             $imageNamesString = implode(',', $imageNamesArray);
-            $farming_practice_id = $_POST['farming_practice_id'];
             $user_id = $_POST['user_id'];
             $status = 'pending';
             $crop_name = $_POST['crop_name'];
@@ -392,13 +432,13 @@ if (isset($_POST['save']) && $_SESSION['rank'] == 'curator') {
 
             // Inserting into Crop table using parameterized query
             $query_crop = "INSERT INTO crop (
-            crop_image, crop_name, crop_description, upland_or_lowland,
-            category, crop_local_name, crop_scientific_name, crop_variety, crop_origin,
-            user_id, status
-            ) VALUES (
-                $1, $2, $3, $4, $5, $6, $7, $8, $9, $10,
-                $11
-            ) RETURNING crop_id";
+        crop_image, crop_name, crop_description, upland_or_lowland,
+        category, crop_local_name, crop_scientific_name, crop_variety, crop_origin,
+        user_id, status
+        ) VALUES (
+            $1, $2, $3, $4, $5, $6, $7, $8, $9, $10,
+            $11
+        ) RETURNING crop_id";
 
             $stmt_crop = pg_prepare($con, "insert_crop", $query_crop);
             $query_run_crop = pg_execute($con, "insert_crop", array(
@@ -499,9 +539,9 @@ if (isset($_POST['save']) && $_SESSION['rank'] == 'curator') {
             exit(0);
         }
     }
-}
+} 
 
-if (isset($_POST['update'])) {
+if (isset($_POST['update']) && $_SESSION['rank'] == 'curator') {
     // Assuming you have a variable $_POST['crop_id'] containing the ID of the crop to update
     // crops table
     $crop_id = pg_escape_string($con, $_POST['crop_id']);
@@ -511,8 +551,11 @@ if (isset($_POST['update'])) {
     $crop_other_info_id = pg_escape_string($con, $_POST['crop_other_info_id']);
     $user_id = pg_escape_string($con, $_POST['user_id']);
 
+    
+
     $location_id = pg_escape_string($con, $_POST['location_id']);
     $other_info_id = pg_escape_string($con, $_POST['other_info_id']);
+    $farming_practice_id = pg_escape_string($con, $_POST['farming_practice_id']);
 
     $crop_name = pg_escape_string($con, $_POST['crop_name']);
     $crop_description = pg_escape_string($con, $_POST['crop_description']);
@@ -572,16 +615,18 @@ if (isset($_POST['update'])) {
         echo "Error updating other_info: " . pg_last_error($con);
         exit(0);
     }
-    // Crop Farming Practice Table
-    $farming_practice_id = pg_escape_string($con, $_POST['farming_practice_id']);
+    // Farming Practice Table
+    $farming_practice_type = handleValue($_POST['farming_practice_type']);
+    $farming_practice_name = handleValue($_POST['farming_practice_name']);
+    $farming_practice_description = handleValue($_POST['farming_practice_description']);
 
-    // Update Crop Farming Practice table
-    $query_crop_farm_prac = "UPDATE crop_farming_practice SET farming_practice_id = $1 WHERE crop_farming_practice_id = $2";
-    $params_crop_farm_prac = array($farming_practice_id, $crop_farming_practice_id);
-    $query_run_crop_farm_prac = pg_query_params($con, $query_crop_farm_prac, $params_crop_farm_prac);
+    // Update Farming Practice table
+    $query_farm_prac = "UPDATE farming_practice SET farming_practice_type = $1, farming_practice_name = $2, farming_practice_description = $3 WHERE farming_practice_id = $4";
+    $params_farm_prac = array($farming_practice_type, $farming_practice_name, $farming_practice_description, $farming_practice_id);
+    $query_run_farm_prac = pg_query_params($con, $query_farm_prac, $params_farm_prac);
 
-    if (!$query_run_crop_farm_prac) {
-        echo "Error updating crop_farm_prac: " . pg_last_error($con);
+    if (!$query_run_farm_prac) {
+        echo "Error updating Farming Practice: " . pg_last_error($con);
         exit(0);
     }
 
@@ -693,7 +738,7 @@ if (isset($_POST['update'])) {
     }
 }
 
-if (isset($_POST['delete'])) {
+if (isset($_POST['delete']) && $_SESSION['rank'] == 'curator') {
     $crop_id = $_POST['crop_id'];
     $current_crop_image = $_POST['current_crop_image'];
     $crop_location_id = $_POST['crop_location_id'];
@@ -702,15 +747,7 @@ if (isset($_POST['delete'])) {
 
     $location_id = $_POST['location_id'];
     $farming_practice_id = $_POST['farming_practice_id'];
-    $other_info_id = $_POST['crop_other_info_id'];
-
-    // Validation Checks
-    if (empty($crop_id) || empty($current_crop_image) || empty($crop_location_id) || empty($crop_farming_practice_id) || empty($crop_other_info_id)) {
-        // Handle the case where parameters are missing
-        $_SESSION['message'] = "Some data is missing cannot proceed";
-        header("location: crop.php?crop_id=" . $crop_id);
-        exit(0);
-    }
+    $other_info_id = $_POST['other_info_id'];
 
     // Start a database transaction
     pg_query($con, "BEGIN");
@@ -756,6 +793,14 @@ if (isset($_POST['delete'])) {
             throw new Exception("Failed to delete from Location table");
         }
 
+        // Delete from Farming Practice table
+        $query_delete_farming_practice = "DELETE FROM farming_practice WHERE farming_practice_id = $1";
+        $query_run_delete_farming_practice = pg_query_params($con, $query_delete_farming_practice, [$farming_practice_id]);
+
+        if (!$query_run_delete_farming_practice) {
+            throw new Exception("Failed to delete from farming_practice table");
+        }
+
         // Delete from Other Info table
         $query_delete_other_info = "DELETE FROM other_info WHERE other_info_id = $1";
         $query_run_delete_other_info = pg_query_params($con, $query_delete_other_info, [$other_info_id]);
@@ -795,4 +840,8 @@ if (isset($_POST['delete'])) {
         echo "Error: " . $e->getMessage();
         exit(0);
     }
+}else{
+    $_SESSION['message'] = "Not Enough Authority";
+    header("Location: crop.php?crop_id=" . $_POST['crop_id']);
+    exit(0);
 }

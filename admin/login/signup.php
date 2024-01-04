@@ -114,7 +114,7 @@ if (isset($_POST['submit'])) {
     $password = pg_escape_string($connection, $raw_password);
 
     // 2. SQL to insert data into admin
-    $sql = "INSERT INTO \"user\" (first_name, last_name, gender, email, affiliation, password, account_type_id) 
+    $sql = "INSERT INTO users (first_name, last_name, gender, email, affiliation, password, account_type_id) 
             VALUES ($1, $2, $3, $4, $5, $6, $7)";
 
     $res = pg_query_params($connection, $sql, array($first_name, $last_name, $gender, $email, $affiliation, $password, $account_type_id));

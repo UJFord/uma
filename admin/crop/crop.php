@@ -36,7 +36,7 @@ require('../sidebar/side.php');
 			<?php
 			if (isset($_GET['crop_id'])) {
 				$crop_id = pg_escape_string($connection, $_GET['crop_id']);
-				$query = "SELECT crop.*, crop_location.*, crop_other_info.* FROM crop LEFT JOIN crop_location ON crop.crop_id = crop_location.crop_id left join crop_other_info on crop.crop_id = crop_other_info.crop_id WHERE crop.crop_id = $1";
+				$query = "SELECT crop.*, crop_location.*, crop_other_info.*, crop_farming_practice.* FROM crop LEFT JOIN crop_location ON crop.crop_id = crop_location.crop_id left join crop_other_info on crop.crop_id = crop_other_info.crop_id left join crop_farming_practice on crop.crop_id = crop_farming_practice.crop_id WHERE crop.crop_id = $1";
 				$query_run = pg_query_params($connection, $query, array($crop_id));
 
 				$emptyValue = 'Empty';
@@ -46,7 +46,8 @@ require('../sidebar/side.php');
 					// get the id for the foreign tables
 					$other_info_id = $crops['other_info_id'];
 					$location_id = $crops['location_id'];
-					$current_crop_location_id = $crops['crop_location_id'];
+					$crop_location_id = $crops['crop_location_id'];
+					$farming_practice_id = $crops['farming_practice_id'];
 					$current_crop_farming_practice_id = $crops['crop_farming_practice_id'];
 					$current_crop_other_info_id = $crops['crop_other_info_id'];
 					$current_crop_image = $crops['crop_image'];
@@ -85,6 +86,7 @@ require('../sidebar/side.php');
 
 							<input type="hidden" name="other_info_id" value="<?= $other_info_id; ?>">
 							<input type="hidden" name="location_id" value="<?= $location_id; ?>">
+							<input type="hidden" name="farming_practice_id" value="<?= $farming_practice_id; ?>">
 
 							<!-- general information -->
 							<h3>General Information</h3>
@@ -182,28 +184,29 @@ require('../sidebar/side.php');
 							<h3 class="mt-4">More</h5>
 
 							<!-- Location -->
-							<h3 class="mt-4">Location</h5>
-								<?php
-								// PHP code to display available Location from the database
+							<div>
+								<h3 class="mt-4">Location</h5>
+									<?php
+									// PHP code to display available Location from the database
 
-								// Query to select all available Location in the database
-								$query3 = "SELECT crop_location.*, location.* FROM crop_location left join location on crop_location.location_id = location.location_id WHERE location.location_id='$location_id'";
+									// Query to select all available Location in the database
+									$query3 = "SELECT crop_location.*, location.* FROM crop_location left join location on crop_location.location_id = location.location_id WHERE location.location_id='$location_id'";
 
-								// Executing query
-								$query_run3 = pg_query($connection, $query3);
+									// Executing query
+									$query_run3 = pg_query($connection, $query3);
 
-								// If count is greater than 0, we have Location; else, we do not have Location
-								if (pg_num_rows($query_run3) > 0) {
-									$location = pg_fetch_assoc($query_run3);
+									// If count is greater than 0, we have Location; else, we do not have Location
+									if (pg_num_rows($query_run3) > 0) {
+										$location = pg_fetch_assoc($query_run3);
 
-									// Define default values for each field if they are $emptyValue
-									$province_name = isset($location['province_name']) ? $location['province_name'] : $emptyValue;
-									$municipality_name = isset($location['municipality_name']) ? $location['municipality_name'] : $emptyValue;
-									$latitude = isset($location['latitude']) ? $location['latitude'] : $emptyValue;
-									$longtitude = isset($location['longtitude']) ? $location['longtitude'] : $emptyValue;
-									$input_date = isset($location['input_date']) ? $location['input_date'] : $emptyValue;
+										// Define default values for each field if they are $emptyValue
+										$province_name = isset($location['province_name']) ? $location['province_name'] : $emptyValue;
+										$municipality_name = isset($location['municipality_name']) ? $location['municipality_name'] : $emptyValue;
+										$latitude = isset($location['latitude']) ? $location['latitude'] : $emptyValue;
+										$longtitude = isset($location['longtitude']) ? $location['longtitude'] : $emptyValue;
+										$input_date = isset($location['input_date']) ? $location['input_date'] : $emptyValue;
 
-								?>
+									?>
 									<div class="row">
 										<div class="col-3">
 											<!-- Province -->
@@ -257,129 +260,101 @@ require('../sidebar/side.php');
 										<?php
 									}
 										?>
-								</div>
-
-								<!-- Associated Farming Practice -->
-								<label class="mt-2">Associated Farming Practice</label>
-								<div class="row">
-									<div class="col">
-									<select id="farming_practice_id" name="farming_practice_id" class="form-select mb-2" disabled>
-										<?php
-										// php code to display available schedules from the database
-										// query to select all available schedules in the database
-										$query = "SELECT crop_farming_practice.*, farming_practice.* FROM crop_farming_practice left join farming_practice on crop_farming_practice.farming_practice_id = farming_practice.farming_practice_id where crop_farming_practice_id = $current_crop_farming_practice_id";
-
-										// Executing query
-										$query_run = pg_query($connection, $query);
-
-										// count rows to check whether we have a schedule or not
-										$count = pg_num_rows($query_run);
-
-										// if count is greater than 0 we have a schedule else we do not have a schedule
-										if ($count > 0) {
-											// we have a schedule
-											while ($row = pg_fetch_assoc($query_run)) {
-												// get the detail of the schedule
-												$farming_practice_id = $row['farming_practice_id'];
-												$farming_practice_name = $row['farming_practice_name'];
-										?>
-												<option value="<?php echo $farming_practice_id; ?>"><?php echo $farming_practice_name; ?></option>
-											<?php
-											}
-										} else {
-											// we do not have a Farming practices
-											?>
-											<option value="0">No Farming Practices Found</option>
-											<?php
-										}
-											?>
-
-										<!-- to display all the available farming practices in case of update -->
-										<?php
-										// php code to display available schedules from the database
-										// query to select all available schedules in the database
-										$query = "SELECT * FROM farming_practice";
-
-										// Executing query
-										$query_run = pg_query($connection, $query);
-
-										// count rows to check whether we have a schedule or not
-										$count = pg_num_rows($query_run);
-
-										// if count is greater than 0 we have a schedule else we do not have a schedule
-										if ($count > 0) {
-											// we have a schedule
-											while ($row = pg_fetch_assoc($query_run)) {
-												// get the detail of the schedule
-												$farming_practice_id = $row['farming_practice_id'];
-												$farming_practice_name = $row['farming_practice_name'];
-										?>
-												<option value="<?php echo $farming_practice_id; ?>"><?php echo $farming_practice_name; ?></option>
-											<?php
-											}
-										} else {
-											// we do not have a schedule
-											?>
-											<option value="0">No Farming Practices Found</option>
-											<?php
-										}
-											?>
-									</select>
 									</div>
+							</div>
+
+							<!-- Associated Farming Practice -->
+							<div class="">
+								<label class="mt-2">Associated Farming Practice</label>
+								<?php
+								// PHP code to display available crop farming practice from the database
+								// Query to select all available crop farming practice in the database
+								$query4 = "SELECT crop_farming_practice.*, farming_practice.* FROM crop_farming_practice left join farming_practice on crop_farming_practice.farming_practice_id = farming_practice.farming_practice_id WHERE farming_practice.farming_practice_id='$farming_practice_id'";
+
+								// Executing query
+								$query_run4 = pg_query($connection, $query4);
+
+								// If count is greater than 0, we have farming_practice; else, we do not have farming_practice
+								if (pg_num_rows($query_run4) > 0) {
+									$farming_practice = pg_fetch_assoc($query_run4);
+
+									// Define default values for each field if they are $emptyValue
+									$farming_practice_type = isset($farming_practice['farming_practice_type']) ? $farming_practice['farming_practice_type'] : $emptyValue;
+									$farming_practice_name = isset($farming_practice['farming_practice_name']) ? $farming_practice['farming_practice_name'] : $emptyValue;
+									$farming_practice_description = isset($farming_practice['farming_practice_description']) ? $farming_practice['farming_practice_description'] : $emptyValue;
+								?>
+										<div class="col">
+											<!-- Other Info Type -->
+											<label for="farming_practice_type">Type</label>
+											<input id="farming_practice_type" type="text" name="farming_practice_type" value="<?= $farming_practice_type; ?>" class="form-control mb-2" disabled>
+										</div>
+										<div class="col">
+											<!-- Other Info Name -->
+											<label for="farming_practice_name">Name</label>
+											<input id="farming_practice_name" type="text" name="farming_practice_name" value="<?= $farming_practice_name; ?>" class="form-control mb-2" disabled>
+										</div>
+										<div class="col">
+											<!-- Other Info Description -->
+											<label for="farming_practice-desc">Description <span class="text-danger"></span></label>
+											<textarea name="farming_practice_description" id="farming_practice-desc" class="txtarea form-control" rows="3" disabled <?php echo ($farming_practice_description !== $emptyValue) ? '>' . $farming_practice_description : 'placeholder="Empty">'; ?></textarea>
 								</div>
-							
-							<!-- Other Information -->
-							<div class="other_info">
+								<?php
+								}
+								?>
+							</div>
+
+						<!-- Other Information -->
+						<div class="other_info">
 							<h3 class="mt-4 d-flex align-items-center" id="otherInfoTitle">Other Info</h3>
-									<?php
-									// PHP code to display available crop other info from the database
-									// Query to select all available crop other info in the database
-									$query4 = "SELECT crop_other_info.*, other_info.* FROM crop_other_info left join other_info on crop_other_info.other_info_id = other_info.other_info_id WHERE other_info.other_info_id='$other_info_id'";
+							<?php
+							// PHP code to display available crop other info from the database
+							// Query to select all available crop other info in the database
+							$query4 = "SELECT crop_other_info.*, other_info.* FROM crop_other_info left join other_info on crop_other_info.other_info_id = other_info.other_info_id WHERE other_info.other_info_id='$other_info_id'";
 
-									// Executing query
-									$query_run4 = pg_query($connection, $query4);
+							// Executing query
+							$query_run4 = pg_query($connection, $query4);
 
-									// If count is greater than 0, we have other_info; else, we do not have other_info
-									if (pg_num_rows($query_run4) > 0) {
-										$other_info = pg_fetch_assoc($query_run4);
+							// If count is greater than 0, we have other_info; else, we do not have other_info
+							if (pg_num_rows($query_run4) > 0) {
+								$other_info = pg_fetch_assoc($query_run4);
 
-										// Define default values for each field if they are $emptyValue
-										$other_info_type = isset($other_info['other_info_type']) ? $other_info['other_info_type'] : $emptyValue;
-										$other_info_name = isset($other_info['other_info_name']) ? $other_info['other_info_name'] : $emptyValue;
-										$other_info_description = isset($other_info['other_info_description']) ? $other_info['other_info_description'] : $emptyValue;
-										$other_info_url = isset($other_info['other_info_url']) ? $other_info['other_info_url'] : $emptyValue;
+								// Define default values for each field if they are $emptyValue
+								$other_info_type = isset($other_info['other_info_type']) ? $other_info['other_info_type'] : $emptyValue;
+								$other_info_name = isset($other_info['other_info_name']) ? $other_info['other_info_name'] : $emptyValue;
+								$other_info_description = isset($other_info['other_info_description']) ? $other_info['other_info_description'] : $emptyValue;
+								$other_info_url = isset($other_info['other_info_url']) ? $other_info['other_info_url'] : $emptyValue;
 
-									?>
-											<div class="col">
-												<!-- Submitted By -->
-												<label for="first_name">Submitted BY:</label>
-												<input id="first_name" name="first_name" type="text" value="<?= $first_name; ?>" class="form-control mb-2" disabled>
-											</div>
-											<div class="col">
-												<!-- Other Info Type -->
-												<label for="other_info_type">Type</label>
-												<input id="other_info_type" name="other_info_type" type="text" value="<?= $other_info_type; ?>" class="form-control mb-2" disabled>
-											</div>
-											<div class="col">
-												<!-- Other Info Name -->
-												<label for="other_info_name">Name</label>
-												<input id="other_info_name" name="other_info_name" type="text" value="<?= $other_info_name; ?>" class="form-control mb-2" disabled>
-											</div>
-											<div class="col">
-												<!-- Other Info Urls -->
-												<label for="other_info_url">Links</label>
-												<a id="other_info_link" href="<?= $other_info_url; ?>">
-												<input id="other_info_url" name="other_info_url" type="text" <?php echo ($other_info_url != $emptyValue && $other_info_url != "") ? 'value="' . $other_info_url . '"' : 'placeholder="No Links"'; ?> class="form-control clickable" readonly>
-												</a>
-											</div>
-											<div class="col">
-												<!-- Other Info Description -->
-												<label for="other_info-desc">Description <span class="text-danger">*</span></label>
-												<textarea name="other_info_description" id="other_info-desc" class="form-control" rows="3" disabled <?php echo ($other_info_description !== $emptyValue) ? '>' . $other_info_description : 'placeholder="Empty">'; ?></textarea>
+							?>
+								<div class="col">
+									<!-- Submitted By -->
+									<label for="first_name">Submitted BY:</label>
+									<input id="first_name" name="first_name" type="text" value="<?= $first_name; ?>" class="form-control mb-2" disabled>
+								</div>
+								<div class="col">
+									<!-- Other Info Type -->
+									<label for="other_info_type">Type</label>
+									<input id="other_info_type" name="other_info_type" type="text" value="<?= $other_info_type; ?>" class="form-control mb-2" disabled>
+								</div>
+								<div class="col">
+									<!-- Other Info Name -->
+									<label for="other_info_name">Name</label>
+									<input id="other_info_name" name="other_info_name" type="text" value="<?= $other_info_name; ?>" class="form-control mb-2" disabled>
+								</div>
+								<div class="col">
+									<!-- Other Info Urls -->
+									<label for="other_info_url">Links</label>
+									<a id="other_info_link" href="<?= $other_info_url; ?>">
+										<input id="other_info_url" name="other_info_url" type="text" <?php echo ($other_info_url != $emptyValue && $other_info_url != "") ? 'value="' . $other_info_url . '"' : 'placeholder="No Links"'; ?> class="form-control clickable" readonly>
+									</a>
+								</div>
+								<div class="col">
+									<!-- Other Info Description -->
+									<label for="other_info-desc">Description <span class="text-danger">*</span></label>
+									<textarea name="other_info_description" id="other_info-desc" class="form-control" rows="3" disabled <?php echo ($other_info_description !== $emptyValue) ? '>' . $other_info_description : 'placeholder="Empty">'; ?></textarea>
 							</div>
 
 						<?php
-									}
+							}
 						?>
 						</div>
 	</div>

@@ -1,9 +1,3 @@
-<?php
-session_start();
-// sidebar
-require('../sidebar/side.php');
-// include('../login/login-check.php');
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,7 +12,12 @@ require('../sidebar/side.php');
 	<link rel="shortcut icon" href="img/logo/Uma logo.svg" type="image/x-icon" />
 	<title>Crop sa Editor</title>
 
-
+	<?php
+	session_start();
+	// sidebar
+	require('../sidebar/side.php');
+	// include('../login/login-check.php');
+	?>
 
 	<!-- summernote -->
 	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
@@ -125,9 +124,9 @@ require('../sidebar/side.php');
 					<!-- More -->
 					<h3 class="mt-4">More</h5>
 
-						<!-- Location -->
-						<h3 class="mt-4">Location</h5>
-							<div class="row">
+						<div class="row">
+							<!-- Location -->
+							<h3 class="mt-4">Location</h5>
 								<div class="col-4">
 									<!-- Municipality -->
 									<label for="municipality">Municipality</label>
@@ -163,72 +162,54 @@ require('../sidebar/side.php');
 									<label for="latitude">Latitude</label>
 									<input id="latitude" type="text" name="latitude" placeholder="Enter Latitude" class="form-control">
 								</div>
-							</div>
+						</div>
 
+						<div class="">
 							<!-- Associated Farming Practice -->
 							<h3 class="mt-4">Associated Farming Practice</h5>
-								<div class="row">
-									<div class="col-4">
-										<select id="farming_practice_id" name="farming_practice_id" class="form-select mb-2">
-											<?php
-											// php code to display available schedules from the database
-											// query to select all available schedules in the database
-											$query = "SELECT * FROM farming_practice";
-
-											// Executing query
-											$query_run = pg_query($connection, $query);
-
-											// count rows to check whether we have a schedule or not
-											$count = pg_num_rows($query_run);
-
-											// if count is greater than 0 we have a schedule else we do not have a schedule
-											if ($count > 0) {
-												// we have a schedule
-												while ($row = pg_fetch_assoc($query_run)) {
-													// get the detail of the schedule
-													$farming_practice_id = $row['farming_practice_id'];
-													$farming_practice_name = $row['farming_practice_name'];
-											?>
-													<option value="<?php echo $farming_practice_id; ?>"><?php echo $farming_practice_name; ?></option>
-												<?php
-												}
-											} else {
-												// we do not have a schedule
-												?>
-												<option value="0">No Farming Practices Found</option>
-											<?php
-											}
-											?>
-										</select>
-									</div>
+								<div class="col">
+									<!-- Other Info Type -->
+									<label for="farming_practice_type">Type</label>
+									<input id="farming_practice_type" type="text" name="farming_practice_type" placeholder="Enter Farming Practice Type" class="form-control mb-2">
 								</div>
-
-								<!-- Other Information -->
-								<div class="other_info">
-									<h3 class="mt-4 d-flex align-items-center" id="otherInfoTitle">Other Info <i class='bx bx-plus ml-2' id="toggleOtherInfo" style="color: blue;"></i> <i class='bx bx-minus ml-2' id="toggleOtherInfoMinus" style="display: none; color:red"></i></h3>
-									<div class="other-info-content" hidden>
-										<div class="col">
-											<!-- Other Info Type -->
-											<label for="other_info_type">Type</label>
-											<input id="other_info_type" type="text" name="other_info_type" placeholder="Enter Other Info Type" class="form-control mb-2">
-										</div>
-										<div class="col">
-											<!-- Other Info Name -->
-											<label for="other_info_name">Name</label>
-											<input id="other_info_name" type="text" name="other_info_name" placeholder="Enter Other Info Name" class="form-control mb-2">
-										</div>
-										<div class="col">
-											<!-- Other Info Description -->
-											<label for="other_info-desc">Description <span class="text-danger">*</span></label>
-											<textarea name="other_info_description" id="other_info-desc" class="txtarea form-control" rows="3"></textarea>
-										</div>
-										<div class="col">
-											<!-- Other Info Url -->
-											<label for="other_info_url">Links</label>
-											<input id="other_info_url" type="text" name="other_info_url" placeholder="Enter links if available" class="form-control">
-										</div>
-									</div>
+								<div class="col">
+									<!-- Other Info Name -->
+									<label for="farming_practice_name">Name</label>
+									<input id="farming_practice_name" type="text" name="farming_practice_name" placeholder="Enter Farming Practice Name" class="form-control mb-2">
 								</div>
+								<div class="col">
+									<!-- Other Info Description -->
+									<label for="farming_practice-desc">Description <span class="text-danger"></span></label>
+									<textarea name="farming_practice_description" id="farming_practice-desc" class="txtarea form-control" rows="3"></textarea>
+								</div>
+						</div>
+
+						<!-- Other Information -->
+						<div class="other_info">
+							<h3 class="mt-4 d-flex align-items-center" id="otherInfoTitle">Other Info <i class='bx bx-plus ml-2' id="toggleOtherInfo" style="color: blue;"></i> <i class='bx bx-minus ml-2' id="toggleOtherInfoMinus" style="display: none; color:red"></i></h3>
+							<div class="other-info-content" hidden>
+								<div class="col">
+									<!-- Other Info Type -->
+									<label for="other_info_type">Type</label>
+									<input id="other_info_type" type="text" name="other_info_type" placeholder="Enter Other Info Type" class="form-control mb-2">
+								</div>
+								<div class="col">
+									<!-- Other Info Name -->
+									<label for="other_info_name">Name</label>
+									<input id="other_info_name" type="text" name="other_info_name" placeholder="Enter Other Info Name" class="form-control mb-2">
+								</div>
+								<div class="col">
+									<!-- Other Info Description -->
+									<label for="other_info-desc">Description <span class="text-danger"></span></label>
+									<textarea name="other_info_description" id="other_info-desc" class="txtarea form-control" rows="3"></textarea>
+								</div>
+								<div class="col">
+									<!-- Other Info Url -->
+									<label for="other_info_url">Links</label>
+									<input id="other_info_url" type="text" name="other_info_url" placeholder="Enter links if available" class="form-control">
+								</div>
+							</div>
+						</div>
 				</div>
 				<!-- editting buttons -->
 				<?php

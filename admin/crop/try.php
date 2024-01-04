@@ -14,15 +14,7 @@ if (isset($_POST['delete'])) {
 
     $location_id = $_POST['location_id'];
     $farming_practice_id = $_POST['farming_practice_id'];
-    $other_info_id = $_POST['crop_other_info_id'];
-
-    // Validation Checks
-    if (empty($crop_id) || empty($current_crop_image) || empty($crop_location_id) || empty($crop_farming_practice_id) || empty($crop_other_info_id)) {
-        // Handle the case where parameters are missing
-        $_SESSION['message'] = "Some data is missing cannot proceed";
-        header("location: crop.php?crop_id=" . $crop_id);
-        exit(0);
-    }
+    $other_info_id = $_POST['other_info_id'];
 
     // Start a database transaction
     pg_query($con, "BEGIN");
@@ -66,6 +58,14 @@ if (isset($_POST['delete'])) {
 
         if (!$query_run_delete_location) {
             throw new Exception("Failed to delete from Location table");
+        }
+
+        // Delete from Farming Practice table
+        $query_delete_farming_practice = "DELETE FROM farming_practice WHERE farming_practice_id = $1";
+        $query_run_delete_farming_practice = pg_query_params($con, $query_delete_farming_practice, [$farming_practice_id]);
+
+        if (!$query_run_delete_farming_practice) {
+            throw new Exception("Failed to delete from farming_practice table");
         }
 
         // Delete from Other Info table

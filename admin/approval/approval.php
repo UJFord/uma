@@ -1,10 +1,3 @@
-<?php
-ob_start(); // Start output buffering
-session_start();
-require('../sidebar/side.php');
-ob_end_flush(); // Send output to the browser
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,6 +11,12 @@ ob_end_flush(); // Send output to the browser
     <!-- favicon -->
     <link rel="shortcut icon" href="img/logo/Uma logo.svg" type="image/x-icon" />
     <title>Uma | AdminPage</title>
+    <?php
+    ob_start(); // Start output buffering
+    session_start();
+    require('../sidebar/side.php');
+    ob_end_flush(); // Send output to the browser
+    ?>
 </head>
 
 <body class="overflow-hidden">
@@ -51,31 +50,43 @@ ob_end_flush(); // Send output to the browser
                         </thead>
 
                         <?php
-                        $query = "SELECT crops.*, users.username FROM crops
-                                JOIN users ON crops.user_id = users.user_id
-                                WHERE status = 'pending'
-                                AND users.rank != 'curator'
-                                ORDER BY crop_id ASC";
+                        $query = "SELECT crop.*, users.first_name, account_type.type_name, crop_location.*, crop_farming_practice.*, crop_other_info.*
+                        FROM crop
+                        JOIN users ON crop.user_id = users.user_id
+                        JOIN crop_location ON crop.crop_id = crop_location.crop_id
+                        JOIN crop_farming_practice ON crop.crop_id = crop_farming_practice.crop_id
+                        JOIN crop_other_info ON crop.crop_id = crop_other_info.crop_id
+                        JOIN account_type ON users.account_type_id = account_type.account_type_id
+                        WHERE crop.status = 'pending' AND account_type.type_name != 'curator'
+                        ORDER BY crop.crop_id ASC";
                         $result = pg_query($connection, $query);
-                        while ($row = pg_fetch_array($result)) {
-                        ?>
-                            <tbody>
-                                <tr>
-                                    <th scope="row"><?php echo $row['username']; ?></th>
-                                    <td><?php echo $row['crop_name']; ?></td>
-                                    <td><?php echo $row['local_name']; ?></td>
-                                    <td><?php echo $row['description']; ?></td>
-                                    <td><?php echo $row['status']; ?></td>
-                                    <td class="curator-only">
-                                        <form action="code.php" method="POST">
-                                            <input type="hidden" name="crop_id" value="<?php echo $row['crop_id']; ?>" />
-                                            <input type="submit" name="approve" value="approve"> &nbsp &nbsp <br>
-                                            <input type="submit" name="delete" value="delete">
-                                        </form>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        <?php
+
+                        if ($result) {
+                            while ($row = pg_fetch_array($result)) {
+                                ?>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row"><?php echo $row['first_name']; ?></th>
+                                            <td><?php echo $row['crop_name']; ?></td>
+                                            <td><?php echo $row['crop_local_name']; ?></td>
+                                            <td><?php echo $row['crop_description']; ?></td>
+                                            <td><?php echo $row['status']; ?></td>
+                                            <td class="curator-only">
+                                                <form action="code.php" method="POST">
+                                                    <input type="hidden" name="crop_id" value="<?php echo $row['crop_id']; ?>" />
+                                                    <input type="hidden" name="other_info_id" value="<?php echo $row['other_info_id']; ?>" />
+                                                    <input type="hidden" name="location_id" value="<?php echo $row['location_id']; ?>" />
+                                                    <input type="hidden" name="farming_practice_id" value="<?php echo $row['farming_practice_id']; ?>" />
+                                                    <input type="submit" name="approve" value="approve"> &nbsp &nbsp <br>
+                                                    <input type="submit" name="delete" value="delete">
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                <?php
+                                }
+                        } else {
+                            echo "Query failed: " . pg_last_error($connection);
                         }
                         ?>
                     </table>
@@ -94,25 +105,32 @@ ob_end_flush(); // Send output to the browser
                             </tr>
                         </thead>
                         <?php
-                        $query = "SELECT crops.*, users.username
-                                FROM crops
-                                JOIN users ON crops.user_id = users.user_id
-                                WHERE crops.status = 'approved'
-                                AND users.rank != 'curator'";
-                        $result = pg_query($connection, $query);
-                        while ($row = pg_fetch_array($result)) {
-                        ?>
-                            <tbody>
-                                <tr>
-                                    <th scope="row"><?php echo $row['username']; ?></th>
-                                    <td><?php echo $row['crop_name']; ?></td>
-                                    <td><?php echo $row['local_name']; ?></td>
-                                    <td><?php echo $row['description']; ?></td>
-                                    <td><?php echo $row['status']; ?></td>
-                                </tr>
-                            </tbody>
-                        <?php
+
+                        $query = "SELECT crop.*, users.first_name, account_type.*
+                        FROM crop
+                        JOIN users ON crop.user_id = users.user_id
+                        JOIN account_type ON users.account_type_id = account_type.account_type_id
+                        WHERE crop.status = 'approved' AND account_type.type_name != 'curator'";
+                        $result2 = pg_query($connection, $query);
+
+                        if ($result2) {
+                            while ($row = pg_fetch_array($result2)) {
+                                ?>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row"><?php echo $row['first_name']; ?></th>
+                                            <td><?php echo $row['crop_name']; ?></td>
+                                            <td><?php echo $row['crop_local_name']; ?></td>
+                                            <td><?php echo $row['crop_description']; ?></td>
+                                            <td><?php echo $row['status']; ?></td>
+                                        </tr>
+                                    </tbody>
+                                <?php
+                                }
+                        } else {
+                            echo "Query failed: " . pg_last_error($connection);
                         }
+
                         ?>
 
                     </table>

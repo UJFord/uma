@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
         setVisibility(curatorElements, false);
         setVisibility(adminElements, true);
         setVisibility(viewerElements, false);
-    } else if (userRole === "user") {
+    } else if (userRole === "viewer") {
         setVisibility(curatorElements, false);
         setVisibility(adminElements, false);
         setVisibility(viewerElements, true);

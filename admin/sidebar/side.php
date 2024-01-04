@@ -9,7 +9,7 @@ require('../../html/navfoot/connection.php');
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
 <!-- script for access js -->
 <script>
-    var userRole = "<?php echo $_SESSION['type_name']; ?>";
+    var userRole = "<?php echo $_SESSION['rank']; ?>";
 </script>
 <script src="../../js/admin/access.js"></script>
 <!-- main nav -->
@@ -59,7 +59,7 @@ require('../../html/navfoot/connection.php');
                 <img src="https://source.unsplash.com/32x32/?nature,water" alt="" width="32" height="32" class="rounded-circle me-2">
                 <strong <?php if (isset($_SESSION['user'])) {
                             $user = $_SESSION['user'];
-                            $query = "select * from \"user\" where user_id = $user";
+                            $query = "select * from users where user_id = $user";
                             $res = pg_query($connection, $query);
                             if (pg_num_rows($res) > 0) {
                                 $user = pg_fetch_assoc($res);
