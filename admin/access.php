@@ -2,11 +2,12 @@
 function access($rank){
     if(isset($_SESSION['ACCESS']) && !$_SESSION["ACCESS"][$rank]){
         $_SESSION['message'] = "<div class='text-center'>Access denied</div>";
-        header("location: ../login/login.php");
+        header("location: ../crop/list.php");
         die();
     }
 }
-$_SESSION["ACCESS"]["USER"] = isset($_SESSION['rank']) && $_SESSION['rank'] == "user";
+
+$_SESSION["ACCESS"]["VIEWER"] = isset($_SESSION['rank']) && $_SESSION['rank'] == "viewer";
 
 $_SESSION["ACCESS"]["ADMIN"] = isset($_SESSION['rank']) && $_SESSION['rank'] == "admin";
 

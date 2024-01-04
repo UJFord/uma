@@ -265,7 +265,7 @@ require('../sidebar/side.php');
 
 							<!-- Associated Farming Practice -->
 							<div class="">
-								<label class="mt-2">Associated Farming Practice</label>
+								<h3 class="mt-4">Associated Farming Practice</h5>
 								<?php
 								// PHP code to display available crop farming practice from the database
 								// Query to select all available crop farming practice in the database

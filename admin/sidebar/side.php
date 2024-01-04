@@ -33,13 +33,13 @@ require('../../html/navfoot/connection.php');
                 </a>
             </li>
             </li>
-            <!-- farming sidebar nav -->
-            <li>
-                <a href="../farming/list.php" <?php echo (strpos($current_page, '/uma/admin/farming/list.php') === 0 || strpos($current_page, '/uma/admin/farming/farming.php') === 0)
+            <!-- users sidebar nav -->
+            <li class="curator-only">
+                <a href="../users/list.php" <?php echo (strpos($current_page, '/uma/admin/users/list.php') === 0 || strpos($current_page, '/uma/admin/users/users.php') === 0)
                                                     ? 'class="nav-link text-dark fw-semibold rounded-start-pill active-nav"'
                                                     : 'class="nav-link text-white"'; ?>>
-                    <i class="fa-solid fa-mountain-sun" style="width: 1.5rem;"></i>
-                    Practices
+                    <i class='bx bx-user' style="width: 1.5rem; font-size: 1.5rem;"></i>
+                    Users
                 </a>
             </li>
             </li>

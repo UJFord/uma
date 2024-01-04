@@ -3,7 +3,7 @@
     <div id="edit-btn-box" class="m-3">
         <button id="edit-btn" type="button" class="btn btn-primary py-3 px-4 curator-only"><i class="fa-solid fa-pen-to-square me-1"></i>Edit</button>
     </div>
-    <!-- shoe in edit mode -->
+    <!-- show in edit mode -->
     <div id="apply-cancel-box" class="d-none m-3">
         <!-- apply -->
         <!-- dapat mag reload sha sa page with all new and edited info -->
@@ -22,31 +22,9 @@
 
 <script>
     // Function to validate input and submit the form
-    function validateAndSubmitForm() {
-        // Validate the form
-        if (validateForm()) {
-            // If validation succeeds, submit the form
-            submitForm();
-        }
-    }
-
-    // Function to validate input
-    function validateForm() {
-        // Get the values from the form
-        var cropName = document.forms["Form"]["crop_name"].value;
-        var imageInput = document.forms["Form"]["current_image"].value;
-        var category = document.forms["Form"]["category"].value;
-        var localName = document.forms["Form"]["local_name"].value;
-        var uplandOrLowland = document.forms["Form"].querySelector('input[name="upland_or_lowland"]:checked');
-        var description = document.forms["Form"]["description"].value;
-
-        // Check if the required fields are not empty
-        if (cropName === "" || imageInput === "" || category === "" || localName === "" || uplandOrLowland === null || description === "") {
-            alert("Please fill out all required fields.");
-            return false; // Prevent form submission
-        }
-        // You can add more validation checks if needed
-        return true; // Allow form submission
+    function SubmitForm() {
+        // If validation succeeds, submit the form
+        submitForm();
     }
 
     function submitForm() {

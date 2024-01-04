@@ -2,6 +2,7 @@ let editBtn = document.querySelector('#edit-btn');
 let applyBtn = document.querySelector('#apply-btn');
 let cancelBtn = document.querySelector('#cancel-btn');
 let linkElement = document.querySelector('#other_info_link'); // Replace 'your-link-id' with the actual ID of your link
+let userEditBtn = document.querySelector('#user-edit-btn');  // for users editing
 
 // Function to remove hidden attribute from an element
 function showElement(elementId) {
@@ -37,7 +38,7 @@ function enableTextInputs(containerId) {
 // edit
 editBtn.addEventListener('click', () => {
     // form panel input disabled
-    let inputDisabled = document.querySelectorAll('#form-panel input[disabled], #form-panel textarea[disabled], #form-panel select[disabled');
+    let inputDisabled = document.querySelectorAll('#form-panel input[disabled], #form-panel textarea[disabled], #form-panel select[disabled]');
 
     // Enable readonly text inputs
     enableTextInputs('form-panel');
@@ -69,9 +70,33 @@ editBtn.addEventListener('click', () => {
 
     // Example: Remove hidden attribute from an element with ID 'exampleElement'
     showElement('image-input');
-    showElement('new_image');
 });
 
+userEditBtn.addEventListener('click', () => {
+    // form panel input disabled
+    let inputDisabled = document.querySelectorAll('#form-panel input[disabled], #form-panel select[disabled]');
+    // edit box
+    let editBox = document.querySelector('#user-edit-btn-box');
+    // apply and cancel box
+    let applyCancelBox = document.querySelector('#apply-cancel-box');
+    // delete button
+    let deleteBox = document.querySelector('#delete-box');
+
+    inputDisabled.forEach(input => {
+        // enable form panel input
+        input.removeAttribute('disabled');
+        // add border
+        input.classList.remove('border-0');
+        input.classList.add('border');
+    });
+
+    // hide edit box
+    editBox.classList.add('d-none');
+    // show apply and cancel box
+    applyCancelBox.classList.remove('d-none');
+    // delete box
+    deleteBox.classList.remove('d-none');
+});
 // cancel
 cancelBtn.addEventListener('click', () => {
     // Enable link
