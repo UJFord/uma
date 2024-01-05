@@ -111,7 +111,7 @@
 													?>
 											</td>
 											<td>
-												<input type="submit" name="approve" value="approve"> &nbsp &nbsp <br>
+												<input type="submit" name="confirm" value="confirm"> &nbsp &nbsp <br>
 												<input type="submit" name="delete" value="delete">
 											</td>
 											<td>
