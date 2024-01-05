@@ -1,7 +1,7 @@
 <?php
 session_start();
 require('../../html/navfoot/connection.php');
-require('functions.php');
+require('../functions.php');
 
 $errors = array();
 

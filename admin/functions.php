@@ -1,5 +1,6 @@
 <?php
 
+//function for signup
 function signup($data)
 {
     $errors = array();
@@ -44,7 +45,7 @@ function signup($data)
             $arr['gender'] = $data['gender'];
             $arr['username'] = $data['username'];
             $arr['email'] = $data['email'];
-            $arr['password'] = md5($data['password']);
+            $arr['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
             $arr['affiliation'] = $data['affiliation'];
             $arr['account_type_id'] = $account_type_id;
 
@@ -59,6 +60,7 @@ function signup($data)
     return $errors;
 }
 
+//function for login
 function login($data)
 {
     $errors = array();
@@ -68,30 +70,34 @@ function login($data)
         $errors[] = "Please enter a valid email";
     }
 
-    if (strlen(trim($data['password'])) < 4) {
-        $errors[] = "Password must be at least 4 characters";
+    if (strlen(trim($data['password'])) < 3) {
+        $errors[] = "Password must be at least 3 characters";
     }
 
     // check
     if (count($errors) == 0) {
-        $arr['email'] = $data['email'];
-        $arr['password'] = md5($data['password']);
+        $email = $data['email'];
+        $providedPassword = $data['password'];
 
-        $query = "select * from users where email = :email and password = :password limit 1";
-        
-        $row = database_run($query, $arr);
+        $query = "SELECT user_id, password, first_name, last_name FROM users WHERE email = :email LIMIT 1";
 
-        if(is_array($row)){
-            $_SESSION['USER'] = $row;
+        $row = database_run($query, array(':email' => $email));
+
+        if (!empty($row) && password_verify($providedPassword, $row[0]['password'])) {
+            // Only store essential information in the session
+            $_SESSION['USER']['user_id'] = $row[0]['user_id'];
+            $_SESSION['USER']['first_name'] = $row[0]['first_name'];
             $_SESSION['LOGGED_IN'] = true;
-        }else{
+        } else {
             $errors[] = "<div class='error text-center'>Email or Password did not match.</div>";
         }
     }
 
+
     return $errors;
 }
 
+//function to connect to db
 function database_run($query, $vars = array())
 {
     $dsn = "pgsql:host=localhost dbname=farm_crops user=postgres password=123";
@@ -104,9 +110,13 @@ function database_run($query, $vars = array())
         $check = $stm->execute($vars);
 
         if ($check) {
-            $data = $stm->fetchAll();
-            if (count($data) > 0) {
+            // Check if it's a SELECT query before attempting to fetch data
+            if ($stm->columnCount() > 0) {
+                $data = $stm->fetchAll(PDO::FETCH_ASSOC);
                 return $data;
+            } else {
+                // If it's not a SELECT query, return true for success
+                return true;
             }
         }
 
@@ -116,16 +126,17 @@ function database_run($query, $vars = array())
     }
 }
 
-function check_login($redirect = true){
-    if(isset($_SESSION['USER']) && isset($_SESSION['LOGGED_IN'])){
-
+// function for login checkup. to see if user is logged in
+function check_login($redirect = true)
+{
+    if (isset($_SESSION['USER']) && isset($_SESSION['LOGGED_IN'])) {
         return true;
     }
 
-    if($redirect){
-        header("location: login.php");
+    if ($redirect) {
+        header("location: ../login/login.php");
         die();
-    }else{
+    } else {
         return false;
     }
 }

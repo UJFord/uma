@@ -36,8 +36,8 @@ require('../../html/navfoot/connection.php');
             <!-- users sidebar nav -->
             <li class="curator-only">
                 <a href="../users/list.php" <?php echo (strpos($current_page, '/uma/admin/users/list.php') === 0 || strpos($current_page, '/uma/admin/users/users.php') === 0)
-                                                    ? 'class="nav-link text-dark fw-semibold rounded-start-pill active-nav"'
-                                                    : 'class="nav-link text-white"'; ?>>
+                                                ? 'class="nav-link text-dark fw-semibold rounded-start-pill active-nav"'
+                                                : 'class="nav-link text-white"'; ?>>
                     <i class='bx bx-user' style="width: 1.5rem; font-size: 1.5rem;"></i>
                     Users
                 </a>
@@ -57,18 +57,32 @@ require('../../html/navfoot/connection.php');
         <div class="dropdown mx-3 mt-0 mb-3">
             <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                 <img src="https://source.unsplash.com/32x32/?nature,water" alt="" width="32" height="32" class="rounded-circle me-2">
-                <strong <?php if (isset($_SESSION['user'])) {
-                            $user = $_SESSION['user'];
-                            $query = "select * from users where user_id = $user";
-                            $res = pg_query($connection, $query);
-                            if (pg_num_rows($res) > 0) {
-                                $user = pg_fetch_assoc($res);
-                                $first_name = $user['first_name'];
-                                $user_id = $user['user_id'];
-                            }
-                        }
-                        ?>><?= $first_name; ?>
-                </strong>
+
+                <!-- setting the variables for the user's user_id and first_name -->
+                <?php
+                if (isset($_SESSION['LOGGED_IN']) && $_SESSION['LOGGED_IN']) {
+                    $user_id = $_SESSION['USER']['user_id'];
+                    $first_name = $_SESSION['USER']['first_name'];
+                } else {
+                    $_SESSION['message'] = "<div class='error text-center'>Failed to login User.</div>";
+                    // Destroy session
+                    session_destroy(); //  unsets $_SESSION['USER']
+                    header("location: list.php");
+                    die();
+                }
+                // Set $first_name and $user_id to session variables
+                $_SESSION['USER']['first_name'] = $first_name;
+                $_SESSION['USER']['user_id'] = $user_id;
+                ?>
+
+                <?php if (isset($_SESSION['LOGGED_IN']) && $_SESSION['LOGGED_IN']) : ?>
+                    <!-- User is logged in, display the first name -->
+                    <strong><?= $first_name; ?></strong>
+                <?php else : ?>
+                    <!-- User is not logged in, display a link to the login page -->
+                    <a href="../login/login.php" class="text-white text-decoration-none">Login</a>
+                <?php endif; ?>
+
             </a>
             <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
                 <li><a class="dropdown-item" href="#">New project...</a></li>
