@@ -59,8 +59,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         <!-- Login Form ends here -->
 
-        <p class="text-center">Not an admin? - <a href="#">Go Back</a></p>
-        <p class="text-center">No Account? - <a href="signup.php">Sign Up</a></p>
+        <p class="text-center">Return to homepage? - <a href="../crop/list.php">Go Back</a></p>
+        <p class="text-center">Want to signup? - <a href="signup.php">Sign Up</a></p>
     </div>
 </body>
 

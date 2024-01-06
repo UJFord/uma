@@ -56,13 +56,11 @@ require('../sidebar/side.php');
 									<li>
 										<h5 class="filter-title">Category</h5>
 										<?php
-										$category_query = pg_query($connection, "SELECT * FROM crop");
+										$category_query = pg_query($connection, "SELECT DISTINCT category FROM crop");
 										if (pg_num_rows($category_query) > 0) {
+											$checked = isset($_GET['category']) ? $_GET['category'] : [];
+
 											while ($category_name = pg_fetch_assoc($category_query)) {
-												$checked = [];
-												if (isset($_GET['category'])) {
-													$checked = $_GET['category'];
-												}
 										?>
 												<div>
 													<input type="checkbox" name="category[]" value="<?= $category_name['category'] ?>" <?php if (in_array($category_name['category'], $checked)) {
@@ -75,6 +73,7 @@ require('../sidebar/side.php');
 										}
 										?>
 									</li>
+
 									<li>
 										<hr class="dropdown-divider" />
 									</li>

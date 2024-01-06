@@ -55,44 +55,36 @@ require('../../html/navfoot/connection.php');
         </ul>
         <hr class="mx-3">
         <div class="dropdown mx-3 mt-0 mb-3">
-            <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                <img src="https://source.unsplash.com/32x32/?nature,water" alt="" width="32" height="32" class="rounded-circle me-2">
-
-                <!-- setting the variables for the user's user_id and first_name -->
-                <?php
-                if (isset($_SESSION['LOGGED_IN']) && $_SESSION['LOGGED_IN']) {
-                    $user_id = $_SESSION['USER']['user_id'];
-                    $first_name = $_SESSION['USER']['first_name'];
-                } else {
-                    $_SESSION['message'] = "<div class='error text-center'>Failed to login User.</div>";
-                    // Destroy session
-                    session_destroy(); //  unsets $_SESSION['USER']
-                    header("location: list.php");
-                    die();
-                }
-                // Set $first_name and $user_id to session variables
-                $_SESSION['USER']['first_name'] = $first_name;
-                $_SESSION['USER']['user_id'] = $user_id;
-                ?>
-
-                <?php if (isset($_SESSION['LOGGED_IN']) && $_SESSION['LOGGED_IN']) : ?>
-                    <!-- User is logged in, display the first name -->
-                    <strong><?= $first_name; ?></strong>
-                <?php else : ?>
-                    <!-- User is not logged in, display a link to the login page -->
-                    <a href="../login/login.php" class="text-white text-decoration-none">Login</a>
-                <?php endif; ?>
-
-            </a>
-            <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-                <li><a class="dropdown-item" href="#">New project...</a></li>
-                <li><a class="dropdown-item" href="#">Settings</a></li>
-                <li><a class="dropdown-item" href="#">Profile</a></li>
-                <li>
-                    <hr class="dropdown-divider">
-                </li>
-                <li><a class="dropdown-item" href="../login/logout.php">Sign out</a></li>
-            </ul>
+            <div class="d-flex align-items-center">
+                <a href="#" class="d-flex align-items-center justify-content-between text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="https://source.unsplash.com/32x32/?nature,water" alt="" width="32" height="32" class="rounded-circle me-2">
+                    <?php if (isset($_SESSION['LOGGED_IN']) && $_SESSION['LOGGED_IN']) : ?>
+                        <!-- User is logged in, display the first name -->
+                        <strong><?= $_SESSION['USER']['first_name']; ?></strong>
+                        <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+                            <li><a class="dropdown-item" href="#">New project...</a></li>
+                            <li><a class="dropdown-item" href="#">Settings</a></li>
+                            <li><a class="dropdown-item" href="../profile/profile.php">Profile</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="../login/logout.php">Sign out</a></li>
+                        </ul>
+                    <?php else : ?>
+                        <!-- User is not logged in, display a link to the login page -->
+                        <?php
+                        // Unset session
+                        if (isset($_SESSION['USER'])) {
+                            unset($_SESSION['USER']);
+                        }
+                        if (isset($_SESSION['LOGGED_IN'])) {
+                            unset($_SESSION['LOGGED_IN']);
+                        }
+                        ?>
+                        <a href="../login/login.php" class="text-white text-decoration-none">Login</a>
+                    <?php endif; ?>
+                </a>
+            </div>
         </div>
     </div>
     <!-- font awesome script -->

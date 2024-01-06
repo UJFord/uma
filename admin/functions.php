@@ -30,6 +30,14 @@ function signup($data)
         $errors[] = "<div class='error text-center'>Password must match.</div>";
     }
 
+    $check = database_run("SELECT COUNT(*) FROM users WHERE email = :email", ['email' => $data['email']]);
+
+    if ($check && $check[0]['count'] > 0) {
+        $errors[] = "<div class='error text-center'>Email already exist.</div>";
+        echo $data['email'];
+        die();
+    }
+
     // Retrieve account type
     $accountTypeQuery = "SELECT * FROM account_type WHERE type_name = 'viewer'";
     $accountTypeResult = database_run($accountTypeQuery);
@@ -79,7 +87,7 @@ function login($data)
         $email = $data['email'];
         $providedPassword = $data['password'];
 
-        $query = "SELECT user_id, password, first_name, last_name FROM users WHERE email = :email LIMIT 1";
+        $query = "SELECT users.user_id, users.password, users.first_name, users.email, account_type.type_name  FROM users left join account_type on users.account_type_id = account_type.account_type_id WHERE email = :email LIMIT 1";
 
         $row = database_run($query, array(':email' => $email));
 
@@ -87,6 +95,8 @@ function login($data)
             // Only store essential information in the session
             $_SESSION['USER']['user_id'] = $row[0]['user_id'];
             $_SESSION['USER']['first_name'] = $row[0]['first_name'];
+            $_SESSION['USER']['email'] = $row[0]['email'];
+            $_SESSION['rank'] = $row[0]['type_name'];
             $_SESSION['LOGGED_IN'] = true;
         } else {
             $errors[] = "<div class='error text-center'>Email or Password did not match.</div>";
@@ -134,9 +144,29 @@ function check_login($redirect = true)
     }
 
     if ($redirect) {
+        $_SESSION['message'] = "<div class='error'>You are not logged in</div>";
         header("location: ../login/login.php");
         die();
     } else {
         return false;
     }
+}
+
+// function for verifying if user's email is verified
+function check_verified()
+{
+    $user_id = $_SESSION['USER']['user_id'];
+    $query = "SELECT email_verified FROM users WHERE user_id = :user_id";
+    $result = database_run($query, array(':user_id' => $user_id));
+
+    if ($result && count($result) > 0) {
+        $email_verified = $result[0]['email_verified'];
+
+        // Check if the email is verified
+        if (!empty($email_verified) && $email_verified == $_SESSION['USER']['email']) {
+            return true;
+        }
+    }
+
+    return false;
 }
