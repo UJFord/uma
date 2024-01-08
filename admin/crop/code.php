@@ -1,8 +1,6 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
 session_start();
+require "../mail.php";
 
 $con = pg_connect("host=localhost dbname=farm_crops user=postgres password=123") or die("Could not connect to server\n");
 
@@ -529,6 +527,8 @@ if (isset($_POST['save']) && $_SESSION['rank'] == 'curator') {
             // Commit the transaction if everything is successful
             pg_query($con, "COMMIT");
             $_SESSION['message'] = "Crop Created Successfully";
+
+
             header("Location: list.php");
             exit(0);
         } catch (Exception $e) {
@@ -538,8 +538,14 @@ if (isset($_POST['save']) && $_SESSION['rank'] == 'curator') {
             echo "Error: " . $e->getMessage();
             exit(0);
         }
+
+        $message = "Curator there is a new crop waiting for approval";
+        $subject = "Crop Data Approval";
+        $recipient = " noel.salazar17.es@gmail.com";
+
+        send_mail($recipient, $subject, $message);
     }
-} 
+}
 
 if (isset($_POST['update']) && $_SESSION['rank'] == 'curator') {
     // Assuming you have a variable $_POST['crop_id'] containing the ID of the crop to update
@@ -551,7 +557,7 @@ if (isset($_POST['update']) && $_SESSION['rank'] == 'curator') {
     $crop_other_info_id = pg_escape_string($con, $_POST['crop_other_info_id']);
     $user_id = pg_escape_string($con, $_POST['user_id']);
 
-    
+
 
     $location_id = pg_escape_string($con, $_POST['location_id']);
     $other_info_id = pg_escape_string($con, $_POST['other_info_id']);
@@ -840,7 +846,7 @@ if (isset($_POST['delete']) && $_SESSION['rank'] == 'curator') {
         echo "Error: " . $e->getMessage();
         exit(0);
     }
-}else{
+} else {
     $_SESSION['message'] = "Not Enough Authority";
     header("Location: crop.php?crop_id=" . $_POST['crop_id']);
     exit(0);

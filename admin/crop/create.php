@@ -43,7 +43,7 @@
 				<?php
 				include('../message.php');
 				?>
-				<input type="hidden" name="user_id" value="<?= $user_id ?>">
+				<input type="hidden" name="user_id" value="<?= $_SESSION['USER']['user_id']; ?>">
 
 				<!-- main form -->
 				<div class="form-control p-3 mt-3">

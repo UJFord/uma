@@ -35,12 +35,14 @@ require('../../html/navfoot/connection.php');
             </li>
             <!-- users sidebar nav -->
             <li class="curator-only">
-                <a href="../users/list.php" <?php echo (strpos($current_page, '/uma/admin/users/list.php') === 0 || strpos($current_page, '/uma/admin/users/users.php') === 0)
-                                                ? 'class="nav-link text-dark fw-semibold rounded-start-pill active-nav"'
-                                                : 'class="nav-link text-white"'; ?>>
-                    <i class='bx bx-user' style="width: 1.5rem; font-size: 1.5rem;"></i>
-                    Users
-                </a>
+                <?php if (isset($_SESSION['LOGGED_IN']) && $_SESSION['LOGGED_IN']) : ?>
+                    <a href="../users/list.php" <?php echo (strpos($current_page, '/uma/admin/users/list.php') === 0 || strpos($current_page, '/uma/admin/users/users.php') === 0)
+                                                    ? 'class="nav-link text-dark fw-semibold rounded-start-pill active-nav"'
+                                                    : 'class="nav-link text-white"'; ?>>
+                        <i class='bx bx-user' style="width: 1.5rem; font-size: 1.5rem;"></i>
+                        Users
+                    </a>
+                <?php endif; ?>
             </li>
             </li>
             <!-- approval sidebar nav -->
