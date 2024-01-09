@@ -49,7 +49,8 @@
 									<th scope="col">Affiliation</th>
 									<th scope="col">Email</th>
 									<th scope="col">Account Type</th>
-									<th scope="col" class="user-edit-btn-box">
+									<th scope="col" id="user-edit-btn-box" class="curator-only">
+										<!-- for edit button -->
 										<button id="user-edit-btn" type="button" class="btn btn-primary py-3 px-4 curator-only"><i class="fa-solid fa-pen-to-square me-1"></i>Edit</button>
 									</th>
 								</tr>
@@ -110,12 +111,9 @@
 													}
 													?>
 											</td>
-											<td>
-												<input type="submit" name="confirm" value="confirm"> &nbsp &nbsp <br>
-												<input type="submit" name="delete" value="delete">
-											</td>
-											<td>
-												
+											<td id="apply-cancel-box" class="curator-only">
+												<input id="confirm-btn" type="submit" name="confirm" value="confirm" class="d-none"> &nbsp &nbsp <br>
+												<input id="delete-btn" type="submit" name="delete" value="delete" class="d-none">
 											</td>
 										</tr>
 									</tbody>
@@ -137,6 +135,8 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 	<!-- font awesome -->
 	<script src="https://kit.fontawesome.com/57e83eb6e4.js" crossorigin="anonymous"></script>
+	<!-- For button js -->
+	<script src="../../js/admin/user-edit.js"></script>
 
 </body>
 
