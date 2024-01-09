@@ -81,18 +81,6 @@
 							<label for="crop_local_name">Local Name <span class="text-danger">*</span></label>
 							<input id="crop_local_name" type="text" name="crop_local_name" placeholder="Enter Crop Local Name" class="form-control mb-2" required>
 
-							<!-- scientific name -->
-							<label for="crop_scientific_name">Scientific Name <span class="text-danger"></span></label>
-							<input id="crop_scientific_name" type="text" name="crop_scientific_name" placeholder="Enter Crop Scientific Name" class="form-control mb-2">
-
-							<!-- Crop Variety -->
-							<label for="crop_variety">Crop Variety <span class="text-danger"></span></label>
-							<input id="crop_variety" type="text" name="crop_variety" placeholder="Enter Crop Variety" class="form-control mb-2">
-
-							<!-- Crop Origin -->
-							<label for="crop_origin">Crop Origin <span class="text-danger"></span></label>
-							<input id="crop_origin" type="text" name="crop_origin" placeholder="Enter Crop Origin" class="form-control mb-2">
-
 							<!-- upland or lowland -->
 							<label>Type <span class="text-danger">*</span></label>
 							<div class="m-2" required>
