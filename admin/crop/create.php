@@ -99,6 +99,10 @@
 						<div class="col">
 							<!-- images chosen not yet uploaded i think i dont know -->
 							<div id="image-previews" class="overflow-x-scroll h-100 border d-flex flex-row">
+								<!-- mao dapat ni ang mag loop everytime naay kani nga crop sa image -->
+								<img src="https://images.unsplash.com/photo-1682695797221-8164ff1fafc9?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="m-2 img-thumbnail" style="height: 200px;">
+								<img src="https://plus.unsplash.com/premium_photo-1664382466520-afe23272be60?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="m-2 img-thumbnail" style="height: 200px;">
+								<img src="https://plus.unsplash.com/premium_photo-1674675647693-777780779499?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="m-2 img-thumbnail" style="height: 200px;">
 							</div>
 						</div>
 					</div>
