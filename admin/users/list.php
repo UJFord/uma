@@ -43,16 +43,13 @@
 					<form id="form-panel" action="code.php" method="POST" class="curator-only">
 						<table class="table table-bordered col-md-12">
 							<thead>
-								<tr>
+								<tr style="text-align: center;">
 									<th scope="col">First Name</th>
 									<th scope="col">Last Name</th>
 									<th scope="col">Affiliation</th>
 									<th scope="col">Email</th>
 									<th scope="col">Account Type</th>
-									<th scope="col" id="user-edit-btn-box" class="curator-only">
-										<!-- for edit button -->
-										<button id="user-edit-btn" type="button" class="btn btn-primary py-3 px-4 curator-only"><i class="fa-solid fa-pen-to-square me-1"></i>Edit</button>
-									</th>
+									<th scope="col" id="user-edit-btn-box" class="curator-only">Action</th>
 								</tr>
 							</thead>
 
@@ -72,48 +69,10 @@
 											<td><?php echo $row['last_name']; ?></td>
 											<td><?php echo $row['affiliation']; ?></td>
 											<td><?php echo $row['email']; ?></td>
-											<td>
-												<select name="account_type_id" class="w-100 border" rows="2" disabled>
-													<?php
-													// php code to display available schedules from the database
-													// query to select all available schedules in the database
-													$query2 = "SELECT * FROM account_type";
-
-													// Executing query
-													$query_run2 = pg_query($connection, $query2);
-
-													// count rows to check whether we have a schedule or not
-													$count2 = pg_num_rows($query_run2);
-
-													// if count is greater than 0 we have a schedule else we do not have a schedule
-													if ($count2 > 0) {
-														// we have a schedule
-														while ($row = pg_fetch_assoc($query_run2)) {
-															// get the detail of the schedule
-															$account_type_id = $row['account_type_id'];
-															$type_name = $row['type_name'];
-													?>
-															<option <?php
-																	if ($current_account_type_id === null) {
-																		echo "selected";
-																	} elseif ($current_account_type_id == $account_type_id) {
-																		echo "selected";
-																	}
-																	?> value="<?php echo $account_type_id; ?>"><?php echo $type_name; ?>
-															</option>
-														<?php
-														}
-													} else {
-														// we do not have a schedule
-														?>
-														<option value="0">No Farming name Found</option>
-													<?php
-													}
-													?>
-											</td>
-											<td id="apply-cancel-box" class="curator-only">
-												<input id="confirm-btn" type="submit" name="confirm" value="confirm" class="d-none"> &nbsp &nbsp <br>
-												<input id="delete-btn" type="submit" name="delete" value="delete" class="d-none">
+											<td><?php echo $row['type_name']; ?></td>
+											<td id="apply-cancel-box" class="curator-only" style="text-align: center;">
+												<a href="user.php?user_id=<?= $row['user_id']; ?>" class="btn btn-info btn-sm">View</a>
+												<button id="delete-btn" type="submit" name="delete" class="btn btn-danger btn-sm">Delete</a>
 											</td>
 										</tr>
 									</tbody>
@@ -136,7 +95,7 @@
 	<!-- font awesome -->
 	<script src="https://kit.fontawesome.com/57e83eb6e4.js" crossorigin="anonymous"></script>
 	<!-- For button js -->
-	<script src="../../js/admin/user-edit.js"></script>
+	<!-- <script src="../../js/admin/user-edit.js"></script> -->
 
 </body>
 

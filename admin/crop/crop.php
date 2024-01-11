@@ -36,7 +36,7 @@ require('../sidebar/side.php');
 			<?php
 			if (isset($_GET['crop_id'])) {
 				$crop_id = pg_escape_string($connection, $_GET['crop_id']);
-				$query = "SELECT crop.*, crop_location.*, crop_other_info.*, crop_farming_practice.* FROM crop LEFT JOIN crop_location ON crop.crop_id = crop_location.crop_id left join crop_other_info on crop.crop_id = crop_other_info.crop_id left join crop_farming_practice on crop.crop_id = crop_farming_practice.crop_id WHERE crop.crop_id = $1";
+				$query = "SELECT crop.*, crop_location.*, crop_other_info.*, crop_farming_practice.*, users.* FROM crop LEFT JOIN crop_location ON crop.crop_id = crop_location.crop_id left join crop_other_info on crop.crop_id = crop_other_info.crop_id left join crop_farming_practice on crop.crop_id = crop_farming_practice.crop_id left join users on crop.user_id = users.user_id WHERE crop.crop_id = $1";
 				$query_run = pg_query_params($connection, $query, array($crop_id));
 
 				$emptyValue = 'Empty';
@@ -64,6 +64,7 @@ require('../sidebar/side.php');
 					$crop_local_name = isset($crops['crop_local_name']) ? htmlspecialchars($crops['crop_local_name'], ENT_QUOTES) : $emptyValue;
 					$other_info = isset($crops['other_info']) ? htmlspecialchars($crops['other_info'], ENT_QUOTES) : $emptyValue;
 					$status = isset($crops['status']) ? htmlspecialchars($crops['status'], ENT_QUOTES) : $emptyValue;
+					$first_name = isset($crops['first_name']) ? htmlspecialchars($crops['first_name'], ENT_QUOTES) : $emptyValue;
 
 			?>
 					<!-- form for submitting -->
@@ -297,11 +298,11 @@ require('../sidebar/side.php');
 											<!-- Other Info Description -->
 											<label for="farming_practice-desc">Description <span class="text-danger"></span></label>
 											<textarea name="farming_practice_description" id="farming_practice-desc" class="txtarea form-control" rows="3" disabled <?php echo ($farming_practice_description !== $emptyValue) ? '>' . $farming_practice_description : 'placeholder="Empty">'; ?></textarea>
-								</div>
-								<?php
-								}
-								?>
 							</div>
+						<?php
+								}
+						?>
+						</div>
 
 						<!-- Other Information -->
 						<div class="other_info">
@@ -343,10 +344,23 @@ require('../sidebar/side.php');
 								<div class="col">
 									<!-- Other Info Urls -->
 									<label for="other_info_url">Links</label>
-									<a id="other_info_link" href="<?= $other_info_url; ?>">
-										<input id="other_info_url" name="other_info_url" type="text" <?php echo ($other_info_url != $emptyValue && $other_info_url != "") ? 'value="' . $other_info_url . '"' : 'placeholder="No Links"'; ?> class="form-control clickable" readonly>
-									</a>
+
+									<?php if ($other_info_url != $emptyValue && $other_info_url != "") : ?>
+										<?php
+										// Check if the URL is absolute
+										if (filter_var($other_info_url, FILTER_VALIDATE_URL) === false) {
+											// If not, prepend "http://"
+											$other_info_url = "http://" . $other_info_url;
+										}
+										?>
+										<a id="other_info_link" href="<?= $other_info_url; ?>" target="_blank">
+											<input id="other_info_url" name="other_info_url" type="text" value="<?= $other_info_url; ?>" class="form-control clickable" readonly>
+										</a>
+									<?php else : ?>
+										<input id="other_info_url" name="other_info_url" type="text" placeholder="No Links" class="form-control clickable" readonly>
+									<?php endif; ?>
 								</div>
+
 								<div class="col">
 									<!-- Other Info Description -->
 									<label for="other_info-desc">Description <span class="text-danger">*</span></label>

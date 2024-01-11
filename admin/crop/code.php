@@ -557,8 +557,6 @@ if (isset($_POST['update']) && $_SESSION['rank'] == 'curator') {
     $crop_other_info_id = pg_escape_string($con, $_POST['crop_other_info_id']);
     $user_id = pg_escape_string($con, $_POST['user_id']);
 
-
-
     $location_id = pg_escape_string($con, $_POST['location_id']);
     $other_info_id = pg_escape_string($con, $_POST['other_info_id']);
     $farming_practice_id = pg_escape_string($con, $_POST['farming_practice_id']);
@@ -739,7 +737,8 @@ if (isset($_POST['update']) && $_SESSION['rank'] == 'curator') {
         header("Location: crop.php?crop_id=" . $_POST['crop_id']);
         exit(0);
     } else {
-        echo "Error: " . pg_last_error($con);
+        $_SESSION['message'] = "<div class='error'>Crop Update Failed.</div>";
+        header("Location: crop.php?crop_id=" . $_POST['crop_id']);
         exit(0);
     }
 }

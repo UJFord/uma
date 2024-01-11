@@ -1,25 +1,27 @@
 let editBtn = document.querySelector('#edit-btn');
 let applyBtn = document.querySelector('#apply-btn');
 let cancelBtn = document.querySelector('#cancel-btn');
-let userEditBtn = document.querySelector('#user-edit-btn');  // for users editing
+let linkElement = document.querySelector('#other_info_link'); // Replace 'your-link-id' with the actual ID of your link
 
-// Function to remove hidden attribute from an element
-function showElement(elementId) {
-    let element = document.getElementById(elementId);
-    if (element) {
-        element.removeAttribute('hidden');
-    }
+// Function to remove readonly attribute from text input fields
+function enableTextInputs(containerId) {
+    let textInputs = document.querySelectorAll(`#${containerId} input[type="text"][readonly]`);
+    textInputs.forEach(input => {
+        input.removeAttribute('readonly');
+    });
 }
 
-userEditBtn.addEventListener('click', () => {
+// edit
+editBtn.addEventListener('click', () => {
     // form panel input disabled
-    let inputDisabled = document.querySelectorAll('#form-panel input[disabled], #form-panel select[disabled]');
+    let inputDisabled = document.querySelectorAll('#form-panel input[disabled], #form-panel textarea[disabled], #form-panel select[disabled]');
+
     // edit box
-    let editBox = document.querySelector('#user-edit-btn');
+    let editBox = document.querySelector('#edit-btn-box');
     // apply and cancel box
-    let applyCancelBox = document.querySelector('#confirm-btn');
+    let applyCancelBox = document.querySelector('#apply-cancel-box');
     // delete button
-    let deleteBox = document.querySelector('#delete-btn');
+    let deleteBox = document.querySelector('#delete-box');
 
     inputDisabled.forEach(input => {
         // enable form panel input
@@ -35,12 +37,11 @@ userEditBtn.addEventListener('click', () => {
     applyCancelBox.classList.remove('d-none');
     // delete box
     deleteBox.classList.remove('d-none');
+
 });
+
 // cancel
 cancelBtn.addEventListener('click', () => {
-    // Enable link
-    enableLink(linkElement);
-
     // Reload the page
     location.reload();
 });
