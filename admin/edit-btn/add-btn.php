@@ -1,4 +1,4 @@
-<div id="button-div" class="fixed-bottom d-flex justify-content-end">
+<div id="button-div" class="fixed-bottom d-flex justify-content-end z-2">
     <!-- show in view mode -->
     <div id="edit-btn-box" class="m-3">
         <button id="apply-btn" type="submit" name="save" class="btn btn-success px-3 py-2 me-1 admin-only curator-only" onclick="validateAndSubmitForm()"><i class="fa-solid fa-check me-1"></i>Add</button>

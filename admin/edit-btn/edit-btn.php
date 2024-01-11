@@ -1,4 +1,4 @@
-<div id="button-div" class="fixed-bottom d-flex justify-content-end">
+<div id="button-div" class="fixed-bottom d-flex justify-content-end z-2">
     <!-- show in view mode -->
     <div id="edit-btn-box" class="m-3">
         <button id="edit-btn" type="button" class="btn btn-primary py-3 px-4 curator-only"><i class="fa-solid fa-pen-to-square me-1"></i>Edit</button>

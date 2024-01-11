@@ -13,7 +13,7 @@ require('../../html/navfoot/connection.php');
 </script>
 <script src="../../js/admin/access.js"></script>
 <!-- main nav -->
-<nav id="main-nav" class="d-none d-md-block col col-3 col-lg-3 col-xl-2 fixed-top h-100 m-0 p-0">
+<nav id="main-nav" class="d-none d-md-block col col-3 col-lg-3 col-xl-2 fixed-top h-100 m-0 p-0 z-3">
     <div class="d-flex flex-column flex-shrink-0 text-white h-100">
         <!-- title -->
         <a href="#" class="d-flex align-items-center m-3 mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
