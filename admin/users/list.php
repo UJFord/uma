@@ -39,8 +39,15 @@
 						<h2 id="crops-title" class="fw-semibold">Users</h2>
 					</div>
 
+					<?php
+					include('../message.php');
+					?>
+
 					<h1 class="text-center  text-white bg-dark col-md-12">Users</h1>
 					<form id="form-panel" action="code.php" method="POST" class="curator-only">
+						<div>
+							<a href="create.php" class="btn btn-info btn-sm">Add</a>
+						</div>
 						<table class="table table-bordered col-md-12">
 							<thead>
 								<tr style="text-align: center;">

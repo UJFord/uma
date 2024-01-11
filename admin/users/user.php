@@ -91,7 +91,14 @@
 							<input type="hidden" name="current_account_type_id" value="<?= $current_account_type_id; ?>">
 
 							<!-- general information -->
-							<h3>General Information</h3>
+							<div class="row">
+								<h3>General Information</h3>
+
+								<div>
+									<a href="reset.php?user_id=<?= $user_id; ?>">Reset Password</a>
+								</div>
+
+							</div>
 
 							<div class="row">
 								<div class="col-5">
@@ -103,14 +110,13 @@
 									<label for="last-name">Last Name <span class="text-danger">*</span></label>
 									<input id="last-name" type="text" name="last_name" value="<?= $last_name; ?>" class="form-control form-control-lg mb-2" disabled>
 
-									<!-- Gender -->
-									<label for="gender">Gender <span class="text-danger">*</span></label>
-									<input id="gender" type="text" name="gender" value="<?= $gender ?>" class="form-control form-control-lg mb-2" disabled>
-
 									<!-- Email -->
 									<label for="email">Email <span class="text-danger"></span></label>
 									<input id="email" type="text" name="email" value="<?= $email ?>" class="form-control form-control-lg mb-2" disabled>
 
+									<!-- Gender -->
+									<label for="gender">Gender <span class="text-danger">*</span></label>
+									<input id="gender" type="text" name="gender" value="<?= $gender ?>" class="form-control form-control-lg mb-2" disabled>
 								</div>
 
 								<div class="col-5">
@@ -119,7 +125,7 @@
 									<input id="registration_date" type="text" name="registration_date" value="<?= $formatted_date ?>" class="form-control form-control-lg mb-2 disabled-input">
 
 									<!-- Account Type -->
-									<label for="type_name">Account Type <span class="text-danger"></span></label>
+									<label for="type_name">Account Type <span class="text-danger">*</span></label>
 									<select id="type_name" name="account_type_id" class="w-100 border form-control-lg mb-2" rows="2" disabled>
 										<?php
 										// php code to display available schedules from the database
