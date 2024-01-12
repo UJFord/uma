@@ -3,349 +3,158 @@ session_start();
 
 $con = pg_connect("host=localhost dbname=farm_crops user=postgres password=123") or die("Could not connect to server\n");
 
-if (isset($_POST['save'])) {
-    // Escape user inputs for data in Ritual table
-    // Function to handle empty values
-    function handleEmpty($value)
-    {
-        $emptyValue = 'Empty';
-        return empty($value) ? $emptyValue : $value;
+if (isset($_POST['save']) && $_SESSION['rank'] == 'curator') {
+    // 1. Get the Data from Signup form
+    $account_type_id = pg_escape_string($con, $_POST['account_type_id']);
+    $first_name = pg_escape_string($con, $_POST['first_name']);
+    $last_name = pg_escape_string($con, $_POST['last_name']);
+    $gender = pg_escape_string($con, $_POST['gender']);
+    $email = pg_escape_string($con, $_POST['email']);
+    $username = pg_escape_string($con, $_POST['username']);
+    $affiliation = pg_escape_string($con, $_POST['affiliation']);
+    $raw_password = $_POST['password'];
+
+    // 2. Validate password length
+    if (strlen(trim($raw_password)) < 8) {
+        $_SESSION['message'] = "<div class='error text-center'>Password must be at least 8 characters.</div>";
+        header("Location: create.php");
+        exit(0);
     }
 
-    $emptyValue = 'Empty';
+    // 3. Check if the email already exists
+    $query = "SELECT COUNT(*) FROM users WHERE email = $1";
+    $params = array($email);
 
-    // Escape user inputs for data in Farming table
-    $farming_practice_name = handleEmpty($_POST['farming_practice_name']);
-    $farming_practice_type = handleEmpty($_POST['farming_practice_type']);
-    $farming_practice_description = handleEmpty($_POST['farming_practice_description']);
+    $result = pg_query_params($con, $query, $params);
 
-    // Prepare the SQL query with placeholders
-    $query = "INSERT INTO farming_practice
-            (farming_practice_name, farming_practice_type, farming_practice_description) 
-            VALUES 
-            ($1, $2, $3) 
-            RETURNING farming_practice_id";
+    if ($result) {
+        $row = pg_fetch_assoc($result);
 
-    // Prepare the statement
-    $stmt = pg_prepare($con, "insert_query", $query);
-
-    if ($stmt) {
-        // Bind parameters
-        $params = array(
-            $farming_practice_name,
-            $farming_practice_type,
-            $farming_practice_description
-        );
-
-        // Execute the statement
-        $result = pg_execute($con, "insert_query", $params);
-
-        if ($result) {
-            $row = pg_fetch_row($result);
-            $farming_id = $row[0];
-
-            $_SESSION['message'] = "Farming Created Successfully";
-            header("Location: list.php");
-            exit(0);
-        } else {
-            echo "Error: wala " . pg_last_error($con);
+        if ($row['count'] > 0) {
+            $_SESSION['message'] = "<div class='error text-center'>Email already exists.</div>";
+            header("Location: create.php");
             exit(0);
         }
-    } else {
-        echo "Error preparing statement: " . pg_last_error($con);
-        exit(0);
-    }
-} else {
-    echo "Error: dili " . pg_last_error($con);
-    // Handle the error, if needed
-    exit(0);
-}
-
-if (isset($_POST['update'])) {
-    $farming_id = pg_escape_string($con, $_POST['farming_id']);
-    $farming_name = $_POST['farming_name'];
-    $description = $_POST['description'];
-    $current_farming_image = $_POST['current_farming_image'];
-    $importance = $_POST['importance'];
-    $role_in_maintaining_upland_ecosystem = $_POST['role_in_maintaining_upland_ecosystem'];
-    $timing = $_POST['timing'];
-    $benefits = $_POST['benefits'];
-    $environmental_impacts = $_POST['environmental_impacts'];
-    $considerations = $_POST['considerations'];
-    $sustainable_practices = $_POST['sustainable_practices'];
-    $history_development = $_POST['history_development'];
-    $construction_and_maintenance = $_POST['construction_and_maintenance'];
-    $challenges = $_POST['challenges'];
-    $principles = $_POST['principles'];
-    $other_info = $_POST['other_info'];
-
-    // Function to handle empty values and NULL values
-    function handleValue($value)
-    {
-        return $value === '' ? 'Empty' : $value;
     }
 
-    // Apply the function to each field
-    $farming_name = handleValue($farming_name);
-    $description = handleValue($description);
-    $importance = handleValue($importance);
-    $role_in_maintaining_upland_ecosystem = handleValue($role_in_maintaining_upland_ecosystem);
-    $timing = handleValue($timing);
-    $benefits = handleValue($benefits);
-    $environmental_impacts = handleValue($environmental_impacts);
-    $considerations = handleValue($considerations);
-    $sustainable_practices = handleValue($sustainable_practices);
-    $history_development = handleValue($history_development);
-    $construction_and_maintenance = handleValue($construction_and_maintenance);
-    $challenges = handleValue($challenges);
-    $principles = handleValue($principles);
-    $other_info = handleValue($other_info);
+    // 4. Hash the password
+    $password = password_hash($raw_password, PASSWORD_DEFAULT);
 
-    // Function to generate a unique image name
-    function generate_unique_farming_image_name($ext)
-    {
-        return "Farming_Image" . rand(000, 999) . '.' . $ext;
-    }
+    // 5. SQL to insert data into users table
+    $sql = "INSERT INTO users (first_name, last_name, gender, email, username, affiliation, password, account_type_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)";
+    $res = pg_query_params($con, $sql, array($first_name, $last_name, $gender, $email, $username, $affiliation, $password, $account_type_id));
 
-    // Check if the image is selected or not
-    if (isset($_FILES['image']['name'])) {
-        $image = $_FILES['image']['name'];
-
-        // Check if a new image is available
-        if ($image != "") {
-            $ext = pathinfo($image, PATHINFO_EXTENSION);
-            $image = generate_unique_farming_image_name($ext);
-
-            // Check if the new image name already exists in the database
-            $query = "SELECT image FROM farming WHERE image = $1";
-            $result = pg_query_params($con, $query, array($image));
-
-            // Check for errors
-            if ($result === false) {
-                echo "Error: " . pg_last_error($con);
-                die();
-            }
-
-            $count = pg_num_rows($result);
-
-            if ($count > 0) {
-                // If the image name exists, generate a new one
-                $image = generate_unique_farming_image_name($ext);
-            } else {
-                // Upload the new image
-                $source_path = $_FILES['image']['tmp_name'];
-                $destination_path = "../img/farming/" . $image;
-
-                // Upload the image
-                $upload = move_uploaded_file($source_path, $destination_path);
-
-                // Check whether the image is uploaded or not
-                if (!$upload) {
-                    echo "wala na upload ang farming";
-                    die();
-                }
-
-                // Remove the current image if available
-                if ($current_farming_image != "") {
-                    $remove_path = "../img/farming/" . $current_farming_image;
-
-                    // Check if the file exists before attempting to remove
-                    if (file_exists($remove_path)) {
-                        $remove = unlink($remove_path);
-
-                        // Check whether the current image is removed or not
-                        if (!$remove) {
-                            echo "wala na remove";
-                            die();
-                        }
-                    }
-                }
-            }
-        } else {
-            $image = $current_farming_image;
-        }
-    } else {
-        $image = $current_farming_image;
-    }
-
-    // Update query with parameterized values for farming table
-    $farming_query = "UPDATE farming SET 
-        farming_name = $1,
-        description = $2,
-        image = $3,
-        importance = $4,
-        role_in_maintaining_upland_ecosystem = $5,
-        timing = $6,
-        benefits = $7,
-        environmental_impacts = $8,
-        considerations = $9,
-        sustainable_practices = $10,
-        history_development = $11,
-        construction_and_maintenance = $12,
-        challenges = $13,
-        principles = $14,
-        other_info = $15
-        WHERE farming_id = $16";
-
-    // Execute parameterized query for farming table
-    $farming_query_run = pg_query_params($con, $farming_query, array(
-        $farming_name, $description, $image, $importance, $role_in_maintaining_upland_ecosystem, $timing,
-        $benefits, $environmental_impacts, $considerations, $sustainable_practices, $history_development,
-        $construction_and_maintenance, $challenges, $principles, $other_info, $farming_id
-    ));
-
-    if (!$farming_query_run) {
-        echo "Error updating farming: " . pg_last_error($con);
-        exit(0);
-    }
-
-    // Continue with the update for the ritual table
-    $ritual_id = pg_escape_string($con, $_POST['ritual_id']);
-    $description = $_POST['description'];
-    $ritual_name = $_POST['ritual_name'];
-    $current_ritual_image = $_POST['current_ritual_image'];
-    $purpose = $_POST['purpose'];
-    $timing = $_POST['timing'];
-    $participants = $_POST['participants'];
-    $items_used = $_POST['items_used'];
-    $other_info = $_POST['other_info'];
-
-    // Apply the function to each field for the ritual table
-    $ritual_name = handleValue($ritual_name);
-    $description = handleValue($description);
-    $purpose = handleValue($purpose);
-    $timing = handleValue($timing);
-    $participants = handleValue($participants);
-    $items_used = handleValue($items_used);
-    $other_info = handleValue($other_info);
-
-    // Function to generate a unique image name
-    function generate_unique_ritual_image_name($ext)
-    {
-        return "Ritual_Image_" . rand(000, 999) . '.' . $ext;
-    }
-
-    // Check if the image is selected or not
-    if (isset($_FILES['ritual_image']['name'])) {
-        $ritual_image = $_FILES['ritual_image']['name'];
-
-        // Check if a new image is available
-        if ($ritual_image != "") {
-            $ext = pathinfo($ritual_image, PATHINFO_EXTENSION);
-            $ritual_image = generate_unique_ritual_image_name($ext);
-
-            // Check if the new image name already exists in the database
-            $query = "SELECT ritual_image FROM ritual WHERE ritual_image = $1";
-            $result = pg_query_params($con, $query, array($ritual_image));
-
-            // Check for errors
-            if ($result === false) {
-                echo "Error: " . pg_last_error($con);
-                die();
-            }
-
-            $count = pg_num_rows($result);
-
-            if ($count > 0) {
-                // If the image name exists, generate a new one
-                $ritual_image = generate_unique_ritual_image_name($ext);
-            } else {
-                // Upload the new image
-                $source_path = $_FILES['ritual_image']['tmp_name'];
-                $destination_path = "../img/rituals/" . $ritual_image;
-
-                // Upload the image
-                $upload = move_uploaded_file($source_path, $destination_path);
-
-                // Check whether the image is uploaded or not
-                if (!$upload) {
-                    echo "wala na upload and ritual";
-                    die();
-                }
-
-                // Remove the current image if available
-                if ($current_ritual_image != "") {
-                    $remove_path = "../img/rituals/" . $current_ritual_image;
-
-                    // Check if the file exists before attempting to remove
-                    if (file_exists($remove_path)) {
-                        $remove = unlink($remove_path);
-
-                        // Check whether the current image is removed or not
-                        if (!$remove) {
-                            echo "wala na remove";
-                            die();
-                        }
-                    }
-                }
-            }
-        } else {
-            $ritual_image = $current_ritual_image;
-        }
-    } else {
-        $ritual_image = $current_ritual_image;
-    }
-
-    // Update query with parameterized values for ritual table
-    $ritual_query = "UPDATE ritual SET 
-            ritual_name = $1,
-            description = $2,
-            ritual_image = $3,
-            purpose = $4,
-            timing = $5,
-            participants = $6,
-            items_used = $7,
-            other_info = $8
-            WHERE ritual_id = $9";
-
-    // Execute parameterized query for ritual table
-    $ritual_query_run = pg_query_params($con, $ritual_query, array(
-        $ritual_name, $description, $ritual_image, $purpose, $timing, $participants, $items_used, $other_info, $ritual_id
-    ));
-
-    if ($ritual_query_run) {
-        $_SESSION['message'] = "Farming and Ritual Updated Successfully";
-        header("Location: farming.php?farming_id=" . $_POST['farming_id']);
+    if ($res) {
+        $_SESSION['message'] = "<div class='success text-center'>User Created Successfully.</div>";
+        header("Location: list.php");
         exit(0);
     } else {
-        echo "Error updating ritual: " . pg_last_error($con);
+        echo "Error: " . pg_last_error($con);
+        // $_SESSION['failed'] = "<div class='error text-center'>Failed to Create User.</div>";
+        // header("Location: create.php");
         exit(0);
     }
 }
 
-if (isset($_POST['delete'])) {
-    $farming_id = pg_escape_string($con, $_POST['farming_id']);
-    $result = pg_query($con, "select * from farming where farming_id='$farming_id'");
-    $count = pg_num_rows($result);
+if (isset($_POST['update']) && $_SESSION['rank'] == 'curator') {
+    $user_id = pg_escape_string($con, $_POST['user_id']);
+    $current_account_type_id = pg_escape_string($con, $_POST['current_account_type_id']);
+    $first_name = pg_escape_string($con, $_POST['first_name']);
+    $last_name = pg_escape_string($con, $_POST['last_name']);
+    $gender = pg_escape_string($con, $_POST['gender']);
+    $email = pg_escape_string($con, $_POST['email']);
+    $username = pg_escape_string($con, $_POST['username']);
+    $affiliation = pg_escape_string($con, $_POST['affiliation']);
 
-    if ($count > 0) {
-        while ($row = pg_fetch_assoc($result)) {
-            $ritual_id = $row['ritual_id'];
-        }
+    if (isset($_POST['account_type_id']) && $_POST['account_type_id'] !== "") {
+        $account_type_id = pg_escape_string($con, $_POST['account_type_id']);
+    } else {
+        $account_type_id = $current_account_type_id;
     }
 
-    // Delete from Farming Table
-    $query_delete_farming = "DELETE FROM farming WHERE farming_id=$1";
-    $query_run_delete_farming = pg_query_params($con, $query_delete_farming, [$farming_id]);
 
-    if ($query_run_delete_farming) {
-        // Delete from Traditional Crop Traits table
-        $query_delete_ritual = "DELETE FROM ritual WHERE ritual_id = $1";
-        $query_run_delete_ritual = pg_query_params($con, $query_delete_ritual, [$ritual_id]);
+    $query_user = "UPDATE users SET first_name = $1, last_name = $2, gender = $3, email = $4, username = $5, affiliation = $6, account_type_id = $7 WHERE user_id = $8";
+    $params_user = array($first_name, $last_name, $gender, $email, $username, $affiliation, $account_type_id, $user_id);
+    $query_run_user = pg_query_params($con, $query_user, $params_user);
 
-        // Check if all deletions were successful
-        if (
-            $query_run_delete_ritual
-        ) {
-            $_SESSION['message'] = "Farming and associated records deleted successfully";
-            header("Location: list.php");
-            exit(0);
-        } else {
-            echo "Error: " . pg_last_error($con);
-            exit(0);
-        }
+    if ($query_run_user) {
+        header("location: user.php?user_id=" . $_POST['user_id']);
+        exit();
     } else {
         echo "Error: " . pg_last_error($con);
         exit(0);
+    }
+}
+
+if (isset($_POST['reset']) && $_SESSION['rank'] == 'curator') {
+    $user_id = pg_escape_string($con, $_POST['user_id']);
+    $password = pg_escape_string($con, $_POST['password']);
+    $current_password = pg_escape_string($con, $_POST['current_password']);
+    $password1 = pg_escape_string($con, $_POST['password1']);
+    $password2 = pg_escape_string($con, $_POST['password2']);
+
+    // Validate password length
+    if (strlen($password1) < 8 || strlen($password2) < 8) {
+        $_SESSION['message'] = "<div class='error text-center'>Password must be at least 8 characters.</div>";
+        header("location: reset.php");
+        exit();
+    }
+
+    // Check if the current password is correct
+    if (!password_verify($current_password, $password)) {
+        $_SESSION['message'] = "<div class='error text-center'>Current Password is wrong.</div>";
+        header("location: reset.php");
+        exit();
+    }
+
+    // Check if the new passwords match
+    if ($password1 != $password2) {
+        $_SESSION['message'] = "<div class='error text-center'>Password must match.</div>";
+        header("location: reset.php");
+        exit();
+    } else {
+        $final_password = password_hash($password1, PASSWORD_DEFAULT);
+    }
+
+    // Update the password in the database
+    $query_reset = "UPDATE users SET password = $1 WHERE user_id = $2";
+    $query_run_reset = pg_query_params($con, $query_reset, array($final_password, $user_id));
+
+    if ($query_run_reset) {
+        $_SESSION['message'] = "<div class='success text-center'>Password Changed Successfully.</div>";
+        header("location: user.php?user_id=" . $_POST['user_id']);
+        exit();
+    } else {
+        echo "Error: " . pg_last_error($con);
+        exit(0);
+    }
+}
+
+
+if (isset($_POST['delete']) && $_SESSION['rank'] == 'curator') {
+    $user_id = $_POST['user_id'];
+
+    // Update related records in the "crop" table
+    $query_update_crop = "UPDATE crop SET user_id = NULL WHERE user_id = $1";
+    $query_run_update_crop = pg_query_params($con, $query_update_crop, [$user_id]);
+
+    // Check if the update query was successful
+    if ($query_run_update_crop) {
+        // Proceed with the user deletion
+        $query_delete_user = "DELETE FROM users WHERE user_id = $1";
+        $query_run_delete_user = pg_query_params($con, $query_delete_user, [$user_id]);
+
+        // Check if the user deletion query was successful
+        if ($query_run_delete_user) {
+            $_SESSION['message'] = "User Deleted.";
+            header("location: list.php");
+            exit();
+        } else {
+            echo "Error deleting user: " . pg_last_error($con);
+            exit();
+        }
+    } else {
+        echo "Error updating related records: " . pg_last_error($con);
+        exit();
     }
 }

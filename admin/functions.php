@@ -103,7 +103,6 @@ function login($data)
         }
     }
 
-
     return $errors;
 }
 
