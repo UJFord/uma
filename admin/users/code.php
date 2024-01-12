@@ -86,39 +86,50 @@ if (isset($_POST['update']) && $_SESSION['rank'] == 'curator') {
     }
 }
 
-if(isset($_POST['reset']) && $_SESSION['rank'] == 'curator'){
-    $user_id = pg_escape_string($_POST['user_id']);
-    $password = pg_escape_string($_POST['password']);
-    $current_password = pg_escape_string($_POST['current_password']);
-    $password1 = pg_escape_string($_POST['password1']);
-    $password2 = pg_escape_string($_POST['password2']);
+if (isset($_POST['reset']) && $_SESSION['rank'] == 'curator') {
+    $user_id = pg_escape_string($con, $_POST['user_id']);
+    $password = pg_escape_string($con, $_POST['password']);
+    $current_password = pg_escape_string($con, $_POST['current_password']);
+    $password1 = pg_escape_string($con, $_POST['password1']);
+    $password2 = pg_escape_string($con, $_POST['password2']);
 
-    if($password != $current_password){
+    // Validate password length
+    if (strlen($password1) < 8 || strlen($password2) < 8) {
+        $_SESSION['message'] = "<div class='error text-center'>Password must be at least 8 characters.</div>";
+        header("location: reset.php");
+        exit();
+    }
+
+    // Check if the current password is correct
+    if (!password_verify($current_password, $password)) {
         $_SESSION['message'] = "<div class='error text-center'>Current Password is wrong.</div>";
         header("location: reset.php");
         exit();
     }
 
-    if($password1 != $password2){
+    // Check if the new passwords match
+    if ($password1 != $password2) {
         $_SESSION['message'] = "<div class='error text-center'>Password must match.</div>";
         header("location: reset.php");
         exit();
-    } else{
+    } else {
         $final_password = password_hash($password1, PASSWORD_DEFAULT);
     }
 
-    $query_reset = "UPDATE users set $password = 1 where user_id = $2";
+    // Update the password in the database
+    $query_reset = "UPDATE users SET password = $1 WHERE user_id = $2";
+    $query_run_reset = pg_query_params($con, $query_reset, array($final_password, $user_id));
 
-    $query_run_rest = pg_query_params($con, $query_reset, array($final_password, $user_id));
-    if($query_run_rest){
+    if ($query_run_reset) {
         $_SESSION['message'] = "<div class='success text-center'>Password Changed Successfully.</div>";
         header("location: user.php?user_id=" . $_POST['user_id']);
         exit();
-    } else{
+    } else {
         echo "Error: " . pg_last_error($con);
         exit(0);
     }
 }
+
 
 if (isset($_POST['delete']) && $_SESSION['rank'] == 'curator') {
     $user_id = $_POST['user_id'];

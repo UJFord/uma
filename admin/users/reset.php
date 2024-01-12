@@ -36,8 +36,8 @@
         <section class="p-0 m-0 col col-md-9 col-xl-10 min-vh-100">
             <!-- form for submitting -->
             <?php
-            if (isset($_POST['reset'])) {
-                $user_id = pg_escape_string($_POST['user_id']);
+            if (isset($_GET['user_id'])) {
+                $user_id = pg_escape_string($connection, $_GET['user_id']);
                 $query = "SELECT * from users where user_id = $1";
                 $query_run = pg_query_params($connection, $query, array($user_id));
 
