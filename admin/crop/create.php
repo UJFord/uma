@@ -49,7 +49,7 @@
 				<div class="form-control p-3 mt-3">
 
 					<!-- general information -->
-					<h3>General Information</h3>
+					<h3>General Info <span class="fs-6">(Required)</span></h3>
 					<div class="row">
 						<div class="col-4">
 							<!-- crop name -->
@@ -82,8 +82,8 @@
 									<input class="form-check-input" type="radio" name="upland_or_lowland" id="ccateg-root" value="Root Crop" required>
 								</div>
 								<div class="form-check form-check-inline">
-									<label class="form-check-label" for="ccateg-other">Other Crops</label>
-									<input class="form-check-input" type="radio" name="upland_or_lowland" id="ccateg-other" value="Other Crops" required>
+									<label class="form-check-label" for="ccateg-other">Other</label>
+									<input class="form-check-input" type="radio" name="upland_or_lowland" id="ccateg-other" value="Other" required>
 								</div>
 							</div>
 
@@ -120,7 +120,7 @@
 					</div>
 
 					<!-- More -->
-					<h3 class="mt-5">Optional Information</h5>
+					<h3 class="mt-5">Additional Info</h5>
 
 						<div class="row">
 							<!-- Location -->

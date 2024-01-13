@@ -2,6 +2,16 @@
 <?php
 $current_page = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 require('../../html/navfoot/connection.php');
+
+$atcrop=    strpos($current_page, '/uma/admin/crop/list.php') === 0 ||
+            strpos($current_page, '/uma/admin/crop/crop.php') === 0 ||
+            strpos($current_page, '/uma/admin/crop/create.php') === 0;
+
+$atuser=    strpos($current_page, '/uma/admin/users/list.php') === 0 || 
+            strpos($current_page, '/uma/admin/users/user.php') === 0;
+
+$atapprove= strpos($current_page, '/uma/admin/approval/approval.php') === 0 || 
+            strpos($current_page, '/uma/admin/approval/approval.php') === 0;
 ?>
 <!-- custom css -->
 <link rel="stylesheet" href="../../css/admin/side.css">
@@ -25,29 +35,27 @@ require('../../html/navfoot/connection.php');
         <ul class="nav nav-pills flex-column mb-auto ps-3">
             <!-- crops sidebar nav -->
             <li class="nav-item">
-                <a href="../crop/list.php" <?php echo (strpos($current_page, '/uma/admin/crop/list.php') === 0 || strpos($current_page, '/uma/admin/crop/crop.php') === 0 || strpos($current_page, '/uma/admin/crop/create.php') === 0)
+                <a href="../crop/list.php" <?php echo ($atcrop)
                                                 ? 'class="nav-link text-dark fw-semibold rounded-start-pill active-nav"'
                                                 : 'class="nav-link text-white"'; ?>>
                     <i class="fa-solid fa-wheat-awn" style="width: 1.5rem;"></i>
                     Crops
                 </a>
             </li>
-            </li>
             <!-- users sidebar nav -->
-            <li class="curator-only">
-                <?php if (isset($_SESSION['LOGGED_IN']) && $_SESSION['LOGGED_IN']) : ?>
-                    <a href="../users/list.php" <?php echo (strpos($current_page, '/uma/admin/users/list.php') === 0 || strpos($current_page, '/uma/admin/users/users.php') === 0)
+            <?php if (isset($_SESSION['LOGGED_IN']) && $_SESSION['LOGGED_IN']) : ?>
+                <li class="curator-only">
+                    <a href="../users/list.php" <?php echo ($atuser)
                                                     ? 'class="nav-link text-dark fw-semibold rounded-start-pill active-nav"'
                                                     : 'class="nav-link text-white"'; ?>>
                         <i class='bx bx-user' style="width: 1.5rem; font-size: 1.5rem;"></i>
                         Users
                     </a>
-                <?php endif; ?>
-            </li>
-            </li>
+                </li>
+            <?php endif; ?>
             <!-- approval sidebar nav -->
             <li>
-                <a href="../approval/approval.php" <?php echo (strpos($current_page, '/uma/admin/approval/approval.php') === 0 || strpos($current_page, '/uma/admin/approval/approval.php') === 0)
+                <a href="../approval/approval.php" <?php echo ($atapprove)
                                                         ? 'class="nav-link text-dark fw-semibold rounded-start-pill active-nav"'
                                                         : 'class="nav-link text-white"'; ?>>
                     <i class='bx bx-list-check' style="width: 1.5rem; font-size: 1.5rem;"></i>

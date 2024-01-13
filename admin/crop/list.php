@@ -36,7 +36,7 @@ require('../sidebar/side.php');
 				<div class="row d-flex justify-content-between mb-3">
 					<!-- title -->
 					<div class="col-6">
-						<h2 id="crops-title" class="fw-semibold">Croeps</h2>
+						<h2 id="crops-title" class="fw-semibold">Crops</h2>
 					</div>
 
 					<!-- search -->
