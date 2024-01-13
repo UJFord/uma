@@ -3,14 +3,17 @@
 $current_page = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 require('../../html/navfoot/connection.php');
 
+// sites to make crop highlight
 $atcrop = strpos($current_page, '/uma/admin/crop/list.php') === 0 ||
     strpos($current_page, '/uma/admin/crop/crop.php') === 0 ||
     strpos($current_page, '/uma/admin/crop/create.php') === 0;
 
+// sites to make users highlight
 $atuser = strpos($current_page, '/uma/admin/users/list.php') === 0 ||
     strpos($current_page, '/uma/admin/users/user.php') === 0 ||
-    strpos($current_page, '/uma/admin/users/create.php') === 0 ;
+    strpos($current_page, '/uma/admin/users/create.php') === 0;
 
+// sites to make approval highlight
 $atapprove = strpos($current_page, '/uma/admin/approval/approval.php') === 0 ||
     strpos($current_page, '/uma/admin/approval/approval.php') === 0;
 ?>
@@ -47,7 +50,7 @@ $atapprove = strpos($current_page, '/uma/admin/approval/approval.php') === 0 ||
                     <a href="../users/list.php" <?php echo ($atuser)
                                                     ? 'class="nav-link text-dark fw-semibold rounded-start-pill active-nav"'
                                                     : 'class="nav-link text-white"'; ?>>
-                        <i class="fa-regular fa-user" style="width: 1.5rem;"></i>
+                        <i class="fa-solid fa-user" style="width: 1.5rem;"></i>
                         Users
                     </a>
                 </li>
