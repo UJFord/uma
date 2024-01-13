@@ -1,8 +1,8 @@
 /* variable colors */
-:root{
+:root {
 	/* color pallete */
 	--mainBrand: #016A70;
-	--darkAccent:#647A78;
+	--darkAccent: #647A78;
 	--lightAccent: #7FA9AD;
 	--darkShades: #202A21;
 	--lightShades: #FFFFDD;
@@ -12,6 +12,21 @@
 	--headColor: #ffc861;
 }
 
-#form-panel{
+.disabled-input {
+	pointer-events: none;
+	background-color: #f8f9fa;
+	/* You can customize the background color */
+	color: #6c757d;
+	/* You can customize the text color */
+}
+
+.clickable {
+	cursor: pointer;
+	color: blue;
+	/* or any other color you prefer for links */
+	text-decoration: underline;
+}
+
+#form-panel {
 	background: var(--lightShades);
 }

@@ -6,11 +6,27 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
-	<!-- cutom css -->
+
+	<!-- add entry custom css -->
 	<link rel="stylesheet" href="../../css/admin/entry.css" />
+	<!-- sidebar custom css -->
+	<link rel="stylesheet" href="../../css/admin/side.css">
+
 	<!-- favicon -->
 	<link rel="shortcut icon" href="img/logo/Uma logo.svg" type="image/x-icon" />
 	<title>Crop sa Editor</title>
+
+	<?php
+	session_start();
+	// sidebar
+	require('../sidebar/side.php');
+	// include('../login/login-check.php');
+	?>
+
+	<!-- summernote -->
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 </head>
 
 <body class="overflow-x-hidden">
@@ -18,385 +34,310 @@
 	<!-- container of everything -->
 	<div class="row">
 
-		<!-- sidebar -->
-		<?php
-		require('../sidebar/side.php');
-		?>
 		<!-- space holder of side panel -->
 		<section class=" d-none d-md-block col col-3 col-xl-2 p-0 m-0"></section>
 		<!-- main panel -->
-		<section id="nav-cards" class="p-0 m-0 col col-md-9 col-xl-10">
+		<section id="" class="p-0 m-0 col col-md-9 col-xl-10">
 
 			<!-- form for submitting -->
-			<form id="form-panel" name="Form" action="code.php" autocomplete="off" onsubmit="return validateForm()" method="POST" class=" py-3 px-5">
+			<form id="form-panel" name="Form" action="code.php" autocomplete="off" method="POST" enctype="multipart/form-data" class=" py-3 px-5">
 				<!-- back button -->
 				<a href="list.php" class="link-offset-2"><i class="bi bi-chevron-left"></i>Go Back</a>
 
-				<!-- display name-->
-				<div class="row d-flex justify-content-between my-3">
-					<div class="col-6">
-						<h3 id="crops-title"><input type="text" name="crop_name" placeholder="Display Title" class="fw-semibold w-100 border py-1 px-2"></h3>
+				<?php
+				include('../message.php');
+				?>
+				<input type="hidden" name="user_id" value="<?= $_SESSION['USER']['user_id']; ?>">
+
+				<!-- main form -->
+				<div class="form-control p-3 mt-3">
+
+					<!-- general information -->
+					<h3 class="fw-bold">General Info <span class="fs-6 fw-semibold">(Required)</span></h3>
+					<div class="row">
+						<div class="col-4">
+							<!-- crop name -->
+							<label for="crop-name">Crop / Variety <span class="text-danger">*</span></label>
+							<input id="crop-name" type="text" name="crop_name" class="form-control form-control-lg mb-4" required>
+						</div>
+						<!-- image -->
+						<div class="col-4">
+							<label for="image-input" class="">Images <span class="text-danger">*</span></label>
+							<input type="file" name="crop_image[]" class="form-control" id="image-input" multiple accept="image/*" required>
+						</div>
 					</div>
-				</div>
 
-				<!-- crop information -->
-				<div id="" class="row form-control p-3">
+					<div class="row mb-4">
+						<div class="col-4">
 
-					<?php include('../message.php'); ?>
+							<!-- local name -->
+							<label for="crop_local_name">Local Name <span class="text-danger">*</span></label>
+							<input id="crop_local_name" type="text" name="crop_local_name" class="form-control mb-4" required>
 
-					<!-- Crop Info -->
-					<table id="info-table" class="table table-hover table-sm">
-						<thead>
-							<tr>
-								<th colspan="2" class="table-dark">General Information</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<th class="table-secondary w-25" scope="row">Description</th>
-								<td><textarea name="description" rows="2" class="border w-100 p-1"></textarea></td>
-							</tr>
-							<tr>
-								<th class="table-secondary">Upland or Lowand</th>
-								<td><input type="text" name="upland_or_lowland" class="w-100 border p-1"></td>
-							</tr>
-							<tr>
-								<th class="table-secondary w-25" scope="row">Season</th>
-								<td><input type="text" name="season" class="w-100 border"></td>
-							</tr>
-							<tr>
-								<th class="table-secondary w-25" scope="row">Category</th>
-								<td><input type="text" name="category"  class="w-100 border"></td>
-							</tr>
-							<tr>
-								<th class="table-secondary w-25" scope="row">Links</th>
-								<td><input type="text" name="links"  class="w-100 border"></td>
-							</tr>
-							<tr>
-								<th class="table-secondary w-25" scope="row">Link to Image</th>
-								<td><input type="text" name="image" class="w-100 border"></td>
-							</tr>
-							<tr>
-								<th class="table-secondary w-25" scope="row">Local Name</th>
-								<td><input type="text" name="local_name" class="w-100 border"></td>
-							</tr>
-						</tbody>
-					</table>
+							<!-- category -->
+							<label for="category">Category <span class="text-danger">*</span></label>
+							<div class="mb-4">
+								<div class="form-check form-check-inline">
+									<label class="form-check-label" for="ccateg-rice">Rice</label>
+									<input class="form-check-input" type="radio" name="upland_or_lowland" id="ccateg-rice" value="Rice" required>
+								</div>
+								<div class="form-check form-check-inline">
+									<label class="form-check-label" for="ccateg-root">Root Crops</label>
+									<input class="form-check-input" type="radio" name="upland_or_lowland" id="ccateg-root" value="Root Crop" required>
+								</div>
+								<div class="form-check form-check-inline">
+									<label class="form-check-label" for="ccateg-other">Other</label>
+									<input class="form-check-input" type="radio" name="upland_or_lowland" id="ccateg-other" value="Other" required>
+								</div>
+							</div>
 
-					<!-- botanical information -->
-					<table id="info-table" class="table table-hover table-sm">
-						<thead>
-							<tr>
-								<th colspan="2" class="table-dark">Botanical Information</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<th class="table-secondary w-25" scope="row">Scientific Name</th>
-								<td><input type="text" name="scientific_name" class="w-100 border"></td>
-							</tr>
-							<tr>
-								<th class="table-secondary">Common Names</th>
-								<td><input type="text" name="common_names" class="w-100 border"></td>
-							</tr>
-						</tbody>
-					</table>
+							<!-- upland or lowland -->
+							<label>Type <span class="text-danger">*</span></label>
+							<div class="">
+								<div class="form-check form-check-inline">
+									<label class="form-check-label" for="ctype-up">Upland</label>
+									<input class="form-check-input" type="radio" name="upland_or_lowland" id="ctype-up" value="Upland" required>
+								</div>
+								<div class="form-check form-check-inline">
+									<label class="form-check-label" for="ctype-low">Lowland</label>
+									<input class="form-check-input" type="radio" name="upland_or_lowland" id="ctype-low" value="Lowland" required>
+								</div>
+							</div>
 
-					<!-- characteristics of traditional rice -->
-					<table class="table table-hover table-sm">
-						<thead>
-							<tr>
-								<th colspan="2" class="table-dark">Characteristics of Traditional Rice</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<th class="table-secondary w-25">Taste</th>
-								<td><input type="text" name="taste" class="w-100 border"></td>
-							</tr>
-							<tr>
-								<th class="table-secondary">Aroma</th>
-								<td><input type="text" name="aroma" class="w-100 border"></td>
-							</tr>
-							<tr>
-								<th class="table-secondary">Maturity Period</th>
-								<td><input type="text" name="maturation" class="w-100 border"></td>
-							</tr>
-							<tr>
-								<th class="table-secondary">Disease Resistance</th>
-								<td><input type="text" name="disease_resistance" class="w-100 border"></td>
-							</tr>
-							<tr>
-								<th class="table-secondary">Pest Resistance</th>
-								<td><input type="text" name="pest_resistance" class="w-100 border"></td>
-							</tr>
-							<tr>
-								<th class="table-secondary">Drought Tolerance</th>
-								<td><input type="text" name="drought_tolerance" class="w-100 border"></td>
-							</tr>
-							<tr>
-								<th class="table-secondary">Adaptability to Different Environments</th>
-								<td><input type="text" name="environment_adaptability" class="w-100 border"></td>
-							</tr>
-							<tr>
-								<th class="table-secondary">Cooking and Eating Quality</th>
-								<td><input type="text" name="culinary_quality" class="w-100 border"></td>
-							</tr>
-							<tr>
-								<th class="table-secondary">Nutritional Value</th>
-								<td><input type="text" name="nutritional_value" class="w-100 border"></td>
-							</tr>
-						</tbody>
-					</table>
+						</div>
 
-					<!-- planting techniques -->
-					<table class="table table-hover table-sm">
-						<thead>
-							<tr>
-								<th colspan="2" class="table-dark">Planting Techniques</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<th class="table-secondary w-25">Description</th>
-								<td><textarea name="planting_techniques" class="w-100 border" rows="2"></textarea></td>
-							</tr>
-						</tbody>
-					</table>
+						<div class="col">
+							<!-- images chosen not yet uploaded i think i dont know -->
+							<div id="image-previews" class="overflow-x-scroll h-100 border d-flex flex-row">
+								<!-- mao dapat ni ang mag loop everytime naay kani nga crop sa image -->
+								<img src="https://images.unsplash.com/photo-1682695797221-8164ff1fafc9?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="m-2 img-thumbnail" style="height: 200px;">
+								<img src="https://plus.unsplash.com/premium_photo-1664382466520-afe23272be60?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="m-2 img-thumbnail" style="height: 200px;">
+								<img src="https://plus.unsplash.com/premium_photo-1674675647693-777780779499?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="m-2 img-thumbnail" style="height: 200px;">
+							</div>
+						</div>
+					</div>
 
-					<!-- Cultural and Spiritual Significance-->
-					<table class="table table-hover table-sm">
-						<thead>
-							<tr>
-								<th colspan="2" class="table-dark">Cultural and Spiritual Significance</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<th class="table-secondary w-25">Description</th>
-								<td><textarea name="cultural_and_spiritual_significance" class="w-100 border" rows="2"></textarea></td>
-							</tr>
-						</tbody>
-					</table>
+					<div class="col">
+						<!-- Descrition -->
+						<label for="gen-desc">Description</label>
+						<textarea name="crop_description" id="gen-desc" class="txtarea form-control" rows="3" required></textarea>
+					</div>
 
-					<!-- Agronomic Characteristic -->
+					<!-- More -->
 
-					<table class="table table-hover table-sm">
-						<thead>
-							<tr>
-								<th colspan="2" class="table-dark">Agronomic Characteristic</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<th class="table-secondary w-25">Days to Maturity</th>
-								<td><input type="text" name="days_to_mature" class="w-100 border"></td>
-							</tr>
-							<tr>
-								<th class="table-secondary w-25">Yield per Plant</th>
-								<td><input type="text" name="yield_potential" class="w-100 border"></td>
-							</tr>
-						</tbody>
-					</table>
+						<!-- Characteristics -->
+						<h4 class="mt-5">Characteristics</h4>
+							<div class="row">
+								<div class="col-2">
+									<!-- taste -->
+									<label for="taste">Taste</label>
+									<input id="taste" type="text" class="form-control mb-4">
+								</div>
+								<div class="col-2">
+									<!-- aroma -->
+									<label for="aroma">Aroma</label>
+									<input id="aroma" type="text" class="form-control mb-4">
+								</div>
+								<div class="col-2">
+									<!-- maturation -->
+									<label for="matur">Maturation</label>
+									<input id="matur" type="text" class="form-control mb-4">
+								</div>
+								<div class="col">
+									<!-- disease resistance -->
+									<label for="resist">Disease Resistance</label>
+									<input id="resist" type="text" class="form-control">
+								</div>
+							</div>
 
-					<!-- Role in maintaining upland ecosystems And biodiversity-->
-					<table class="table table-hover table-sm">
-						<thead>
-							<tr>
-								<th colspan="2" class="table-dark">Role in Maintaining Upland Ecosystems</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<th class="table-secondary w-25">Description</th>
-								<td><textarea name="rice_biodiversity_uplift" class="w-100 border" rows="2"></textarea></td>
-							</tr>
-						</tbody>
-					</table>
+							<!-- More -->
+							<h4 class="mt-4">Additional Info</h5>
 
-					<!-- Economic Importance-->
-					<table class="table table-hover table-sm">
-						<thead>
-							<tr>
-								<th colspan="2" class="table-dark">Economic Importance</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<th class="table-secondary w-25">Description</th>
-								<td><textarea name="economic_importance" class="w-100 border" rows="2"></textarea></td>
-							</tr>
-						</tbody>
-					</table>
+								<!-- Planting Techniques -->
+								<label class="mt-2">Planting Techniques</label>
+								<div class="row">
+									<div class="col">
+										<!-- Descrition -->
+										<textarea name="" id="tech-desc" class="txtarea form-control" rows="2"></textarea>
+									</div>
+								</div>
 
-					<!-- Traditional Knowledge and Practices-->
-					<table class="table table-hover table-sm">
-						<thead>
-							<tr>
-								<th colspan="2" class="table-dark">Traditional Knowledge and Practices</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<th class="table-secondary w-25">Description</th>
-								<td><textarea name="traditional_knowledge_and_practices" class="w-100 border" rows="2"></textarea></td>
-							</tr>
-						</tbody>
-					</table>
+								<!-- Cultural and Spiritual Significance -->
+								<label class="mt-2" for="signif-desc">Cultural and Spiritual Significance</label>
+								<div class="row">
+									<div class="col">
+										<!-- Descrition -->
+										<textarea name="" id="signif-desc" class="txtarea form-control" rows="2"></textarea>
+									</div>
+								</div>
 
-					<!-- Location  -->
-					<table class="table table-hover table-sm">
-						<thead>
-							<tr>
-								<th colspan="2" class="table-dark">Location</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<th class="table-secondary w-25">Map</th>
-								<td></td>
-							</tr>
-							<tr>
-								<th></th>
-								<td></td>
-							</tr>
-						</tbody>
-					</table>
+								<!-- Role in Maintaining Upland Ecosystems -->
+								<label class="mt-2">Role in Maintaining Upland Ecosystems</label>
+								<div class="row">
+									<div class="col">
+										<!-- Descrition -->
+										<textarea name="" id="role-desc" class="txtarea form-control" rows="2"></textarea>
+									</div>
+								</div>
 
-					<!-- morphological characteristics  -->
-					<table class="table table-hover table-sm">
-						<thead>
-							<tr>
-								<th colspan="2" class="table-dark">Morphological Characteristics</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<th class="table-secondary w-25">Plant Height</th>
-								<td><input type="text" name="plant_height"class="w-100 border"></td>
-							</tr>
-							<tr>
-								<th class="table-secondary">Panicle Length</th>
-								<td><input type="text" name="panicle_length" class="w-100 border"></td>
-							</tr>
-							<tr>
-								<th class="table-secondary">Grain Quality</th>
-								<td><input type="text" name="grain_quality" class="w-100 border"></td>
-							</tr>
-							<tr>
-								<th class="table-secondary">Grain Color</th>
-								<td><input type="text" name="grain_color" class="w-100 border"></td>
-							</tr>
-							<tr>
-								<th class="table-secondary">Grain Length</th>
-								<td><input type="text" name="grain_length" class="w-100 border"></td>
-							</tr>
-							<tr>
-								<th class="table-secondary">Grain Width</th>
-								<td><input type="text" name="grain_width" class="w-100 border"></td>
-							</tr>
-							<tr>
-								<th class="table-secondary">Grain Shape</th>
-								<td><input type="text" name="grain_shape" class="w-100 border"></td>
-							</tr>
-							<tr>
-								<th class="table-secondary">Awn Length</th>
-								<td><input type="text" name="awn_length" class="w-100 border"></td>
-							</tr>
-							<tr>
-								<th class="table-secondary">Leaf Length</th>
-								<td><input type="text" name="leaf_length" class="w-100 border"></td>
-							</tr>
-							<tr>
-								<th class="table-secondary">Leaf Width</th>
-								<td><input type="text" name="leaf_width" class="w-100 border"></td>
-							</tr>
-							<tr>
-								<th class="table-secondary">Leaf Shape</th>
-								<td><input type="text" name="leaf_shape" class="w-100 border"></td>
-							</tr>
-							<tr>
-								<th class="table-secondary">Stem Color</th>
-								<td><input type="text" name="stem_color" class="w-100 border"></td>
-							</tr>
-							<tr>
-								<th class="table-secondary">Another Color</th>
-								<td><input type="text" name="another_color" class="w-100 border"></td>
-							</tr>
-						</tbody>
-					</table>
+								<!-- Cultural Importance and Traditional Knowledge -->
+								<label class="mt-2">Cultural Importance and Traditional Knowledge</label>
+								<div class="row">
+									<div class="col">
+										<!-- Descrition -->
+										<textarea name="" id="impotance-desc" class="txtarea form-control" rows="2"></textarea>
+									</div>
+								</div>
 
-					<!-- relationship among cultivars  -->
-					<table class="table table-hover table-sm">
-						<thead>
-							<tr>
-								<th colspan="2" class="table-dark">Relationship Among Cultivars</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<th class="table-secondary w-25">Distinct Groups of Cultivars based on Morphological and Genetic Characteristics</th>
-								<td><textarea name="distinct_cultivar_groups_morph_gen" class="w-100 border" rows="2"></textarea></td>
-							</tr>
-							<tr>
-								<th class="table-secondary">Relationships Among Cultivars based on Cluster Analysis and Principal Component Analysis</th>
-								<td><textarea name="cultivar_relations_cluster_and_pca" class="w-100 border" rows="2"></textarea></td>
-							</tr>
-							<tr>
-								<th class="table-secondary">Potential for Hybridization and Breeding Among Cultivars</th>
-								<td><textarea name="hybridization_potential" class="w-100 border" rows="2"></textarea></td>
-							</tr>
-							<tr>
-								<th class="table-secondary">Implications for Conservation and Breeding Efforts</th>
-								<td><textarea name="conservation_and_breeding_implications" class="w-100 border" rows="2"></textarea></td>
-							</tr>
-						</tbody>
-					</table>
+								<!-- Unique Features -->
+								<label class="mt-2">Unique Features</label>
+								<div class="row">
+									<div class="col">
+										<!-- Descrition -->
+										<textarea name="" id="feat-desc" class="txtarea form-control" rows="2"></textarea>
+									</div>
+								</div>
 
-					<!-- potential for breeding -->
-					<table class="table table-hover table-sm">
-						<thead>
-							<tr>
-								<th colspan="2" class="table-dark">Potential for Breeding</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<th class="table-secondary w-25">Description</th>
-								<td><textarea name="breeding_potential" class="w-100 border" rows="2"></textarea></td>
-							</tr>
-						</tbody>
-					</table>
+								<!-- Cultural Use -->
+								<label class="mt-2">Cultural Use</label>
+								<div class="row">
+									<div class="col">
+										<!-- Descrition -->
+										<textarea name="" id="use-desc" class="txtarea form-control" rows="2"></textarea>
+									</div>
+								</div>
 
-					<!-- threats from lowland-associated influences-->
-					<table class="table table-hover table-sm">
-						<thead>
-							<tr>
-								<th colspan="2" class="table-dark">Threats from Lowland-Associated Influences</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<th class="table-secondary w-25">Description</th>
-								<td><textarea name="threats" class="w-100 border" rows="2"></textarea></td>
-							</tr>
-						</tbody>
-					</table>
+								<!-- Associated Farming Practice -->
+								<label class="mt-2">Associated Farming Practice</label>
+								<div class="row">
+									<div class="col">
+										<!-- Descrition -->
+										<textarea name="" id="prac-desc" class="txtarea form-control" rows="2"></textarea>
+									</div>
+								</div>
 
-					<!-- other info-->
-					<table class="table table-hover table-sm  mb-0">
-						<thead>
-							<tr>
-								<th colspan="2" class="table-dark">Other Info</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<th class="table-secondary w-25">Description</th>
-								<td><textarea name="other_info" class="w-100 border" rows="2"></textarea></td>
-							</tr>
-						</tbody>
-					</table>
+								<!-- Associated Vegetation -->
+								<label class="mt-2">Associated Vegetation</label>
+								<div class="row">
+									<div class="col">
+										<!-- Descrition -->
+										<textarea name="" id="veg-desc" class="txtarea form-control" rows="2"></textarea>
+									</div>
+								</div>
+
+								<!-- Last Seen Location -->
+								<label class="mt-2">Last Seen Location</label>
+								<div class="row">
+									<div class="col">
+										<!-- Descrition -->
+										<textarea name="" id="loc-desc" class="txtarea form-control" rows="2"></textarea>
+									</div>
+								</div>
+
+								<!-- Threats to Upland Farms -->
+								<label class="mt-2">Threats to Upland Farms</label>
+								<div class="row">
+									<div class="col">
+										<!-- Descrition -->
+										<textarea name="" id="threat-desc" class="txtarea form-control" rows="2"></textarea>
+									</div>
+								</div>
+
+								<!-- Other Information -->
+								<label class="mt-2">Other Information</label>
+								<div class="row">
+									<div class="col">
+										<!-- Description -->
+										<textarea name="" id="more-desc" class="txtarea form-control" rows="2"></textarea>
+									</div>
+								</div>
+
+								<div class="row">
+									<!-- Location -->
+									<h5 class="mt-2">Location</h5>
+									<div class="col-4">
+										<!-- Municipality -->
+										<label for="municipality">Municipality</label>
+										<select id="municipality" name="municipality_name" class="form-select mb-2">
+											<option value="alabel" selected>None</option>
+											<option value="alabel">Alabel</option>
+											<option value="glan">Glan</option>
+											<option value="kiamba">Kiamba</option>
+											<option value="maasim">Maasim</option>
+											<option value="maitum">Maitum</option>
+											<option value="malapatan">Malapatan</option>
+											<option value="malungon">Malungon</option>
+										</select>
+									</div>
+									<div class="col-3">
+										<!-- Province -->
+										<label for="province">Province</label>
+										<select id="province" name="province_name" class="form-select mb-2">
+											<option value="sarangani" selected>None</option>
+											<option value="sarangani">Davao Del Norte</option>
+											<option value="davao">Davao</option>
+											<option value="south_cotabato">South Cotabato</option>
+											<option value="cotabato">Cotabato</option>
+										</select>
+									</div>
+									<div class="col-3">
+										<!-- Longtitude -->
+										<label for="longtitude">Longtitude</label>
+										<input id="longtitude" type="text" name="longtitude" placeholder="Enter Longtitude" class="form-control mb-2">
+									</div>
+									<div class="col-2">
+										<!-- Latitude -->
+										<label for="latitude">Latitude</label>
+										<input id="latitude" type="text" name="latitude" placeholder="Enter Latitude" class="form-control">
+									</div>
+								</div>
+
+								<div class="">
+									<!-- Associated Farming Practice -->
+									<h5 class="mt-4">Associated Farming Practice</h5>
+									<div class="col">
+										<!-- Other Info Type -->
+										<label for="farming_practice_type">Type</label>
+										<input id="farming_practice_type" type="text" name="farming_practice_type" placeholder="Enter Farming Practice Type" class="form-control mb-2">
+									</div>
+									<div class="col">
+										<!-- Other Info Name -->
+										<label for="farming_practice_name">Name</label>
+										<input id="farming_practice_name" type="text" name="farming_practice_name" placeholder="Enter Farming Practice Name" class="form-control mb-2">
+									</div>
+									<div class="col">
+										<!-- Other Info Description -->
+										<label for="farming_practice-desc">Description <span class="text-danger"></span></label>
+										<textarea name="farming_practice_description" id="farming_practice-desc" class="txtarea form-control" rows="3"></textarea>
+									</div>
+								</div>
+
+								<!-- Other Information -->
+								<div class="other_info">
+									<h3 class="mt-4 d-flex align-items-center" id="otherInfoTitle">Other Info <i class='bx bx-plus ml-2' id="toggleOtherInfo" style="color: blue;"></i> <i class='bx bx-minus ml-2' id="toggleOtherInfoMinus" style="display: none; color:red"></i></h3>
+									<div class="other-info-content" hidden>
+										<div class="col">
+											<!-- Other Info Type -->
+											<label for="other_info_type">Type</label>
+											<input id="other_info_type" type="text" name="other_info_type" placeholder="Enter Other Info Type" class="form-control mb-2">
+										</div>
+										<div class="col">
+											<!-- Other Info Name -->
+											<label for="other_info_name">Name</label>
+											<input id="other_info_name" type="text" name="other_info_name" placeholder="Enter Other Info Name" class="form-control mb-2">
+										</div>
+										<div class="col">
+											<!-- Other Info Description -->
+											<label for="other_info-desc">Description <span class="text-danger"></span></label>
+											<textarea name="other_info_description" id="other_info-desc" class="txtarea form-control" rows="3"></textarea>
+										</div>
+										<div class="col">
+											<!-- Other Info Url -->
+											<label for="other_info_url">Links</label>
+											<input id="other_info_url" type="text" name="other_info_url" placeholder="Enter links if available" class="form-control">
+										</div>
+									</div>
+								</div>
 				</div>
 				<!-- editting buttons -->
 				<?php
@@ -404,10 +345,68 @@
 				?>
 			</form>
 		</section>
-
 	</div>
 
 	<!-- scipts -->
+
+	<!-- script to handle visibility for the other info -->
+	<script>
+		var toggleOtherInfo = document.getElementById('toggleOtherInfo');
+		var toggleOtherInfoMinus = document.getElementById('toggleOtherInfoMinus');
+		var otherInfoContent = document.querySelector('.other-info-content');
+
+		toggleOtherInfo.addEventListener('click', function() {
+			otherInfoContent.hidden = !otherInfoContent.hidden;
+			toggleOtherInfo.style.display = otherInfoContent.hidden ? 'inline-block' : 'none';
+			toggleOtherInfoMinus.style.display = otherInfoContent.hidden ? 'none' : 'inline-block';
+		});
+
+		toggleOtherInfoMinus.addEventListener('click', function() {
+			otherInfoContent.hidden = true;
+			toggleOtherInfo.style.display = 'inline-block';
+			toggleOtherInfoMinus.style.display = 'none';
+		});
+	</script>
+
+
+	<!-- JavaScript to handle file input change event and update image previews -->
+	<script>
+		document.addEventListener("DOMContentLoaded", function() {
+			var imageInput = document.getElementById("image-input");
+			var imagePreviews = document.getElementById("image-previews");
+
+			imageInput.addEventListener("change", function() {
+				// Clear existing image previews
+				imagePreviews.innerHTML = "";
+
+				// Display selected images
+				for (var i = 0; i < imageInput.files.length; i++) {
+					var img = document.createElement("img");
+					img.src = URL.createObjectURL(imageInput.files[i]);
+					img.className = "m-2 img-thumbnail";
+					img.style.height = "200px";
+					imagePreviews.appendChild(img);
+				}
+			});
+		});
+	</script>
+
+
+	<script>
+		$('.txtarea').summernote({
+			tabsize: 2,
+			height: 120,
+			toolbar: [
+				['style', ['style']],
+				['font', ['bold', 'underline', 'clear']],
+				['color', ['color']],
+				['para', ['ul', 'ol', 'paragraph']],
+				['table', ['table']],
+				['insert', ['link', 'picture', 'video']],
+				['view', ['fullscreen', 'codeview', 'help']]
+			]
+		});
+	</script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 	<!-- font awesome -->
 	<script src="https://kit.fontawesome.com/57e83eb6e4.js" crossorigin="anonymous"></script>
