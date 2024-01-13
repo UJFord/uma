@@ -3,25 +3,23 @@
 $current_page = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 require('../../html/navfoot/connection.php');
 
-$atcrop=    strpos($current_page, '/uma/admin/crop/list.php') === 0 ||
-            strpos($current_page, '/uma/admin/crop/crop.php') === 0 ||
-            strpos($current_page, '/uma/admin/crop/create.php') === 0;
+$atcrop = strpos($current_page, '/uma/admin/crop/list.php') === 0 ||
+    strpos($current_page, '/uma/admin/crop/crop.php') === 0 ||
+    strpos($current_page, '/uma/admin/crop/create.php') === 0;
 
-$atuser=    strpos($current_page, '/uma/admin/users/list.php') === 0 || 
-            strpos($current_page, '/uma/admin/users/user.php') === 0;
+$atuser = strpos($current_page, '/uma/admin/users/list.php') === 0 ||
+    strpos($current_page, '/uma/admin/users/user.php') === 0 ||
+    strpos($current_page, '/uma/admin/users/create.php') === 0 ;
 
-$atapprove= strpos($current_page, '/uma/admin/approval/approval.php') === 0 || 
-            strpos($current_page, '/uma/admin/approval/approval.php') === 0;
+$atapprove = strpos($current_page, '/uma/admin/approval/approval.php') === 0 ||
+    strpos($current_page, '/uma/admin/approval/approval.php') === 0;
 ?>
 <!-- custom css -->
-<link rel="stylesheet" href="../../css/admin/side.css">
-<!--========== BOX ICONS ==========-->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
 <!-- script for access js -->
 <script>
     var userRole = "<?php echo $_SESSION['rank']; ?>";
 </script>
-<script src="../../js/admin/access.js"></script>
+<script src="../../js/admin/access.js" defer></script>
 <!-- main nav -->
 <nav id="main-nav" class="d-none d-md-block col col-3 col-lg-3 col-xl-2 fixed-top h-100 m-0 p-0 z-3">
     <div class="d-flex flex-column flex-shrink-0 text-white h-100">
@@ -41,6 +39,7 @@ $atapprove= strpos($current_page, '/uma/admin/approval/approval.php') === 0 ||
                     <i class="fa-solid fa-wheat-awn" style="width: 1.5rem;"></i>
                     Crops
                 </a>
+
             </li>
             <!-- users sidebar nav -->
             <?php if (isset($_SESSION['LOGGED_IN']) && $_SESSION['LOGGED_IN']) : ?>
@@ -48,7 +47,7 @@ $atapprove= strpos($current_page, '/uma/admin/approval/approval.php') === 0 ||
                     <a href="../users/list.php" <?php echo ($atuser)
                                                     ? 'class="nav-link text-dark fw-semibold rounded-start-pill active-nav"'
                                                     : 'class="nav-link text-white"'; ?>>
-                        <i class='bx bx-user' style="width: 1.5rem; font-size: 1.5rem;"></i>
+                        <i class="fa-regular fa-user" style="width: 1.5rem;"></i>
                         Users
                     </a>
                 </li>
@@ -58,7 +57,7 @@ $atapprove= strpos($current_page, '/uma/admin/approval/approval.php') === 0 ||
                 <a href="../approval/approval.php" <?php echo ($atapprove)
                                                         ? 'class="nav-link text-dark fw-semibold rounded-start-pill active-nav"'
                                                         : 'class="nav-link text-white"'; ?>>
-                    <i class='bx bx-list-check' style="width: 1.5rem; font-size: 1.5rem;"></i>
+                    <i class="fa-solid fa-check" style="width: 1.5rem;"></i>
                     Approval
                 </a>
             </li>

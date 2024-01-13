@@ -6,8 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
-    <!-- cutom css -->
+
+    <!-- list custom css -->
     <link rel="stylesheet" href="../../css/admin/list.css" />
+    <!-- sidebar custom css -->
+    <link rel="stylesheet" href="../../css/admin/side.css">
+
     <!-- favicon -->
     <link rel="shortcut icon" href="img/logo/Uma logo.svg" type="image/x-icon" />
     <title>Uma | AdminPage</title>
@@ -63,28 +67,28 @@
 
                         if ($result) {
                             while ($row = pg_fetch_array($result)) {
-                                ?>
-                                    <tbody>
-                                        <tr>
-                                            <th scope="row"><?php echo $row['first_name']; ?></th>
-                                            <td><?php echo $row['crop_name']; ?></td>
-                                            <td><?php echo $row['crop_local_name']; ?></td>
-                                            <td><?php echo $row['crop_description']; ?></td>
-                                            <td><?php echo $row['status']; ?></td>
-                                            <td class="curator-only">
-                                                <form action="code.php" method="POST">
-                                                    <input type="hidden" name="crop_id" value="<?php echo $row['crop_id']; ?>" />
-                                                    <input type="hidden" name="other_info_id" value="<?php echo $row['other_info_id']; ?>" />
-                                                    <input type="hidden" name="location_id" value="<?php echo $row['location_id']; ?>" />
-                                                    <input type="hidden" name="farming_practice_id" value="<?php echo $row['farming_practice_id']; ?>" />
-                                                    <input type="submit" name="approve" value="approve"> &nbsp &nbsp <br>
-                                                    <input type="submit" name="delete" value="delete">
-                                                </form>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                <?php
-                                }
+                        ?>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row"><?php echo $row['first_name']; ?></th>
+                                        <td><?php echo $row['crop_name']; ?></td>
+                                        <td><?php echo $row['crop_local_name']; ?></td>
+                                        <td><?php echo $row['crop_description']; ?></td>
+                                        <td><?php echo $row['status']; ?></td>
+                                        <td class="curator-only">
+                                            <form action="code.php" method="POST">
+                                                <input type="hidden" name="crop_id" value="<?php echo $row['crop_id']; ?>" />
+                                                <input type="hidden" name="other_info_id" value="<?php echo $row['other_info_id']; ?>" />
+                                                <input type="hidden" name="location_id" value="<?php echo $row['location_id']; ?>" />
+                                                <input type="hidden" name="farming_practice_id" value="<?php echo $row['farming_practice_id']; ?>" />
+                                                <input type="submit" name="approve" value="approve"> &nbsp &nbsp <br>
+                                                <input type="submit" name="delete" value="delete">
+                                            </form>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                        <?php
+                            }
                         } else {
                             echo "Query failed: " . pg_last_error($connection);
                         }
@@ -115,18 +119,18 @@
 
                         if ($result2) {
                             while ($row = pg_fetch_array($result2)) {
-                                ?>
-                                    <tbody>
-                                        <tr>
-                                            <th scope="row"><?php echo $row['first_name']; ?></th>
-                                            <td><?php echo $row['crop_name']; ?></td>
-                                            <td><?php echo $row['crop_local_name']; ?></td>
-                                            <td><?php echo $row['crop_description']; ?></td>
-                                            <td><?php echo $row['status']; ?></td>
-                                        </tr>
-                                    </tbody>
-                                <?php
-                                }
+                        ?>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row"><?php echo $row['first_name']; ?></th>
+                                        <td><?php echo $row['crop_name']; ?></td>
+                                        <td><?php echo $row['crop_local_name']; ?></td>
+                                        <td><?php echo $row['crop_description']; ?></td>
+                                        <td><?php echo $row['status']; ?></td>
+                                    </tr>
+                                </tbody>
+                        <?php
+                            }
                         } else {
                             echo "Query failed: " . pg_last_error($connection);
                         }
