@@ -53,8 +53,8 @@
 					<div class="row">
 						<div class="col-4">
 							<!-- crop name -->
-							<label for="crop-name">Crop <span class="text-danger">*</span></label>
-							<input id="crop-name" type="text" name="crop_name" placeholder="Enter Crop Name" class="form-control form-control-lg mb-2" required>
+							<label for="crop-name">Crop / Variety <span class="text-danger">*</span></label>
+							<input id="crop-name" type="text" name="crop_name" class="form-control form-control-lg mb-4" required>
 						</div>
 						<!-- image -->
 						<div class="col-4">
@@ -63,34 +63,40 @@
 						</div>
 					</div>
 
-					<div class="row">
+					<div class="row mb-4">
 						<div class="col-4">
-							<!-- category -->
-							<label for="category">Category <span class="text-danger">*</span></label>
-							<select id="category" name="category" class="form-select mb-2" required>
-								<option value="rice" selected>Rice</option>
-								<option value="root">Rootcrop</option>
-								<option value="fly">Flying</option>
-								<option value="rock">Rock</option>
-								<option value="fire">Fire</option>
-								<option value="grass">Grass</option>
-								<option value="steel">Steel</option>
-							</select>
-
+							
 							<!-- local name -->
 							<label for="crop_local_name">Local Name <span class="text-danger">*</span></label>
-							<input id="crop_local_name" type="text" name="crop_local_name" placeholder="Enter Crop Local Name" class="form-control mb-2" required>
+							<input id="crop_local_name" type="text" name="crop_local_name" class="form-control mb-4" required>
+							
+							<!-- category -->
+							<label for="category">Category <span class="text-danger">*</span></label>
+							<div class="mb-4">
+								<div class="form-check form-check-inline">
+									<label class="form-check-label" for="ccateg-rice">Rice</label>
+									<input class="form-check-input" type="radio" name="upland_or_lowland" id="ccateg-rice" value="Rice" required>
+								</div>
+								<div class="form-check form-check-inline">
+									<label class="form-check-label" for="ccateg-root">Root Crops</label>
+									<input class="form-check-input" type="radio" name="upland_or_lowland" id="ccateg-root" value="Root Crop" required>
+								</div>
+								<div class="form-check form-check-inline">
+									<label class="form-check-label" for="ccateg-other">Other Crops</label>
+									<input class="form-check-input" type="radio" name="upland_or_lowland" id="ccateg-other" value="Other Crops" required>
+								</div>
+							</div>
 
 							<!-- upland or lowland -->
 							<label>Type <span class="text-danger">*</span></label>
-							<div class="m-2" required>
+							<div class="">
 								<div class="form-check form-check-inline">
-									<label class="form-check-label" for="inlineRadio1">Upland</label>
-									<input class="form-check-input" type="radio" name="upland_or_lowland" id="inlineRadio1" value="Upland">
+									<label class="form-check-label" for="ctype-up">Upland</label>
+									<input class="form-check-input" type="radio" name="upland_or_lowland" id="ctype-up" value="Upland" required>
 								</div>
 								<div class="form-check form-check-inline">
-									<label class="form-check-label" for="inlineRadio2">Lowland</label>
-									<input class="form-check-input" type="radio" name="upland_or_lowland" id="inlineRadio2" value="Lowland">
+									<label class="form-check-label" for="ctype-low">Lowland</label>
+									<input class="form-check-input" type="radio" name="upland_or_lowland" id="ctype-low" value="Lowland" required>
 								</div>
 							</div>
 
@@ -114,66 +120,66 @@
 					</div>
 
 					<!-- More -->
-					<h3 class="mt-4">More</h5>
+					<h3 class="mt-5">Optional Information</h5>
 
 						<div class="row">
 							<!-- Location -->
-							<h3 class="mt-4">Location</h5>
-								<div class="col-4">
-									<!-- Municipality -->
-									<label for="municipality">Municipality</label>
-									<select id="municipality" name="municipality_name" class="form-select mb-2">
-										<option value="alabel" selected>None</option>
-										<option value="alabel">Alabel</option>
-										<option value="glan">Glan</option>
-										<option value="kiamba">Kiamba</option>
-										<option value="maasim">Maasim</option>
-										<option value="maitum">Maitum</option>
-										<option value="malapatan">Malapatan</option>
-										<option value="malungon">Malungon</option>
-									</select>
-								</div>
-								<div class="col-3">
-									<!-- Province -->
-									<label for="province">Province</label>
-									<select id="province" name="province_name" class="form-select mb-2">
-										<option value="sarangani" selected>None</option>
-										<option value="sarangani">Davao Del Norte</option>
-										<option value="davao">Davao</option>
-										<option value="south_cotabato">South Cotabato</option>
-										<option value="cotabato">Cotabato</option>
-									</select>
-								</div>
-								<div class="col-3">
-									<!-- Longtitude -->
-									<label for="longtitude">Longtitude</label>
-									<input id="longtitude" type="text" name="longtitude" placeholder="Enter Longtitude" class="form-control mb-2">
-								</div>
-								<div class="col-2">
-									<!-- Latitude -->
-									<label for="latitude">Latitude</label>
-									<input id="latitude" type="text" name="latitude" placeholder="Enter Latitude" class="form-control">
-								</div>
+							<h5 class="mt-2">Location</h5>
+							<div class="col-4">
+								<!-- Municipality -->
+								<label for="municipality">Municipality</label>
+								<select id="municipality" name="municipality_name" class="form-select mb-2">
+									<option value="alabel" selected>None</option>
+									<option value="alabel">Alabel</option>
+									<option value="glan">Glan</option>
+									<option value="kiamba">Kiamba</option>
+									<option value="maasim">Maasim</option>
+									<option value="maitum">Maitum</option>
+									<option value="malapatan">Malapatan</option>
+									<option value="malungon">Malungon</option>
+								</select>
+							</div>
+							<div class="col-3">
+								<!-- Province -->
+								<label for="province">Province</label>
+								<select id="province" name="province_name" class="form-select mb-2">
+									<option value="sarangani" selected>None</option>
+									<option value="sarangani">Davao Del Norte</option>
+									<option value="davao">Davao</option>
+									<option value="south_cotabato">South Cotabato</option>
+									<option value="cotabato">Cotabato</option>
+								</select>
+							</div>
+							<div class="col-3">
+								<!-- Longtitude -->
+								<label for="longtitude">Longtitude</label>
+								<input id="longtitude" type="text" name="longtitude" placeholder="Enter Longtitude" class="form-control mb-2">
+							</div>
+							<div class="col-2">
+								<!-- Latitude -->
+								<label for="latitude">Latitude</label>
+								<input id="latitude" type="text" name="latitude" placeholder="Enter Latitude" class="form-control">
+							</div>
 						</div>
 
 						<div class="">
 							<!-- Associated Farming Practice -->
-							<h3 class="mt-4">Associated Farming Practice</h5>
-								<div class="col">
-									<!-- Other Info Type -->
-									<label for="farming_practice_type">Type</label>
-									<input id="farming_practice_type" type="text" name="farming_practice_type" placeholder="Enter Farming Practice Type" class="form-control mb-2">
-								</div>
-								<div class="col">
-									<!-- Other Info Name -->
-									<label for="farming_practice_name">Name</label>
-									<input id="farming_practice_name" type="text" name="farming_practice_name" placeholder="Enter Farming Practice Name" class="form-control mb-2">
-								</div>
-								<div class="col">
-									<!-- Other Info Description -->
-									<label for="farming_practice-desc">Description <span class="text-danger"></span></label>
-									<textarea name="farming_practice_description" id="farming_practice-desc" class="txtarea form-control" rows="3"></textarea>
-								</div>
+							<h5 class="mt-4">Associated Farming Practice</h5>
+							<div class="col">
+								<!-- Other Info Type -->
+								<label for="farming_practice_type">Type</label>
+								<input id="farming_practice_type" type="text" name="farming_practice_type" placeholder="Enter Farming Practice Type" class="form-control mb-2">
+							</div>
+							<div class="col">
+								<!-- Other Info Name -->
+								<label for="farming_practice_name">Name</label>
+								<input id="farming_practice_name" type="text" name="farming_practice_name" placeholder="Enter Farming Practice Name" class="form-control mb-2">
+							</div>
+							<div class="col">
+								<!-- Other Info Description -->
+								<label for="farming_practice-desc">Description <span class="text-danger"></span></label>
+								<textarea name="farming_practice_description" id="farming_practice-desc" class="txtarea form-control" rows="3"></textarea>
+							</div>
 						</div>
 
 						<!-- Other Information -->

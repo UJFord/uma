@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <?php
 session_start();
 require('../sidebar/side.php');
@@ -7,7 +8,6 @@ require('../sidebar/side.php');
 // require('../functions.php');
 // check_login();
 ?>
-<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -36,7 +36,7 @@ require('../sidebar/side.php');
 				<div class="row d-flex justify-content-between mb-3">
 					<!-- title -->
 					<div class="col-6">
-						<h2 id="crops-title" class="fw-semibold">Crops</h2>
+						<h2 id="crops-title" class="fw-semibold">Croeps</h2>
 					</div>
 
 					<!-- search -->
