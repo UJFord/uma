@@ -80,7 +80,7 @@ $atapprove = strpos($current_page, '/uma/admin/approval/approval.php') === 0 ||
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="../login/logout.php">Sign out</a></li>
+                            <li><a class="dropdown-item" href="../../login/logout.php">Sign out</a></li>
                         </ul>
                     <?php else : ?>
                         <!-- User is not logged in, display a link to the login page -->
@@ -93,7 +93,7 @@ $atapprove = strpos($current_page, '/uma/admin/approval/approval.php') === 0 ||
                             unset($_SESSION['LOGGED_IN']);
                         }
                         ?>
-                        <a href="../login/login.php" class="text-white text-decoration-none">Login</a>
+                        <a href="../../login/index.php" class="text-white text-decoration-none">Login</a>
                     <?php endif; ?>
                 </a>
             </div>

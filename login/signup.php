@@ -1,7 +1,7 @@
 <?php
 session_start();
-require('../../html/navfoot/connection.php');
-require('../functions.php');
+require('../html/navfoot/connection.php');
+require('../admin/functions.php');
 
 $errors = array();
 
@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <head>
     <title>Login - Food Order System</title>
-    <link rel="stylesheet" href="../../css/admin/login.css">
+    <link rel="stylesheet" href="../css/admin/login.css">
 </head>
 
 <body>
@@ -81,7 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         <!-- Login Form ends here -->
 
-        <p class="text-center">Already have an Account? - <a href="login.php">Go Back</a></p>
+        <p class="text-center">Already have an Account? - <a href="index.php">Go Back</a></p>
     </div>
 
 </body>

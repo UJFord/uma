@@ -23,7 +23,8 @@
 	session_start();
 	// sidebar
 	require('../sidebar/side.php');
-	// include('../login/login-check.php');
+	include '../access.php';
+	access('CURATOR');
 	?>
 
 	<!-- summernote -->

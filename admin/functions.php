@@ -144,7 +144,7 @@ function check_login($redirect = true)
 
     if ($redirect) {
         $_SESSION['message'] = "<div class='error'>You are not logged in</div>";
-        header("location: ../login/login.php");
+        header("location: ../../login/login.php");
         die();
     } else {
         return false;
