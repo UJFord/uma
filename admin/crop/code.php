@@ -155,13 +155,6 @@ if (isset($_POST['save']) && $_SESSION['rank'] == 'curator') {
         $category = $_POST['category'];
         $crop_description = $_POST['crop_description'];
 
-        // Validate data before insertion
-        if (empty($crop_name) || empty($crop_local_name) || empty($category) || empty($crop_description) || empty($image)) {
-            // Handle the case where any required field is empty
-            echo "naay empty";
-            exit();
-        }
-
         // Inserting into Crop table using parameterized query
         $query_crop = "INSERT INTO crop (
         crop_image, crop_name, crop_description, upland_or_lowland,
@@ -420,13 +413,6 @@ if (isset($_POST['save']) && $_SESSION['rank'] == 'curator') {
             $crop_local_name = $_POST['crop_local_name'];
             $category = $_POST['category'];
             $crop_description = $_POST['crop_description'];
-
-            // Validate data before insertion
-            if (empty($crop_name) || empty($crop_local_name) || empty($category) || empty($crop_description) || empty($image)) {
-                // Handle the case where any required field is empty
-                echo "naay empty";
-                exit();
-            }
 
             // Inserting into Crop table using parameterized query
             $query_crop = "INSERT INTO crop (

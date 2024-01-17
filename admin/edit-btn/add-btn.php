@@ -19,14 +19,13 @@
     function validateForm() {
         // Get the values from the form
         var cropName = document.forms["Form"]["crop_name"].value;
-        var imageInput = document.forms["Form"]["image"].value;
-        var category = document.forms["Form"]["category"].value;
-        var localName = document.forms["Form"]["local_name"].value;
+        var imageInput = document.forms["Form"]["crop_image"].value;
+        var category = document.forms["Form"].querySelector('input[name="category"]:checked');
+        var localName = document.forms["Form"]["crop_local_name"].value;
         var uplandOrLowland = document.forms["Form"].querySelector('input[name="upland_or_lowland"]:checked');
-        var description = document.forms["Form"]["description"].value;
 
         // Check if the required fields are not empty
-        if (cropName === "" || imageInput === "" || category === "" || localName === "" || uplandOrLowland === null || description === "") {
+        if (cropName === "" || imageInput === "" || category === "" || localName === "" || uplandOrLowland === null) {
             alert("Please fill out all required fields.");
             return false; // Prevent form submission
         }
