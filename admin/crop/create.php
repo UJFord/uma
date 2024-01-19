@@ -82,15 +82,15 @@
 							<div class="mb-4">
 								<div class="form-check form-check-inline">
 									<label class="form-check-label" for="ccateg-rice">Rice</label>
-									<input class="form-check-input" type="radio" name="upland_or_lowland" id="ccateg-rice" value="Rice" required>
+									<input class="form-check-input" type="radio" name="category" id="ccateg-rice" value="Rice" required>
 								</div>
 								<div class="form-check form-check-inline">
 									<label class="form-check-label" for="ccateg-root">Root Crops</label>
-									<input class="form-check-input" type="radio" name="upland_or_lowland" id="ccateg-root" value="Root Crop" required>
+									<input class="form-check-input" type="radio" name="category" id="ccateg-root" value="Root Crop" required>
 								</div>
 								<div class="form-check form-check-inline">
 									<label class="form-check-label" for="ccateg-other">Other</label>
-									<input class="form-check-input" type="radio" name="upland_or_lowland" id="ccateg-other" value="Other" required>
+									<input class="form-check-input" type="radio" name="category" id="ccateg-other" value="Other" required>
 								</div>
 							</div>
 
