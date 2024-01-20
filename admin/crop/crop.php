@@ -181,24 +181,24 @@ require('../sidebar/side.php');
 								<div class="col-4">
 									<!-- Scientific name -->
 									<label for="crop_scientific_name">Scientific Name <span class="fw-light">(Optional)</span></label>
-									<input id="crop_scientific_name" type="text" name="crop_scientific_name" value="<?= $crop_scientific_name ?>" class="form-control mb-4">
+									<input id="crop_scientific_name" type="text" name="crop_scientific_name" value="<?= $crop_scientific_name ?>" class="form-control mb-4" disabled>
 								</div>
 								<div class="col-4">
 									<!-- Crop Variety -->
 									<label for="crop_variety">Crop Variety <span class="fw-light">(Optional)</span></label>
-									<input id="crop_variety" type="text" name="crop_variety" value="<?= $crop_variety ?>" class="form-control mb-4">
+									<input id="crop_variety" type="text" name="crop_variety" value="<?= $crop_variety ?>" class="form-control mb-4" disabled>
 								</div>
 								<div class="col-4">
 									<!-- Crop Origin -->
 									<label for="crop_origin">Crop Origin <span class="fw-light">(Optional)</span></label>
-									<input id="crop_origin" type="text" name="crop_origin" value="<?= $crop_origin ?>" class="form-control mb-4">
+									<input id="crop_origin" type="text" name="crop_origin" value="<?= $crop_origin ?>" class="form-control mb-4" disabled>
 								</div>
 							</div>
 
 							<div class="col">
 								<!-- Description -->
 								<label for="gen-desc">Description <span class="fw-light">(Optional)</span></label>
-								<textarea name="crop_description" value="<?= $crop_description ?>" id="gen-desc" class="txtarea form-control" rows="3" <?php echo ($crop_description !== $emptyValue) ? '>' . $crop_description : 'placeholder="Empty">'; ?></textarea>
+								<textarea name="crop_description" value="<?= $crop_description ?>" id="gen-desc" class="txtarea form-control" rows="3" disabled <?php echo ($crop_description !== $emptyValue) ? '>' . $crop_description : 'placeholder="Empty">'; ?></textarea>
 							</div>
 
 							<!-- More -->

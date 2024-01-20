@@ -16,10 +16,8 @@
     <link rel="shortcut icon" href="img/logo/Uma logo.svg" type="image/x-icon" />
     <title>Uma | AdminPage</title>
     <?php
-    ob_start(); // Start output buffering
     session_start();
     require('../sidebar/side.php');
-    ob_end_flush(); // Send output to the browser
     ?>
 </head>
 

@@ -282,8 +282,8 @@ if (isset($_POST['save']) && $_SESSION['rank'] == 'curator') {
 
             // Inserting into location table using parameterized query
             $query_location = "INSERT INTO location (province_name, municipality_name, longtitude,
-        latitude) 
-        VALUES ($1, $2, $3, $4) RETURNING location_id";
+            latitude) 
+            VALUES ($1, $2, $3, $4) RETURNING location_id";
 
             $query_run_location = pg_query_params($con, $query_location, array(
                 $province_name, $municipality_name, $longtitude,

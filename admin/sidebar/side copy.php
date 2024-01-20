@@ -18,12 +18,9 @@ $atapprove = strpos($current_page, '/uma/admin/approval/approval.php') === 0 ||
     strpos($current_page, '/uma/admin/approval/approval.php') === 0;
 ?>
 <!-- custom css -->
-
 <!-- script for access js -->
 <script>
-    <?php if (isset($_SESSION['LOGGED_IN']) && $_SESSION['LOGGED_IN']) : ?>
-        var userRole = "<?php echo $_SESSION['rank']; ?>";
-    <?php endif; ?>
+    var userRole = "<?php echo $_SESSION['rank']; ?>";
 </script>
 
 <!-- JQUERY link -->
@@ -31,34 +28,10 @@ $atapprove = strpos($current_page, '/uma/admin/approval/approval.php') === 0 ||
 
 <script>
     // Jquery code here!
-    $(document).ready(function() {
-
-        function load_unseen_notification(view = '') {
-            $.ajax({
-                url: "/incognito-capstone/admin/sidebar/fetch.php",
-                method: "POST",
-                data: {
-                    view: view
-                },
-                dataType: "json",
-                success: function(data) {
-                    $('.count').html(data.notification);
-                    if (data.unseen_notification > 0) {
-                        $('.count').html(data.unseen_notification);
-                    }
-                }
-            });
-        }
-
-        load_unseen_notification();
-
-    });
+    $(document).ready(functio());
 </script>
 
-<?php if (isset($_SESSION['LOGGED_IN']) && $_SESSION['LOGGED_IN']) : ?>
-    <script src="../../js/admin/access.js" defer></script>
-<?php endif; ?>
-
+<script src="../../js/admin/access.js" defer></script>
 <!-- main nav -->
 <nav id="main-nav" class="d-none d-md-block col col-3 col-lg-3 col-xl-2 fixed-top h-100 m-0 p-0 z-3">
     <div class="d-flex flex-column flex-shrink-0 text-white h-100">
@@ -91,18 +64,15 @@ $atapprove = strpos($current_page, '/uma/admin/approval/approval.php') === 0 ||
                     </a>
                 </li>
             <?php endif; ?>
-
             <!-- approval sidebar nav -->
             <li>
                 <a href="../approval/approval.php" <?php echo ($atapprove)
                                                         ? 'class="nav-link text-dark fw-semibold rounded-start-pill active-nav"'
                                                         : 'class="nav-link text-white"'; ?>>
                     <i class="fa-solid fa-check" style="width: 1.5rem;"></i>
-                    Approval Crops
-                    <span class="count" style="color:red;"></span>
+                    Approval
                 </a>
             </li>
-
         </ul>
         <hr class="mx-3">
         <div class="dropdown mx-3 mt-0 mb-3">
@@ -137,7 +107,6 @@ $atapprove = strpos($current_page, '/uma/admin/approval/approval.php') === 0 ||
                 </a>
             </div>
         </div>
-
     </div>
     <!-- font awesome script -->
     <script src="https://kit.fontawesome.com/57e83eb6e4.js" crossorigin="anonymous"></script>

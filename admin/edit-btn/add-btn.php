@@ -33,13 +33,32 @@
         return true; // Allow form submission
     }
 
+    // Function to submit the form and refresh notifications
     function submitForm() {
         console.log('submitForm function called');
         // Get the form reference
         var form = document.getElementById('form-panel');
         // Trigger the form submission
         if (form) {
-            form.submit();
+            // Perform AJAX submission or other necessary actions
+            $.ajax({
+                url: "code.php",
+                method: "POST",
+                data: new FormData(form),
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function(data) {
+                    // Reset the form
+                    form.reset();
+                    // Reload unseen notifications
+                    load_unseen_notification();
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.error("Form submission error:", textStatus, errorThrown);
+                    // Handle error if needed
+                }
+            });
         }
     }
 </script>

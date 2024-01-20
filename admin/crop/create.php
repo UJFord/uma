@@ -23,8 +23,9 @@
 	session_start();
 	// sidebar
 	require('../sidebar/side.php');
-	include '../access.php';
-	access('CURATOR');
+	// include '../access.php';
+	// access('CURATOR');
+	// access('ADMIN');
 	?>
 
 	<!-- summernote -->
@@ -284,7 +285,6 @@
 			});
 		});
 	</script>
-
 
 	<script>
 		$('.txtarea').summernote({
