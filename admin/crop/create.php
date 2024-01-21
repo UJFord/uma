@@ -312,7 +312,7 @@
 							<label for="farming_practice-desc">Description <span class="text-danger"></span></label>
 							<textarea name="farming_practice_description" id="farming_practice-desc" class="txtarea form-control" rows="3"></textarea>
 						</div>
-					</div>
+					</div>>
 				</div>
 				<!-- editting buttons -->
 				<?php
