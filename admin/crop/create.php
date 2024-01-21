@@ -12,6 +12,9 @@
 	<!-- sidebar custom css -->
 	<link rel="stylesheet" href="../../css/admin/side.css">
 
+	<!--========== BOX ICONS ==========-->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+
 	<!-- favicon -->
 	<link rel="shortcut icon" href="img/logo/Uma logo.svg" type="image/x-icon" />
 	<title>Crop sa Editor</title>
@@ -20,7 +23,9 @@
 	session_start();
 	// sidebar
 	require('../sidebar/side.php');
-	// include('../login/login-check.php');
+	// include '../access.php';
+	// access('CURATOR');
+	// access('ADMIN');
 	?>
 
 	<!-- summernote -->
@@ -69,7 +74,6 @@
 
 					<div class="row mb-4">
 						<div class="col-4">
-
 							<!-- local name -->
 							<label for="crop_local_name">Local Name <span class="text-danger fw-bold">*</span></label>
 							<input id="crop_local_name" type="text" name="crop_local_name" class="form-control mb-4" required>
@@ -79,15 +83,15 @@
 							<div class="mb-4">
 								<div class="form-check form-check-inline">
 									<label class="form-check-label" for="ccateg-rice">Rice</label>
-									<input class="form-check-input" type="radio" name="upland_or_lowland" id="ccateg-rice" value="Rice" required>
+									<input class="form-check-input" type="radio" name="category" id="ccateg-rice" value="Rice" required>
 								</div>
 								<div class="form-check form-check-inline">
 									<label class="form-check-label" for="ccateg-root">Root Crops</label>
-									<input class="form-check-input" type="radio" name="upland_or_lowland" id="ccateg-root" value="Root Crop" required>
+									<input class="form-check-input" type="radio" name="category" id="ccateg-root" value="Root Crop" required>
 								</div>
 								<div class="form-check form-check-inline">
 									<label class="form-check-label" for="ccateg-other">Other</label>
-									<input class="form-check-input" type="radio" name="upland_or_lowland" id="ccateg-other" value="Other" required>
+									<input class="form-check-input" type="radio" name="category" id="ccateg-other" value="Other" required>
 								</div>
 							</div>
 
@@ -103,7 +107,6 @@
 									<input class="form-check-input" type="radio" name="upland_or_lowland" id="ctype-low" value="Lowland" required>
 								</div>
 							</div>
-
 						</div>
 
 						<div class="col">
@@ -117,142 +120,32 @@
 						</div>
 					</div>
 
+					<div class="row mb-4">
+						<div class="col-4">
+							<!-- Scientific name -->
+							<label for="crop_scientific_name">Scientific Name <span class="fw-light">(Optional)</span></label>
+							<input id="crop_scientific_name" type="text" name="crop_scientific_name" class="form-control mb-4">
+						</div>
+						<div class="col-4">
+							<!-- Crop Variety -->
+							<label for="crop_variety">Crop Variety <span class="fw-light">(Optional)</span></label>
+							<input id="crop_variety" type="text" name="crop_variety" class="form-control mb-4">
+						</div>
+						<div class="col-4">
+							<!-- Crop Origin -->
+							<label for="crop_origin">Crop Origin <span class="fw-light">(Optional)</span></label>
+							<input id="crop_origin" type="text" name="crop_origin" class="form-control mb-4">
+						</div>
+					</div>
+
 					<div class="col">
 						<!-- Description -->
 						<label for="gen-desc">Description <span class="fw-light">(Optional)</span></label>
-						<textarea name="crop_description" id="gen-desc" class="txtarea form-control" rows="3" required></textarea>
+						<textarea name="crop_description" id="gen-desc" class="txtarea form-control" rows="3"></textarea>
 					</div>
-
-
-
 
 					<!-- More -->
 					<h3 class="mt-5 fw-bolder">Additional Info <span class="fs-5 fw-normal">(Optional)</span></h3>
-
-					<!-- Characteristics -->
-					<h4 class="">Characteristics</h4>
-					<div class="row">
-						<div class="col-2">
-							<!-- taste -->
-							<label for="taste">Taste</label>
-							<input id="taste" type="text" class="form-control mb-4">
-						</div>
-						<div class="col-2">
-							<!-- aroma -->
-							<label for="aroma">Aroma</label>
-							<input id="aroma" type="text" class="form-control mb-4">
-						</div>
-						<div class="col-2">
-							<!-- maturation -->
-							<label for="matur">Maturation</label>
-							<input id="matur" type="text" class="form-control mb-4">
-						</div>
-						<div class="col">
-							<!-- disease resistance -->
-							<label for="resist">Disease Resistance</label>
-							<input id="resist" type="text" class="form-control">
-						</div>
-					</div>
-
-
-					<!-- Planting Techniques -->
-					<label class="mt-2">Planting Techniques</label>
-					<div class="row">
-						<div class="col">
-							<!-- Descrition -->
-							<textarea name="" id="tech-desc" class="txtarea form-control" rows="2"></textarea>
-						</div>
-					</div>
-
-					<!-- Cultural and Spiritual Significance -->
-					<label class="mt-2" for="signif-desc">Cultural and Spiritual Significance</label>
-					<div class="row">
-						<div class="col">
-							<!-- Descrition -->
-							<textarea name="" id="signif-desc" class="txtarea form-control" rows="2"></textarea>
-						</div>
-					</div>
-
-					<!-- Role in Maintaining Upland Ecosystems -->
-					<label class="mt-2">Role in Maintaining Upland Ecosystems</label>
-					<div class="row">
-						<div class="col">
-							<!-- Descrition -->
-							<textarea name="" id="role-desc" class="txtarea form-control" rows="2"></textarea>
-						</div>
-					</div>
-
-					<!-- Cultural Importance and Traditional Knowledge -->
-					<label class="mt-2">Cultural Importance and Traditional Knowledge</label>
-					<div class="row">
-						<div class="col">
-							<!-- Descrition -->
-							<textarea name="" id="impotance-desc" class="txtarea form-control" rows="2"></textarea>
-						</div>
-					</div>
-
-					<!-- Unique Features -->
-					<label class="mt-2">Unique Features</label>
-					<div class="row">
-						<div class="col">
-							<!-- Descrition -->
-							<textarea name="" id="feat-desc" class="txtarea form-control" rows="2"></textarea>
-						</div>
-					</div>
-
-					<!-- Cultural Use -->
-					<label class="mt-2">Cultural Use</label>
-					<div class="row">
-						<div class="col">
-							<!-- Descrition -->
-							<textarea name="" id="use-desc" class="txtarea form-control" rows="2"></textarea>
-						</div>
-					</div>
-
-					<!-- Associated Farming Practice -->
-					<label class="mt-2">Associated Farming Practice</label>
-					<div class="row">
-						<div class="col">
-							<!-- Descrition -->
-							<textarea name="" id="prac-desc" class="txtarea form-control" rows="2"></textarea>
-						</div>
-					</div>
-
-					<!-- Associated Vegetation -->
-					<label class="mt-2">Associated Vegetation</label>
-					<div class="row">
-						<div class="col">
-							<!-- Descrition -->
-							<textarea name="" id="veg-desc" class="txtarea form-control" rows="2"></textarea>
-						</div>
-					</div>
-
-					<!-- Last Seen Location -->
-					<label class="mt-2">Last Seen Location</label>
-					<div class="row">
-						<div class="col">
-							<!-- Descrition -->
-							<textarea name="" id="loc-desc" class="txtarea form-control" rows="2"></textarea>
-						</div>
-					</div>
-
-					<!-- Threats to Upland Farms -->
-					<label class="mt-2">Threats to Upland Farms</label>
-					<div class="row">
-						<div class="col">
-							<!-- Descrition -->
-							<textarea name="" id="threat-desc" class="txtarea form-control" rows="2"></textarea>
-						</div>
-					</div>
-
-					<!-- Other Information -->
-					<label class="mt-2">Other Information</label>
-					<div class="row">
-						<div class="col">
-							<!-- Description -->
-							<textarea name="" id="more-desc" class="txtarea form-control" rows="2"></textarea>
-						</div>
-					</div>
 
 					<div class="row">
 						<!-- Location -->
@@ -261,7 +154,7 @@
 							<!-- Municipality -->
 							<label for="municipality">Municipality</label>
 							<select id="municipality" name="municipality_name" class="form-select mb-2">
-								<option value="alabel" selected>None</option>
+								<option value="none" selected>None</option>
 								<option value="alabel">Alabel</option>
 								<option value="glan">Glan</option>
 								<option value="kiamba">Kiamba</option>
@@ -312,7 +205,34 @@
 							<label for="farming_practice-desc">Description <span class="text-danger"></span></label>
 							<textarea name="farming_practice_description" id="farming_practice-desc" class="txtarea form-control" rows="3"></textarea>
 						</div>
-					</div>>
+					</div>
+
+					<!-- Other Information -->
+					<div class="other_info">
+						<h3 class="mt-4 d-flex align-items-center" id="otherInfoTitle">Other Info <i class='bx bx-plus ml-2' id="toggleOtherInfo" style="color: blue;"></i> <i class='bx bx-minus ml-2' id="toggleOtherInfoMinus" style="display: none; color:red"></i></h3>
+						<div class="other-info-content" hidden>
+							<div class="col">
+								<!-- Other Info Type -->
+								<label for="other_info_type">Type</label>
+								<input id="other_info_type" type="text" name="other_info_type" placeholder="Enter Other Info Type" class="form-control mb-2">
+							</div>
+							<div class="col">
+								<!-- Other Info Name -->
+								<label for="other_info_name">Name</label>
+								<input id="other_info_name" type="text" name="other_info_name" placeholder="Enter Other Info Name" class="form-control mb-2">
+							</div>
+							<div class="col">
+								<!-- Other Info Description -->
+								<label for="other_info-desc">Description <span class="text-danger"></span></label>
+								<textarea name="other_info_description" id="other_info-desc" class="txtarea form-control" rows="3"></textarea>
+							</div>
+							<div class="col">
+								<!-- Other Info Url -->
+								<label for="other_info_url">Links</label>
+								<input id="other_info_url" type="text" name="other_info_url" placeholder="Enter links if available" class="form-control">
+							</div>
+						</div>
+					</div>
 				</div>
 				<!-- editting buttons -->
 				<?php
@@ -365,7 +285,6 @@
 			});
 		});
 	</script>
-
 
 	<script>
 		$('.txtarea').summernote({

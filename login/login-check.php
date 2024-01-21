@@ -7,5 +7,5 @@ if (!isset($_SESSION['user'])) // if admin session is not set
     // Redirect to with message
     $_SESSION['messgage'] = "<div class='error text-center'>Please Login to Access Admin Panel.</div>";
     // REdirect to login page
-    header('location:../login/login.php');
+    header('location:../../login/login.php');
 }

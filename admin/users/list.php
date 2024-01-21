@@ -20,7 +20,6 @@
 	<?php
 	session_start();
 	require('../sidebar/side.php');
-	// include('../login/login-check.php');
 	include '../access.php';
 	access('CURATOR');
 	?>

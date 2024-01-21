@@ -1,4 +1,5 @@
 <?php
+ob_start(); // Add this at the beginning
 function access($rank){
     if(isset($_SESSION['ACCESS']) && !$_SESSION["ACCESS"][$rank]){
         $_SESSION['message'] = "<div class='text-center'>Access denied</div>";
@@ -13,4 +14,5 @@ $_SESSION["ACCESS"]["ADMIN"] = isset($_SESSION['rank']) && $_SESSION['rank'] == 
 
 $_SESSION["ACCESS"]["CURATOR"] = isset($_SESSION['rank']) && $_SESSION['rank'] == "curator";
 
+ob_end_flush(); // Add this at the end
 ?>

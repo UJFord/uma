@@ -1,7 +1,7 @@
 <?php
 session_start();
-require('../../html/navfoot/connection.php');
-require('../functions.php');
+require('../html/navfoot/connection.php');
+require('../admin/functions.php');
 
 $errors = array();
 
@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $errors = login($_POST);
 
     if (count($errors) == 0) {
-        header("location: ../crop/list.php");
+        header("location: ../admin/crop/list.php");
         die();
     }
 }
@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <head>
     <title>Login - UMA</title>
-    <link rel="stylesheet" href="../../css/admin/login.css">
+    <link rel="stylesheet" href="../css/admin/login.css">
 </head>
 
 <body>
@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <br><br>
 
         <?php
-        include "../message.php";
+        include "../admin/message.php";
         ?>
 
         <div>
@@ -59,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         <!-- Login Form ends here -->
 
-        <p class="text-center">Return to homepage? - <a href="../crop/list.php">Go Back</a></p>
+        <p class="text-center">Return to homepage? - <a href="../admin/crop/list.php">Go Back</a></p>
         <p class="text-center">Want to signup? - <a href="signup.php">Sign Up</a></p>
     </div>
 </body>

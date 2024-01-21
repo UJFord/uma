@@ -87,18 +87,25 @@ function login($data)
         $email = $data['email'];
         $providedPassword = $data['password'];
 
-        $query = "SELECT users.user_id, users.password, users.first_name, users.email, account_type.type_name  FROM users left join account_type on users.account_type_id = account_type.account_type_id WHERE email = :email LIMIT 1";
+        $query = "SELECT users.user_id, users.password, users.first_name, users.email, users.email_verified, account_type.type_name  FROM users LEFT JOIN account_type ON users.account_type_id = account_type.account_type_id WHERE email = :email LIMIT 1";
 
         $row = database_run($query, array(':email' => $email));
 
         if (!empty($row) && password_verify($providedPassword, $row[0]['password'])) {
-            // Only store essential information in the session
-            $_SESSION['USER']['user_id'] = $row[0]['user_id'];
-            $_SESSION['USER']['first_name'] = $row[0]['first_name'];
-            $_SESSION['USER']['email'] = $row[0]['email'];
-            $_SESSION['rank'] = $row[0]['type_name'];
-            $_SESSION['LOGGED_IN'] = true;
+            // Check if the user's email is verified
+            if ($row[0]['email_verified'] == $email) {
+                // Only store essential information in the session
+                $_SESSION['USER']['user_id'] = $row[0]['user_id'];
+                $_SESSION['USER']['first_name'] = $row[0]['first_name'];
+                $_SESSION['USER']['email'] = $row[0]['email'];
+                $_SESSION['rank'] = $row[0]['type_name'];
+                $_SESSION['LOGGED_IN'] = true;
+            } else {
+                // Email is not verified
+                $errors[] = "<div class='error text-center'>Email is not verified. Please verify your email first.</div>";
+            }
         } else {
+            // Email or Password did not match
             $errors[] = "<div class='error text-center'>Email or Password did not match.</div>";
         }
     }
@@ -135,23 +142,38 @@ function database_run($query, $vars = array())
     }
 }
 
-// function for login checkup. to see if user is logged in
-function check_login($redirect = true)
+// Function for comprehensive user check
+function check_user($redirect = true)
 {
     if (isset($_SESSION['USER']) && isset($_SESSION['LOGGED_IN'])) {
-        return true;
+        // User is logged in
+
+        // Check if the user's email is verified
+        if (check_verified()) {
+            return true;
+        } else {
+            // Redirect if email is not verified
+            if ($redirect) {
+                $_SESSION['message'] = "<div class='error'>Your email is not verified</div>";
+                header("location: ../../login/index.php");
+                die();
+            } else {
+                return false;
+            }
+        }
     }
 
+    // Redirect if not logged in
     if ($redirect) {
         $_SESSION['message'] = "<div class='error'>You are not logged in</div>";
-        header("location: ../login/login.php");
+        header("location: ../../login/index.php");
         die();
     } else {
         return false;
     }
 }
 
-// function for verifying if user's email is verified
+// Function for verifying if the user's email is verified
 function check_verified()
 {
     $user_id = $_SESSION['USER']['user_id'];
@@ -167,5 +189,8 @@ function check_verified()
         }
     }
 
-    return false;
+    // Redirect to verification page if not verified
+    $_SESSION['message'] = "<div class='error'>Your email is not verified</div>";
+    header("location: ../crop/list.php");
+    exit();
 }

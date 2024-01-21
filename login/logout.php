@@ -1,6 +1,6 @@
 <?php
 session_start();
-require '../../html/navfoot/connection.php';
+require '../html/navfoot/connection.php';
 
 ?>
 
@@ -9,5 +9,5 @@ require '../../html/navfoot/connection.php';
 session_destroy(); //  unsets $_SESSION['user']
 
 // Redirect to login page
-header('location:../login/login.php');
+header('location:../login/index.php');
 ?>

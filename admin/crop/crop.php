@@ -13,11 +13,11 @@ require('../sidebar/side.php');
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
-	
+
 	<!-- add entry custom css -->
 	<link rel="stylesheet" href="../../css/admin/entry.css" />
 	<!-- sidebar custom css -->
-	<link rel="stylesheet" href="../../css/admin/side.css"> 
+	<link rel="stylesheet" href="../../css/admin/side.css">
 
 	<!-- favicon -->
 	<link rel="shortcut icon" href="img/logo/Uma logo.svg" type="image/x-icon" />
@@ -94,49 +94,48 @@ require('../sidebar/side.php');
 							<input type="hidden" name="farming_practice_id" value="<?= $farming_practice_id; ?>">
 
 							<!-- general information -->
-							<h3>General Information</h3>
+							<h3 class="fw-bolder">General Info <span class="fs-5 fw-normal"></span></h3>
 							<div class="row">
 								<div class="col-4">
 									<!-- crop name -->
-									<label for="crop-name">Crop <span class="text-danger">*</span></label>
-									<input id="crop-name" type="text" name="crop_name" value="<?= $crop_name; ?>" class="form-control form-control-lg mb-2" disabled>
+									<label for="crop-name">Crop / Variety <span class="text-danger fw-bold">*</span></label>
+									<input id="crop-name" type="text" name="crop_name" value="<?= $crop_name; ?>" class="form-control form-control-lg mb-4" disabled>
 								</div>
 								<!-- image -->
 								<div class="col-4">
-									<label for="image-input" class="">Images <span class="text-danger">*</span></label>
-									<input type="file" class="form-control" name="crop_image[]" id="image-input" multiple accept="image/*" hidden>
+									<label for="image-input">Images <span class="text-danger fw-bold">*</span></label>
+									<input type="file" name="crop_image[]" class="form-control" id="image-input" multiple accept="image/*" hidden>
 								</div>
 							</div>
 
-							<div class="row">
+							<div class="row mb-4">
 								<div class="col-4">
-									<!-- category -->
-									<label for="category">Category <span class="text-danger">*</span></label>
-									<select id="category" name="category" class="form-select mb-2" disabled>
-										<option value="rice" <?php echo ($category === 'rice') ? 'selected' : ''; ?>>Rice</option>
-										<option value="root" <?php echo ($category === 'root') ? 'selected' : ''; ?>>Rootcrop</option>
-										<option value="fly" <?php echo ($category === 'fly') ? 'selected' : ''; ?>>Flying</option>
-										<option value="rock" <?php echo ($category === 'rock') ? 'selected' : ''; ?>>Rock</option>
-										<option value="fire" <?php echo ($category === 'fire') ? 'selected' : ''; ?>>Fire</option>
-										<option value="grass" <?php echo ($category === 'grass') ? 'selected' : ''; ?>>Grass</option>
-										<option value="steel" <?php echo ($category === 'steel') ? 'selected' : ''; ?>>Steel</option>
-									</select>
-
 									<!-- local name -->
-									<label for="local">Local Name <span class="text-danger">*</span></label>
-									<input id="local" type="text" name="crop_local_name" value="<?= $crop_local_name ?>" class="form-control mb-2" disabled>
+									<label for="crop_local_name">Local Name <span class="text-danger fw-bold">*</span></label>
+									<input id="crop_local_name" type="text" name="crop_local_name" value="<?= $crop_local_name ?>" class="form-control mb-4" disabled>
 
-									<!-- scientific name -->
-									<label for="crop_scientific_name">Scientific Name <span class="text-danger"></span></label>
-									<input id="crop_scientific_name" type="text" name="crop_scientific_name" value="<?= $crop_scientific_name ?>" class="form-control mb-2" disabled>
-
-									<!-- Crop Variety -->
-									<label for="crop_variety">Crop Variety <span class="text-danger"></span></label>
-									<input id="crop_variety" type="text" name="crop_variety" value="<?= $crop_variety ?>" class="form-control mb-2" disabled>
-
-									<!-- Crop Origin -->
-									<label for="crop_origin">Crop Origin <span class="text-danger"></span></label>
-									<input id="crop_origin" type="text" name="crop_origin" value="<?= $crop_origin ?>" class="form-control mb-2" disabled>
+									<!-- category -->
+									<label>Category <span class="text-danger">*</span></label>
+									<div class="mb-4">
+										<div class="form-check form-check-inline">
+											<label class="form-check-label" for="ccateg-rice">Rice</label>
+											<input class="form-check-input" <?php if ($category == "Rice") {
+																				echo "checked";
+																			} ?> type="radio" name="category" id="ccateg-rice" value="Rice" disabled>
+										</div>
+										<div class="form-check form-check-inline">
+											<label class="form-check-label" for="ccateg-root">Root Crops</label>
+											<input class="form-check-input" <?php if ($category == "Root Crop") {
+																				echo "checked";
+																			} ?> type="radio" name="category" id="ccateg-root" value="Root Crop" disabled>
+										</div>
+										<div class="form-check form-check-inline">
+											<label class="form-check-label" for="ccateg-other">Other</label>
+											<input class="form-check-input" <?php if ($category == "Other") {
+																				echo "checked";
+																			} ?> type="radio" name="category" id="ccateg-other" value="Other" disabled>
+										</div>
+									</div>
 
 									<!-- upland or lowland -->
 									<label>Type <span class="text-danger">*</span></label>
@@ -154,7 +153,6 @@ require('../sidebar/side.php');
 																			} ?> type="radio" name="upland_or_lowland" id="inlineRadio2" value="Lowland" disabled>
 										</div>
 									</div>
-
 								</div>
 
 								<div class="col">
@@ -167,7 +165,7 @@ require('../sidebar/side.php');
 											// Display each image
 											foreach ($imageNames as $imageName) {
 										?>
-												<img src="<?php echo 'http://localhost/incognito-capstone/admin/'; ?>img/crop/<?php echo trim($imageName); ?>" width="100%">
+												<img src="<?php echo 'http://localhost/incognito-capstone/admin/'; ?>img/crop/<?php echo trim($imageName); ?>" class="m-2 img-thumbnail" style="height: 200px;">
 										<?php
 											}
 										} else {
@@ -179,132 +177,150 @@ require('../sidebar/side.php');
 								</div>
 							</div>
 
+							<div class="row mb-4">
+								<div class="col-4">
+									<!-- Scientific name -->
+									<label for="crop_scientific_name">Scientific Name <span class="fw-light">(Optional)</span></label>
+									<input id="crop_scientific_name" type="text" name="crop_scientific_name" value="<?= $crop_scientific_name ?>" class="form-control mb-4" disabled>
+								</div>
+								<div class="col-4">
+									<!-- Crop Variety -->
+									<label for="crop_variety">Crop Variety <span class="fw-light">(Optional)</span></label>
+									<input id="crop_variety" type="text" name="crop_variety" value="<?= $crop_variety ?>" class="form-control mb-4" disabled>
+								</div>
+								<div class="col-4">
+									<!-- Crop Origin -->
+									<label for="crop_origin">Crop Origin <span class="fw-light">(Optional)</span></label>
+									<input id="crop_origin" type="text" name="crop_origin" value="<?= $crop_origin ?>" class="form-control mb-4" disabled>
+								</div>
+							</div>
+
 							<div class="col">
 								<!-- Description -->
-								<label for="gen-desc">Description <span class="text-danger">*</span></label>
-								<textarea name="crop_description" id="gen-desc" class="form-control" rows="3" disabled <?php echo ($crop_description !== $emptyValue) ? '>' . $crop_description : 'placeholder="Empty">'; ?></textarea>
+								<label for="gen-desc">Description <span class="fw-light">(Optional)</span></label>
+								<textarea name="crop_description" value="<?= $crop_description ?>" id="gen-desc" class="txtarea form-control" rows="3" disabled <?php echo ($crop_description !== $emptyValue) ? '>' . $crop_description : 'placeholder="Empty">'; ?></textarea>
 							</div>
 
 							<!-- More -->
 							<h3 class="mt-4">More</h5>
 
-							<!-- Location -->
-							<div>
-								<h3 class="mt-4">Location</h5>
-									<?php
-									// PHP code to display available Location from the database
-
-									// Query to select all available Location in the database
-									$query3 = "SELECT crop_location.*, location.* FROM crop_location left join location on crop_location.location_id = location.location_id WHERE location.location_id='$location_id'";
-
-									// Executing query
-									$query_run3 = pg_query($connection, $query3);
-
-									// If count is greater than 0, we have Location; else, we do not have Location
-									if (pg_num_rows($query_run3) > 0) {
-										$location = pg_fetch_assoc($query_run3);
-
-										// Define default values for each field if they are $emptyValue
-										$province_name = isset($location['province_name']) ? $location['province_name'] : $emptyValue;
-										$municipality_name = isset($location['municipality_name']) ? $location['municipality_name'] : $emptyValue;
-										$latitude = isset($location['latitude']) ? $location['latitude'] : $emptyValue;
-										$longtitude = isset($location['longtitude']) ? $location['longtitude'] : $emptyValue;
-										$input_date = isset($location['input_date']) ? $location['input_date'] : $emptyValue;
-
-									?>
-									<div class="row">
-										<div class="col-3">
-											<!-- Province -->
-											<label for="province">Province</label>
-											<select id="province" name="province_name" class="form-select mb-2" disabled>
-												<option value="<?= $province_name; ?>" <?php echo ($province_name === 'province_name') ? 'selected' : ''; ?>><?= $province_name; ?></option>
-												<option value="sarangani">None</option>
-												<option value="sarangani">Davao Del Norte</option>
-												<option value="davao">Davao</option>
-												<option value="south_cotabato">South Cotabato</option>
-												<option value="cotabato">Cotabato</option>
-											</select>
-										</div>
-										<div class="col-3">
-											<!-- MUnicipality Name -->
-											<label for="municipality">Municipality Name</label>
-											<select id="municipality" name="municipality_name" class="form-select mb-2" disabled>
-												<option value="<?= $municipality_name; ?>" <?php echo ($municipality_name === 'municipality_name') ? 'selected' : ''; ?>><?= $municipality_name; ?></option>
-												<option value="none">None</option>
-												<option value="alabel">Alabel</option>
-												<option value="glan">Glan</option>
-												<option value="kiamba">Kiamba</option>
-												<option value="maasim">Maasim</option>
-												<option value="maitum">Maitum</option>
-												<option value="malapatan">Malapatan</option>
-												<option value="malungon">Malungon</option>
-											</select>										
-										</div>
-										<div class="col-2">
-											<!-- Latitude -->
-											<label for="latitude">Latitude</label>
-											<input id="latitude" name="latitude" type="text" value="<?= $latitude; ?>" class="form-control mb-2" disabled>
-										</div>
-										<div class="col-2">
-											<!-- Longtitude -->
-											<label for="longtitude">Longtitude</label>
-											<input id="longtitude" name="longtitude" type="text" value="<?= $longtitude; ?>" class="form-control" disabled>
-										</div>
-
+								<!-- Location -->
+								<div>
+									<h3 class="mt-4">Location</h5>
 										<?php
-										// Convert the string to a DateTime object
-										$date = new DateTime($input_date);
-										// Format the date to display up to the minute
-										$formatted_date = $date->format('Y-m-d H:i');
+										// PHP code to display available Location from the database
+
+										// Query to select all available Location in the database
+										$query3 = "SELECT crop_location.*, location.* FROM crop_location left join location on crop_location.location_id = location.location_id WHERE location.location_id='$location_id'";
+
+										// Executing query
+										$query_run3 = pg_query($connection, $query3);
+
+										// If count is greater than 0, we have Location; else, we do not have Location
+										if (pg_num_rows($query_run3) > 0) {
+											$location = pg_fetch_assoc($query_run3);
+
+											// Define default values for each field if they are $emptyValue
+											$province_name = isset($location['province_name']) ? $location['province_name'] : $emptyValue;
+											$municipality_name = isset($location['municipality_name']) ? $location['municipality_name'] : $emptyValue;
+											$latitude = isset($location['latitude']) ? $location['latitude'] : $emptyValue;
+											$longtitude = isset($location['longtitude']) ? $location['longtitude'] : $emptyValue;
+											$input_date = isset($location['input_date']) ? $location['input_date'] : $emptyValue;
+
 										?>
-										<div class="col-3">
-											<!-- Input Date -->
-											<label for="input_date">Input Date</label>
-											<input id="input_date" name="input_date" type="text" value="<?= $formatted_date; ?>" class="form-control disabled-input">
-										</div>
+											<div class="row">
+												<div class="col-3">
+													<!-- Province -->
+													<label for="province">Province</label>
+													<select id="province" name="province_name" class="form-select mb-2" disabled>
+														<option value="<?= $province_name; ?>" <?php echo ($province_name === 'province_name') ? 'selected' : ''; ?>><?= $province_name; ?></option>
+														<option value="sarangani">None</option>
+														<option value="sarangani">Davao Del Norte</option>
+														<option value="davao">Davao</option>
+														<option value="south_cotabato">South Cotabato</option>
+														<option value="cotabato">Cotabato</option>
+													</select>
+												</div>
+												<div class="col-3">
+													<!-- MUnicipality Name -->
+													<label for="municipality">Municipality Name</label>
+													<select id="municipality" name="municipality_name" class="form-select mb-2" disabled>
+														<option value="<?= $municipality_name; ?>" <?php echo ($municipality_name === 'municipality_name') ? 'selected' : ''; ?>><?= $municipality_name; ?></option>
+														<option value="none">None</option>
+														<option value="alabel">Alabel</option>
+														<option value="glan">Glan</option>
+														<option value="kiamba">Kiamba</option>
+														<option value="maasim">Maasim</option>
+														<option value="maitum">Maitum</option>
+														<option value="malapatan">Malapatan</option>
+														<option value="malungon">Malungon</option>
+													</select>
+												</div>
+												<div class="col-2">
+													<!-- Latitude -->
+													<label for="latitude">Latitude</label>
+													<input id="latitude" name="latitude" type="text" value="<?= $latitude; ?>" class="form-control mb-2" disabled>
+												</div>
+												<div class="col-2">
+													<!-- Longtitude -->
+													<label for="longtitude">Longtitude</label>
+													<input id="longtitude" name="longtitude" type="text" value="<?= $longtitude; ?>" class="form-control" disabled>
+												</div>
+
+												<?php
+												// Convert the string to a DateTime object
+												$date = new DateTime($input_date);
+												// Format the date to display up to the minute
+												$formatted_date = $date->format('Y-m-d H:i');
+												?>
+												<div class="col-3">
+													<!-- Input Date -->
+													<label for="input_date">Input Date</label>
+													<input id="input_date" name="input_date" type="text" value="<?= $formatted_date; ?>" class="form-control disabled-input">
+												</div>
+											<?php
+										}
+											?>
+											</div>
+								</div>
+
+								<!-- Associated Farming Practice -->
+								<div class="">
+									<h3 class="mt-4">Associated Farming Practice</h5>
 										<?php
-									}
+										// PHP code to display available crop farming practice from the database
+										// Query to select all available crop farming practice in the database
+										$query4 = "SELECT crop_farming_practice.*, farming_practice.* FROM crop_farming_practice left join farming_practice on crop_farming_practice.farming_practice_id = farming_practice.farming_practice_id WHERE farming_practice.farming_practice_id='$farming_practice_id'";
+
+										// Executing query
+										$query_run4 = pg_query($connection, $query4);
+
+										// If count is greater than 0, we have farming_practice; else, we do not have farming_practice
+										if (pg_num_rows($query_run4) > 0) {
+											$farming_practice = pg_fetch_assoc($query_run4);
+
+											// Define default values for each field if they are $emptyValue
+											$farming_practice_type = isset($farming_practice['farming_practice_type']) ? $farming_practice['farming_practice_type'] : $emptyValue;
+											$farming_practice_name = isset($farming_practice['farming_practice_name']) ? $farming_practice['farming_practice_name'] : $emptyValue;
+											$farming_practice_description = isset($farming_practice['farming_practice_description']) ? $farming_practice['farming_practice_description'] : $emptyValue;
 										?>
-									</div>
-							</div>
-
-							<!-- Associated Farming Practice -->
-							<div class="">
-								<h3 class="mt-4">Associated Farming Practice</h5>
-								<?php
-								// PHP code to display available crop farming practice from the database
-								// Query to select all available crop farming practice in the database
-								$query4 = "SELECT crop_farming_practice.*, farming_practice.* FROM crop_farming_practice left join farming_practice on crop_farming_practice.farming_practice_id = farming_practice.farming_practice_id WHERE farming_practice.farming_practice_id='$farming_practice_id'";
-
-								// Executing query
-								$query_run4 = pg_query($connection, $query4);
-
-								// If count is greater than 0, we have farming_practice; else, we do not have farming_practice
-								if (pg_num_rows($query_run4) > 0) {
-									$farming_practice = pg_fetch_assoc($query_run4);
-
-									// Define default values for each field if they are $emptyValue
-									$farming_practice_type = isset($farming_practice['farming_practice_type']) ? $farming_practice['farming_practice_type'] : $emptyValue;
-									$farming_practice_name = isset($farming_practice['farming_practice_name']) ? $farming_practice['farming_practice_name'] : $emptyValue;
-									$farming_practice_description = isset($farming_practice['farming_practice_description']) ? $farming_practice['farming_practice_description'] : $emptyValue;
-								?>
-										<div class="col">
-											<!-- Other Info Type -->
-											<label for="farming_practice_type">Type</label>
-											<input id="farming_practice_type" type="text" name="farming_practice_type" value="<?= $farming_practice_type; ?>" class="form-control mb-2" disabled>
-										</div>
-										<div class="col">
-											<!-- Other Info Name -->
-											<label for="farming_practice_name">Name</label>
-											<input id="farming_practice_name" type="text" name="farming_practice_name" value="<?= $farming_practice_name; ?>" class="form-control mb-2" disabled>
-										</div>
-										<div class="col">
-											<!-- Other Info Description -->
-											<label for="farming_practice-desc">Description <span class="text-danger"></span></label>
-											<textarea name="farming_practice_description" id="farming_practice-desc" class="txtarea form-control" rows="3" disabled <?php echo ($farming_practice_description !== $emptyValue) ? '>' . $farming_practice_description : 'placeholder="Empty">'; ?></textarea>
+											<div class="col">
+												<!-- Other Info Type -->
+												<label for="farming_practice_type">Type</label>
+												<input id="farming_practice_type" type="text" name="farming_practice_type" value="<?= $farming_practice_type; ?>" class="form-control mb-2" disabled>
+											</div>
+											<div class="col">
+												<!-- Other Info Name -->
+												<label for="farming_practice_name">Name</label>
+												<input id="farming_practice_name" type="text" name="farming_practice_name" value="<?= $farming_practice_name; ?>" class="form-control mb-2" disabled>
+											</div>
+											<div class="col">
+												<!-- Other Info Description -->
+												<label for="farming_practice-desc">Description <span class="text-danger"></span></label>
+												<textarea name="farming_practice_description" id="farming_practice-desc" class="txtarea form-control" rows="3" disabled <?php echo ($farming_practice_description !== $emptyValue) ? '>' . $farming_practice_description : 'placeholder="Empty">'; ?></textarea>
 							</div>
 						<?php
-								}
+										}
 						?>
 						</div>
 
@@ -369,32 +385,32 @@ require('../sidebar/side.php');
 									<!-- Other Info Description -->
 									<label for="other_info-desc">Description <span class="text-danger">*</span></label>
 									<textarea name="other_info_description" id="other_info-desc" class="form-control" rows="3" disabled <?php echo ($other_info_description !== $emptyValue) ? '>' . $other_info_description : 'placeholder="Empty">'; ?></textarea>
-							</div>
+											</div>
 
-						<?php
-							}
-						?>
+										<?php
+									}
+										?>
+								</div>
 						</div>
-	</div>
-	<!-- editting buttons -->
-	<?php
-					require('../edit-btn/edit-btn.php');
-	?>
-	</form>
-<?php
+						<!-- editting buttons -->
+						<?php
+						require('../edit-btn/edit-btn.php');
+						?>
+					</form>
+			<?php
 				}
 			}
-?>
-</section>
-</div>
-<!-- scipts -->
-<!-- custom -->
-<script src="../../js/admin/entry-edit.js"></script>
-<script src="../../js/admin/crop-image.js"></script>
-<!-- bootstrap -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
-<!-- font awesome -->
-<script src="https://kit.fontawesome.com/57e83eb6e4.js" crossorigin="anonymous"></script>
+			?>
+		</section>
+	</div>
+	<!-- scipts -->
+	<!-- custom -->
+	<script src="../../js/admin/entry-edit.js"></script>
+	<script src="../../js/admin/crop-image.js"></script>
+	<!-- bootstrap -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+	<!-- font awesome -->
+	<script src="https://kit.fontawesome.com/57e83eb6e4.js" crossorigin="anonymous"></script>
 </body>
 
 </html>

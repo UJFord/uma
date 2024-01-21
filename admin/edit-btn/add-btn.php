@@ -19,14 +19,13 @@
     function validateForm() {
         // Get the values from the form
         var cropName = document.forms["Form"]["crop_name"].value;
-        var imageInput = document.forms["Form"]["image"].value;
-        var category = document.forms["Form"]["category"].value;
-        var localName = document.forms["Form"]["local_name"].value;
+        var imageInput = document.forms["Form"]["crop_image"].value;
+        var category = document.forms["Form"].querySelector('input[name="category"]:checked');
+        var localName = document.forms["Form"]["crop_local_name"].value;
         var uplandOrLowland = document.forms["Form"].querySelector('input[name="upland_or_lowland"]:checked');
-        var description = document.forms["Form"]["description"].value;
 
         // Check if the required fields are not empty
-        if (cropName === "" || imageInput === "" || category === "" || localName === "" || uplandOrLowland === null || description === "") {
+        if (cropName === "" || imageInput === "" || category === "" || localName === "" || uplandOrLowland === null) {
             alert("Please fill out all required fields.");
             return false; // Prevent form submission
         }
@@ -34,13 +33,32 @@
         return true; // Allow form submission
     }
 
+    // Function to submit the form and refresh notifications
     function submitForm() {
         console.log('submitForm function called');
         // Get the form reference
         var form = document.getElementById('form-panel');
         // Trigger the form submission
         if (form) {
-            form.submit();
+            // Perform AJAX submission or other necessary actions
+            $.ajax({
+                url: "code.php",
+                method: "POST",
+                data: new FormData(form),
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function(data) {
+                    // Reset the form
+                    form.reset();
+                    // Reload unseen notifications
+                    load_unseen_notification();
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.error("Form submission error:", textStatus, errorThrown);
+                    // Handle error if needed
+                }
+            });
         }
     }
 </script>
