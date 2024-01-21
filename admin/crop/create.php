@@ -12,9 +12,6 @@
 	<!-- sidebar custom css -->
 	<link rel="stylesheet" href="../../css/admin/side.css">
 
-	<!--========== BOX ICONS ==========-->
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
-
 	<!-- favicon -->
 	<link rel="shortcut icon" href="img/logo/Uma logo.svg" type="image/x-icon" />
 	<title>Crop sa Editor</title>
@@ -123,13 +120,177 @@
 					<div class="col">
 						<!-- Description -->
 						<label for="gen-desc">Description <span class="fw-light">(Optional)</span></label>
-						<textarea name="crop_description" id="gen-desc" class="txtarea form-control" rows="3"></textarea>
+						<div class="border rounded p-2">
+							<textarea name="crop_description" id="gen-desc" class="txtarea form-control w-100 h-100"></textarea>
+						</div>
 					</div>
+
+
+
 
 					<!-- More -->
 					<h3 class="mt-5 fw-bolder">Additional Info <span class="fs-5 fw-normal">(Optional)</span></h3>
 
+					<!-- Characteristics -->
+					<h4 class="">Characteristics</h4>
 					<div class="row">
+						<div class="col-2">
+							<!-- taste -->
+							<label for="taste">Taste</label>
+							<input id="taste" type="text" class="form-control mb-4">
+						</div>
+						<div class="col-2">
+							<!-- aroma -->
+							<label for="aroma">Aroma</label>
+							<input id="aroma" type="text" class="form-control mb-4">
+						</div>
+						<div class="col-2">
+							<!-- maturation -->
+							<label for="matur">Maturation</label>
+							<input id="matur" type="text" class="form-control mb-4">
+						</div>
+						<div class="col">
+							<!-- disease resistance -->
+							<label for="resist">Disease Resistance</label>
+							<input id="resist" type="text" class="form-control">
+						</div>
+					</div>
+
+
+					<!-- Planting Techniques -->
+					<label class="mt-2" for="tech-desc">Planting Techniques</label>
+					<div class="row">
+						<div class="col">
+							<!-- Descrition -->
+							<!-- <textarea name="" id="tech-desc" class="txtarea form-control" rows="2"></textarea> -->
+							<div class="border rounded p-2">
+								<textarea  id="tech-desc" class="txtarea form-control w-100 h-100"></textarea>
+							</div>
+						</div>
+					</div>
+
+					<!-- Cultural and Spiritual Significance -->
+					<label class="mt-2" for="signif-desc">Cultural and Spiritual Significance</label>
+					<div class="row">
+						<div class="col">
+							<!-- Descrition -->
+							<!-- <textarea name="" id="signif-desc" class="txtarea form-control" rows="2"></textarea> -->
+							<div class="border rounded p-2">
+								<textarea  id="signif-desc" class="txtarea form-control w-100 h-100"></textarea>
+							</div>
+						</div>
+					</div>
+
+					<!-- Role in Maintaining Upland Ecosystems -->
+					<label class="mt-2" for="role-desc">Role in Maintaining Upland Ecosystems</label>
+					<div class="row">
+						<div class="col">
+							<!-- Descrition -->
+							<!-- <textarea name="" id="role-desc" class="txtarea form-control" rows="2"></textarea> -->
+							<div class="border rounded p-2">
+								<textarea  id="role-desc" class="txtarea form-control w-100 h-100"></textarea>
+							</div>
+						</div>
+					</div>
+
+					<!-- Cultural Importance and Traditional Knowledge -->
+					<label class="mt-2" for="importance-desc">Cultural Importance and Traditional Knowledge</label>
+					<div class="row">
+						<div class="col">
+							<!-- Descrition -->
+							<!-- <textarea name="" id="importance-desc" class="txtarea form-control" rows="2"></textarea> -->
+							<div class="border rounded p-2">
+								<textarea  id="importance-desc" class="txtarea form-control w-100 h-100"></textarea>
+							</div>
+						</div>
+					</div>
+
+					<!-- Unique Features -->
+					<label class="mt-2" for="feat-desc">Unique Features</label>
+					<div class="row">
+						<div class="col">
+							<!-- Descrition -->
+							<!-- <textarea name="" id="feat-desc" class="txtarea form-control" rows="2"></textarea> -->
+							<div class="border rounded p-2">
+								<textarea  id="feat-desc" class="txtarea form-control w-100 h-100"></textarea>
+							</div>
+						</div>
+					</div>
+
+					<!-- Cultural Use -->
+					<label class="mt-2" for="use-desc">Cultural Use</label>
+					<div class="row">
+						<div class="col">
+							<!-- Descrition -->
+							<!-- <textarea name="" id="use-desc" class="txtarea form-control" rows="2"></textarea> -->
+							<div class="border rounded p-2">
+								<textarea  id="use-desc" class="txtarea form-control w-100 h-100"></textarea>
+							</div>
+						</div>
+					</div>
+
+					<!-- Associated Farming Practice -->
+					<label class="mt-2" for="prac-desc">Associated Farming Practice</label>
+					<div class="row">
+						<div class="col">
+							<!-- Descrition -->
+							<!-- <textarea name="" id="prac-desc" class="txtarea form-control" rows="2"></textarea> -->
+							<div class="border rounded p-2">
+								<textarea  id="prac-desc" class="txtarea form-control w-100 h-100"></textarea>
+							</div>
+						</div>
+					</div>
+
+					<!-- Associated Vegetation -->
+					<label class="mt-2" for="veg-desc">Associated Vegetation</label>
+					<div class="row">
+						<div class="col">
+							<!-- Descrition -->
+							<!-- <textarea name="" id="veg-desc" class="txtarea form-control" rows="2"></textarea> -->
+							<div class="border rounded p-2">
+								<textarea  id="veg-desc" class="txtarea form-control w-100 h-100"></textarea>
+							</div>
+						</div>
+					</div>
+
+					<!-- Last Seen Location -->
+					<label class="mt-2" for="loc-desc">Last Seen Location</label>
+					<div class="row">
+						<div class="col">
+							<!-- Descrition -->
+							<!-- <textarea name="" id="loc-desc" class="txtarea form-control" rows="2"></textarea> -->
+							<div class="border rounded p-2">
+								<textarea  id="loc-desc" class="txtarea form-control w-100 h-100"></textarea>
+							</div>
+						</div>
+					</div>
+
+					<!-- Threats to Upland Farms -->
+					<label class="mt-2" for="threat-desc">Threats to Upland Farms</label>
+					<div class="row">
+						<div class="col">
+							<!-- Descrition -->
+							<!-- <textarea name="" id="threat-desc" class="txtarea form-control" rows="2"></textarea> -->
+							<div class="border rounded p-2">
+								<textarea  id="threat-desc" class="txtarea form-control w-100 h-100"></textarea>
+							</div>
+						</div>
+					</div>
+
+					<!-- Other Information -->
+					<label class="mt-2" for="more-desc">Other Information</label>
+					<div class="row">
+						<div class="col">
+							<!-- Description -->
+							<!-- <textarea name="" id="more-desc" class="txtarea form-control" rows="2"></textarea> -->
+							<div class="border rounded p-2">
+								<textarea  id="more-desc" class="txtarea form-control w-100 h-100"></textarea>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+
 						<!-- Location -->
 						<h5 class="mt-2">Location</h5>
 						<div class="col-4">
@@ -246,8 +407,8 @@
 	</script>
 
 
-	<!-- JavaScript to handle file input change event and update image previews -->
 	<script>
+		// JavaScript to handle file input change event and update image previews 
 		document.addEventListener("DOMContentLoaded", function() {
 			var imageInput = document.getElementById("image-input");
 			var imagePreviews = document.getElementById("image-previews");
@@ -266,22 +427,49 @@
 				}
 			});
 		});
-	</script>
 
-	<script>
+
+		// SUMMERNOT HANDLING //
+
+		// text area handling
 		$('.txtarea').summernote({
+			codeviewFilter: false,
+			codeviewIframeFilter: true,
+			airMode: true,
 			tabsize: 2,
-			height: 120,
+			height: 100,
 			toolbar: [
-				['style', ['style']],
 				['font', ['bold', 'underline', 'clear']],
+				['fontsize', ['fontsize']],
 				['color', ['color']],
 				['para', ['ul', 'ol', 'paragraph']],
 				['table', ['table']],
-				['insert', ['link', 'picture', 'video']],
-				['view', ['fullscreen', 'codeview', 'help']]
-			]
+				['insert', ['link']]
+			],
+			popover: {
+				image: [
+					['image', ['resizeFull', 'resizeHalf', 'resizeQuarter', 'resizeNone']],
+					['float', ['floatLeft', 'floatRight', 'floatNone']],
+					['remove', ['removeMedia']]
+				],
+				link: [
+					['link', ['linkDialogShow', 'unlink']]
+				],
+				table: [
+					['add', ['addRowDown', 'addRowUp', 'addColLeft', 'addColRight']],
+					['delete', ['deleteRow', 'deleteCol', 'deleteTable']],
+				],
+				air: [
+					['color', ['color']],
+					['font', ['bold', 'underline', 'clear']],
+					['para', ['ul', 'paragraph']],
+					['table', ['table']],
+					['insert', ['link', 'picture']]
+				]
+			}
+
 		});
+		// 
 	</script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 	<!-- font awesome -->
