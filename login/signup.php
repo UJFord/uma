@@ -10,7 +10,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $errors = signup($_POST);
 
     if (count($errors) == 0) {
-        header("location: login.php");
+        $_SESSION['message'] = "<div class='success'>Signup successful wait for the verification in your email.</div>";
+        header("location: index.php");
         die();
     }
 }

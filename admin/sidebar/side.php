@@ -2,6 +2,7 @@
 <?php
 $current_page = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 require('../../html/navfoot/connection.php');
+require('../functions.php');
 
 // sites to make crop highlight
 $atcrop = strpos($current_page, '/uma/admin/crop/list.php') === 0 ||
@@ -92,16 +93,31 @@ $atapprove = strpos($current_page, '/uma/admin/approval/approval.php') === 0 ||
                 </li>
             <?php endif; ?>
 
-            <!-- approval sidebar nav -->
-            <li>
-                <a href="../approval/approval.php" <?php echo ($atapprove)
-                                                        ? 'class="nav-link text-dark fw-semibold rounded-start-pill active-nav"'
-                                                        : 'class="nav-link text-white"'; ?>>
-                    <i class="fa-solid fa-check" style="width: 1.5rem;"></i>
-                    Approval Crops
-                    <span class="count" style="color:red;"></span>
-                </a>
-            </li>
+            <!-- approval crops sidebar nav -->
+            <?php if (isset($_SESSION['LOGGED_IN']) && $_SESSION['LOGGED_IN']) : ?>
+                <li class="admin-only curator-only">
+                    <a href="../approval-crop/approval.php" <?php echo ($atapprove)
+                                                                ? 'class="nav-link text-dark fw-semibold rounded-start-pill active-nav"'
+                                                                : 'class="nav-link text-white"'; ?>>
+                        <i class="fa-solid fa-check" style="width: 1.5rem;"></i>
+                        Approval Crops
+                        <span class="count" style="color:red;"></span>
+                    </a>
+                </li>
+            <?php endif; ?>
+
+            <!-- approval users sidebar nav -->
+            <?php if (isset($_SESSION['LOGGED_IN']) && $_SESSION['LOGGED_IN']) : ?>
+                <li class="admin-only curator-only">
+                    <a href="../approval-users/approval.php" <?php echo ($atapprove)
+                                                                    ? 'class="nav-link text-dark fw-semibold rounded-start-pill active-nav"'
+                                                                    : 'class="nav-link text-white"'; ?>>
+                        <i class="fa-solid fa-check" style="width: 1.5rem;"></i>
+                        Approval Users
+                        <span class="count" style="color:red;"></span>
+                    </a>
+                </li>
+            <?php endif; ?>
 
         </ul>
         <hr class="mx-3">

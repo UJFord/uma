@@ -34,7 +34,7 @@
                 <div class="row d-flex justify-content-between mb-3">
                     <!-- title -->
                     <div class="col-6">
-                        <h2 id="crops-title" class="fw-semibold">Approval</h2>
+                        <h2 id="crops-title" class="fw-semibold">Approval Users</h2>
                     </div>
 
                     <h1 class="text-center  text-white bg-dark col-md-12">PENDING LIST</h1>
@@ -42,25 +42,21 @@
                     <table class="table table-bordered col-md-12">
                         <thead>
                             <tr>
-                                <th scope="col">Sent By</th>
-                                <th scope="col">Crop Name</th>
-                                <th scope="col">local Name</th>
-                                <th scope="col">Description</th>
+                                <th scope="col">First Name</th>
+                                <th scope="col">Last Name</th>
+                                <th scope="col">Affiliation</th>
+                                <th scope="col">Registration Date</th>
                                 <th scope="col">STATUS</th>
                                 <th scope="col" class="curator-only">ACTION</th>
                             </tr>
                         </thead>
 
                         <?php
-                        $query = "SELECT crop.*, users.first_name, account_type.type_name, crop_location.*, crop_farming_practice.*, crop_other_info.*
-                        FROM crop
-                        JOIN users ON crop.user_id = users.user_id
-                        JOIN crop_location ON crop.crop_id = crop_location.crop_id
-                        JOIN crop_farming_practice ON crop.crop_id = crop_farming_practice.crop_id
-                        JOIN crop_other_info ON crop.crop_id = crop_other_info.crop_id
+                        $query = "SELECT users.user_id, users.first_name, users.last_name, users.affiliation, users.registration_date, account_type.type_name
+                        FROM users
                         JOIN account_type ON users.account_type_id = account_type.account_type_id
-                        WHERE crop.status = 'pending' AND account_type.type_name != 'curator'
-                        ORDER BY crop.crop_id ASC";
+                        WHERE users.email_verified IS NULL AND account_type.type_name <> 'curator'
+                        ORDER BY users.user_id ASC";
                         $result = pg_query($connection, $query);
 
                         if ($result) {
@@ -69,18 +65,14 @@
                                 <tbody>
                                     <tr>
                                         <th scope="row"><?php echo $row['first_name']; ?></th>
-                                        <td><?php echo $row['crop_name']; ?></td>
-                                        <td><?php echo $row['crop_local_name']; ?></td>
-                                        <td><?php echo $row['crop_description']; ?></td>
-                                        <td><?php echo $row['status']; ?></td>
+                                        <td><?php echo $row['last_name']; ?></td>
+                                        <td><?php echo $row['affiliation']; ?></td>
+                                        <td><?php echo $row['registration_date']; ?></td>
+                                        <td><?php echo $row['type_name']; ?></td>
                                         <td class="curator-only">
                                             <form action="code.php" method="POST">
-                                                <input type="hidden" name="crop_id" value="<?php echo $row['crop_id']; ?>" />
-                                                <input type="hidden" name="other_info_id" value="<?php echo $row['other_info_id']; ?>" />
-                                                <input type="hidden" name="location_id" value="<?php echo $row['location_id']; ?>" />
-                                                <input type="hidden" name="farming_practice_id" value="<?php echo $row['farming_practice_id']; ?>" />
-                                                <input type="submit" name="approve" value="approve"> &nbsp &nbsp <br>
-                                                <input type="submit" name="delete" value="delete">
+                                                <input type="hidden" name="user_id" value="<?php echo $row['user_id']; ?>" />
+                                                <a href="view.php?user_id=<?= $row['user_id']; ?>" class="btn btn-info btn-sm">View</a>
                                             </form>
                                         </td>
                                     </tr>
@@ -99,20 +91,20 @@
                     <table class="table table-bordered col-md-12">
                         <thead>
                             <tr>
-                                <th scope="col">Sent By</th>
-                                <th scope="col">Crop Name</th>
-                                <th scope="col">local Name</th>
-                                <th scope="col">Description</th>
+                                <th scope="col">First Name</th>
+                                <th scope="col">Last Name</th>
+                                <th scope="col">Affiliation</th>
+                                <th scope="col">Registration Date</th>
                                 <th scope="col">STATUS</th>
                             </tr>
                         </thead>
                         <?php
 
-                        $query = "SELECT crop.*, users.first_name, account_type.*
-                        FROM crop
-                        JOIN users ON crop.user_id = users.user_id
-                        JOIN account_type ON users.account_type_id = account_type.account_type_id
-                        WHERE crop.status = 'approved' AND account_type.type_name != 'curator'";
+                        $query = "SELECT u.first_name, u.last_name, u.affiliation, u.registration_date, u.email_verified, a.type_name
+                        FROM users u
+                        JOIN account_type a ON u.account_type_id = a.account_type_id
+                        WHERE u.email_verified IS NOT NULL AND a.type_name <> 'curator'";
+
                         $result2 = pg_query($connection, $query);
 
                         if ($result2) {
@@ -121,10 +113,16 @@
                                 <tbody>
                                     <tr>
                                         <th scope="row"><?php echo $row['first_name']; ?></th>
-                                        <td><?php echo $row['crop_name']; ?></td>
-                                        <td><?php echo $row['crop_local_name']; ?></td>
-                                        <td><?php echo $row['crop_description']; ?></td>
-                                        <td><?php echo $row['status']; ?></td>
+                                        <td><?php echo $row['last_name']; ?></td>
+                                        <td><?php echo $row['affiliation']; ?></td>
+                                        <td><?php echo $row['registration_date']; ?></td>
+                                        <td>
+                                            <?php
+                                            if ($row['email_verified'] != '') {
+                                                echo 'Verified';
+                                            }
+                                            ?>
+                                        </td>
                                     </tr>
                                 </tbody>
                         <?php
