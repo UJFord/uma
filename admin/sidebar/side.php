@@ -43,9 +43,17 @@ $atapprove = strpos($current_page, '/uma/admin/approval/approval.php') === 0 ||
                 },
                 dataType: "json",
                 success: function(data) {
-                    $('.count').html(data.notification);
-                    if (data.unseen_notification > 0) {
-                        $('.count').html(data.unseen_notification);
+                    // Access data1 and update HTML accordingly
+                    $('.count').html(data.data1.notification);
+                    if (data.data1.unseen_notification > 0) {
+                        $('.count').html(data.data1.unseen_notification);
+                    }
+
+                    // Access data2 and update HTML accordingly
+                    // Adjust the selectors and HTML update based on your needs
+                    $('.count2').html(data.data2.notification);
+                    if (data.data2.unseen_notification > 0) {
+                        $('.count2').html(data.data2.unseen_notification);
                     }
                 }
             });
@@ -55,6 +63,7 @@ $atapprove = strpos($current_page, '/uma/admin/approval/approval.php') === 0 ||
 
     });
 </script>
+
 
 <?php if (isset($_SESSION['LOGGED_IN']) && $_SESSION['LOGGED_IN']) : ?>
     <script src="../../js/admin/access.js" defer></script>
@@ -114,7 +123,7 @@ $atapprove = strpos($current_page, '/uma/admin/approval/approval.php') === 0 ||
                                                                     : 'class="nav-link text-white"'; ?>>
                         <i class="fa-solid fa-check" style="width: 1.5rem;"></i>
                         Approval Users
-                        <span class="count" style="color:red;"></span>
+                        <span class="count2" style="color:red;"></span>
                     </a>
                 </li>
             <?php endif; ?>

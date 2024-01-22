@@ -83,7 +83,7 @@
 					<!-- form for submitting -->
 					<form id="form-panel" name="Form" action="code.php" autocomplete="off" method="POST" enctype="multipart/form-data" class="h-100 py-3 px-5">
 						<!-- back button -->
-						<a href="list.php" class="link-offset-2"><i class="bi bi-chevron-left"></i>Go Back</a>
+						<a href="approval.php" class="link-offset-2"><i class="bi bi-chevron-left"></i>Go Back</a>
 
 						<?php
 						include('../message.php');
@@ -96,11 +96,7 @@
 
 							<!-- general information -->
 							<div class="row">
-								<h3>General Information</h3>
-
-								<div>
-									<a href="reset.php?user_id=<?= $user_id; ?>">Reset Password</a>
-								</div>
+								<h3>User Information</h3>
 
 							</div>
 
@@ -108,19 +104,19 @@
 								<div class="col-5">
 									<!-- First Name -->
 									<label for="first-name">First Name<span class="text-danger">*</span></label>
-									<input id="first-name" type="text" name="first_name" value="<?= $first_name; ?>" class="form-control form-control-lg mb-2" disabled>
+									<input id="first-name" type="text" name="first_name" value="<?= $first_name; ?>" class="form-control form-control-lg mb-2 disabled-input">
 
 									<!-- Last Name -->
 									<label for="last-name">Last Name <span class="text-danger">*</span></label>
-									<input id="last-name" type="text" name="last_name" value="<?= $last_name; ?>" class="form-control form-control-lg mb-2" disabled>
+									<input id="last-name" type="text" name="last_name" value="<?= $last_name; ?>" class="form-control form-control-lg mb-2 disabled-input">
 
                                     <!-- Gender -->
 									<label for="gender">Gender <span class="text-danger">*</span></label>
-									<input id="gender" type="text" name="gender" value="<?= $gender ?>" class="form-control form-control-lg mb-2" disabled>
+									<input id="gender" type="text" name="gender" value="<?= $gender ?>" class="form-control form-control-lg mb-2 disabled-input">
 
 									<!-- Email -->
 									<label for="email">Email <span class="text-danger"></span></label>
-									<input id="email" type="text" name="email" value="<?= $email ?>" class="form-control form-control-lg mb-2" disabled>
+									<input id="email" type="text" name="email" value="<?= $email ?>" class="form-control form-control-lg mb-2 disabled-input">
 								</div>
 
 								<div class="col-5">
@@ -130,7 +126,7 @@
 
 									<!-- Account Type -->
 									<label for="type_name">Account Type <span class="text-danger">*</span></label>
-									<select id="type_name" name="account_type_id" class="w-100 border form-control-lg mb-2" rows="2" disabled>
+									<select id="type_name" name="account_type_id" class="w-100 border form-control-lg mb-2" rows="2">
 										<?php
 										// php code to display available schedules from the database
 										// query to select all available schedules in the database
@@ -171,11 +167,11 @@
 
 									<!-- Username -->
 									<label for="username">Username <span class="text-danger"></span></label>
-									<input id="username" type="text" name="username" value="<?= $username ?>" class="form-control form-control-lg mb-2" disabled>
+									<input id="username" type="text" name="username" value="<?= $username ?>" class="form-control form-control-lg mb-2 disabled-input">
 
 									<!-- Affiliation -->
 									<label for="affiliation">Affiliation <span class="text-danger"></span></label>
-									<input id="affiliation" type="text" name="affiliation" value="<?= $affiliation ?>" class="form-control form-control-lg mb-2" disabled>
+									<input id="affiliation" type="text" name="affiliation" value="<?= $affiliation ?>" class="form-control form-control-lg mb-2 disabled-input">
 
 								</div>
 							</div>
@@ -183,7 +179,7 @@
 						</div>
 						<!-- editting buttons -->
 						<?php
-						require('../edit-btn/edit-btn.php');
+						require('../edit-btn/verify-btn.php');
 						?>
 					</form>
 			<?php
