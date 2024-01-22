@@ -130,7 +130,8 @@ if (isset($_POST['save']) && $_SESSION['rank'] == 'curator') {
 
                     // Check whether the image is uploaded or not
                     if (!$upload) {
-                        echo "Image upload failed";
+                        echo "wala na upload ang image";
+                        echo "Error: " . pg_last_error($con);
                         die();
                     }
 
@@ -142,7 +143,8 @@ if (isset($_POST['save']) && $_SESSION['rank'] == 'curator') {
             }
         } else {
             // Don't upload image and set the image value as blank
-            echo "No Image uploaded";
+            echo "wala image na select";
+            echo "Error: " . pg_last_error($con);
             die();
         }
 
