@@ -139,6 +139,9 @@ if (isset($_POST['save']) && $_SESSION['rank'] == 'curator') {
                     $imageNamesArray[] = $finalimg; // Add image name to the array
                 } else {
                     // Display error message for invalid file format
+                    echo "invalid ang file format image";
+                    echo "Error: " . pg_last_error($con);
+                    die();
                 }
             }
         } else {
