@@ -1,14 +1,21 @@
 <?php
 session_start();
 $con = pg_connect("host=localhost dbname=farm_crops user=postgres password=123") or die("Could not connect to server\n");
+require "../mail.php";
 
-if (isset($_POST['approve'])) {
+if (isset($_POST['approve']) && $_SESSION['rank'] == 'curator') {
     $user_id = $_POST['user_id'];
     $email = $_POST['email'];
 
     $select = "UPDATE users SET email_verified = '$email' WHERE user_id = '$user_id' ";
     $result = pg_query($con, $select);
     if ($result) {
+        $message = "Your email is now verified";
+        $subject = "Email verification";
+        $recipient = $email;
+
+        send_mail($recipient, $subject, $message);
+
         header("location: approval.php");
         exit; // Ensure that the script stops executing after the redirect header
     } else {

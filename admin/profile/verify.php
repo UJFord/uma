@@ -4,16 +4,16 @@ require('../sidebar/side.php');
 
 require('../functions.php');
 require "../mail.php";
-check_login();
 
 $errors = array();
 // to send verify code in the datbase
 if ($_SERVER['REQUEST_METHOD'] == 'GET' && !check_verified()) {
-
     // send email
+
+    // create random code
     $vars['code'] = strval(mt_rand(10000, 99999));
 
-    // save to database
+    // create expire time set to 10 min
     $vars['expires'] = (time() + (60 * 10));
 
     $vars['email'] = $_SESSION['USER']['email'];
@@ -21,6 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && !check_verified()) {
     $query = "insert into verify (code, expires, email) values (:code, :expires, :email)";
     database_run($query, $vars);
 
+    // email code
     $message = "your code is ". $vars['code'];
     $subject = "Email verification";
     $recipient = $vars['email'];

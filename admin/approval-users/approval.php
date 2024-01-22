@@ -39,6 +39,7 @@
 
                     <h1 class="text-center  text-white bg-dark col-md-12">PENDING LIST</h1>
 
+                    <!-- Header -->
                     <table class="table table-bordered col-md-12">
                         <thead>
                             <tr>
@@ -62,6 +63,7 @@
                         if ($result) {
                             while ($row = pg_fetch_array($result)) {
                         ?>
+                        <!-- Body -->
                                 <tbody>
                                     <tr>
                                         <th scope="row"><?php echo $row['first_name']; ?></th>

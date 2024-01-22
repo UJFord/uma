@@ -52,7 +52,7 @@
                         </thead>
 
                         <?php
-                        $query = "SELECT crop.*, users.first_name, account_type.type_name, crop_location.*, crop_farming_practice.*, crop_other_info.*
+                        $query = "SELECT crop.*, users.first_name, users.email, account_type.type_name, crop_location.*, crop_farming_practice.*, crop_other_info.*
                         FROM crop
                         JOIN users ON crop.user_id = users.user_id
                         JOIN crop_location ON crop.crop_id = crop_location.crop_id
@@ -79,6 +79,7 @@
                                                 <input type="hidden" name="other_info_id" value="<?php echo $row['other_info_id']; ?>" />
                                                 <input type="hidden" name="location_id" value="<?php echo $row['location_id']; ?>" />
                                                 <input type="hidden" name="farming_practice_id" value="<?php echo $row['farming_practice_id']; ?>" />
+                                                <input type="hidden" name="email" value="<?php echo $row['email']; ?>" />
                                                 <input type="submit" name="approve" value="approve"> &nbsp &nbsp <br>
                                                 <input type="submit" name="delete" value="delete">
                                             </form>

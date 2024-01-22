@@ -6,11 +6,11 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
-	
+
 	<!-- add entry custom css -->
 	<link rel="stylesheet" href="../../css/admin/entry.css" />
 	<!-- sidebar custom css -->
-	<link rel="stylesheet" href="../../css/admin/side.css"> 
+	<link rel="stylesheet" href="../../css/admin/side.css">
 
 	<!-- favicon -->
 	<link rel="shortcut icon" href="img/logo/Uma logo.svg" type="image/x-icon" />
@@ -96,7 +96,7 @@
 
 							<!-- general information -->
 							<div class="row">
-								<h3>General Information</h3>
+								<h3>User Information</h3>
 
 								<div>
 									<a href="reset.php?user_id=<?= $user_id; ?>">Reset Password</a>
@@ -178,6 +178,48 @@
 									<input id="affiliation" type="text" name="affiliation" value="<?= $affiliation ?>" class="form-control form-control-lg mb-2" disabled>
 
 								</div>
+
+								<!-- More -->
+								<h3 class="mt-5 fw-bolder">Crops Submitted<span class="fs-5 fw-normal"></span></h3>
+
+								<div>
+									<table class="table table-bordered col-md-12">
+										<thead>
+											<tr>
+												<th scope="col">Crop ID</th>
+												<th scope="col">Crop Name</th>
+												<th scope="col">local Name</th>
+												<th scope="col">Description</th>
+											</tr>
+										</thead>
+
+										<?php
+										$query = "SELECT *
+										FROM crop
+										WHERE user_id = $user_id
+										ORDER BY crop.crop_id ASC";
+										$result = pg_query($connection, $query);
+
+										if ($result) {
+											while ($row = pg_fetch_array($result)) {
+										?>
+												<tbody>
+													<tr>
+														<th scope="row"><?php echo $row['crop_id']; ?></th>
+														<td><?php echo $row['crop_name']; ?></td>
+														<td><?php echo $row['crop_local_name']; ?></td>
+														<td><?php echo $row['crop_description']; ?></td>
+													</tr>
+												</tbody>
+										<?php
+											}
+										} else {
+											echo "Query failed: " . pg_last_error($connection);
+										}
+										?>
+									</table>
+								</div>
+
 							</div>
 
 						</div>

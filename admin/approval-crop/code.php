@@ -1,12 +1,20 @@
 <?php
 session_start();
 $con = pg_connect("host=localhost dbname=farm_crops user=postgres password=123") or die("Could not connect to server\n");
+require "../mail.php";
 
 if (isset($_POST['approve'])) {
     $crop_id = $_POST['crop_id'];
+    $email = $_POST['email'];
     $select = "UPDATE crop SET status = 'approved' WHERE crop_id = '$crop_id' ";
     $result = pg_query($con, $select);
     if ($result) {
+        $message = "Your crop input has been approved";
+        $subject = "Crop Approval";
+        $recipient = $email;
+
+        send_mail($recipient, $subject, $message);
+
         header("location: approval.php");
         exit; // Ensure that the script stops executing after the redirect header
     } else {

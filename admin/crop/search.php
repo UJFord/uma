@@ -13,6 +13,8 @@ require('../sidebar/side.php');
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
+	<!-- sidebar custom css -->
+	<link rel="stylesheet" href="../../css/admin/side.css">
 	<!-- cutom css -->
 	<link rel="stylesheet" href="../../css/admin/list.css" />
 	<!-- favicon -->
@@ -84,24 +86,24 @@ require('../sidebar/side.php');
 
 					<?php
 					$search = pg_escape_string($connection, $_POST['search']);
-					$query = "SELECT * FROM crops WHERE crop_name ILIKE $1 OR DESCRIPTION ILIKE $1";
+					$query = "SELECT * FROM crop WHERE crop_name ILIKE $1 OR crop_description ILIKE $1";
 					$result = pg_query_params($connection, $query, array("%$search%"));
 					$count = pg_num_rows($result);
 
 					if ($count > 0) {
 						while ($row = pg_fetch_assoc($result)) {
 							$crop_id = $row['crop_id'];
-							$image = $row['image'];
+							$crop_image = $row['crop_image'];
 							$crop_name = $row['crop_name'];
 
 					?>
 							<!-- crop -->
 							<div class="card-container col-6 col-md-4 col-lg-2 p-2">
 								<?php
-								if ($image !== null) {
+								if ($crop_image !== null) {
 								?>
 									<a href="crop.php?crop_id=<?php echo $crop_id; ?>" class="crop-card py-3 px-1 d-flex justify-content-center align-items-end" style="
-									background-image: url('<?php echo $image; ?>');
+									background-image: url('<?php echo $crop_image; ?>');
 								">
 										<div class="crop-card-text row w-100 d-flex flex-row justify-content-between align-items-center">
 											<!-- crop name -->
