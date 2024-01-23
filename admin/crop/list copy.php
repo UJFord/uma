@@ -19,7 +19,7 @@ require('../sidebar/side.php');
 	<!-- list custom css -->
 	<link rel="stylesheet" href="../../css/admin/list.css" />
 	<!-- sidebar custom css -->
-	<link rel="stylesheet" href="../../css/admin/side.css">
+	<link rel="stylesheet" href="../../css/admin/side.css"> 
 
 	<!-- favicon -->
 	<link rel="shortcut icon" href="img/logo/Uma logo.svg" type="image/x-icon" />
@@ -101,45 +101,76 @@ require('../sidebar/side.php');
 						</div>
 					</div>
 				</div>
-				<form id="form-panel" action="code.php" method="POST" class="curator-only">
-					<table class="table table-bordered col-md-12">
-						<thead>
-							<tr>
-								<th scope="col">crop Id</th>
-								<th scope="col">Crop Name</th>
-								<th scope="col">Scientific Name</th>
-								<th scope="col">Lowland or Upland</th>
-								<th scope="col">Description</th>
-								<th scope="col" class="curator-only admin-only">Status</th>
-							</tr>
-						</thead>
 
-						<?php
-						$query = "select * from crop ORDER BY crop_id ASC";
-						$query_run = pg_query($connection, $query);
+				<!-- crop cards -->
+				<div id="crop-cards" class="row">
+					<?php
+					include '../message.php';
+					// add entry button
+					require '../add/add.php';
+					?>
 
-						if ($query_run) {
-							while ($row = pg_fetch_array($query_run)) {
-						?>
-								<tbody>
-									<tr>
-										<td scope="col"><?= $row['crop_id']; ?></td>
-										<td scope="col"><?= $row['crop_name']; ?></td>
-										<td scope="col"><?= $row['crop_scientific_name']; ?></td>
-										<td scope="col"><?= $row['upland_or_lowland']; ?></td>
-										<td scope="col"><?= $row['crop_description']; ?></td>
-										<td id="apply-cancel-box" class="curator-only admin-only" style="text-align: center;">
-											<a href="crop.php?crop_id=<?= $row['crop_id']; ?>" class="btn btn-info btn-sm">View</a>
-											<button id="delete-btn" type="submit" name="delete" class="btn btn-danger btn-sm">Delete</a>
-										</td>
-									</tr>
-								</tbody>
-						<?php
-							}
+					<?php
+					if (isset($_GET['category'])) {
+						$categoryChecked = array_map('strtolower', $_GET['category']);
+
+						// Convert category names to lowercase in the SQL query
+						$result = pg_query($connection, "SELECT DISTINCT * FROM crop WHERE LOWER(category) IN ('" . implode("','", $categoryChecked) . "') ORDER BY crop_id");
+					} else {
+						$result = pg_query($connection, "SELECT * FROM crop ORDER BY crop_id");
+					}
+
+					$count = pg_num_rows($result);
+
+					if ($count > 0) {
+						while ($row = pg_fetch_assoc($result)) {
+							$crop_id = $row['crop_id'];
+							$crop_image = $row['crop_image'];
+							$crop_name = $row['crop_name'];
+
+					?>
+							<!-- crop -->
+							<div class="card-container col-6 col-md-4 col-lg-2 p-2">
+								<?php
+								if ($crop_image !== null) {
+								?>
+									<a href="crop.php?crop_id=<?php echo $crop_id; ?>" class="crop-card py-3 px-1 d-flex justify-content-center align-items-end" style="
+									background-image: url('<?php echo $crop_image; ?>');
+								">
+										<div class="crop-card-text row w-100 d-flex flex-row justify-content-between align-items-center">
+											<!-- crop name -->
+											<h4 class="crop-name col-6"><?php echo ucfirst($crop_name); ?></h4>
+											<!-- arrow -->
+											<div class="col-2 arrow-container">
+												<i class="position-absolute bi bi-arrow-right-short fs-3"></i>
+											</div>
+										</div>
+									</a>
+								<?php
+								} else {
+								?>
+									<a href="crop.php?crop_id=<?php echo $crop_id; ?>" class="crop-card py-3 px-1 d-flex justify-content-center align-items-end" style="
+									background-image: url('https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image.png');
+								">
+										<div class="crop-card-text row w-100 d-flex flex-row justify-content-between align-items-center">
+											<!-- crop name -->
+											<h4 class="crop-name col-6"><?php echo ucfirst($crop_name); ?></h4>
+											<!-- arrow -->
+											<div class="col-2 arrow-container">
+												<i class="position-absolute bi bi-arrow-right-short fs-3"></i>
+											</div>
+										</div>
+									</a>
+								<?php
+								}
+								?>
+							</div>
+					<?php
 						}
-						?>
-					</table>
-				</form>
+					}
+
+					?>
+				</div>
 			</div>
 		</section>
 
