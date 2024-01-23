@@ -21,11 +21,13 @@ $atapprove = strpos($current_page, '/uma/admin/approval/approval.php') === 0 ||
 <!-- custom css -->
 
 <!-- script for access js -->
+<!-- script for access js -->
 <script>
-    <?php if (isset($_SESSION['LOGGED_IN']) && $_SESSION['LOGGED_IN']) : ?>
-        var userRole = "<?php echo $_SESSION['rank']; ?>";
-    <?php endif; ?>
+    var none_user = "not_a_user";
+    var userRole = <?php echo (isset($_SESSION['LOGGED_IN']) && $_SESSION['LOGGED_IN']) ? '"' . $_SESSION['rank'] . '"' : 'none_user'; ?>;
 </script>
+<script src="../../js/admin/access.js" defer></script>
+
 
 <!-- JQUERY link -->
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
@@ -64,11 +66,6 @@ $atapprove = strpos($current_page, '/uma/admin/approval/approval.php') === 0 ||
     });
 </script>
 
-
-<?php if (isset($_SESSION['LOGGED_IN']) && $_SESSION['LOGGED_IN']) : ?>
-    <script src="../../js/admin/access.js" defer></script>
-<?php endif; ?>
-
 <!-- main nav -->
 <nav id="main-nav" class="d-none d-md-block col col-3 col-lg-3 col-xl-2 fixed-top h-100 m-0 p-0 z-3">
     <div class="d-flex flex-column flex-shrink-0 text-white h-100">
@@ -92,7 +89,7 @@ $atapprove = strpos($current_page, '/uma/admin/approval/approval.php') === 0 ||
             </li>
             <!-- users sidebar nav -->
             <?php if (isset($_SESSION['LOGGED_IN']) && $_SESSION['LOGGED_IN']) : ?>
-                <li class="curator-only">
+                <li class="curator-only admin-only">
                     <a href="../users/list.php" <?php echo ($atuser)
                                                     ? 'class="nav-link text-dark fw-semibold rounded-start-pill active-nav"'
                                                     : 'class="nav-link text-white"'; ?>>

@@ -29,6 +29,10 @@ document.addEventListener("DOMContentLoaded", function () {
         setVisibility(curatorElements, false);
         setVisibility(adminElements, false);
         setVisibility(viewerElements, true);
+    } else if (userRole === "not_a_user") {
+        setVisibility(curatorElements, false);
+        setVisibility(adminElements, false);
+        setVisibility(viewerElements, false);
     } else {
         console.error("Unexpected user role:", userRole);
     }
