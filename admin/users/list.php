@@ -44,9 +44,7 @@
 					<!-- search -->
 					<div id="filter-search" class="col-6 col-md-5 col-lg-3">
 						<div class="input-group">
-							<form action="search.php" method="POST">
-								<input type="search" name="search" class="form-control" placeholder="Start typing to filter..." />
-							</form>
+							<input type="search" id="searchInput" name="search" class="form-control" placeholder="Start typing to filter..." oninput="filterTable()" />
 						</div>
 					</div>
 					<?php
@@ -63,7 +61,7 @@
 								</h4>
 							</div>
 							<div class="card-body">
-								<table class="table table-bordered table-striped col-md-12">
+								<table id="dataTable" class="table table-bordered table-striped col-md-12">
 									<thead>
 										<tr>
 											<th scope="col">User Id</th>

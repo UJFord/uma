@@ -46,10 +46,10 @@ require('../sidebar/side.php');
 					<!-- search -->
 					<div id="filter-search" class="col-6 col-md-5 col-lg-3">
 						<div class="input-group">
-							<button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+							<!-- <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
 								<i class="bi bi-funnel"></i>
-							</button>
-							<form action="" method="GET">
+							</button> -->
+							<!-- <form action="" method="GET">
 								<ul class="dropdown-menu">
 									<div class="filter-header">
 										<h5>Filter
@@ -94,10 +94,8 @@ require('../sidebar/side.php');
 										<a class="dropdown-item" href="#">Separated link</a>
 									</li>
 								</ul>
-							</form>
-							<form action="search.php" method="POST">
-								<input type="search" name="search" class="form-control" placeholder="Start typing to filter..." />
-							</form>
+							</form> -->
+							<input type="search" id="searchInput" name="search" class="form-control" placeholder="Start typing to filter..." oninput="filterTable()" />
 						</div>
 					</div>
 				</div>
@@ -110,13 +108,14 @@ require('../sidebar/side.php');
 								</h4>
 							</div>
 							<div class="card-body">
-								<table class="table table-bordered table-striped col-md-12">
+								<table id="dataTable" class="table table-bordered table-striped col-md-12">
 									<thead>
 										<tr>
 											<th scope="col">Crop Id</th>
 											<th scope="col">Crop Name</th>
 											<th scope="col">Scientific Name</th>
 											<th scope="col">Lowland or Upland</th>
+											<th scope="col">Category</th>
 											<th scope="col">Description</th>
 											<th scope="col" class="curator-only admin-only">Status</th>
 										</tr>
@@ -135,6 +134,7 @@ require('../sidebar/side.php');
 													<td><?= $row['crop_name']; ?></td>
 													<td><?= $row['crop_scientific_name']; ?></td>
 													<td><?= $row['upland_or_lowland']; ?></td>
+													<td><?= $row['category']; ?></td>
 													<td><?= $row['crop_description']; ?></td>
 													<form id="form-panel" action="code.php" method="POST" class="curator-only">
 														<td class="curator-only admin-only" style="text-align: center;">
