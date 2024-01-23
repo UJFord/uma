@@ -54,6 +54,7 @@
 						<table class="table table-bordered col-md-12">
 							<thead>
 								<tr style="text-align: center;">
+									<th scope="col">User ID</th>
 									<th scope="col">First Name</th>
 									<th scope="col">Last Name</th>
 									<th scope="col">Affiliation</th>
@@ -75,7 +76,8 @@
 							?>
 									<tbody>
 										<tr>
-											<th scope="row"><?php echo $row['first_name']; ?></th>
+											<th scope="row"><?php echo $row['user_id']; ?></th>
+											<td><?php echo $row['first_name']; ?></td>
 											<td><?php echo $row['last_name']; ?></td>
 											<td><?php echo $row['affiliation']; ?></td>
 											<td><?php echo $row['email']; ?></td>

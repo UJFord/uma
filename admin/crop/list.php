@@ -101,45 +101,60 @@ require('../sidebar/side.php');
 						</div>
 					</div>
 				</div>
-				<form id="form-panel" action="code.php" method="POST" class="curator-only">
-					<table class="table table-bordered col-md-12">
-						<thead>
-							<tr>
-								<th scope="col">crop Id</th>
-								<th scope="col">Crop Name</th>
-								<th scope="col">Scientific Name</th>
-								<th scope="col">Lowland or Upland</th>
-								<th scope="col">Description</th>
-								<th scope="col" class="curator-only admin-only">Status</th>
-							</tr>
-						</thead>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="card">
+							<div class="card-header">
+								<h4>Crop Details
+									<a href="create.php" class="btn btn-primary float-end">Add Crops</a>
+								</h4>
+							</div>
+							<div class="card-body">
+								<form id="form-panel" action="code.php" method="POST" class="curator-only">
+									<table class="table table-bordered table-striped col-md-12">
+										<thead>
+											<tr>
+												<th scope="col">crop Id</th>
+												<th scope="col">Crop Name</th>
+												<th scope="col">Scientific Name</th>
+												<th scope="col">Lowland or Upland</th>
+												<th scope="col">Description</th>
+												<th scope="col" class="curator-only admin-only">Status</th>
+											</tr>
+										</thead>
 
-						<?php
-						$query = "select * from crop ORDER BY crop_id ASC";
-						$query_run = pg_query($connection, $query);
+										<?php
+										$query = "select * from crop ORDER BY crop_id ASC";
+										$query_run = pg_query($connection, $query);
 
-						if ($query_run) {
-							while ($row = pg_fetch_array($query_run)) {
-						?>
-								<tbody>
-									<tr>
-										<td scope="col"><?= $row['crop_id']; ?></td>
-										<td scope="col"><?= $row['crop_name']; ?></td>
-										<td scope="col"><?= $row['crop_scientific_name']; ?></td>
-										<td scope="col"><?= $row['upland_or_lowland']; ?></td>
-										<td scope="col"><?= $row['crop_description']; ?></td>
-										<td id="apply-cancel-box" class="curator-only admin-only" style="text-align: center;">
-											<a href="crop.php?crop_id=<?= $row['crop_id']; ?>" class="btn btn-info btn-sm">View</a>
-											<button id="delete-btn" type="submit" name="delete" class="btn btn-danger btn-sm">Delete</a>
-										</td>
-									</tr>
-								</tbody>
-						<?php
-							}
-						}
-						?>
-					</table>
-				</form>
+										if ($query_run) {
+											while ($row = pg_fetch_array($query_run)) {
+										?>
+												<tbody>
+													<tr>
+														<th scope="row"><?= $row['crop_id']; ?></th>
+														<td><?= $row['crop_name']; ?></td>
+														<td><?= $row['crop_scientific_name']; ?></td>
+														<td><?= $row['upland_or_lowland']; ?></td>
+														<td><?= $row['crop_description']; ?></td>
+														<td class="curator-only admin-only" style="text-align: center;">
+															<a href="crop.php?crop_id=<?= $row['crop_id']; ?>" class="btn btn-info btn-sm">View</a>
+															<button id="delete-btn" type="submit" name="delete" class="btn btn-danger btn-sm">Delete</a>
+														</td>
+													</tr>
+												</tbody>
+										<?php
+											}
+										}
+										?>
+									</table>
+								</form>
+							</div>
+						</div>
+
+					</div>
+				</div>
+
 			</div>
 		</section>
 
