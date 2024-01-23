@@ -10,7 +10,7 @@ if (isset($_POST['approve']) && $_SESSION['rank'] == 'curator') {
     $select = "UPDATE users SET email_verified = '$email' WHERE user_id = '$user_id' ";
     $result = pg_query($con, $select);
     if ($result) {
-        $message = "Your email is now verified";
+        $message = "Thank you for creating an account. Your email is now verified.";
         $subject = "Email verification";
         $recipient = $email;
 

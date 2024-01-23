@@ -98,6 +98,9 @@ require('../sidebar/side.php');
 							<input type="search" id="searchInput" name="search" class="form-control" placeholder="Start typing to filter..." oninput="filterTable()" />
 						</div>
 					</div>
+					<?php
+					include('../message.php');
+					?>
 				</div>
 				<div class="row">
 					<div class="col-md-12">
@@ -122,7 +125,7 @@ require('../sidebar/side.php');
 									</thead>
 
 									<?php
-									$query = "select * from crop ORDER BY crop_id ASC";
+									$query = "select * from crop where status = 'approved' ORDER BY crop_id ASC";
 									$query_run = pg_query($connection, $query);
 
 									if ($query_run) {
@@ -137,8 +140,9 @@ require('../sidebar/side.php');
 													<td><?= $row['category']; ?></td>
 													<td><?= $row['crop_description']; ?></td>
 													<form id="form-panel" action="code.php" method="POST" class="curator-only">
-														<td class="curator-only admin-only" style="text-align: center;">
-															<a href="crop.php?crop_id=<?= $row['crop_id']; ?>" class="btn btn-info btn-sm">View</a>
+													<td class="curator-only admin-only" style="text-align: center;">
+															<input type="hidden" name="user_id" value="<?= $row['user_id']; ?>">
+															<a href="user.php?user_id=<?= $row['user_id']; ?>" class="btn btn-info btn-sm">View</a>
 															<button id="delete-btn" type="submit" name="delete" class="btn btn-danger btn-sm">Delete</a>
 														</td>
 													</form>

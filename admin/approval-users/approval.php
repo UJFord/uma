@@ -56,7 +56,7 @@
                         $query = "SELECT users.user_id, users.first_name, users.last_name, users.affiliation, users.registration_date, account_type.type_name
                         FROM users
                         JOIN account_type ON users.account_type_id = account_type.account_type_id
-                        WHERE users.email_verified IS NULL AND account_type.type_name <> 'curator'
+                        WHERE users.email_verified IS NULL
                         ORDER BY users.user_id ASC";
                         $result = pg_query($connection, $query);
 

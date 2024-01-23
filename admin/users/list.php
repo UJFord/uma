@@ -92,6 +92,7 @@
 													<td><?= $row['type_name']; ?></td>
 													<form id="form-panel" action="code.php" method="POST" class="curator-only">
 														<td class="curator-only admin-only" style="text-align: center;">
+															<input type="hidden" name="user_id" value="<?= $row['user_id']; ?>">
 															<a href="user.php?user_id=<?= $row['user_id']; ?>" class="btn btn-info btn-sm">View</a>
 															<button id="delete-btn" type="submit" name="delete" class="btn btn-danger btn-sm">Delete</a>
 														</td>

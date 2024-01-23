@@ -59,7 +59,7 @@
                         JOIN crop_farming_practice ON crop.crop_id = crop_farming_practice.crop_id
                         JOIN crop_other_info ON crop.crop_id = crop_other_info.crop_id
                         JOIN account_type ON users.account_type_id = account_type.account_type_id
-                        WHERE crop.status = 'pending' AND account_type.type_name != 'curator'
+                        WHERE crop.status = 'pending'
                         ORDER BY crop.crop_id ASC";
                         $result = pg_query($connection, $query);
 

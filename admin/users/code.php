@@ -130,10 +130,8 @@ if (isset($_POST['reset']) && $_SESSION['rank'] == 'curator') {
     }
 }
 
-
 if (isset($_POST['delete']) && $_SESSION['rank'] == 'curator') {
     $user_id = $_POST['user_id'];
-
     // Update related records in the "crop" table
     $query_update_crop = "UPDATE crop SET user_id = NULL WHERE user_id = $1";
     $query_run_update_crop = pg_query_params($con, $query_update_crop, [$user_id]);
