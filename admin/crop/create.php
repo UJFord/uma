@@ -49,7 +49,9 @@
 				<?php
 				include('../message.php');
 				?>
-				<input type="hidden" name="user_id" value="<?php if (isset($_SESSION['LOGGED_IN']) && $_SESSION['LOGGED_IN']){$_SESSION['USER']['user_id'];} ?>">
+				<input type="hidden" name="user_id" value="<?php if (isset($_SESSION['LOGGED_IN']) && $_SESSION['LOGGED_IN']) {
+																$_SESSION['USER']['user_id'];
+															} ?>">
 
 				<!-- main form -->
 				<div class="form-control p-3 mt-3">
@@ -130,7 +132,7 @@
 
 					<!-- Characteristics -->
 					<h4 class="">Characteristics</h4>
-					<div class="row">
+					<div class="row">	
 						<div class="col-2">
 							<!-- taste -->
 							<label for="taste">Taste</label>
@@ -148,147 +150,13 @@
 						</div>
 						<div class="col">
 							<!-- disease resistance -->
-							<label for="resist">Disease Resistance</label>
+							<label for="resist">Pest and Disease Resistance</label>
 							<input id="resist" type="text" class="form-control">
 						</div>
 					</div>
 
-
-					<!-- Planting Techniques -->
-					<label class="mt-2" for="tech-desc">Planting Techniques</label>
+					<!-- Location -->
 					<div class="row">
-						<div class="col">
-							<!-- Descrition -->
-							<!-- <textarea name="" id="tech-desc" class="txtarea form-control" rows="2"></textarea> -->
-							<div class="border rounded p-2">
-								<textarea  id="tech-desc" class="txtarea form-control w-100 h-100"></textarea>
-							</div>
-						</div>
-					</div>
-
-					<!-- Cultural and Spiritual Significance -->
-					<label class="mt-2" for="signif-desc">Cultural and Spiritual Significance</label>
-					<div class="row">
-						<div class="col">
-							<!-- Descrition -->
-							<!-- <textarea name="" id="signif-desc" class="txtarea form-control" rows="2"></textarea> -->
-							<div class="border rounded p-2">
-								<textarea  id="signif-desc" class="txtarea form-control w-100 h-100"></textarea>
-							</div>
-						</div>
-					</div>
-
-					<!-- Role in Maintaining Upland Ecosystems -->
-					<label class="mt-2" for="role-desc">Role in Maintaining Upland Ecosystems</label>
-					<div class="row">
-						<div class="col">
-							<!-- Descrition -->
-							<!-- <textarea name="" id="role-desc" class="txtarea form-control" rows="2"></textarea> -->
-							<div class="border rounded p-2">
-								<textarea  id="role-desc" class="txtarea form-control w-100 h-100"></textarea>
-							</div>
-						</div>
-					</div>
-
-					<!-- Cultural Importance and Traditional Knowledge -->
-					<label class="mt-2" for="importance-desc">Cultural Importance and Traditional Knowledge</label>
-					<div class="row">
-						<div class="col">
-							<!-- Descrition -->
-							<!-- <textarea name="" id="importance-desc" class="txtarea form-control" rows="2"></textarea> -->
-							<div class="border rounded p-2">
-								<textarea  id="importance-desc" class="txtarea form-control w-100 h-100"></textarea>
-							</div>
-						</div>
-					</div>
-
-					<!-- Unique Features -->
-					<label class="mt-2" for="feat-desc">Unique Features</label>
-					<div class="row">
-						<div class="col">
-							<!-- Descrition -->
-							<!-- <textarea name="" id="feat-desc" class="txtarea form-control" rows="2"></textarea> -->
-							<div class="border rounded p-2">
-								<textarea  id="feat-desc" class="txtarea form-control w-100 h-100"></textarea>
-							</div>
-						</div>
-					</div>
-
-					<!-- Cultural Use -->
-					<label class="mt-2" for="use-desc">Cultural Use</label>
-					<div class="row">
-						<div class="col">
-							<!-- Descrition -->
-							<!-- <textarea name="" id="use-desc" class="txtarea form-control" rows="2"></textarea> -->
-							<div class="border rounded p-2">
-								<textarea  id="use-desc" class="txtarea form-control w-100 h-100"></textarea>
-							</div>
-						</div>
-					</div>
-
-					<!-- Associated Farming Practice -->
-					<label class="mt-2" for="prac-desc">Associated Farming Practice</label>
-					<div class="row">
-						<div class="col">
-							<!-- Descrition -->
-							<!-- <textarea name="" id="prac-desc" class="txtarea form-control" rows="2"></textarea> -->
-							<div class="border rounded p-2">
-								<textarea  id="prac-desc" class="txtarea form-control w-100 h-100"></textarea>
-							</div>
-						</div>
-					</div>
-
-					<!-- Associated Vegetation -->
-					<label class="mt-2" for="veg-desc">Associated Vegetation</label>
-					<div class="row">
-						<div class="col">
-							<!-- Descrition -->
-							<!-- <textarea name="" id="veg-desc" class="txtarea form-control" rows="2"></textarea> -->
-							<div class="border rounded p-2">
-								<textarea  id="veg-desc" class="txtarea form-control w-100 h-100"></textarea>
-							</div>
-						</div>
-					</div>
-
-					<!-- Last Seen Location -->
-					<label class="mt-2" for="loc-desc">Last Seen Location</label>
-					<div class="row">
-						<div class="col">
-							<!-- Descrition -->
-							<!-- <textarea name="" id="loc-desc" class="txtarea form-control" rows="2"></textarea> -->
-							<div class="border rounded p-2">
-								<textarea  id="loc-desc" class="txtarea form-control w-100 h-100"></textarea>
-							</div>
-						</div>
-					</div>
-
-					<!-- Threats to Upland Farms -->
-					<label class="mt-2" for="threat-desc">Threats to Upland Farms</label>
-					<div class="row">
-						<div class="col">
-							<!-- Descrition -->
-							<!-- <textarea name="" id="threat-desc" class="txtarea form-control" rows="2"></textarea> -->
-							<div class="border rounded p-2">
-								<textarea  id="threat-desc" class="txtarea form-control w-100 h-100"></textarea>
-							</div>
-						</div>
-					</div>
-
-					<!-- Other Information -->
-					<label class="mt-2" for="more-desc">Other Information</label>
-					<div class="row">
-						<div class="col">
-							<!-- Description -->
-							<!-- <textarea name="" id="more-desc" class="txtarea form-control" rows="2"></textarea> -->
-							<div class="border rounded p-2">
-								<textarea  id="more-desc" class="txtarea form-control w-100 h-100"></textarea>
-							</div>
-						</div>
-					</div>
-
-					<div class="row">
-
-						<!-- Location -->
 						<h5 class="mt-2">Location</h5>
 						<div class="col-4">
 							<!-- Municipality -->
@@ -327,8 +195,104 @@
 						</div>
 					</div>
 
+					<!-- Planting Techniques -->
+					<label class="mt-2" for="tech-desc">Planting Techniques</label>
+					<div class="row">
+						<div class="col">
+							<!-- Descrition -->
+							<!-- <textarea name="" id="tech-desc" class="txtarea form-control" rows="2"></textarea> -->
+							<div class="border rounded p-2">
+								<textarea id="tech-desc" class="txtarea form-control w-100 h-100"></textarea>
+							</div>
+						</div>
+					</div>
+
+					<!-- Cultural and Spiritual Significance -->
+					<label class="mt-2" for="signif-desc">Cultural and Spiritual Significance</label>
+					<div class="row">
+						<div class="col">
+							<!-- Descrition -->
+							<!-- <textarea name="" id="signif-desc" class="txtarea form-control" rows="2"></textarea> -->
+							<div class="border rounded p-2">
+								<textarea id="signif-desc" class="txtarea form-control w-100 h-100"></textarea>
+							</div>
+						</div>
+					</div>
+
+					<!-- Role in Maintaining Upland Ecosystems -->
+					<label class="mt-2" for="role-desc">Role in Maintaining Upland Ecosystems</label>
+					<div class="row">
+						<div class="col">
+							<!-- Descrition -->
+							<!-- <textarea name="" id="role-desc" class="txtarea form-control" rows="2"></textarea> -->
+							<div class="border rounded p-2">
+								<textarea id="role-desc" class="txtarea form-control w-100 h-100"></textarea>
+							</div>
+						</div>
+					</div>
+
+					<!-- Cultural Importance and Traditional Knowledge -->
+					<label class="mt-2" for="importance-desc">Cultural Importance and Traditional Knowledge</label>
+					<div class="row">
+						<div class="col">
+							<!-- Descrition -->
+							<!-- <textarea name="" id="importance-desc" class="txtarea form-control" rows="2"></textarea> -->
+							<div class="border rounded p-2">
+								<textarea id="importance-desc" class="txtarea form-control w-100 h-100"></textarea>
+							</div>
+						</div>
+					</div>
+
+					<!-- Unique Features -->
+					<label class="mt-2" for="feat-desc">Unique Features</label>
+					<div class="row">
+						<div class="col">
+							<!-- Descrition -->
+							<!-- <textarea name="" id="feat-desc" class="txtarea form-control" rows="2"></textarea> -->
+							<div class="border rounded p-2">
+								<textarea id="feat-desc" class="txtarea form-control w-100 h-100"></textarea>
+							</div>
+						</div>
+					</div>
+
+					<!-- Cultural Use -->
+					<label class="mt-2" for="use-desc">Cultural Use</label>
+					<div class="row">
+						<div class="col">
+							<!-- Descrition -->
+							<!-- <textarea name="" id="use-desc" class="txtarea form-control" rows="2"></textarea> -->
+							<div class="border rounded p-2">
+								<textarea id="use-desc" class="txtarea form-control w-100 h-100"></textarea>
+							</div>
+						</div>
+					</div>
+
+					<!-- Associated Vegetation -->
+					<label class="mt-2" for="veg-desc">Associated Vegetation</label>
+					<div class="row">
+						<div class="col">
+							<!-- Descrition -->
+							<!-- <textarea name="" id="veg-desc" class="txtarea form-control" rows="2"></textarea> -->
+							<div class="border rounded p-2">
+								<textarea id="veg-desc" class="txtarea form-control w-100 h-100"></textarea>
+							</div>
+						</div>
+					</div>
+
+					<!-- Threats to Upland Farms -->
+					<label class="mt-2" for="threat-desc">Threats to Upland Farms</label>
+					<div class="row">
+						<div class="col">
+							<!-- Descrition -->
+							<!-- <textarea name="" id="threat-desc" class="txtarea form-control" rows="2"></textarea> -->
+							<div class="border rounded p-2">
+								<textarea id="threat-desc" class="txtarea form-control w-100 h-100"></textarea>
+							</div>
+						</div>
+					</div>
+
+					<!-- Associated Farming Practice -->
 					<div class="">
-						<!-- Associated Farming Practice -->
 						<h5 class="mt-4">Associated Farming Practice</h5>
 						<div class="col">
 							<!-- Other Info Type -->
@@ -349,7 +313,7 @@
 
 					<!-- Other Information -->
 					<div class="other_info">
-						<h3 class="mt-4 d-flex align-items-center" id="otherInfoTitle">Other Info <i class='bx bx-plus ml-2' id="toggleOtherInfo" style="color: blue;"></i> <i class='bx bx-minus ml-2' id="toggleOtherInfoMinus" style="display: none; color:red"></i></h3>
+						<h3 class="mt-4 d-flex align-items-center" id="otherInfoTitle">Other Info <i class="fa-solid fa-plus" id="toggleOtherInfo" style="color: blue;"></i> <i class="fa-solid fa-minus" id="toggleOtherInfoMinus" style="display: none; color:red"></i></h3>
 						<div class="other-info-content" hidden>
 							<div class="col">
 								<!-- Other Info Type -->
