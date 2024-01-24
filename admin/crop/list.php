@@ -116,7 +116,7 @@ require('../sidebar/side.php');
 										<tr>
 											<th scope="col">Crop Id</th>
 											<th scope="col">Crop Name</th>
-											<th scope="col">Scientific Name</th>
+											<th scope="col">Input Date</th>
 											<th scope="col">Lowland or Upland</th>
 											<th scope="col">Category</th>
 											<th scope="col">Description</th>
@@ -133,14 +133,20 @@ require('../sidebar/side.php');
 									?>
 											<tbody>
 												<tr>
+													<?php
+													// Convert the string to a DateTime object
+													$date = new DateTime($row['input_date']);
+													// Format the date to display up to the minute
+													$formatted_date = $date->format('Y-m-d H:i');
+													?>
 													<th scope="row"><?= $row['crop_id']; ?></th>
 													<td><?= $row['crop_name']; ?></td>
-													<td><?= $row['crop_scientific_name']; ?></td>
+													<td><?= $formatted_date; ?></td>
 													<td><?= $row['upland_or_lowland']; ?></td>
 													<td><?= $row['category']; ?></td>
 													<td><?= $row['crop_description']; ?></td>
 													<form id="form-panel" action="code.php" method="POST" class="curator-only">
-													<td class="curator-only admin-only" style="text-align: center;">
+														<td class="curator-only admin-only" style="text-align: center;">
 															<input type="hidden" name="crop_id" value="<?= $row['crop_id']; ?>">
 															<a href="crop.php?crop_id=<?= $row['crop_id']; ?>" class="btn btn-info btn-sm">View</a>
 															<button id="delete-btn" type="submit" name="delete" class="btn btn-danger btn-sm">Delete</a>

@@ -26,7 +26,6 @@
 	?>
 
 	<!-- summernote -->
-	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
 	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 </head>
@@ -50,7 +49,7 @@
 				include('../message.php');
 				?>
 				<input type="hidden" name="user_id" value="<?php if (isset($_SESSION['LOGGED_IN']) && $_SESSION['LOGGED_IN']) {
-																$_SESSION['USER']['user_id'];
+																echo $_SESSION['USER']['user_id'];
 															} ?>">
 
 				<!-- main form -->
@@ -132,26 +131,26 @@
 
 					<!-- Characteristics -->
 					<h4 class="">Characteristics</h4>
-					<div class="row">	
+					<div class="row">
 						<div class="col-2">
 							<!-- taste -->
 							<label for="taste">Taste</label>
-							<input id="taste" type="text" class="form-control mb-4">
+							<input id="taste" name="taste" type="text" class="form-control mb-4">
 						</div>
 						<div class="col-2">
 							<!-- aroma -->
 							<label for="aroma">Aroma</label>
-							<input id="aroma" type="text" class="form-control mb-4">
+							<input id="aroma" name="aroma" type="text" class="form-control mb-4">
 						</div>
 						<div class="col-2">
 							<!-- maturation -->
 							<label for="matur">Maturation</label>
-							<input id="matur" type="text" class="form-control mb-4">
+							<input id="matur" name="maturation" type="text" class="form-control mb-4">
 						</div>
 						<div class="col">
 							<!-- disease resistance -->
 							<label for="resist">Pest and Disease Resistance</label>
-							<input id="resist" type="text" class="form-control">
+							<input id="resist" name="pest_and_disease_resistance" type="text" class="form-control">
 						</div>
 					</div>
 
@@ -202,7 +201,7 @@
 							<!-- Descrition -->
 							<!-- <textarea name="" id="tech-desc" class="txtarea form-control" rows="2"></textarea> -->
 							<div class="border rounded p-2">
-								<textarea id="tech-desc" class="txtarea form-control w-100 h-100"></textarea>
+								<textarea id="tech-desc" name="planting_techniques" class="txtarea form-control w-100 h-100"></textarea>
 							</div>
 						</div>
 					</div>
@@ -214,7 +213,7 @@
 							<!-- Descrition -->
 							<!-- <textarea name="" id="signif-desc" class="txtarea form-control" rows="2"></textarea> -->
 							<div class="border rounded p-2">
-								<textarea id="signif-desc" class="txtarea form-control w-100 h-100"></textarea>
+								<textarea id="signif-desc" name="cultural_and_spiritual_significance" class="txtarea form-control w-100 h-100"></textarea>
 							</div>
 						</div>
 					</div>
@@ -226,7 +225,7 @@
 							<!-- Descrition -->
 							<!-- <textarea name="" id="role-desc" class="txtarea form-control" rows="2"></textarea> -->
 							<div class="border rounded p-2">
-								<textarea id="role-desc" class="txtarea form-control w-100 h-100"></textarea>
+								<textarea id="role-desc" name="role_in_maintaining_upland_ecosystem" class="txtarea form-control w-100 h-100"></textarea>
 							</div>
 						</div>
 					</div>
@@ -238,7 +237,7 @@
 							<!-- Descrition -->
 							<!-- <textarea name="" id="importance-desc" class="txtarea form-control" rows="2"></textarea> -->
 							<div class="border rounded p-2">
-								<textarea id="importance-desc" class="txtarea form-control w-100 h-100"></textarea>
+								<textarea id="importance-desc" name="cultural_importance_and_traditional_knowledge" class="txtarea form-control w-100 h-100"></textarea>
 							</div>
 						</div>
 					</div>
@@ -250,7 +249,7 @@
 							<!-- Descrition -->
 							<!-- <textarea name="" id="feat-desc" class="txtarea form-control" rows="2"></textarea> -->
 							<div class="border rounded p-2">
-								<textarea id="feat-desc" class="txtarea form-control w-100 h-100"></textarea>
+								<textarea id="feat-desc" name="unique_features" class="txtarea form-control w-100 h-100"></textarea>
 							</div>
 						</div>
 					</div>
@@ -262,7 +261,7 @@
 							<!-- Descrition -->
 							<!-- <textarea name="" id="use-desc" class="txtarea form-control" rows="2"></textarea> -->
 							<div class="border rounded p-2">
-								<textarea id="use-desc" class="txtarea form-control w-100 h-100"></textarea>
+								<textarea id="use-desc" name="cultural_use" class="txtarea form-control w-100 h-100"></textarea>
 							</div>
 						</div>
 					</div>
@@ -274,7 +273,7 @@
 							<!-- Descrition -->
 							<!-- <textarea name="" id="veg-desc" class="txtarea form-control" rows="2"></textarea> -->
 							<div class="border rounded p-2">
-								<textarea id="veg-desc" class="txtarea form-control w-100 h-100"></textarea>
+								<textarea id="veg-desc" name="associated_vegetation" class="txtarea form-control w-100 h-100"></textarea>
 							</div>
 						</div>
 					</div>
@@ -286,7 +285,7 @@
 							<!-- Descrition -->
 							<!-- <textarea name="" id="threat-desc" class="txtarea form-control" rows="2"></textarea> -->
 							<div class="border rounded p-2">
-								<textarea id="threat-desc" class="txtarea form-control w-100 h-100"></textarea>
+								<textarea id="threat-desc" name="threats" class="txtarea form-control w-100 h-100"></textarea>
 							</div>
 						</div>
 					</div>
@@ -306,15 +305,17 @@
 						</div>
 						<div class="col">
 							<!-- Other Info Description -->
-							<label for="farming_practice-desc">Description <span class="text-danger"></span></label>
-							<textarea name="farming_practice_description" id="farming_practice-desc" class="txtarea form-control" rows="3"></textarea>
+							<label for="farming_practice-desc">Description</label>
+							<div class="border rounded p-2">
+								<textarea id="farming_practice_description" name="farming_practice_description" class="txtarea form-control w-100 h-100"></textarea>
+							</div>
 						</div>
 					</div>
 
 					<!-- Other Information -->
 					<div class="other_info">
 						<h3 class="mt-4 d-flex align-items-center" id="otherInfoTitle">Other Info <i class="fa-solid fa-plus" id="toggleOtherInfo" style="color: blue;"></i> <i class="fa-solid fa-minus" id="toggleOtherInfoMinus" style="display: none; color:red"></i></h3>
-						<div class="other-info-content" hidden>
+						<div class="other-info-content">
 							<div class="col">
 								<!-- Other Info Type -->
 								<label for="other_info_type">Type</label>
@@ -326,14 +327,16 @@
 								<input id="other_info_name" type="text" name="other_info_name" placeholder="Enter Other Info Name" class="form-control mb-2">
 							</div>
 							<div class="col">
-								<!-- Other Info Description -->
-								<label for="other_info-desc">Description <span class="text-danger"></span></label>
-								<textarea name="other_info_description" id="other_info-desc" class="txtarea form-control" rows="3"></textarea>
-							</div>
-							<div class="col">
 								<!-- Other Info Url -->
 								<label for="other_info_url">Links</label>
 								<input id="other_info_url" type="text" name="other_info_url" placeholder="Enter links if available" class="form-control">
+							</div>
+							<div class="col">
+								<!-- Other Info Description -->
+								<label for="other_info-desc">Description <span class="text-danger"></span></label>
+								<div class="border rounded p-2">
+									<textarea name="other_info_description" id="other_info-desc" class="txtarea form-control" rows="3"></textarea>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -366,7 +369,6 @@
 			toggleOtherInfoMinus.style.display = 'none';
 		});
 	</script>
-
 
 	<script>
 		// JavaScript to handle file input change event and update image previews 
@@ -432,6 +434,7 @@
 		});
 		// 
 	</script>
+
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 	<!-- font awesome -->
 	<script src="https://kit.fontawesome.com/57e83eb6e4.js" crossorigin="anonymous"></script>
