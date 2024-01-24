@@ -49,7 +49,7 @@
 				<?php
 				include('../message.php');
 				?>
-				<input type="hidden" name="user_id" value="<?= $_SESSION['USER']['user_id']; ?>">
+				<input type="hidden" name="user_id" value="<?php if (isset($_SESSION['LOGGED_IN']) && $_SESSION['LOGGED_IN']){$_SESSION['USER']['user_id'];} ?>">
 
 				<!-- main form -->
 				<div class="form-control p-3 mt-3">
