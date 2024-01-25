@@ -20,10 +20,14 @@
 	session_start();
 	// sidebar
 	require('../sidebar/side.php');
-	// include '../access.php';
-	// access('CURATOR');
-	// access('ADMIN');
 	?>
+
+	<!-- Check access when the page loads -->
+	<script>
+		// Assume you have the userRole variable defined somewhere in your PHP code
+		var userRole = "<?php echo isset($_SESSION['rank']) ? $_SESSION['rank'] : ''; ?>";
+		checkAccess(userRole);
+	</script>
 
 	<!-- summernote -->
 	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
@@ -48,6 +52,7 @@
 				<?php
 				include('../message.php');
 				?>
+				<div id="error-message"></div>
 				<input type="hidden" name="user_id" value="<?php if (isset($_SESSION['LOGGED_IN']) && $_SESSION['LOGGED_IN']) {
 																echo $_SESSION['USER']['user_id'];
 															} ?>">
@@ -118,8 +123,8 @@
 						</div>
 					</div>
 
+					<!-- Description -->
 					<div class="col">
-						<!-- Description -->
 						<label for="gen-desc">Description <span class="fw-light">(Optional)</span></label>
 						<div class="border rounded p-2">
 							<textarea name="crop_description" id="gen-desc" class="txtarea form-control w-100 h-100"></textarea>
@@ -370,8 +375,8 @@
 		});
 	</script>
 
+	<!-- JavaScript to handle file input change event and update image previews -->
 	<script>
-		// JavaScript to handle file input change event and update image previews 
 		document.addEventListener("DOMContentLoaded", function() {
 			var imageInput = document.getElementById("image-input");
 			var imagePreviews = document.getElementById("image-previews");

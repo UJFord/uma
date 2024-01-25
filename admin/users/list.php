@@ -20,9 +20,13 @@
 	<?php
 	session_start();
 	require('../sidebar/side.php');
-	include '../access.php';
-	access('CURATOR');
 	?>
+	<!-- Check access when the page loads -->
+	<script>
+		// Assume you have the userRole variable defined somewhere in your PHP code
+		var userRole = "<?php echo isset($_SESSION['rank']) ? $_SESSION['rank'] : ''; ?>";
+		checkAccess(userRole);
+	</script>
 </head>
 
 <body class="overflow-hidden">
@@ -91,10 +95,10 @@
 													<td><?= $row['email']; ?></td>
 													<td><?= $row['type_name']; ?></td>
 													<form id="form-panel" action="code.php" method="POST" class="curator-only">
-														<td class="curator-only admin-only" style="text-align: center;">
+														<td class="" style="text-align: center;">
 															<input type="hidden" name="user_id" value="<?= $row['user_id']; ?>">
 															<a href="user.php?user_id=<?= $row['user_id']; ?>" class="btn btn-info btn-sm">View</a>
-															<button id="delete-btn" type="submit" name="delete" class="btn btn-danger btn-sm">Delete</a>
+															<button id="delete-btn" type="submit" name="delete" class="curator-only admin-only btn btn-danger btn-sm">Delete</a>
 														</td>
 													</form>
 												</tr>
@@ -118,7 +122,6 @@
 	<script src="https://kit.fontawesome.com/57e83eb6e4.js" crossorigin="anonymous"></script>
 	<!-- For button js -->
 	<!-- <script src="../../js/admin/user-edit.js"></script> -->
-
 </body>
 
 </html>

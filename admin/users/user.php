@@ -21,10 +21,13 @@
 	session_start();
 	require('../sidebar/side.php');
 	// include('../login/login-check.php');
-	include '../access.php';
-	access('CURATOR');
 	?>
-
+	<!-- Check access when the page loads -->
+	<script>
+		// Assume you have the userRole variable defined somewhere in your PHP code
+		var userRole = "<?php echo isset($_SESSION['rank']) ? $_SESSION['rank'] : ''; ?>";
+		checkAccess(userRole);
+	</script>
 	<!-- script fort access level -->
 	<script src="../../js/admin/access.js" defer></script>
 </head>
@@ -235,7 +238,6 @@
 		</section>
 	</div>
 	<!-- scipts -->
-	<!-- custom -->
 	<script src="../../js/admin/user-edit.js"></script>
 	<!-- bootstrap -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>

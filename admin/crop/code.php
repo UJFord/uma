@@ -591,15 +591,13 @@ if (isset($_POST['update']) && $_SESSION['rank'] == 'curator') {
     $location_id = pg_escape_string($con, $_POST['location_id']);
     $other_info_id = pg_escape_string($con, $_POST['other_info_id']);
     $farming_practice_id = pg_escape_string($con, $_POST['farming_practice_id']);
+    $characteristics_id = pg_escape_string($con, $_POST['characteristics_id']);
 
     $crop_name = pg_escape_string($con, $_POST['crop_name']);
     $crop_description = pg_escape_string($con, $_POST['crop_description']);
     $upland_or_lowland = pg_escape_string($con, $_POST['upland_or_lowland']);
     $crop_local_name = pg_escape_string($con, $_POST['crop_local_name']);
-    $crop_scientific_name = pg_escape_string($con, $_POST['crop_scientific_name']);
     $category = pg_escape_string($con, $_POST['category']);
-    $crop_variety = pg_escape_string($con, $_POST['crop_variety']);
-    $crop_origin = pg_escape_string($con, $_POST['crop_origin']);
 
     // Function to handle values and ensure they are strings
     function handleValue($value)

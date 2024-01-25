@@ -1,5 +1,5 @@
-<!-- get current page -->
 <?php
+// get current page
 $current_page = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 require('../../html/navfoot/connection.php');
 require('../functions.php');
@@ -28,6 +28,7 @@ $atapprove = strpos($current_page, '/uma/admin/approval/approval.php') === 0 ||
     var userRole = <?php echo (isset($_SESSION['LOGGED_IN']) && $_SESSION['LOGGED_IN']) ? '"' . $_SESSION['rank'] . '"' : 'none_user'; ?>;
 </script>
 <script src="../../js/admin/access.js" defer></script>
+<script src="../../js/admin/access-control.js"></script>
 
 
 <!-- JQUERY link -->

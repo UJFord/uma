@@ -120,7 +120,7 @@ require('../sidebar/side.php');
 											<th scope="col">Lowland or Upland</th>
 											<th scope="col">Category</th>
 											<th scope="col">Description</th>
-											<th scope="col" class="curator-only admin-only">Status</th>
+											<th scope="col">Status</th>
 										</tr>
 									</thead>
 
@@ -145,11 +145,11 @@ require('../sidebar/side.php');
 													<td><?= $row['upland_or_lowland']; ?></td>
 													<td><?= $row['category']; ?></td>
 													<td><?= $row['crop_description']; ?></td>
-													<form id="form-panel" action="code.php" method="POST" class="curator-only">
-														<td class="curator-only admin-only" style="text-align: center;">
+													<form id="form-panel" action="code.php" method="POST" class="">
+														<td style="text-align: center;">
 															<input type="hidden" name="crop_id" value="<?= $row['crop_id']; ?>">
 															<a href="crop.php?crop_id=<?= $row['crop_id']; ?>" class="btn btn-info btn-sm">View</a>
-															<button id="delete-btn" type="submit" name="delete" class="btn btn-danger btn-sm">Delete</a>
+															<button id="delete-btn" type="submit" name="delete" class="curator-only admin-only btn btn-danger btn-sm">Delete</a>
 														</td>
 													</form>
 												</tr>

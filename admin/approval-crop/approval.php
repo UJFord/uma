@@ -19,6 +19,12 @@
     session_start();
     require('../sidebar/side.php');
     ?>
+    <!-- Check access when the page loads -->
+    <script>
+        // Assume you have the userRole variable defined somewhere in your PHP code
+        var userRole = "<?php echo isset($_SESSION['rank']) ? $_SESSION['rank'] : ''; ?>";
+        checkAccess(userRole);
+    </script>
 </head>
 
 <body class="overflow-hidden">
@@ -147,45 +153,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
     <!-- font awesome -->
     <script src="https://kit.fontawesome.com/57e83eb6e4.js" crossorigin="anonymous"></script>
-    <!-- script fort access level -->
-    <script>
-        // script for access levels in admin
-        // hide or show based on account type
-        document.addEventListener("DOMContentLoaded", function() {
-            // Use PHP to set the user role dynamically
-            var userRole = "<?php echo $_SESSION['rank']; ?>";
-            var addEntryCard = document.getElementById("add-entry-card");
-
-            // Elements to show/hide based on user role
-            var curatorElements = document.querySelectorAll(".curator-only");
-            var adminElements = document.querySelectorAll(".admin-only");
-            var viewerElements = document.querySelectorAll(".viewer-only");
-
-            // Function to set visibility based on user role
-            function setVisibility(elements, isVisible) {
-                elements.forEach(function(element) {
-                    element.style.display = isVisible ? "block" : "none";
-                });
-            }
-
-            // Check user role and set visibility
-            if (userRole === "curator") {
-                setVisibility(curatorElements, true);
-                setVisibility(adminElements, true);
-                setVisibility(viewerElements, false);
-            } else if (userRole === "admin") {
-                setVisibility(curatorElements, false);
-                setVisibility(adminElements, true);
-                setVisibility(viewerElements, false);
-            } else if (userRole === "user") {
-                setVisibility(curatorElements, false);
-                setVisibility(adminElements, false);
-                setVisibility(viewerElements, true);
-            } else {
-                console.error("Unexpected user role:", userRole);
-            }
-        });
-    </script>
 </body>
 
 </html>
