@@ -174,7 +174,7 @@ if (isset($_POST['save']) && $_SESSION['rank'] == 'curator') {
             echo "Error: " . pg_last_error($con);
             die();
         }
-        
+
         $imageNamesString = implode(',', $imageNamesArray);
         $user_id = $_POST['user_id'];
         $status = 'approved';
@@ -586,6 +586,7 @@ if (isset($_POST['update']) && $_SESSION['rank'] == 'curator') {
     $crop_location_id = pg_escape_string($con, $_POST['crop_location_id']);
     $crop_farming_practice_id = pg_escape_string($con, $_POST['crop_farming_practice_id']);
     $crop_other_info_id = pg_escape_string($con, $_POST['crop_other_info_id']);
+    $crop_characteristics_id = pg_escape_string($con, $_POST['crop_characteristics_id']);
     $user_id = pg_escape_string($con, $_POST['user_id']);
 
     $location_id = pg_escape_string($con, $_POST['location_id']);
@@ -597,7 +598,14 @@ if (isset($_POST['update']) && $_SESSION['rank'] == 'curator') {
     $crop_description = pg_escape_string($con, $_POST['crop_description']);
     $upland_or_lowland = pg_escape_string($con, $_POST['upland_or_lowland']);
     $crop_local_name = pg_escape_string($con, $_POST['crop_local_name']);
-    $category = pg_escape_string($con, $_POST['category']);
+    $planting_techniques = pg_escape_string($con, $_POST['planting_techniques']);
+    $cultural_and_spiritual_significance = pg_escape_string($con, $_POST['cultural_and_spiritual_significance']);
+    $role_in_maintaining_upland_ecosystem = pg_escape_string($con, $_POST['role_in_maintaining_upland_ecosystem']);
+    $cultural_importance_and_traditional_knowledge = pg_escape_string($con, $_POST['cultural_importance_and_traditional_knowledge']);
+    $unique_features = pg_escape_string($con, $_POST['unique_features']);
+    $cultural_use = pg_escape_string($con, $_POST['cultural_use']);
+    $associated_vegetation = pg_escape_string($con, $_POST['associated_vegetation']);
+    $threats = pg_escape_string($con, $_POST['threats']);
 
     // Function to handle values and ensure they are strings
     function handleValue($value)
@@ -611,10 +619,31 @@ if (isset($_POST['update']) && $_SESSION['rank'] == 'curator') {
     $crop_description = handleValue($_POST['crop_description']);
     $upland_or_lowland = handleValue($_POST['upland_or_lowland']);
     $crop_local_name = handleValue($_POST['crop_local_name']);
-    $crop_scientific_name = handleValue($_POST['crop_scientific_name']);
     $category = handleValue($_POST['category']);
-    $crop_variety = handleValue($_POST['crop_variety']);
-    $crop_origin = handleValue($_POST['crop_origin']);
+    $planting_techniques = handleValue($_POST['planting_techniques']);
+    $cultural_and_spiritual_significance = handleValue($_POST['cultural_and_spiritual_significance']);
+    $role_in_maintaining_upland_ecosystem = handleValue($_POST['role_in_maintaining_upland_ecosystem']);
+    $cultural_importance_and_traditional_knowledge = handleValue($_POST['cultural_importance_and_traditional_knowledge']);
+    $unique_features = handleValue($_POST['unique_features']);
+    $cultural_use = handleValue($_POST['cultural_use']);
+    $associated_vegetation = handleValue($_POST['associated_vegetation']);
+    $threats = handleValue($_POST['threats']);
+
+    // Characteristics Table
+    $aroma = handleValue($_POST['aroma']);
+    $taste = handleValue($_POST['taste']);
+    $maturation = handleValue($_POST['maturation']);
+    $pest_and_disease_resistance = handleValue($_POST['pest_and_disease_resistance']);
+
+    // Update Characteristics table
+    $query_characteristics = "UPDATE characteristics SET aroma = $1, taste = $2, maturation = $3, pest_and_disease_resistance = $4 WHERE characteristics_id = $5";
+    $params_characteristics = array($aroma, $taste, $maturation, $pest_and_disease_resistance, $characteristics_id);
+    $query_run_characteristics = pg_query_params($con, $query_characteristics, $params_characteristics);
+
+    if (!$query_run_characteristics) {
+        echo "Error updating characteristics: " . pg_last_error($con);
+        exit(0);
+    }
 
     // Location Table
     $province_name = handleValue($_POST['province_name']);
@@ -746,14 +775,16 @@ if (isset($_POST['update']) && $_SESSION['rank'] == 'curator') {
 
     // Update Crop table using parameterized query
     $query_crop = "UPDATE crop SET
-        crop_name = $1, crop_local_name = $2, crop_scientific_name = $3, crop_description = $4, crop_image = $5, crop_variety = $6,
-        crop_origin = $7, upland_or_lowland = $8, category = $9
-        WHERE crop_id = $10";
+        crop_name = $1, crop_local_name = $2, planting_techniques = $3, crop_description = $4, crop_image = $5, cultural_and_spiritual_significance = $6,
+        role_in_maintaining_upland_ecosystem = $7, upland_or_lowland = $8, category = $9, cultural_importance_and_traditional_knowledge = $10,
+        unique_features = $11, cultural_use = $12, associated_vegetation = $13, threats = $14
+        WHERE crop_id = $15";
 
     // Parameters for the query
     $params_crop = array(
-        $crop_name, $crop_local_name, $crop_scientific_name, $crop_description, $finalimg, $crop_variety,
-        $crop_origin, $upland_or_lowland, $category, $crop_id
+        $crop_name, $crop_local_name, $planting_techniques, $crop_description, $finalimg, $cultural_and_spiritual_significance,
+        $role_in_maintaining_upland_ecosystem, $upland_or_lowland, $category, $cultural_importance_and_traditional_knowledge,
+        $unique_features, $cultural_use, $associated_vegetation, $threats, $crop_id
     );
 
     // Prepare the statement
@@ -778,10 +809,12 @@ if (isset($_POST['delete']) && $_SESSION['rank'] == 'curator') {
     $crop_location_id = $_POST['crop_location_id'];
     $crop_farming_practice_id = $_POST['crop_farming_practice_id'];
     $crop_other_info_id = $_POST['crop_other_info_id'];
+    $crop_characteristics_id = $_POST['crop_characteristics_id'];
 
     $location_id = $_POST['location_id'];
     $farming_practice_id = $_POST['farming_practice_id'];
     $other_info_id = $_POST['other_info_id'];
+    $characteristics_id = $_POST['characteristics_id'];
 
     // Start a database transaction
     pg_query($con, "BEGIN");
@@ -793,6 +826,14 @@ if (isset($_POST['delete']) && $_SESSION['rank'] == 'curator') {
 
         if (!$query_run_delete_crop) {
             throw new Exception("Failed to delete from Crop table");
+        }
+
+        // Delete from Crop table
+        $query_delete_crop_characteristics = "DELETE FROM crop_characteristics WHERE crop_characteristics_id = $1";
+        $query_run_delete_crop_characteristics = pg_query_params($con, $query_delete_crop_characteristics, [$crop_characteristics_id]);
+
+        if (!$query_run_delete_crop_characteristics) {
+            throw new Exception("Failed to delete from Crop Characteristics table");
         }
 
         // Delete from Crop Location table
@@ -817,6 +858,14 @@ if (isset($_POST['delete']) && $_SESSION['rank'] == 'curator') {
 
         if (!$query_run_delete_crop_other_info) {
             throw new Exception("Failed to delete from Crop Othher Info table");
+        }
+
+        // Delete from Crop table
+        $query_delete_characteristics = "DELETE FROM characteristics WHERE characteristics_id = $1";
+        $query_run_delete_characteristics = pg_query_params($con, $query_delete_characteristics, [$characteristics_id]);
+
+        if (!$query_run_delete_characteristics) {
+            throw new Exception("Failed to delete from Characteristics table");
         }
 
         // Delete from Location table

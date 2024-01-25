@@ -149,7 +149,6 @@ require('../sidebar/side.php');
 														<td style="text-align: center;">
 															<input type="hidden" name="crop_id" value="<?= $row['crop_id']; ?>">
 															<a href="crop.php?crop_id=<?= $row['crop_id']; ?>" class="btn btn-info btn-sm">View</a>
-															<button id="delete-btn" type="submit" name="delete" class="curator-only admin-only btn btn-danger btn-sm">Delete</a>
 														</td>
 													</form>
 												</tr>

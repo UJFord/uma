@@ -98,11 +98,12 @@ require('../sidebar/side.php');
 							<input type="hidden" name="crop_farming_practice_id" value="<?= $crops['crop_farming_practice_id']; ?>">
 							<input type="hidden" name="crop_other_info_id" value="<?= $crops['crop_other_info_id']; ?>">
 							<input type="hidden" name="current_crop_image" value="<?= $current_crop_image; ?>">
-							<input type="hidden" name="current_crop_characteristics_id" value="<?= $crops['crop_characteristics_id']; ?>">
+							<input type="hidden" name="crop_characteristics_id" value="<?= $crops['crop_characteristics_id']; ?>">
 
 							<input type="hidden" name="other_info_id" value="<?= $other_info_id; ?>">
 							<input type="hidden" name="location_id" value="<?= $location_id; ?>">
 							<input type="hidden" name="farming_practice_id" value="<?= $farming_practice_id; ?>">
+							<input type="hidden" name="characteristics_id" value="<?= $characteristics_id; ?>">
 
 							<?php
 							// Convert the string to a DateTime object
@@ -329,7 +330,7 @@ require('../sidebar/side.php');
 									<!-- Descrition -->
 									<!-- <textarea name="" id="tech-desc" class="txtarea form-control" rows="2"></textarea> -->
 								<div class="border rounded p-2">
-									<textarea id="tech-desc" name="planting_techniques" class="txtarea form-control w-100 h-100" disabled <?php echo ($planting_techniques !== $emptyValue) ? '>' . $planting_techniques : 'placeholder="Empty">'; ?>></textarea>
+									<textarea id="tech-desc" name="planting_techniques" class="txtarea form-control w-100 h-100" disabled <?php echo ($planting_techniques !== $emptyValue) ? '>' . $planting_techniques : 'placeholder="Empty">'; ?></textarea>
 								</div>
 							</div>
 						</div>
@@ -478,7 +479,7 @@ require('../sidebar/side.php');
 																<div class="col">
 																	<!-- Submitted By -->
 																	<label for="first_name">Submitted BY:</label>
-																	<input id="first_name" name="first_name" type="text" value="<?= $first_name; ?>" class="form-control mb-2" disabled>
+																	<input id="first_name" name="first_name" type="text" value="<?= $first_name; ?>" class="form-control mb-2 disabled-input">
 																</div>
 																<div class="col">
 																	<!-- Other Info Type -->

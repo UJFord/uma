@@ -179,21 +179,42 @@ require('../sidebar/side.php');
 											<div class="card h-100">
 												<div class="card-body">
 													<h6 class="d-flex align-items-center mb-3">Crops Submitted</h6>
-													<small>Web Design</small>
-													<div class="progress mb-3" style="height: 5px">
-														<div class="progress-bar bg-primary" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-													</div>
-													<small>Website Markup</small>
-													<div class="progress mb-3" style="height: 5px">
-														<div class="progress-bar bg-primary" role="progressbar" style="width: 72%" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
-													</div>
-													<small>One Page</small>
-													<div class="progress mb-3" style="height: 5px">
-														<div class="progress-bar bg-primary" role="progressbar" style="width: 89%" aria-valuenow="89" aria-valuemin="0" aria-valuemax="100"></div>
-													</div>
-													<small>Mobile Template</small>
-													<div class="progress mb-3" style="height: 5px">
-														<div class="progress-bar bg-primary" role="progressbar" style="width: 55%" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
+													<div>
+														<table class="table table-bordered col-md-12">
+															<thead>
+																<tr>
+																	<th scope="col">Crop ID</th>
+																	<th scope="col">Crop Name</th>
+																	<th scope="col">local Name</th>
+																	<th scope="col">Description</th>
+																</tr>
+															</thead>
+
+															<?php
+															$query = "SELECT *
+															FROM crop
+															WHERE user_id = $user_id
+															ORDER BY crop.crop_id ASC";
+															$result = pg_query($connection, $query);
+
+															if ($result) {
+																while ($row = pg_fetch_array($result)) {
+															?>
+																	<tbody>
+																		<tr>
+																			<th scope="row"><?php echo $row['crop_id']; ?></th>
+																			<td><?php echo $row['crop_name']; ?></td>
+																			<td><?php echo $row['crop_local_name']; ?></td>
+																			<td><?php echo $row['crop_description']; ?></td>
+																		</tr>
+																	</tbody>
+															<?php
+																}
+															} else {
+																echo "Query failed: " . pg_last_error($connection);
+															}
+															?>
+														</table>
 													</div>
 												</div>
 											</div>
