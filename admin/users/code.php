@@ -41,8 +41,8 @@ if (isset($_POST['save']) && $_SESSION['rank'] == 'curator') {
     $password = password_hash($raw_password, PASSWORD_DEFAULT);
 
     // 5. SQL to insert data into users table
-    $sql = "INSERT INTO users (first_name, last_name, gender, email, username, affiliation, password, account_type_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)";
-    $res = pg_query_params($con, $sql, array($first_name, $last_name, $gender, $email, $username, $affiliation, $password, $account_type_id));
+    $sql = "INSERT INTO users (first_name, last_name, gender, email, username, affiliation, password, account_type_id, email_verified) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)";
+    $res = pg_query_params($con, $sql, array($first_name, $last_name, $gender, $email, $username, $affiliation, $password, $account_type_id, $email));
 
     if ($res) {
         $_SESSION['message'] = "<div class='success text-center'>User Created Successfully.</div>";

@@ -142,6 +142,9 @@ function database_run($query, $vars = array())
     }
 }
 
+// Kani pababa wala ata ni silay use wala nako ni gi gamit kay dapat man gud ma access basking dili logged in
+// lahi na akong gi gamit gi js nalang nako. kay kung need ni sya gamitun kailangan ni sya ibutang sa side.php
+// kay maguba ang page kay duwa ang gina call na header unya kung ibutang sa side.php kay dili na ma access ku walay acc.
 // Function for comprehensive user check
 function check_user($redirect = true)
 {

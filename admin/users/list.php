@@ -80,7 +80,8 @@
 
 									<?php
 									$query = "SELECT users.*, account_type.* FROM users 
-										JOIN account_type ON users.account_type_id = account_type.account_type_id ORDER BY users.user_id ASC";
+										JOIN account_type ON users.account_type_id = account_type.account_type_id
+										where email_verified is not null ORDER BY users.user_id ASC";
 									$query_run = pg_query($connection, $query);
 
 									if ($query_run) {

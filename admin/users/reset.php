@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
     <!-- cutom css -->
     <link rel="stylesheet" href="../../css/admin/entry.css" />
+    <!-- sidebar custom css -->
+    <link rel="stylesheet" href="../../css/admin/side.css">
     <!-- favicon -->
     <link rel="shortcut icon" href="img/logo/Uma logo.svg" type="image/x-icon" />
     <title>Users</title>
@@ -52,7 +54,7 @@
             ?>
             <form id="form-panel" name="Form" action="code.php" autocomplete="off" method="POST" enctype="multipart/form-data" class="h-100 py-3 px-5">
                 <!-- back button -->
-                <a href="list.php" class="link-offset-2"><i class="bi bi-chevron-left"></i>Go Back</a>
+                <a href="user.php?user_id=<?= $user_id; ?>" class="link-offset-2"><i class="bi bi-chevron-left"></i>Go Back</a>
 
                 <?php
                 include('../message.php');
