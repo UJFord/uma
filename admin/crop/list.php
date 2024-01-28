@@ -95,6 +95,11 @@ require('../sidebar/side.php');
 									</li>
 								</ul>
 							</form> -->
+
+							<div>
+								<a href="list.php"><i class="fa-regular fa-rectangle-list list-box" aria-hidden="true"></i></a>
+								<a href="list-box.php"><i class="fa-solid fa-table-cells list-box" aria-hidden="true"></i></a>
+							</div>
 							<input type="search" id="searchInput" name="search" class="form-control" placeholder="Start typing to filter..." oninput="filterTable()" />
 						</div>
 					</div>

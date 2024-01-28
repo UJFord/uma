@@ -2,6 +2,7 @@
 <?php
 session_start();
 require('../sidebar/side.php');
+require('../search-box.php');
 // include('../login/login-check.php');
 // include '../access.php';
 // access('ADMIN');
@@ -19,7 +20,7 @@ require('../sidebar/side.php');
 	<!-- list custom css -->
 	<link rel="stylesheet" href="../../css/admin/list.css" />
 	<!-- sidebar custom css -->
-	<link rel="stylesheet" href="../../css/admin/side.css"> 
+	<link rel="stylesheet" href="../../css/admin/side.css">
 
 	<!-- favicon -->
 	<link rel="shortcut icon" href="img/logo/Uma logo.svg" type="image/x-icon" />
@@ -46,132 +47,82 @@ require('../sidebar/side.php');
 					<!-- search -->
 					<div id="filter-search" class="col-6 col-md-5 col-lg-3">
 						<div class="input-group">
-							<button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-								<i class="bi bi-funnel"></i>
-							</button>
-							<form action="" method="GET">
-								<ul class="dropdown-menu">
-									<div class="filter-header">
-										<h5>Filter
-											<button type="submit" class="btn btn-primary py-1 px-1 ">Search</button>
-										</h5>
-									</div>
-
-									<li>
-										<h5 class="filter-title">Category</h5>
-										<?php
-										$category_query = pg_query($connection, "SELECT DISTINCT category FROM crop");
-										if (pg_num_rows($category_query) > 0) {
-											$checked = isset($_GET['category']) ? $_GET['category'] : [];
-
-											while ($category_name = pg_fetch_assoc($category_query)) {
-										?>
-												<div>
-													<input type="checkbox" name="category[]" value="<?= $category_name['category'] ?>" <?php if (in_array($category_name['category'], $checked)) {
-																																			echo "checked";
-																																		} ?>>
-													<?= $category_name['category'] ?>
-												</div>
-										<?php
-											}
-										}
-										?>
-									</li>
-
-									<li>
-										<hr class="dropdown-divider" />
-									</li>
-									<li>
-										<a class="dropdown-item" href="#">Another action</a>
-									</li>
-									<li>
-										<a class="dropdown-item" href="#">Something else here</a>
-									</li>
-									<li>
-										<hr class="dropdown-divider" />
-									</li>
-									<li>
-										<a class="dropdown-item" href="#">Separated link</a>
-									</li>
-								</ul>
-							</form>
-							<form action="search.php" method="POST">
-								<input type="search" name="search" class="form-control" placeholder="Start typing to filter..." />
-							</form>
+							<div>
+								<a href="list.php"><i class="fa-regular fa-rectangle-list list-box" aria-hidden="true"></i></a>
+								<a href="list-box.php"><i class="fa-solid fa-table-cells list-box" aria-hidden="true"></i></a>
+							</div>
+							<input type="search" id="searchInput" name="search" class="form-control" placeholder="Start typing to filter..." oninput="filterTable()" />
 						</div>
 					</div>
-				</div>
 
-				<!-- crop cards -->
-				<div id="crop-cards" class="row">
-					<?php
-					include '../message.php';
-					// add entry button
-					require '../add/add.php';
-					?>
+					<!-- crop cards -->
+					<div id="crop-cards" class="row">
+						<?php
+						include '../message.php';
+						?>
 
-					<?php
-					if (isset($_GET['category'])) {
-						$categoryChecked = array_map('strtolower', $_GET['category']);
+						<?php
+						if (isset($_GET['category'])) {
+							$categoryChecked = array_map('strtolower', $_GET['category']);
 
-						// Convert category names to lowercase in the SQL query
-						$result = pg_query($connection, "SELECT DISTINCT * FROM crop WHERE LOWER(category) IN ('" . implode("','", $categoryChecked) . "') ORDER BY crop_id");
-					} else {
-						$result = pg_query($connection, "SELECT * FROM crop ORDER BY crop_id");
-					}
-
-					$count = pg_num_rows($result);
-
-					if ($count > 0) {
-						while ($row = pg_fetch_assoc($result)) {
-							$crop_id = $row['crop_id'];
-							$crop_image = $row['crop_image'];
-							$crop_name = $row['crop_name'];
-
-					?>
-							<!-- crop -->
-							<div class="card-container col-6 col-md-4 col-lg-2 p-2">
-								<?php
-								if ($crop_image !== null) {
-								?>
-									<a href="crop.php?crop_id=<?php echo $crop_id; ?>" class="crop-card py-3 px-1 d-flex justify-content-center align-items-end" style="
-									background-image: url('<?php echo $crop_image; ?>');
-								">
-										<div class="crop-card-text row w-100 d-flex flex-row justify-content-between align-items-center">
-											<!-- crop name -->
-											<h4 class="crop-name col-6"><?php echo ucfirst($crop_name); ?></h4>
-											<!-- arrow -->
-											<div class="col-2 arrow-container">
-												<i class="position-absolute bi bi-arrow-right-short fs-3"></i>
-											</div>
-										</div>
-									</a>
-								<?php
-								} else {
-								?>
-									<a href="crop.php?crop_id=<?php echo $crop_id; ?>" class="crop-card py-3 px-1 d-flex justify-content-center align-items-end" style="
-									background-image: url('https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image.png');
-								">
-										<div class="crop-card-text row w-100 d-flex flex-row justify-content-between align-items-center">
-											<!-- crop name -->
-											<h4 class="crop-name col-6"><?php echo ucfirst($crop_name); ?></h4>
-											<!-- arrow -->
-											<div class="col-2 arrow-container">
-												<i class="position-absolute bi bi-arrow-right-short fs-3"></i>
-											</div>
-										</div>
-									</a>
-								<?php
-								}
-								?>
-							</div>
-					<?php
+							// Convert category names to lowercase in the SQL query
+							$result = pg_query($connection, "SELECT DISTINCT * FROM crop WHERE LOWER(category) IN ('" . implode("','", $categoryChecked) . "') ORDER BY crop_id");
+						} else {
+							$result = pg_query($connection, "SELECT * FROM crop ORDER BY crop_id");
 						}
-					}
 
-					?>
+						$count = pg_num_rows($result);
+
+						if ($count > 0) {
+							while ($row = pg_fetch_assoc($result)) {
+								$crop_id = $row['crop_id'];
+								$crop_image = $row['crop_image'];
+								$crop_name = $row['crop_name'];
+
+						?>
+								<!-- crop -->
+								<div class="filterable-row card-container col-6 col-md-4 col-lg-2 p-2">
+									<?php
+									if ($crop_image !== null) {
+									?>
+										<a href="crop.php?crop_id=<?php echo $crop_id; ?>" class="crop-card py-3 px-1 d-flex justify-content-center align-items-end" style="
+                                    background-image: url(../img/crop/<?php echo $crop_image; ?>);
+                                ">
+											<div class="crop-card-text row w-100 d-flex flex-row justify-content-between align-items-center">
+												<!-- crop name -->
+												<h4 class="crop-name col-6"><?php echo ucfirst($crop_name); ?></h4>
+												<!-- arrow -->
+												<div class="col-2 arrow-container">
+													<i class="position-absolute bi bi-arrow-right-short fs-3"></i>
+												</div>
+											</div>
+										</a>
+									<?php
+									} else {
+									?>
+										<a href="crop.php?crop_id=<?php echo $crop_id; ?>" class="crop-card py-3 px-1 d-flex justify-content-center align-items-end" style="
+                                    background-image: url('https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image.png');
+                                ">
+											<div class="crop-card-text row w-100 d-flex flex-row justify-content-between align-items-center">
+												<!-- crop name -->
+												<h4 class="crop-name col-6"><?php echo ucfirst($crop_name); ?></h4>
+												<!-- arrow -->
+												<div class="col-2 arrow-container">
+													<i class="position-absolute bi bi-arrow-right-short fs-3"></i>
+												</div>
+											</div>
+										</a>
+									<?php
+									}
+									?>
+								</div>
+						<?php
+							}
+						}
+						?>
+					</div>
+
 				</div>
-			</div>
 		</section>
 
 	</div>
