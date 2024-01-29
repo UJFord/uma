@@ -25,6 +25,13 @@ require('../sidebar/side.php');
 
 	<!-- script fort access level -->
 	<script src="../../js/admin/access.js" defer></script>
+
+	<!-- Check access when the page loads -->
+	<script>
+		// Assume you have the userRole variable defined somewhere in your PHP code
+		var userRole = "<?php echo isset($_SESSION['rank']) ? $_SESSION['rank'] : ''; ?>";
+		checkAccess(userRole);
+	</script>
 </head>
 
 <body class="overflow-x-hidden">
@@ -123,8 +130,7 @@ require('../sidebar/side.php');
 								<!-- image -->
 								<div class="col-4">
 									<label for="image-input">Images <span class="text-danger fw-bold">*</span></label>
-									<input type="file" name="crop_image[]" class="form-control" id="image-input" multiple accept="image/*" hidden>
-								</div>
+									<input type="file" name="crop_image[]" class="form-control" id="image-input" multiple="multiple" accept="image/*" hidden>								</div>
 								<div class="col-3">
 									<!-- Input Date -->
 									<label for="input_date">Input Date</label>
@@ -189,7 +195,7 @@ require('../sidebar/side.php');
 											// Display each image
 											foreach ($imageNames as $imageName) {
 										?>
-												<img src="<?php echo 'http://localhost/incognito-capstone/admin/'; ?>img/crop/<?php echo trim($imageName); ?>" class="m-2 img-thumbnail" style="height: 200px;">
+												<img id="current-crop-image" src="<?php echo 'http://localhost/incognito-capstone/admin/'; ?>img/crop/<?php echo trim($imageName); ?>" class="m-2 img-thumbnail" style="height: 200px;">
 										<?php
 											}
 										} else {
@@ -341,8 +347,8 @@ require('../sidebar/side.php');
 							<div class="col">
 								<!-- Descrition -->
 								<!-- <textarea name="" id="signif-desc" class="txtarea form-control" rows="2"></textarea> -->
-								<div class="border rounded p-2">
-									<textarea id="signif-desc" name="cultural_and_spiritual_significance" class="txtarea form-control w-100 h-100" disabled <?php echo ($cultural_and_spiritual_significance !== $emptyValue) ? '>' . $cultural_and_spiritual_significance : 'placeholder="Empty">'; ?></textarea>
+									<div class="border rounded p-2">
+										<textarea id="signif-desc" name="cultural_and_spiritual_significance" class="txtarea form-control w-100 h-100" disabled <?php echo ($cultural_and_spiritual_significance !== $emptyValue) ? '>' . $cultural_and_spiritual_significance : 'placeholder="Empty">'; ?></textarea>
 										</div>
 									</div>
 								</div>
@@ -353,8 +359,8 @@ require('../sidebar/side.php');
 									<div class="col">
 										<!-- Descrition -->
 										<!-- <textarea name="" id="role-desc" class="txtarea form-control" rows="2"></textarea> -->
-									<div class="border rounded p-2">
-										<textarea id="role-desc" name="role_in_maintaining_upland_ecosystem" class="txtarea form-control w-100 h-100" disabled <?php echo ($role_in_maintaining_upland_ecosystem !== $emptyValue) ? '>' . $role_in_maintaining_upland_ecosystem : 'placeholder="Empty">'; ?></textarea>
+										<div class="border rounded p-2">
+											<textarea id="role-desc" name="role_in_maintaining_upland_ecosystem" class="txtarea form-control w-100 h-100" disabled <?php echo ($role_in_maintaining_upland_ecosystem !== $emptyValue) ? '>' . $role_in_maintaining_upland_ecosystem : 'placeholder="Empty">'; ?></textarea>
 										</div>
 									</div>
 								</div>
@@ -365,8 +371,8 @@ require('../sidebar/side.php');
 									<div class="col">
 										<!-- Descrition -->
 										<!-- <textarea name="" id="importance-desc" class="txtarea form-control" rows="2"></textarea> -->
-										<div class="border rounded p-2">
-											<textarea id="importance-desc" name="cultural_importance_and_traditional_knowledge" class="txtarea form-control w-100 h-100" disabled <?php echo ($cultural_importance_and_traditional_knowledge !== $emptyValue) ? '>' . $cultural_importance_and_traditional_knowledge : 'placeholder="Empty">'; ?></textarea>
+											<div class="border rounded p-2">
+												<textarea id="importance-desc" name="cultural_importance_and_traditional_knowledge" class="txtarea form-control w-100 h-100" disabled <?php echo ($cultural_importance_and_traditional_knowledge !== $emptyValue) ? '>' . $cultural_importance_and_traditional_knowledge : 'placeholder="Empty">'; ?></textarea>
 										</div>
 									</div>
 								</div>
@@ -377,8 +383,8 @@ require('../sidebar/side.php');
 									<div class="col">
 										<!-- Descrition -->
 										<!-- <textarea name="" id="feat-desc" class="txtarea form-control" rows="2"></textarea> -->
-											<div class="border rounded p-2">
-												<textarea id="feat-desc" name="unique_features" class="txtarea form-control w-100 h-100" disabled <?php echo ($unique_features !== $emptyValue) ? '>' . $unique_features : 'placeholder="Empty">'; ?></textarea>
+												<div class="border rounded p-2">
+													<textarea id="feat-desc" name="unique_features" class="txtarea form-control w-100 h-100" disabled <?php echo ($unique_features !== $emptyValue) ? '>' . $unique_features : 'placeholder="Empty">'; ?></textarea>
 										</div>
 									</div>
 								</div>
@@ -389,8 +395,8 @@ require('../sidebar/side.php');
 									<div class="col">
 										<!-- Descrition -->
 										<!-- <textarea name="" id="use-desc" class="txtarea form-control" rows="2"></textarea> -->
-												<div class="border rounded p-2">
-													<textarea id="use-desc" name="cultural_use" class="txtarea form-control w-100 h-100" disabled <?php echo ($cultural_use !== $emptyValue) ? '>' . $cultural_use : 'placeholder="Empty">'; ?></textarea>
+													<div class="border rounded p-2">
+														<textarea id="use-desc" name="cultural_use" class="txtarea form-control w-100 h-100" disabled <?php echo ($cultural_use !== $emptyValue) ? '>' . $cultural_use : 'placeholder="Empty">'; ?></textarea>
 										</div>
 									</div>
 								</div>
@@ -401,8 +407,8 @@ require('../sidebar/side.php');
 									<div class="col">
 										<!-- Descrition -->
 										<!-- <textarea name="" id="veg-desc" class="txtarea form-control" rows="2"></textarea> -->
-													<div class="border rounded p-2">
-														<textarea id="veg-desc" name="associated_vegetation" class="txtarea form-control w-100 h-100" disabled <?php echo ($associated_vegetation !== $emptyValue) ? '>' . $associated_vegetation : 'placeholder="Empty">'; ?></textarea>
+														<div class="border rounded p-2">
+															<textarea id="veg-desc" name="associated_vegetation" class="txtarea form-control w-100 h-100" disabled <?php echo ($associated_vegetation !== $emptyValue) ? '>' . $associated_vegetation : 'placeholder="Empty">'; ?></textarea>
 										</div>
 									</div>
 								</div>
@@ -413,8 +419,8 @@ require('../sidebar/side.php');
 									<div class="col">
 										<!-- Descrition -->
 										<!-- <textarea name="" id="threat-desc" class="txtarea form-control" rows="2"></textarea> -->
-														<div class="border rounded p-2">
-															<textarea id="threat-desc" name="threats" class="txtarea form-control w-100 h-100" disabled <?php echo ($threats !== $emptyValue) ? '>' . $threats : 'placeholder="Empty">'; ?></textarea>
+															<div class="border rounded p-2">
+																<textarea id="threat-desc" name="threats" class="txtarea form-control w-100 h-100" disabled <?php echo ($threats !== $emptyValue) ? '>' . $threats : 'placeholder="Empty">'; ?></textarea>
 										</div>
 									</div>
 								</div>
@@ -453,72 +459,72 @@ require('../sidebar/side.php');
 										<!-- Other Info Description -->
 										<label for="farming_practice-desc">Description <span class="text-danger"></span></label>
 										<textarea name="farming_practice_description" id="farming_practice-desc" class="txtarea form-control" rows="3" disabled <?php echo ($farming_practice_description !== $emptyValue) ? '>' . $farming_practice_description : 'placeholder="Empty">'; ?></textarea>
-														</div>
-														<!-- Other Information -->
-														<div class="other_info">
-															<h3 class="mt-4 d-flex align-items-center" id="otherInfoTitle">Other Info</h3>
-															<?php
-															// PHP code to display available crop other info from the database
-															// Query to select all available crop other info in the database
-															$query4 = "SELECT crop_other_info.*, other_info.* FROM crop_other_info left join other_info on crop_other_info.other_info_id = other_info.other_info_id WHERE other_info.other_info_id='$other_info_id'";
+															</div>
+															<!-- Other Information -->
+															<div class="other_info">
+																<h3 class="mt-4 d-flex align-items-center" id="otherInfoTitle">Other Info</h3>
+																<?php
+																// PHP code to display available crop other info from the database
+																// Query to select all available crop other info in the database
+																$query4 = "SELECT crop_other_info.*, other_info.* FROM crop_other_info left join other_info on crop_other_info.other_info_id = other_info.other_info_id WHERE other_info.other_info_id='$other_info_id'";
 
-															// Executing query
-															$query_run4 = pg_query($connection, $query4);
+																// Executing query
+																$query_run4 = pg_query($connection, $query4);
 
-															// If count is greater than 0, we have other_info; else, we do not have other_info
-															if (pg_num_rows($query_run4) > 0) {
-																$other_info = pg_fetch_assoc($query_run4);
+																// If count is greater than 0, we have other_info; else, we do not have other_info
+																if (pg_num_rows($query_run4) > 0) {
+																	$other_info = pg_fetch_assoc($query_run4);
 
-																// Define default values for each field if they are $emptyValue
-																$other_info_type = isset($other_info['other_info_type']) ? $other_info['other_info_type'] : $emptyValue;
-																$other_info_name = isset($other_info['other_info_name']) ? $other_info['other_info_name'] : $emptyValue;
-																$other_info_description = isset($other_info['other_info_description']) ? $other_info['other_info_description'] : $emptyValue;
-																$other_info_url = isset($other_info['other_info_url']) ? $other_info['other_info_url'] : $emptyValue;
+																	// Define default values for each field if they are $emptyValue
+																	$other_info_type = isset($other_info['other_info_type']) ? $other_info['other_info_type'] : $emptyValue;
+																	$other_info_name = isset($other_info['other_info_name']) ? $other_info['other_info_name'] : $emptyValue;
+																	$other_info_description = isset($other_info['other_info_description']) ? $other_info['other_info_description'] : $emptyValue;
+																	$other_info_url = isset($other_info['other_info_url']) ? $other_info['other_info_url'] : $emptyValue;
 
-															?>
-																<div class="col">
-																	<!-- Submitted By -->
-																	<label for="first_name">Submitted BY:</label>
-																	<input id="first_name" name="first_name" type="text" value="<?= $first_name; ?>" class="form-control mb-2 disabled-input">
-																</div>
-																<div class="col">
-																	<!-- Other Info Type -->
-																	<label for="other_info_type">Type</label>
-																	<input id="other_info_type" name="other_info_type" type="text" value="<?= $other_info_type; ?>" class="form-control mb-2" disabled>
-																</div>
-																<div class="col">
-																	<!-- Other Info Name -->
-																	<label for="other_info_name">Name</label>
-																	<input id="other_info_name" name="other_info_name" type="text" value="<?= $other_info_name; ?>" class="form-control mb-2" disabled>
-																</div>
-																<div class="col">
-																	<!-- Other Info Urls -->
-																	<label for="other_info_url">Links</label>
+																?>
+																	<div class="col">
+																		<!-- Submitted By -->
+																		<label for="first_name">Submitted BY:</label>
+																		<input id="first_name" name="first_name" type="text" value="<?= $first_name; ?>" class="form-control mb-2 disabled-input">
+																	</div>
+																	<div class="col">
+																		<!-- Other Info Type -->
+																		<label for="other_info_type">Type</label>
+																		<input id="other_info_type" name="other_info_type" type="text" value="<?= $other_info_type; ?>" class="form-control mb-2" disabled>
+																	</div>
+																	<div class="col">
+																		<!-- Other Info Name -->
+																		<label for="other_info_name">Name</label>
+																		<input id="other_info_name" name="other_info_name" type="text" value="<?= $other_info_name; ?>" class="form-control mb-2" disabled>
+																	</div>
+																	<div class="col">
+																		<!-- Other Info Urls -->
+																		<label for="other_info_url">Links</label>
 
-																	<?php if ($other_info_url != $emptyValue && $other_info_url != "") : ?>
-																		<?php
-																		// Check if the URL is absolute
-																		if (filter_var($other_info_url, FILTER_VALIDATE_URL) === false) {
-																			// If not, prepend "http://"
-																			$other_info_url = "http://" . $other_info_url;
-																		}
-																		?>
-																		<a id="other_info_link" href="<?= $other_info_url; ?>" target="_blank">
-																			<input id="other_info_url" name="other_info_url" type="text" value="<?= $other_info_url; ?>" class="form-control clickable" readonly>
-																		</a>
-																	<?php else : ?>
-																		<input id="other_info_url" name="other_info_url" type="text" placeholder="No Links" class="form-control clickable" readonly>
-																	<?php endif; ?>
-																</div>
+																		<?php if ($other_info_url != $emptyValue && $other_info_url != "") : ?>
+																			<?php
+																			// Check if the URL is absolute
+																			if (filter_var($other_info_url, FILTER_VALIDATE_URL) === false) {
+																				// If not, prepend "http://"
+																				$other_info_url = "http://" . $other_info_url;
+																			}
+																			?>
+																			<a id="other_info_link" href="<?= $other_info_url; ?>" target="_blank">
+																				<input id="other_info_url" name="other_info_url" type="text" value="<?= $other_info_url; ?>" class="form-control clickable" readonly>
+																			</a>
+																		<?php else : ?>
+																			<input id="other_info_url" name="other_info_url" type="text" placeholder="No Links" class="form-control clickable" readonly>
+																		<?php endif; ?>
+																	</div>
 
-																<div class="col">
-																	<!-- Other Info Description -->
-																	<label for="other_info-desc">Description <span class="text-danger">*</span></label>
-																	<textarea name="other_info_description" id="other_info-desc" class="form-control" rows="3" disabled <?php echo ($other_info_description !== $emptyValue) ? '>' . $other_info_description : 'placeholder="Empty">'; ?></textarea>
+																	<div class="col">
+																		<!-- Other Info Description -->
+																		<label for="other_info-desc">Description <span class="text-danger">*</span></label>
+																		<textarea name="other_info_description" id="other_info-desc" class="form-control" rows="3" disabled <?php echo ($other_info_description !== $emptyValue) ? '>' . $other_info_description : 'placeholder="Empty">'; ?></textarea>
 									</div>
 
 								<?php
-															}
+																}
 								?>
 						</div>
 	</div>
