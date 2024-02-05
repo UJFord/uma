@@ -107,7 +107,7 @@ require('../sidebar/side.php');
 					include('../message.php');
 
 					// Set the number of items to display per page
-					$items_per_page = 7;
+					$items_per_page = 10;
 
 					// Get the current page number
 					$current_page = isset($_GET['page']) ? $_GET['page'] : 1;
@@ -124,8 +124,6 @@ require('../sidebar/side.php');
 					$total_pages = ceil($total_rows / $items_per_page);
 					?>
 				</div>
-				<!-- Add pagination links -->
-				<?php generatePaginationLinks($total_pages, $current_page, 'page'); ?>
 				<div class="row">
 					<div class="col-md-12">
 						<div class="card">
@@ -149,6 +147,7 @@ require('../sidebar/side.php');
 									</thead>
 
 									<?php
+									// Update your SQL query with LIMIT and OFFSET
 									$query = "SELECT * FROM crop WHERE status = 'approved' ORDER BY crop_id ASC LIMIT $items_per_page OFFSET $offset";
 									$query_run = pg_query($connection, $query);
 

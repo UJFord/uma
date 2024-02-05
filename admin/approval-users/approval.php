@@ -42,6 +42,24 @@
                     <div class="col-6">
                         <h2 id="crops-title" class="fw-semibold">Approval Users</h2>
                     </div>
+                    <?php
+                    // Set the number of items to display per page
+                    $items_per_page = 5;
+
+                    // Get the current page number
+                    $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
+
+                    // Calculate the offset based on the current page and items per page
+                    $offset = ($current_page - 1) * $items_per_page;
+
+                    // Count the total number of rows for pagination
+                    $total_rows_query = "SELECT COUNT(*) FROM users WHERE email_verified is null";
+                    $total_rows_result = pg_query($connection, $total_rows_query);
+                    $total_rows = pg_fetch_row($total_rows_result)[0];
+
+                    // Calculate the total number of pages
+                    $total_pages = ceil($total_rows / $items_per_page);
+                    ?>
 
                     <h1 class="text-center  text-white bg-dark col-md-12">PENDING LIST</h1>
 
@@ -63,7 +81,7 @@
                         FROM users
                         JOIN account_type ON users.account_type_id = account_type.account_type_id
                         WHERE users.email_verified IS NULL
-                        ORDER BY users.user_id ASC";
+                        ORDER BY users.user_id ASC LIMIT $items_per_page OFFSET $offset";
                         $result = pg_query($connection, $query);
 
                         if ($result) {
@@ -92,10 +110,42 @@
                         }
                         ?>
                     </table>
+                    <!-- Add pagination links -->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <ul class="pagination justify-content-center">
+                                <?php for ($page = 1; $page <= $total_pages; $page++) : ?>
+                                    <li class="page-item <?php echo ($current_page == $page) ? 'active' : ''; ?>">
+                                        <a class="page-link" href="?page=<?php echo $page; ?>"><?php echo $page; ?></a>
+                                    </li>
+                                <?php endfor; ?>
+                            </ul>
+                        </div>
+                    </div>
                     <!-- ================================================================== -->
                     &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
                     <h1 class="text-center  text-white bg-success col-md-12
                     ">APPROVED LIST </h1>
+
+                    <?php
+                    // Set the number of items to display per page
+                    $items_per_page = 5;
+
+                    // Get the current page number
+                    $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
+
+                    // Calculate the offset based on the current page and items per page
+                    $offset = ($current_page - 1) * $items_per_page;
+
+                    // Count the total number of rows for pagination
+                    $total_rows_query = "SELECT COUNT(*) FROM users left join account_type on users.account_type_id = account_type.account_type_id WHERE users.email_verified is not null and account_type.account_type_id <> 'curator'";
+                    $total_rows_result = pg_query($connection, $total_rows_query);
+                    $total_rows = pg_fetch_row($total_rows_result)[0];
+
+                    // Calculate the total number of pages
+                    $total_pages = ceil($total_rows / $items_per_page);
+                    ?>
+
                     <table class="table table-bordered col-md-12">
                         <thead>
                             <tr>
@@ -142,6 +192,18 @@
                         ?>
 
                     </table>
+                    <!-- Add pagination links -->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <ul class="pagination justify-content-center">
+                                <?php for ($page = 1; $page <= $total_pages; $page++) : ?>
+                                    <li class="page-item <?php echo ($current_page == $page) ? 'active' : ''; ?>">
+                                        <a class="page-link" href="?page=<?php echo $page; ?>"><?php echo $page; ?></a>
+                                    </li>
+                                <?php endfor; ?>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>

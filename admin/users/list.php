@@ -53,8 +53,27 @@
 					</div>
 					<?php
 					include('../message.php');
+
+					// Set the number of items to display per page
+					$items_per_page = 7;
+
+					// Get the current page number
+					$current_page = isset($_GET['page']) ? $_GET['page'] : 1;
+
+					// Calculate the offset based on the current page and items per page
+					$offset = ($current_page - 1) * $items_per_page;
+
+					// Count the total number of rows for pagination
+					$total_rows_query = "SELECT COUNT(*) FROM users WHERE email_verified is not null";
+					$total_rows_result = pg_query($connection, $total_rows_query);
+					$total_rows = pg_fetch_row($total_rows_result)[0];
+
+					// Calculate the total number of pages
+					$total_pages = ceil($total_rows / $items_per_page);
 					?>
 				</div>
+				<!-- Add pagination links -->
+				<?php generatePaginationLinks($total_pages, $current_page, 'page'); ?>
 
 				<div class="row">
 					<div class="col-md-12">
@@ -81,7 +100,7 @@
 									<?php
 									$query = "SELECT users.*, account_type.* FROM users 
 										JOIN account_type ON users.account_type_id = account_type.account_type_id
-										where email_verified is not null ORDER BY users.user_id ASC";
+										where email_verified is not null ORDER BY users.user_id ASC LIMIT $items_per_page OFFSET $offset";
 									$query_run = pg_query($connection, $query);
 
 									if ($query_run) {
