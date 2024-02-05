@@ -450,18 +450,26 @@ if (isset($_POST['save']) && $_SESSION['rank'] == 'curator') {
                             }
                         }
 
-                        $source_path = $_FILES['crop_image']['tmp_name'][$key];
-                        $destination_path = "../img/crop/" . $image;
+                        foreach ($_FILES['crop_image']['tmp_name'] as $key => $tempFilePath) {
+                            $destination_path = "../img/crop/" . $image;
 
-                        // Upload the image
-                        $upload = move_uploaded_file($source_path, $destination_path);
+                            // Upload the image
+                            $upload = move_uploaded_file($tempFilePath, $destination_path);
 
-                        // Check whether the image is uploaded or not
-                        if (!$upload) {
-                            echo "wala na upload ang image";
-                            echo "Error: " . pg_last_error($con);
-                            die();
+                            // Check whether the image is uploaded or not
+                            if (!$upload) {
+                                echo "wala na upload ang image";
+                                echo "Error: " . pg_last_error($con);
+
+                                // Enable error reporting and display errors
+                                error_reporting(E_ALL);
+                                ini_set('display_errors', 1);
+
+                                // Halt execution
+                                die();
+                            }
                         }
+
 
                         $finalimg = $image;
                         $imageNamesArray[] = $finalimg; // Add image name to the array
