@@ -138,7 +138,7 @@
                     $offset = ($current_page - 1) * $items_per_page;
 
                     // Count the total number of rows for pagination
-                    $total_rows_query = "SELECT COUNT(*) FROM users left join account_type on users.account_type_id = account_type.account_type_id WHERE users.email_verified is not null and account_type.account_type_id <> 'curator'";
+                    $total_rows_query = "SELECT COUNT(*) FROM users left join account_type on users.account_type_id = account_type.account_type_id WHERE users.email_verified is not null and account_type.type_name <> 'curator'";
                     $total_rows_result = pg_query($connection, $total_rows_query);
                     $total_rows = pg_fetch_row($total_rows_result)[0];
 
