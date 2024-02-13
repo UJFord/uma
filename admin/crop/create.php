@@ -59,7 +59,6 @@
 
 				<!-- main form -->
 				<div class="form-control p-3 mt-3">
-
 					<!-- general information -->
 					<h3 class="fw-bolder">General Info <span class="fs-5 fw-normal">(Required)</span></h3>
 					<div class="row">
@@ -180,7 +179,7 @@
 							<!-- Province -->
 							<label for="province">Province</label>
 							<select id="province" name="province_name" class="form-select mb-2">
-								<option value="sarangani" selected>None</option>
+								<option value="none" selected>None</option>
 								<option value="sarangani">Davao Del Norte</option>
 								<option value="davao">Davao</option>
 								<option value="south_cotabato">South Cotabato</option>
@@ -190,12 +189,12 @@
 						<div class="col-3">
 							<!-- Longtitude -->
 							<label for="longtitude">Longtitude</label>
-							<input id="longtitude" type="text" name="longtitude" placeholder="Enter Longtitude" class="form-control mb-2">
+							<input id="longtitude" type="number" name="longtitude" placeholder="Enter Longtitude" class="form-control mb-2">
 						</div>
 						<div class="col-2">
 							<!-- Latitude -->
 							<label for="latitude">Latitude</label>
-							<input id="latitude" type="text" name="latitude" placeholder="Enter Latitude" class="form-control">
+							<input id="latitude" type="number" name="latitude" placeholder="Enter Latitude" class="form-control">
 						</div>
 					</div>
 
