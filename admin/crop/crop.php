@@ -339,13 +339,11 @@ require('../sidebar/side.php');
 								<label class="mt-2" for="tech-desc">Planting Techniques</label>
 								<div class="row">
 									<div class="col">
-										<div class="border rounded p-2">
-											<?php if (!empty(trim($planting_techniques)) && trim($planting_techniques) !== $emptyValue) : ?>
-												<textarea id="tech-desc" name="planting_techniques" class="txtarea form-control w-100 h-100" disabled><?php echo $planting_techniques; ?></textarea>
-											<?php else : ?>
-												<textarea id="tech-desc" name="planting_techniques" class="txtarea form-control w-100 h-100" disabled placeholder="Empty"></textarea>
-											<?php endif; ?>
-										</div>
+										<?php if (!empty(trim($planting_techniques)) && trim($planting_techniques) !== $emptyValue) : ?>
+											<textarea id="tech-desc" name="planting_techniques" class="txtarea form-control w-100 h-100" disabled><?php echo $planting_techniques; ?></textarea>
+										<?php else : ?>
+											<textarea id="tech-desc" name="planting_techniques" class="txtarea form-control w-100 h-100" disabled placeholder="Empty"></textarea>
+										<?php endif; ?>
 									</div>
 								</div>
 
@@ -354,13 +352,11 @@ require('../sidebar/side.php');
 								<div class="row">
 									<div class="col">
 										<!-- Descrition -->
-										<div class="border rounded p-2">
-											<?php if (!empty(trim($cultural_and_spiritual_significance)) && trim($cultural_and_spiritual_significance) !== $emptyValue) : ?>
-												<textarea id="tech-desc" name="cultural_and_spiritual_significance" class="txtarea form-control w-100 h-100" disabled><?php echo $cultural_and_spiritual_significance; ?></textarea>
-											<?php else : ?>
-												<textarea id="tech-desc" name="cultural_and_spiritual_significance" class="txtarea form-control w-100 h-100" disabled placeholder="Empty"></textarea>
-											<?php endif; ?>
-										</div>
+										<?php if (!empty(trim($cultural_and_spiritual_significance)) && trim($cultural_and_spiritual_significance) !== $emptyValue) : ?>
+											<textarea id="tech-desc" name="cultural_and_spiritual_significance" class="txtarea form-control w-100 h-100" disabled><?php echo $cultural_and_spiritual_significance; ?></textarea>
+										<?php else : ?>
+											<textarea id="tech-desc" name="cultural_and_spiritual_significance" class="txtarea form-control w-100 h-100" disabled placeholder="Empty"></textarea>
+										<?php endif; ?>
 									</div>
 								</div>
 
@@ -368,13 +364,11 @@ require('../sidebar/side.php');
 								<label class="mt-2" for="role-desc">Role in Maintaining Upland Ecosystems</label>
 								<div class="row">
 									<div class="col">
-										<div class="border rounded p-2">
-											<?php if (!empty(trim($role_in_maintaining_upland_ecosystem)) && trim($role_in_maintaining_upland_ecosystem) !== $emptyValue) : ?>
-												<textarea id="role-desc" name="role_in_maintaining_upland_ecosystem" class="txtarea form-control w-100 h-100" disabled><?php echo $role_in_maintaining_upland_ecosystem; ?></textarea>
-											<?php else : ?>
-												<textarea id="role-desc" name="role_in_maintaining_upland_ecosystem" class="txtarea form-control w-100 h-100" disabled placeholder="Empty"></textarea>
-											<?php endif; ?>
-										</div>
+										<?php if (!empty(trim($role_in_maintaining_upland_ecosystem)) && trim($role_in_maintaining_upland_ecosystem) !== $emptyValue) : ?>
+											<textarea id="role-desc" name="role_in_maintaining_upland_ecosystem" class="txtarea form-control w-100 h-100" disabled><?php echo $role_in_maintaining_upland_ecosystem; ?></textarea>
+										<?php else : ?>
+											<textarea id="role-desc" name="role_in_maintaining_upland_ecosystem" class="txtarea form-control w-100 h-100" disabled placeholder="Empty"></textarea>
+										<?php endif; ?>
 									</div>
 								</div>
 
@@ -382,13 +376,11 @@ require('../sidebar/side.php');
 								<label class="mt-2" for="importance-desc">Cultural Importance and Traditional Knowledge</label>
 								<div class="row">
 									<div class="col">
-										<div class="border rounded p-2">
-											<?php if (!empty(trim($cultural_importance_and_traditional_knowledge)) && trim($cultural_importance_and_traditional_knowledge) !== $emptyValue) : ?>
-												<textarea id="importance-desc" name="cultural_importance_and_traditional_knowledge" class="txtarea form-control w-100 h-100" disabled><?php echo $cultural_importance_and_traditional_knowledge; ?></textarea>
-											<?php else : ?>
-												<textarea id="importance-desc" name="cultural_importance_and_traditional_knowledge" class="txtarea form-control w-100 h-100" disabled placeholder="Empty"></textarea>
-											<?php endif; ?>
-										</div>
+										<?php if (!empty(trim($cultural_importance_and_traditional_knowledge)) && trim($cultural_importance_and_traditional_knowledge) !== $emptyValue) : ?>
+											<textarea id="importance-desc" name="cultural_importance_and_traditional_knowledge" class="txtarea form-control w-100 h-100" disabled><?php echo $cultural_importance_and_traditional_knowledge; ?></textarea>
+										<?php else : ?>
+											<textarea id="importance-desc" name="cultural_importance_and_traditional_knowledge" class="txtarea form-control w-100 h-100" disabled placeholder="Empty"></textarea>
+										<?php endif; ?>
 									</div>
 								</div>
 
@@ -397,14 +389,11 @@ require('../sidebar/side.php');
 								<div class="row">
 									<div class="col">
 										<!-- Descrition -->
-										<!-- <textarea name="" id="feat-desc" class="txtarea form-control" rows="2"></textarea> -->
-										<div class="border rounded p-2">
-											<?php if (!empty(trim($unique_features)) && trim($unique_features) !== $emptyValue) : ?>
-												<textarea id="feat-desc" name="unique_features" class="txtarea form-control w-100 h-100" disabled><?php echo $unique_features; ?></textarea>
-											<?php else : ?>
-												<textarea id="feat-desc" name="unique_features" class="txtarea form-control w-100 h-100" disabled placeholder="Empty"></textarea>
-											<?php endif; ?>
-										</div>
+										<?php if (!empty(trim($unique_features)) && trim($unique_features) !== $emptyValue) : ?>
+											<textarea id="feat-desc" name="unique_features" class="txtarea form-control w-100 h-100" disabled><?php echo $unique_features; ?></textarea>
+										<?php else : ?>
+											<textarea id="feat-desc" name="unique_features" class="txtarea form-control w-100 h-100" disabled placeholder="Empty"></textarea>
+										<?php endif; ?>
 									</div>
 								</div>
 
@@ -412,13 +401,11 @@ require('../sidebar/side.php');
 								<label class="mt-2" for="use-desc">Cultural Use</label>
 								<div class="row">
 									<div class="col">
-										<div class="border rounded p-2">
-											<?php if (!empty(trim($cultural_use)) && trim($cultural_use) !== $emptyValue) : ?>
-												<textarea id="use-desc" name="cultural_use" class="txtarea form-control w-100 h-100" disabled><?php echo $cultural_use; ?></textarea>
-											<?php else : ?>
-												<textarea id="use-desc" name="cultural_use" class="txtarea form-control w-100 h-100" disabled placeholder="Empty"></textarea>
-											<?php endif; ?>
-										</div>
+										<?php if (!empty(trim($cultural_use)) && trim($cultural_use) !== $emptyValue) : ?>
+											<textarea id="use-desc" name="cultural_use" class="txtarea form-control w-100 h-100" disabled><?php echo $cultural_use; ?></textarea>
+										<?php else : ?>
+											<textarea id="use-desc" name="cultural_use" class="txtarea form-control w-100 h-100" disabled placeholder="Empty"></textarea>
+										<?php endif; ?>
 									</div>
 								</div>
 
@@ -427,13 +414,11 @@ require('../sidebar/side.php');
 								<div class="row">
 									<div class="col">
 										<!-- Descrition -->
-										<div class="border rounded p-2">
-											<?php if (!empty(trim($associated_vegetation)) && trim($associated_vegetation) !== $emptyValue) : ?>
-												<textarea id="veg-desc" name="associated_vegetation" class="txtarea form-control w-100 h-100" disabled><?php echo $associated_vegetation; ?></textarea>
-											<?php else : ?>
-												<textarea id="veg-desc" name="associated_vegetation" class="txtarea form-control w-100 h-100" disabled placeholder="Empty"></textarea>
-											<?php endif; ?>
-										</div>
+										<?php if (!empty(trim($associated_vegetation)) && trim($associated_vegetation) !== $emptyValue) : ?>
+											<textarea id="veg-desc" name="associated_vegetation" class="txtarea form-control w-100 h-100" disabled><?php echo $associated_vegetation; ?></textarea>
+										<?php else : ?>
+											<textarea id="veg-desc" name="associated_vegetation" class="txtarea form-control w-100 h-100" disabled placeholder="Empty"></textarea>
+										<?php endif; ?>
 									</div>
 								</div>
 
@@ -442,14 +427,11 @@ require('../sidebar/side.php');
 								<div class="row">
 									<div class="col">
 										<!-- Descrition -->
-										<!-- <textarea name="" id="threat-desc" class="txtarea form-control" rows="2"></textarea> -->
-										<div class="border rounded p-2">
-											<?php if (!empty(trim($threats)) && trim($threats) !== $emptyValue) : ?>
-												<textarea id="threat-desc" name="threats" class="txtarea form-control w-100 h-100" disabled><?php echo $threats; ?></textarea>
-											<?php else : ?>
-												<textarea id="threat-desc" name="threats" class="txtarea form-control w-100 h-100" disabled placeholder="Empty"></textarea>
-											<?php endif; ?>
-										</div>
+										<?php if (!empty(trim($threats)) && trim($threats) !== $emptyValue) : ?>
+											<textarea id="threat-desc" name="threats" class="txtarea form-control w-100 h-100" disabled><?php echo $threats; ?></textarea>
+										<?php else : ?>
+											<textarea id="threat-desc" name="threats" class="txtarea form-control w-100 h-100" disabled placeholder="Empty"></textarea>
+										<?php endif; ?>
 									</div>
 								</div>
 
