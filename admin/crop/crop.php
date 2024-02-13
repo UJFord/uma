@@ -246,22 +246,38 @@ require('../sidebar/side.php');
 										<div class="col-2">
 											<!-- taste -->
 											<label for="taste">Taste</label>
-											<input id="taste" name="taste" type="text" value="<?= $taste; ?>" class="form-control mb-4" disabled>
+											<?php if (!empty(trim($taste)) && trim($taste) !== $emptyValue) : ?>
+												<input id="taste" name="taste" class="txtarea form-control" value="<?= $taste; ?>" disabled></input>
+											<?php else : ?>
+												<input id="taste" name="taste" class="txtarea form-control" placeholder="Empty"></input>
+											<?php endif; ?>
 										</div>
 										<div class="col-2">
 											<!-- aroma -->
 											<label for="aroma">Aroma</label>
-											<input id="aroma" name="aroma" type="text" value="<?= $aroma; ?>" class="form-control mb-4" disabled>
+											<?php if (!empty(trim($aroma)) && trim($aroma) !== $emptyValue) : ?>
+												<input id="aroma" name="aroma" class="txtarea form-control" value="<?= $aroma; ?>" disabled></input>
+											<?php else : ?>
+												<input id="aroma" name="aroma" class="txtarea form-control" disabled placeholder="Empty"></input>
+											<?php endif; ?>
 										</div>
 										<div class="col-2">
 											<!-- maturation -->
 											<label for="matur">Maturation</label>
-											<input id="matur" name="maturation" type="text" value="<?= $maturation; ?>" class="form-control mb-4" disabled>
+											<?php if (!empty(trim($maturation)) && trim($maturation) !== $emptyValue) : ?>
+												<input id="matur" name="maturation" class="txtarea form-control" value="<?= $maturation; ?>" disabled></input>
+											<?php else : ?>
+												<input id="matur" name="maturation" class="txtarea form-control" disabled placeholder="Empty"></input>
+											<?php endif; ?>
 										</div>
 										<div class="col">
 											<!-- disease resistance -->
 											<label for="resist">Pest and Disease Resistance</label>
-											<input id="resist" name="pest_and_disease_resistance" type="text" value="<?= $pest_and_disease_resistance; ?>" class="form-control" disabled>
+											<?php if (!empty(trim($pest_and_disease_resistance)) && trim($pest_and_disease_resistance) !== $emptyValue) : ?>
+												<input id="resist" name="pest_and_disease_resistance" class="txtarea form-control" value="<?= $pest_and_disease_resistance; ?>" disabled></input>
+											<?php else : ?>
+												<input id="resist" name="pest_and_disease_resistance" class="txtarea form-control" disabled placeholder="Empty"></input>
+											<?php endif; ?>
 										</div>
 									<?php
 									}
@@ -322,12 +338,20 @@ require('../sidebar/side.php');
 												<div class="col-2">
 													<!-- Latitude -->
 													<label for="latitude">Latitude</label>
-													<input id="latitude" name="latitude" type="text" value="<?= $latitude; ?>" class="form-control mb-2" disabled>
+													<?php if (!empty(trim($latitude)) && trim($latitude) !== $emptyValue) : ?>
+														<input id="latitude" name="latitude" class="txtarea form-control" value="<?= $latitude; ?>" disabled></input>
+													<?php else : ?>
+														<input id="latitude" name="latitude" class="txtarea form-control" disabled placeholder="Empty"></input>
+													<?php endif; ?>
 												</div>
 												<div class="col-2">
 													<!-- Longtitude -->
 													<label for="longtitude">Longtitude</label>
-													<input id="longtitude" name="longtitude" type="text" value="<?= $longtitude; ?>" class="form-control" disabled>
+													<?php if (!empty(trim($longtitude)) && trim($longtitude) !== $emptyValue) : ?>
+														<input id="longtitude" name="longtitude" class="txtarea form-control" value="<?= $longtitude; ?>" disabled></input>
+													<?php else : ?>
+														<input id="longtitude" name="longtitude" class="txtarea form-control" disabled placeholder="Empty"></input>
+													<?php endif; ?>
 												</div>
 											<?php
 										}
