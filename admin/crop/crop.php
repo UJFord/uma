@@ -26,12 +26,12 @@ require('../sidebar/side.php');
 	<!-- script fort access level -->
 	<script src="../../js/admin/access.js" defer></script>
 
-	<!-- Check access when the page loads -->
+	<!-- Check access when the page loads
 	<script>
 		// Assume you have the userRole variable defined somewhere in your PHP code
 		var userRole = "<?php echo isset($_SESSION['rank']) ? $_SESSION['rank'] : ''; ?>";
 		checkAccess(userRole);
-	</script>
+	</script> -->
 </head>
 
 <body class="overflow-x-hidden">
@@ -130,7 +130,8 @@ require('../sidebar/side.php');
 								<!-- image -->
 								<div class="col-4">
 									<label for="image-input">Images <span class="text-danger fw-bold">*</span></label>
-									<input type="file" name="crop_image[]" class="form-control" id="image-input" multiple="multiple" accept="image/*" hidden>								</div>
+									<input type="file" name="crop_image[]" class="form-control" id="image-input" multiple="multiple" accept="image/*" hidden>
+								</div>
 								<div class="col-3">
 									<!-- Input Date -->
 									<label for="input_date">Input Date</label>
@@ -138,6 +139,7 @@ require('../sidebar/side.php');
 								</div>
 							</div>
 
+							<!-- general information -->
 							<div class="row mb-4">
 								<div class="col-4">
 									<!-- local name -->
@@ -207,10 +209,14 @@ require('../sidebar/side.php');
 								</div>
 							</div>
 
+							<!-- Description -->
 							<div class="col">
-								<!-- Description -->
 								<label for="gen-desc">Description <span class="fw-light">(Optional)</span></label>
-								<textarea name="crop_description" value="<?= $crop_description ?>" id="gen-desc" class="txtarea form-control" rows="3" disabled <?php echo ($crop_description !== $emptyValue) ? '>' . $crop_description : 'placeholder="Empty">'; ?></textarea>
+								<?php if (!empty(trim($crop_description)) && trim($crop_description) !== $emptyValue) : ?>
+									<textarea id="gen-desc" name="crop_description" class="txtarea form-control" rows="3" disabled><?php echo $crop_description; ?></textarea>
+								<?php else : ?>
+									<textarea id="gen-desc" name="crop_description" class="txtarea form-control" rows="3" disabled placeholder="Empty"></textarea>
+								<?php endif; ?>
 							</div>
 
 							<!-- More -->
@@ -257,9 +263,9 @@ require('../sidebar/side.php');
 											<label for="resist">Pest and Disease Resistance</label>
 											<input id="resist" name="pest_and_disease_resistance" type="text" value="<?= $pest_and_disease_resistance; ?>" class="form-control" disabled>
 										</div>
-										<?php
+									<?php
 									}
-										?>								
+									?>
 								</div>
 
 								<!-- Location -->
@@ -332,23 +338,28 @@ require('../sidebar/side.php');
 								<!-- Planting Techniques -->
 								<label class="mt-2" for="tech-desc">Planting Techniques</label>
 								<div class="row">
-								<div class="col">
-									<!-- Descrition -->
-									<!-- <textarea name="" id="tech-desc" class="txtarea form-control" rows="2"></textarea> -->
-								<div class="border rounded p-2">
-									<textarea id="tech-desc" name="planting_techniques" class="txtarea form-control w-100 h-100" disabled <?php echo ($planting_techniques !== $emptyValue) ? '>' . $planting_techniques : 'placeholder="Empty">'; ?></textarea>
+									<div class="col">
+										<div class="border rounded p-2">
+											<?php if (!empty(trim($planting_techniques)) && trim($planting_techniques) !== $emptyValue) : ?>
+												<textarea id="tech-desc" name="planting_techniques" class="txtarea form-control w-100 h-100" disabled><?php echo $planting_techniques; ?></textarea>
+											<?php else : ?>
+												<textarea id="tech-desc" name="planting_techniques" class="txtarea form-control w-100 h-100" disabled placeholder="Empty"></textarea>
+											<?php endif; ?>
+										</div>
+									</div>
 								</div>
-							</div>
-						</div>
 
-						<!-- Cultural and Spiritual Significance -->
-						<label class="mt-2" for="signif-desc">Cultural and Spiritual Significance</label>
-						<div class="row">
-							<div class="col">
-								<!-- Descrition -->
-								<!-- <textarea name="" id="signif-desc" class="txtarea form-control" rows="2"></textarea> -->
-									<div class="border rounded p-2">
-										<textarea id="signif-desc" name="cultural_and_spiritual_significance" class="txtarea form-control w-100 h-100" disabled <?php echo ($cultural_and_spiritual_significance !== $emptyValue) ? '>' . $cultural_and_spiritual_significance : 'placeholder="Empty">'; ?></textarea>
+								<!-- Cultural and Spiritual Significance -->
+								<label class="mt-2" for="signif-desc">Cultural and Spiritual Significance</label>
+								<div class="row">
+									<div class="col">
+										<!-- Descrition -->
+										<div class="border rounded p-2">
+											<?php if (!empty(trim($cultural_and_spiritual_significance)) && trim($cultural_and_spiritual_significance) !== $emptyValue) : ?>
+												<textarea id="tech-desc" name="cultural_and_spiritual_significance" class="txtarea form-control w-100 h-100" disabled><?php echo $cultural_and_spiritual_significance; ?></textarea>
+											<?php else : ?>
+												<textarea id="tech-desc" name="cultural_and_spiritual_significance" class="txtarea form-control w-100 h-100" disabled placeholder="Empty"></textarea>
+											<?php endif; ?>
 										</div>
 									</div>
 								</div>
@@ -357,10 +368,12 @@ require('../sidebar/side.php');
 								<label class="mt-2" for="role-desc">Role in Maintaining Upland Ecosystems</label>
 								<div class="row">
 									<div class="col">
-										<!-- Descrition -->
-										<!-- <textarea name="" id="role-desc" class="txtarea form-control" rows="2"></textarea> -->
 										<div class="border rounded p-2">
-											<textarea id="role-desc" name="role_in_maintaining_upland_ecosystem" class="txtarea form-control w-100 h-100" disabled <?php echo ($role_in_maintaining_upland_ecosystem !== $emptyValue) ? '>' . $role_in_maintaining_upland_ecosystem : 'placeholder="Empty">'; ?></textarea>
+											<?php if (!empty(trim($role_in_maintaining_upland_ecosystem)) && trim($role_in_maintaining_upland_ecosystem) !== $emptyValue) : ?>
+												<textarea id="role-desc" name="role_in_maintaining_upland_ecosystem" class="txtarea form-control w-100 h-100" disabled><?php echo $role_in_maintaining_upland_ecosystem; ?></textarea>
+											<?php else : ?>
+												<textarea id="role-desc" name="role_in_maintaining_upland_ecosystem" class="txtarea form-control w-100 h-100" disabled placeholder="Empty"></textarea>
+											<?php endif; ?>
 										</div>
 									</div>
 								</div>
@@ -369,10 +382,12 @@ require('../sidebar/side.php');
 								<label class="mt-2" for="importance-desc">Cultural Importance and Traditional Knowledge</label>
 								<div class="row">
 									<div class="col">
-										<!-- Descrition -->
-										<!-- <textarea name="" id="importance-desc" class="txtarea form-control" rows="2"></textarea> -->
-											<div class="border rounded p-2">
-												<textarea id="importance-desc" name="cultural_importance_and_traditional_knowledge" class="txtarea form-control w-100 h-100" disabled <?php echo ($cultural_importance_and_traditional_knowledge !== $emptyValue) ? '>' . $cultural_importance_and_traditional_knowledge : 'placeholder="Empty">'; ?></textarea>
+										<div class="border rounded p-2">
+											<?php if (!empty(trim($cultural_importance_and_traditional_knowledge)) && trim($cultural_importance_and_traditional_knowledge) !== $emptyValue) : ?>
+												<textarea id="importance-desc" name="cultural_importance_and_traditional_knowledge" class="txtarea form-control w-100 h-100" disabled><?php echo $cultural_importance_and_traditional_knowledge; ?></textarea>
+											<?php else : ?>
+												<textarea id="importance-desc" name="cultural_importance_and_traditional_knowledge" class="txtarea form-control w-100 h-100" disabled placeholder="Empty"></textarea>
+											<?php endif; ?>
 										</div>
 									</div>
 								</div>
@@ -383,8 +398,12 @@ require('../sidebar/side.php');
 									<div class="col">
 										<!-- Descrition -->
 										<!-- <textarea name="" id="feat-desc" class="txtarea form-control" rows="2"></textarea> -->
-												<div class="border rounded p-2">
-													<textarea id="feat-desc" name="unique_features" class="txtarea form-control w-100 h-100" disabled <?php echo ($unique_features !== $emptyValue) ? '>' . $unique_features : 'placeholder="Empty">'; ?></textarea>
+										<div class="border rounded p-2">
+											<?php if (!empty(trim($unique_features)) && trim($unique_features) !== $emptyValue) : ?>
+												<textarea id="feat-desc" name="unique_features" class="txtarea form-control w-100 h-100" disabled><?php echo $unique_features; ?></textarea>
+											<?php else : ?>
+												<textarea id="feat-desc" name="unique_features" class="txtarea form-control w-100 h-100" disabled placeholder="Empty"></textarea>
+											<?php endif; ?>
 										</div>
 									</div>
 								</div>
@@ -393,10 +412,12 @@ require('../sidebar/side.php');
 								<label class="mt-2" for="use-desc">Cultural Use</label>
 								<div class="row">
 									<div class="col">
-										<!-- Descrition -->
-										<!-- <textarea name="" id="use-desc" class="txtarea form-control" rows="2"></textarea> -->
-													<div class="border rounded p-2">
-														<textarea id="use-desc" name="cultural_use" class="txtarea form-control w-100 h-100" disabled <?php echo ($cultural_use !== $emptyValue) ? '>' . $cultural_use : 'placeholder="Empty">'; ?></textarea>
+										<div class="border rounded p-2">
+											<?php if (!empty(trim($cultural_use)) && trim($cultural_use) !== $emptyValue) : ?>
+												<textarea id="use-desc" name="cultural_use" class="txtarea form-control w-100 h-100" disabled><?php echo $cultural_use; ?></textarea>
+											<?php else : ?>
+												<textarea id="use-desc" name="cultural_use" class="txtarea form-control w-100 h-100" disabled placeholder="Empty"></textarea>
+											<?php endif; ?>
 										</div>
 									</div>
 								</div>
@@ -406,9 +427,12 @@ require('../sidebar/side.php');
 								<div class="row">
 									<div class="col">
 										<!-- Descrition -->
-										<!-- <textarea name="" id="veg-desc" class="txtarea form-control" rows="2"></textarea> -->
-														<div class="border rounded p-2">
-															<textarea id="veg-desc" name="associated_vegetation" class="txtarea form-control w-100 h-100" disabled <?php echo ($associated_vegetation !== $emptyValue) ? '>' . $associated_vegetation : 'placeholder="Empty">'; ?></textarea>
+										<div class="border rounded p-2">
+											<?php if (!empty(trim($associated_vegetation)) && trim($associated_vegetation) !== $emptyValue) : ?>
+												<textarea id="veg-desc" name="associated_vegetation" class="txtarea form-control w-100 h-100" disabled><?php echo $associated_vegetation; ?></textarea>
+											<?php else : ?>
+												<textarea id="veg-desc" name="associated_vegetation" class="txtarea form-control w-100 h-100" disabled placeholder="Empty"></textarea>
+											<?php endif; ?>
 										</div>
 									</div>
 								</div>
@@ -419,139 +443,149 @@ require('../sidebar/side.php');
 									<div class="col">
 										<!-- Descrition -->
 										<!-- <textarea name="" id="threat-desc" class="txtarea form-control" rows="2"></textarea> -->
-															<div class="border rounded p-2">
-																<textarea id="threat-desc" name="threats" class="txtarea form-control w-100 h-100" disabled <?php echo ($threats !== $emptyValue) ? '>' . $threats : 'placeholder="Empty">'; ?></textarea>
+										<div class="border rounded p-2">
+											<?php if (!empty(trim($threats)) && trim($threats) !== $emptyValue) : ?>
+												<textarea id="threat-desc" name="threats" class="txtarea form-control w-100 h-100" disabled><?php echo $threats; ?></textarea>
+											<?php else : ?>
+												<textarea id="threat-desc" name="threats" class="txtarea form-control w-100 h-100" disabled placeholder="Empty"></textarea>
+											<?php endif; ?>
 										</div>
 									</div>
 								</div>
 
-						<!-- Associated Farming Practice -->
-						<div class="">
-							<h3 class="mt-4">Associated Farming Practice</h5>
-								<?php
-								// PHP code to display available crop farming practice from the database
-								// Query to select all available crop farming practice in the database
-								$query4 = "SELECT crop_farming_practice.*, farming_practice.* FROM crop_farming_practice left join farming_practice on crop_farming_practice.farming_practice_id = farming_practice.farming_practice_id WHERE farming_practice.farming_practice_id='$farming_practice_id'";
+								<!-- Associated Farming Practice -->
+								<div class="">
+									<h3 class="mt-4">Associated Farming Practice</h5>
+										<?php
+										// PHP code to display available crop farming practice from the database
+										// Query to select all available crop farming practice in the database
+										$query4 = "SELECT crop_farming_practice.*, farming_practice.* FROM crop_farming_practice left join farming_practice on crop_farming_practice.farming_practice_id = farming_practice.farming_practice_id WHERE farming_practice.farming_practice_id='$farming_practice_id'";
 
-								// Executing query
-								$query_run4 = pg_query($connection, $query4);
+										// Executing query
+										$query_run4 = pg_query($connection, $query4);
 
-								// If count is greater than 0, we have farming_practice; else, we do not have farming_practice
-								if (pg_num_rows($query_run4) > 0) {
-									$farming_practice = pg_fetch_assoc($query_run4);
+										// If count is greater than 0, we have farming_practice; else, we do not have farming_practice
+										if (pg_num_rows($query_run4) > 0) {
+											$farming_practice = pg_fetch_assoc($query_run4);
 
-									// Define default values for each field if they are $emptyValue
-									$farming_practice_type = isset($farming_practice['farming_practice_type']) ? $farming_practice['farming_practice_type'] : $emptyValue;
-									$farming_practice_name = isset($farming_practice['farming_practice_name']) ? $farming_practice['farming_practice_name'] : $emptyValue;
-									$farming_practice_description = isset($farming_practice['farming_practice_description']) ? $farming_practice['farming_practice_description'] : $emptyValue;
-								?>
-									<div class="col">
-										<!-- Other Info Type -->
-										<label for="farming_practice_type">Type</label>
-										<input id="farming_practice_type" type="text" name="farming_practice_type" value="<?= $farming_practice_type; ?>" class="form-control mb-2" disabled>
-									</div>
-									<div class="col">
-										<!-- Other Info Name -->
-										<label for="farming_practice_name">Name</label>
-										<input id="farming_practice_name" type="text" name="farming_practice_name" value="<?= $farming_practice_name; ?>" class="form-control mb-2" disabled>
-									</div>
-									<div class="col">
-										<!-- Other Info Description -->
-										<label for="farming_practice-desc">Description <span class="text-danger"></span></label>
-										<textarea name="farming_practice_description" id="farming_practice-desc" class="txtarea form-control" rows="3" disabled <?php echo ($farming_practice_description !== $emptyValue) ? '>' . $farming_practice_description : 'placeholder="Empty">'; ?></textarea>
-															</div>
-															<!-- Other Information -->
-															<div class="other_info">
-																<h3 class="mt-4 d-flex align-items-center" id="otherInfoTitle">Other Info</h3>
-																<?php
-																// PHP code to display available crop other info from the database
-																// Query to select all available crop other info in the database
-																$query4 = "SELECT crop_other_info.*, other_info.* FROM crop_other_info left join other_info on crop_other_info.other_info_id = other_info.other_info_id WHERE other_info.other_info_id='$other_info_id'";
+											// Define default values for each field if they are $emptyValue
+											$farming_practice_type = isset($farming_practice['farming_practice_type']) ? $farming_practice['farming_practice_type'] : $emptyValue;
+											$farming_practice_name = isset($farming_practice['farming_practice_name']) ? $farming_practice['farming_practice_name'] : $emptyValue;
+											$farming_practice_description = isset($farming_practice['farming_practice_description']) ? $farming_practice['farming_practice_description'] : $emptyValue;
+										?>
+											<div class="col">
+												<!-- Other Info Type -->
+												<label for="farming_practice_type">Type</label>
+												<input id="farming_practice_type" type="text" name="farming_practice_type" value="<?= $farming_practice_type; ?>" class="form-control mb-2" disabled>
+											</div>
+											<div class="col">
+												<!-- Other Info Name -->
+												<label for="farming_practice_name">Name</label>
+												<input id="farming_practice_name" type="text" name="farming_practice_name" value="<?= $farming_practice_name; ?>" class="form-control mb-2" disabled>
+											</div>
+											<div class="col">
+												<!-- Other Info Description -->
+												<label for="farming_practice-desc">Description <span class="text-danger"></span></label>
+												<?php if (!empty(trim($farming_practice_description)) && trim($farming_practice_description) !== $emptyValue) : ?>
+													<textarea id="farming_practice-desc" name="farming_practice_description" class="txtarea form-control" rows="3" disabled><?php echo $farming_practice_description; ?></textarea>
+												<?php else : ?>
+													<textarea id="farming_practice-desc" name="farming_practice_description" class="txtarea form-control" rows="3" disabled placeholder="Empty"></textarea>
+												<?php endif; ?>
+											</div>
+											<!-- Other Information -->
+											<div class="other_info">
+												<h3 class="mt-4 d-flex align-items-center" id="otherInfoTitle">Other Info</h3>
+												<?php
+												// PHP code to display available crop other info from the database
+												// Query to select all available crop other info in the database
+												$query4 = "SELECT crop_other_info.*, other_info.* FROM crop_other_info left join other_info on crop_other_info.other_info_id = other_info.other_info_id WHERE other_info.other_info_id='$other_info_id'";
 
-																// Executing query
-																$query_run4 = pg_query($connection, $query4);
+												// Executing query
+												$query_run4 = pg_query($connection, $query4);
 
-																// If count is greater than 0, we have other_info; else, we do not have other_info
-																if (pg_num_rows($query_run4) > 0) {
-																	$other_info = pg_fetch_assoc($query_run4);
+												// If count is greater than 0, we have other_info; else, we do not have other_info
+												if (pg_num_rows($query_run4) > 0) {
+													$other_info = pg_fetch_assoc($query_run4);
 
-																	// Define default values for each field if they are $emptyValue
-																	$other_info_type = isset($other_info['other_info_type']) ? $other_info['other_info_type'] : $emptyValue;
-																	$other_info_name = isset($other_info['other_info_name']) ? $other_info['other_info_name'] : $emptyValue;
-																	$other_info_description = isset($other_info['other_info_description']) ? $other_info['other_info_description'] : $emptyValue;
-																	$other_info_url = isset($other_info['other_info_url']) ? $other_info['other_info_url'] : $emptyValue;
+													// Define default values for each field if they are $emptyValue
+													$other_info_type = isset($other_info['other_info_type']) ? $other_info['other_info_type'] : $emptyValue;
+													$other_info_name = isset($other_info['other_info_name']) ? $other_info['other_info_name'] : $emptyValue;
+													$other_info_description = isset($other_info['other_info_description']) ? $other_info['other_info_description'] : $emptyValue;
+													$other_info_url = isset($other_info['other_info_url']) ? $other_info['other_info_url'] : $emptyValue;
 
-																?>
-																	<div class="col">
-																		<!-- Submitted By -->
-																		<label for="first_name">Submitted BY:</label>
-																		<input id="first_name" name="first_name" type="text" value="<?= $first_name; ?>" class="form-control mb-2 disabled-input">
-																	</div>
-																	<div class="col">
-																		<!-- Other Info Type -->
-																		<label for="other_info_type">Type</label>
-																		<input id="other_info_type" name="other_info_type" type="text" value="<?= $other_info_type; ?>" class="form-control mb-2" disabled>
-																	</div>
-																	<div class="col">
-																		<!-- Other Info Name -->
-																		<label for="other_info_name">Name</label>
-																		<input id="other_info_name" name="other_info_name" type="text" value="<?= $other_info_name; ?>" class="form-control mb-2" disabled>
-																	</div>
-																	<div class="col">
-																		<!-- Other Info Urls -->
-																		<label for="other_info_url">Links</label>
+												?>
+													<div class="col">
+														<!-- Submitted By -->
+														<label for="first_name">Submitted BY:</label>
+														<input id="first_name" name="first_name" type="text" value="<?= $first_name; ?>" class="form-control mb-2 disabled-input">
+													</div>
+													<div class="col">
+														<!-- Other Info Type -->
+														<label for="other_info_type">Type</label>
+														<input id="other_info_type" name="other_info_type" type="text" value="<?= $other_info_type; ?>" class="form-control mb-2" disabled>
+													</div>
+													<div class="col">
+														<!-- Other Info Name -->
+														<label for="other_info_name">Name</label>
+														<input id="other_info_name" name="other_info_name" type="text" value="<?= $other_info_name; ?>" class="form-control mb-2" disabled>
+													</div>
+													<div class="col">
+														<!-- Other Info Urls -->
+														<label for="other_info_url">Links</label>
 
-																		<?php if ($other_info_url != $emptyValue && $other_info_url != "") : ?>
-																			<?php
-																			// Check if the URL is absolute
-																			if (filter_var($other_info_url, FILTER_VALIDATE_URL) === false) {
-																				// If not, prepend "http://"
-																				$other_info_url = "http://" . $other_info_url;
-																			}
-																			?>
-																			<a id="other_info_link" href="<?= $other_info_url; ?>" target="_blank">
-																				<input id="other_info_url" name="other_info_url" type="text" value="<?= $other_info_url; ?>" class="form-control clickable" readonly>
-																			</a>
-																		<?php else : ?>
-																			<input id="other_info_url" name="other_info_url" type="text" placeholder="No Links" class="form-control clickable" readonly>
-																		<?php endif; ?>
-																	</div>
+														<?php if ($other_info_url != $emptyValue && $other_info_url != "") : ?>
+															<?php
+															// Check if the URL is absolute
+															if (filter_var($other_info_url, FILTER_VALIDATE_URL) === false) {
+																// If not, prepend "http://"
+																$other_info_url = "http://" . $other_info_url;
+															}
+															?>
+															<a id="other_info_link" href="<?= $other_info_url; ?>" target="_blank">
+																<input id="other_info_url" name="other_info_url" type="text" value="<?= $other_info_url; ?>" class="form-control clickable" readonly>
+															</a>
+														<?php else : ?>
+															<input id="other_info_url" name="other_info_url" type="text" placeholder="No Links" class="form-control clickable" readonly>
+														<?php endif; ?>
+													</div>
 
-																	<div class="col">
-																		<!-- Other Info Description -->
-																		<label for="other_info-desc">Description <span class="text-danger">*</span></label>
-																		<textarea name="other_info_description" id="other_info-desc" class="form-control" rows="3" disabled <?php echo ($other_info_description !== $emptyValue) ? '>' . $other_info_description : 'placeholder="Empty">'; ?></textarea>
-									</div>
-
-								<?php
-																}
-								?>
+													<div class="col">
+														<!-- Other Info Description -->
+														<label for="other_info-desc">Description <span class="text-danger">*</span></label>
+														<?php if (!empty(trim($other_info_description)) && trim($other_info_description) !== $emptyValue) : ?>
+															<textarea id="other_info-desc" name="other_info_description" class="txtarea form-control" rows="3" disabled><?php echo $other_info_description; ?></textarea>
+														<?php else : ?>
+															<textarea id="other_info-desc" name="other_info_description" class="txtarea form-control" rows="3" disabled placeholder="Empty"></textarea>
+														<?php endif; ?>
+													</div>
+												<?php
+												}
+												?>
+											</div>
+								</div>
+							<?php
+										}
+							?>
 						</div>
-	</div>
-<?php
-								}
-?>
-</div>
-
-<!-- editting buttons -->
-<?php
-					require('../edit-btn/edit-btn.php');
-?>
-</form>
-<?php
+						<!-- editting buttons -->
+						<?php
+						require('../edit-btn/edit-btn.php');
+						?>
+					</form>
+			<?php
 				}
 			}
-?>
-</section>
-</div>
-<!-- scipts -->
-<!-- custom -->
-<script src="../../js/admin/entry-edit.js"></script>
-<script src="../../js/admin/crop-image.js"></script>
-<!-- bootstrap -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
-<!-- font awesome -->
-<script src="https://kit.fontawesome.com/57e83eb6e4.js" crossorigin="anonymous"></script>
+			?>
+		</section>
+	</div>
+	<!-- scipts -->
+	<!-- custom -->
+	<script src="../../js/admin/entry-edit.js"></script>
+	<script src="../../js/admin/crop-image.js"></script>
+	<!-- bootstrap -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+	<!-- font awesome -->
+	<script src="https://kit.fontawesome.com/57e83eb6e4.js" crossorigin="anonymous"></script>
 </body>
 
 </html>
