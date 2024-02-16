@@ -2,7 +2,6 @@
 <?php
 session_start();
 require('../sidebar/side.php');
-include('../../login/login-check.php');
 ?>
 
 <!DOCTYPE html>
@@ -27,11 +26,11 @@ include('../../login/login-check.php');
 	<script src="../../js/admin/access.js" defer></script>
 
 	<!-- Check access when the page loads -->
-	<script>
+	<!-- <script>
 		// Assume you have the userRole variable defined somewhere in your PHP code
 		var userRole = "<?php echo isset($_SESSION['rank']) ? $_SESSION['rank'] : ''; ?>";
 		checkAccess(userRole);
-	</script>
+	</script> -->
 </head>
 
 <body class="overflow-x-hidden">
