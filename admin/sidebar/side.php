@@ -15,9 +15,13 @@ $atuser = strpos($current_page, '/uma/admin/users/list.php') === 0 ||
     strpos($current_page, '/uma/admin/users/user.php') === 0 ||
     strpos($current_page, '/uma/admin/users/create.php') === 0;
 
-// sites to make approval highlight
-$atapprove = strpos($current_page, '/uma/admin/approval/approval.php') === 0 ||
-    strpos($current_page, '/uma/admin/approval/approval.php') === 0;
+// sites to make approval crop highlight
+$atapprove_crop = strpos($current_page, '/uma/admin/approval-crop/approval.php') === 0 ||
+    strpos($current_page, '/uma/admin/approval-crop/view.php') === 0;
+
+// sites to make approval users highlight
+$atapprove_users = strpos($current_page, '/uma/admin/approval-users/approval.php') === 0 ||
+strpos($current_page, '/uma/admin/approval-users/view.php') === 0;
 ?>
 <!-- custom css -->
 
@@ -40,7 +44,7 @@ $atapprove = strpos($current_page, '/uma/admin/approval/approval.php') === 0 ||
 
         function load_unseen_notification(view = '') {
             $.ajax({
-                url: "/incognito-capstone/admin/sidebar/fetch.php",
+                url: "../sidebar/fetch.php",
                 method: "POST",
                 data: {
                     view: view
@@ -104,7 +108,7 @@ $atapprove = strpos($current_page, '/uma/admin/approval/approval.php') === 0 ||
             <!-- approval crops sidebar nav -->
             <?php if (isset($_SESSION['LOGGED_IN']) && $_SESSION['LOGGED_IN']) : ?>
                 <li class="admin-only curator-only">
-                    <a href="../approval-crop/approval.php" <?php echo ($atapprove)
+                    <a href="../approval-crop/approval.php" <?php echo ($atapprove_crop)
                                                                 ? 'class="nav-link text-dark fw-semibold rounded-start-pill active-nav"'
                                                                 : 'class="nav-link text-white"'; ?>>
                         <i class="fa-solid fa-check" style="width: 1.5rem;"></i>
@@ -116,8 +120,8 @@ $atapprove = strpos($current_page, '/uma/admin/approval/approval.php') === 0 ||
 
             <!-- approval users sidebar nav -->
             <?php if (isset($_SESSION['LOGGED_IN']) && $_SESSION['LOGGED_IN']) : ?>
-                <li class="admin-only curator-only">
-                    <a href="../approval-users/approval.php" <?php echo ($atapprove)
+                <li class="curator-only">
+                    <a href="../approval-users/approval.php" <?php echo ($atapprove_users)
                                                                     ? 'class="nav-link text-dark fw-semibold rounded-start-pill active-nav"'
                                                                     : 'class="nav-link text-white"'; ?>>
                         <i class="fa-solid fa-check" style="width: 1.5rem;"></i>

@@ -197,7 +197,7 @@ require('../sidebar/side.php');
 											// Display each image
 											foreach ($imageNames as $imageName) {
 										?>
-												<img id="current-crop-image" src="<?php echo 'http://localhost/incognito-capstone/admin/'; ?>img/crop/<?php echo trim($imageName); ?>" class="m-2 img-thumbnail" style="height: 200px;">
+												<img id="current-crop-image" src="<?php echo '../img/crop/'; ?><?php echo trim($imageName); ?>" class="m-2 img-thumbnail" style="height: 200px;">
 										<?php
 											}
 										} else {
@@ -249,7 +249,7 @@ require('../sidebar/side.php');
 											<?php if (!empty(trim($taste)) && trim($taste) !== $emptyValue) : ?>
 												<input id="taste" name="taste" class="txtarea form-control" value="<?= $taste; ?>" disabled></input>
 											<?php else : ?>
-												<input id="taste" name="taste" class="txtarea form-control" placeholder="Empty"></input>
+												<input id="taste" name="taste" class="txtarea form-control" placeholder="Empty" disabled></input>
 											<?php endif; ?>
 										</div>
 										<div class="col-2">
@@ -309,18 +309,6 @@ require('../sidebar/side.php');
 										?>
 											<div class="row">
 												<div class="col-3">
-													<!-- Province -->
-													<label for="province">Province</label>
-													<select id="province" name="province_name" class="form-select mb-2" disabled>
-														<option value="<?= $province_name; ?>" <?php echo ($province_name === 'province_name') ? 'selected' : ''; ?>><?= $province_name; ?></option>
-														<option value="sarangani">None</option>
-														<option value="sarangani">Davao Del Norte</option>
-														<option value="davao">Davao</option>
-														<option value="south_cotabato">South Cotabato</option>
-														<option value="cotabato">Cotabato</option>
-													</select>
-												</div>
-												<div class="col-3">
 													<!-- MUnicipality Name -->
 													<label for="municipality">Municipality Name</label>
 													<select id="municipality" name="municipality_name" class="form-select mb-2" disabled>
@@ -333,6 +321,18 @@ require('../sidebar/side.php');
 														<option value="maitum">Maitum</option>
 														<option value="malapatan">Malapatan</option>
 														<option value="malungon">Malungon</option>
+													</select>
+												</div>
+												<div class="col-3">
+													<!-- Province -->
+													<label for="province">Province</label>
+													<select id="province" name="province_name" class="form-select mb-2" disabled>
+														<option value="<?= $province_name; ?>" <?php echo ($province_name === 'province_name') ? 'selected' : ''; ?>><?= $province_name; ?></option>
+														<option value="sarangani">None</option>
+														<option value="sarangani">Davao Del Norte</option>
+														<option value="davao">Davao</option>
+														<option value="south_cotabato">South Cotabato</option>
+														<option value="cotabato">Cotabato</option>
 													</select>
 												</div>
 												<div class="col-2">

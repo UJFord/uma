@@ -1,0 +1,17 @@
+PHP:
+  beautifiers:
+    - PHP-CS-Fixer
+    - PHP_CodeSniffer
+HTML:
+  beautifiers:
+    - Pretty Diff
+    - JS-Beautify
+CSS:
+  beautifiers:
+    - Prettier
+    - Pretty Diff
+    - JS-Beautify
+    - CSScomb
+HTML+ERB:
+  beautifiers:
+    - Pretty Diff
