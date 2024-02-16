@@ -52,7 +52,7 @@
 						</div>
 					</div>
 					<?php
-					include('../message.php');
+					include('../functions/message.php');
 
 					// Set the number of items to display per page
 					$items_per_page = 7;

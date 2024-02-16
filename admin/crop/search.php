@@ -79,7 +79,7 @@ require('../sidebar/side.php');
 				<!-- crop cards -->
 				<div id="crop-cards" class="row">
 					<?php
-					include('../message.php');
+					include('../functions/message.php');
 					// add entry button
 					require('../add/add.php');
 					?>

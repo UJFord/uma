@@ -50,7 +50,7 @@
 				<a href="list.php" class="link-offset-2"><i class="bi bi-chevron-left"></i>Go Back</a>
 
 				<?php
-				include('../message.php');
+				include('../functions/message.php');
 				?>
 				<div id="error-message"></div>
 				<input type="hidden" name="user_id" value="<?php if (isset($_SESSION['LOGGED_IN']) && $_SESSION['LOGGED_IN']) {

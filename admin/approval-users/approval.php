@@ -43,6 +43,8 @@
                         <h2 id="crops-title" class="fw-semibold">Approval Users</h2>
                     </div>
                     <?php
+                    include('../functions/message.php');
+
                     // Set the number of items to display per page
                     $items_per_page = 5;
 

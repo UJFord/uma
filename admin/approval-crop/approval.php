@@ -43,6 +43,10 @@
                         <h2 id="crops-title" class="fw-semibold">Approval Crops</h2>
                     </div>
 
+                    <?php
+					include('../functions/message.php');
+                    ?>
+
                     <h1 class="text-center  text-white bg-dark col-md-12">PENDING LIST</h1>
 
                     <table class="table table-bordered col-md-12">

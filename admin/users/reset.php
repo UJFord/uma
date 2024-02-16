@@ -57,7 +57,7 @@
                 <a href="user.php?user_id=<?= $user_id; ?>" class="link-offset-2"><i class="bi bi-chevron-left"></i>Go Back</a>
 
                 <?php
-                include('../message.php');
+                include('../functions/message.php');
                 ?>
 
                 <!-- main form -->

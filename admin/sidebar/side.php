@@ -2,8 +2,7 @@
 // get current page
 $current_page = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 require('../../html/navfoot/connection.php');
-require('../functions.php');
-require('../search.php');
+require('../functions/functions.php');
 
 // sites to make crop highlight
 $atcrop = strpos($current_page, '/uma/admin/crop/list.php') === 0 ||

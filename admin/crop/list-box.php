@@ -2,7 +2,7 @@
 <?php
 session_start();
 require('../sidebar/side.php');
-require('../search-box.php');
+// require('../search-box.php');
 // include('../login/login-check.php');
 // include '../access.php';
 // access('ADMIN');
@@ -51,14 +51,14 @@ require('../search-box.php');
 								<a href="list.php"><i class="fa-regular fa-rectangle-list list-box" aria-hidden="true"></i></a>
 								<a href="list-box.php"><i class="fa-solid fa-table-cells list-box" aria-hidden="true"></i></a>
 							</div>
-							<input type="search" id="searchInput" name="search" class="form-control" placeholder="Start typing to filter..." oninput="filterTable()" />
+							<input type="search" id="searchInputBox" name="search" class="form-control" placeholder="Start typing to filter..." oninput="filterTableBox()" />
 						</div>
 					</div>
 
 					<!-- crop cards -->
 					<div id="crop-cards" class="row">
 						<?php
-						include '../message.php';
+						include('../functions/message.php');
 						?>
 
 						<?php

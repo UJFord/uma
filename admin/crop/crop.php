@@ -2,7 +2,7 @@
 <?php
 session_start();
 require('../sidebar/side.php');
-// include('../login/login-check.php');
+include('../../login/login-check.php');
 ?>
 
 <!DOCTYPE html>
@@ -26,12 +26,12 @@ require('../sidebar/side.php');
 	<!-- script fort access level -->
 	<script src="../../js/admin/access.js" defer></script>
 
-	<!-- Check access when the page loads
+	<!-- Check access when the page loads -->
 	<script>
 		// Assume you have the userRole variable defined somewhere in your PHP code
 		var userRole = "<?php echo isset($_SESSION['rank']) ? $_SESSION['rank'] : ''; ?>";
 		checkAccess(userRole);
-	</script> -->
+	</script>
 </head>
 
 <body class="overflow-x-hidden">
@@ -94,7 +94,7 @@ require('../sidebar/side.php');
 						<a href="list.php" class="link-offset-2"><i class="bi bi-chevron-left"></i>Go Back</a>
 
 						<?php
-						include('../message.php');
+						include('../functions/message.php');
 						?>
 
 						<!-- main form -->

@@ -14,7 +14,6 @@ if (isset($_POST['approve'])) {
         $recipient = $email;
 
         send_mail($recipient, $subject, $message);
-
         header("location: approval.php");
         exit; // Ensure that the script stops executing after the redirect header
     } else {
