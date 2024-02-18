@@ -30,3 +30,28 @@
 #form-panel {
 	background: var(--lightShades);
 }
+
+/* CSS FOR IMAGES */
+.image-preview {
+	display: inline-block;
+	position: relative;
+	margin-right: .05rem!important;
+	height: 200px;
+}
+
+.image-preview img {
+	padding: 0.25rem;
+	background-color: var(--bs-body-bg);
+	border: var(--bs-border-width) solid var(--bs-border-color);
+	border-radius: var(--bs-border-radius);
+	height: 200px;
+}
+
+.delete-button {
+	position: absolute;
+	top: 0;
+	right: 0;
+	color: red;
+	border: none;
+	cursor: pointer;
+}

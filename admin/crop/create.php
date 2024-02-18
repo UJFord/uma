@@ -70,7 +70,7 @@
 						<!-- image -->
 						<div class="col-4">
 							<label for="image-input">Images <span class="text-danger fw-bold">*</span></label>
-							<input type="file" name="crop_image[]" class="form-control" id="image-input" multiple accept="image/*" required>
+							<input type="file" name="crop_image[]" class="form-control" id="imageInput" multiple accept="image/*" required>
 						</div>
 					</div>
 
@@ -113,7 +113,7 @@
 
 						<div class="col">
 							<!-- images chosen not yet uploaded i think i dont know -->
-							<div id="image-previews" class="overflow-x-scroll h-100 border d-flex flex-row">
+							<div id="previewContainer" class="overflow-x-scroll h-100 border d-flex flex-row">
 								<!-- mao dapat ni ang mag loop everytime naay kani nga crop sa image -->
 								<img src="https://images.unsplash.com/photo-1682695797221-8164ff1fafc9?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="m-2 img-thumbnail" style="height: 200px;">
 								<img src="https://plus.unsplash.com/premium_photo-1664382466520-afe23272be60?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="m-2 img-thumbnail" style="height: 200px;">
@@ -376,28 +376,70 @@
 
 	<!-- JavaScript to handle file input change event and update image previews -->
 	<script>
+		// JavaScript to handle file input change event and update image previews 
 		document.addEventListener("DOMContentLoaded", function() {
-			var imageInput = document.getElementById("image-input");
-			var imagePreviews = document.getElementById("image-previews");
+			var imageInput = document.getElementById("imageInput");
+			var previewContainer = document.getElementById("previewContainer");
+			var selectedFiles = [];
 
 			imageInput.addEventListener("change", function() {
-				// Clear existing image previews
-				imagePreviews.innerHTML = "";
+				previewContainer.innerHTML = "";
+				selectedFiles = [];
 
-				// Display selected images
 				for (var i = 0; i < imageInput.files.length; i++) {
-					var img = document.createElement("img");
-					img.src = URL.createObjectURL(imageInput.files[i]);
-					img.className = "m-2 img-thumbnail";
-					img.style.height = "200px";
-					imagePreviews.appendChild(img);
+					var file = imageInput.files[i];
+					selectedFiles.push(file);
+
+					var reader = new FileReader();
+					reader.onload = (function(index) {
+						return function(e) {
+							var imagePreview = document.createElement('div');
+							imagePreview.className = 'image-preview';
+							var image = document.createElement('img');
+							image.src = e.target.result;
+							var deleteButton = document.createElement('button');
+							deleteButton.className = 'delete-button';
+							deleteButton.textContent = 'X';
+							deleteButton.addEventListener('click', function() {
+								previewContainer.removeChild(imagePreview);
+								selectedFiles.splice(index, 1);
+							});
+							imagePreview.appendChild(image);
+							imagePreview.appendChild(deleteButton);
+							previewContainer.appendChild(imagePreview);
+						};
+					})(i);
+					reader.readAsDataURL(file);
 				}
+			});
+
+			document.getElementById("form-panel").addEventListener("submit", function() {
+				var formData = new FormData(this);
+				selectedFiles.forEach(function(file) {
+					formData.append('crop_image[]', file);
+				});
+				// Add other form data here if needed
+				// Example: formData.append('some_other_field', 'some_value');
+
+				// Now you can submit formData to your PHP script using fetch or XMLHttpRequest
+				// Example using fetch:
+				fetch(window.location.href, { // Use window.location.href to get the current URL
+					method: 'POST',
+					body: formData
+				}).then(function(response) {
+					// Handle response
+					console.log(response);
+				}).catch(function(error) {
+					// Handle error
+					console.error(error);
+				});
+
+				// Prevent the form from actually submitting
+				return false;
 			});
 		});
 
-
 		// SUMMERNOT HANDLING //
-
 		// text area handling
 		$('.txtarea').summernote({
 			codeviewFilter: false,
