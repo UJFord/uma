@@ -19,6 +19,12 @@
     session_start();
     require('../sidebar/side.php');
     ?>
+    <!-- Check access when the page loads -->
+    <script>
+        // Assume you have the userRole variable defined somewhere in your PHP code
+        var userRole = "<?php echo isset($_SESSION['rank']) ? $_SESSION['rank'] : ''; ?>";
+        checkAccess(userRole);
+    </script>
 </head>
 
 <body class="overflow-hidden">
@@ -37,6 +43,10 @@
                         <h2 id="crops-title" class="fw-semibold">Approval Crops</h2>
                     </div>
 
+                    <?php
+					include('../functions/message.php');
+                    ?>
+
                     <h1 class="text-center  text-white bg-dark col-md-12">PENDING LIST</h1>
 
                     <table class="table table-bordered col-md-12">
@@ -52,14 +62,14 @@
                         </thead>
 
                         <?php
-                        $query = "SELECT crop.*, users.first_name, account_type.type_name, crop_location.*, crop_farming_practice.*, crop_other_info.*
+                        $query = "SELECT crop.*, users.first_name, users.email, account_type.type_name, crop_location.*, crop_farming_practice.*, crop_other_info.*
                         FROM crop
                         JOIN users ON crop.user_id = users.user_id
                         JOIN crop_location ON crop.crop_id = crop_location.crop_id
                         JOIN crop_farming_practice ON crop.crop_id = crop_farming_practice.crop_id
                         JOIN crop_other_info ON crop.crop_id = crop_other_info.crop_id
                         JOIN account_type ON users.account_type_id = account_type.account_type_id
-                        WHERE crop.status = 'pending' AND account_type.type_name != 'curator'
+                        WHERE crop.status = 'pending'
                         ORDER BY crop.crop_id ASC";
                         $result = pg_query($connection, $query);
 
@@ -79,6 +89,7 @@
                                                 <input type="hidden" name="other_info_id" value="<?php echo $row['other_info_id']; ?>" />
                                                 <input type="hidden" name="location_id" value="<?php echo $row['location_id']; ?>" />
                                                 <input type="hidden" name="farming_practice_id" value="<?php echo $row['farming_practice_id']; ?>" />
+                                                <input type="hidden" name="email" value="<?php echo $row['email']; ?>" />
                                                 <input type="submit" name="approve" value="approve"> &nbsp &nbsp <br>
                                                 <input type="submit" name="delete" value="delete">
                                             </form>
@@ -146,45 +157,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
     <!-- font awesome -->
     <script src="https://kit.fontawesome.com/57e83eb6e4.js" crossorigin="anonymous"></script>
-    <!-- script fort access level -->
-    <script>
-        // script for access levels in admin
-        // hide or show based on account type
-        document.addEventListener("DOMContentLoaded", function() {
-            // Use PHP to set the user role dynamically
-            var userRole = "<?php echo $_SESSION['rank']; ?>";
-            var addEntryCard = document.getElementById("add-entry-card");
-
-            // Elements to show/hide based on user role
-            var curatorElements = document.querySelectorAll(".curator-only");
-            var adminElements = document.querySelectorAll(".admin-only");
-            var viewerElements = document.querySelectorAll(".viewer-only");
-
-            // Function to set visibility based on user role
-            function setVisibility(elements, isVisible) {
-                elements.forEach(function(element) {
-                    element.style.display = isVisible ? "block" : "none";
-                });
-            }
-
-            // Check user role and set visibility
-            if (userRole === "curator") {
-                setVisibility(curatorElements, true);
-                setVisibility(adminElements, true);
-                setVisibility(viewerElements, false);
-            } else if (userRole === "admin") {
-                setVisibility(curatorElements, false);
-                setVisibility(adminElements, true);
-                setVisibility(viewerElements, false);
-            } else if (userRole === "user") {
-                setVisibility(curatorElements, false);
-                setVisibility(adminElements, false);
-                setVisibility(viewerElements, true);
-            } else {
-                console.error("Unexpected user role:", userRole);
-            }
-        });
-    </script>
 </body>
 
 </html>

@@ -6,11 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
-    
-	<!-- add entry custom css -->
-	<link rel="stylesheet" href="../../css/admin/entry.css" />
-	<!-- sidebar custom css -->
-	<link rel="stylesheet" href="../../css/admin/side.css"> 
+
+    <!-- add entry custom css -->
+    <link rel="stylesheet" href="../../css/admin/entry.css" />
+    <!-- sidebar custom css -->
+    <link rel="stylesheet" href="../../css/admin/side.css">
 
     <!-- favicon -->
     <link rel="shortcut icon" href="img/logo/Uma logo.svg" type="image/x-icon" />
@@ -21,10 +21,13 @@
     session_start();
     require('../sidebar/side.php');
     // include('../login/login-check.php');
-    include '../access.php';
-    access('CURATOR');
     ?>
-
+    <!-- Check access when the page loads -->
+    <script>
+        // Assume you have the userRole variable defined somewhere in your PHP code
+        var userRole = "<?php echo isset($_SESSION['rank']) ? $_SESSION['rank'] : ''; ?>";
+        checkAccess(userRole);
+    </script>
     <!-- script fort access level -->
     <script src="../../js/admin/access.js" defer></script>
 </head>
@@ -44,7 +47,7 @@
                 <a href="list.php" class="link-offset-2"><i class="bi bi-chevron-left"></i>Go Back</a>
 
                 <?php
-                include('../message.php');
+                include('../functions/message.php');
                 ?>
 
                 <!-- main form -->

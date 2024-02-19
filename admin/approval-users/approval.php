@@ -19,6 +19,12 @@
     session_start();
     require('../sidebar/side.php');
     ?>
+    <!-- Check access when the page loads -->
+    <script>
+        // Assume you have the userRole variable defined somewhere in your PHP code
+        var userRole = "<?php echo isset($_SESSION['rank']) ? $_SESSION['rank'] : ''; ?>";
+        checkAccess(userRole);
+    </script>
 </head>
 
 <body class="overflow-hidden">
@@ -36,9 +42,30 @@
                     <div class="col-6">
                         <h2 id="crops-title" class="fw-semibold">Approval Users</h2>
                     </div>
+                    <?php
+                    include('../functions/message.php');
+
+                    // Set the number of items to display per page
+                    $items_per_page = 5;
+
+                    // Get the current page number
+                    $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
+
+                    // Calculate the offset based on the current page and items per page
+                    $offset = ($current_page - 1) * $items_per_page;
+
+                    // Count the total number of rows for pagination
+                    $total_rows_query = "SELECT COUNT(*) FROM users WHERE email_verified is null";
+                    $total_rows_result = pg_query($connection, $total_rows_query);
+                    $total_rows = pg_fetch_row($total_rows_result)[0];
+
+                    // Calculate the total number of pages
+                    $total_pages = ceil($total_rows / $items_per_page);
+                    ?>
 
                     <h1 class="text-center  text-white bg-dark col-md-12">PENDING LIST</h1>
 
+                    <!-- Header -->
                     <table class="table table-bordered col-md-12">
                         <thead>
                             <tr>
@@ -55,13 +82,14 @@
                         $query = "SELECT users.user_id, users.first_name, users.last_name, users.affiliation, users.registration_date, account_type.type_name
                         FROM users
                         JOIN account_type ON users.account_type_id = account_type.account_type_id
-                        WHERE users.email_verified IS NULL AND account_type.type_name <> 'curator'
-                        ORDER BY users.user_id ASC";
+                        WHERE users.email_verified IS NULL
+                        ORDER BY users.user_id ASC LIMIT $items_per_page OFFSET $offset";
                         $result = pg_query($connection, $query);
 
                         if ($result) {
                             while ($row = pg_fetch_array($result)) {
                         ?>
+                                <!-- Body -->
                                 <tbody>
                                     <tr>
                                         <th scope="row"><?php echo $row['first_name']; ?></th>
@@ -84,10 +112,42 @@
                         }
                         ?>
                     </table>
+                    <!-- Add pagination links -->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <ul class="pagination justify-content-center">
+                                <?php for ($page = 1; $page <= $total_pages; $page++) : ?>
+                                    <li class="page-item <?php echo ($current_page == $page) ? 'active' : ''; ?>">
+                                        <a class="page-link" href="?page=<?php echo $page; ?>"><?php echo $page; ?></a>
+                                    </li>
+                                <?php endfor; ?>
+                            </ul>
+                        </div>
+                    </div>
                     <!-- ================================================================== -->
                     &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
                     <h1 class="text-center  text-white bg-success col-md-12
                     ">APPROVED LIST </h1>
+
+                    <?php
+                    // Set the number of items to display per page
+                    $items_per_page = 5;
+
+                    // Get the current page number
+                    $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
+
+                    // Calculate the offset based on the current page and items per page
+                    $offset = ($current_page - 1) * $items_per_page;
+
+                    // Count the total number of rows for pagination
+                    $total_rows_query = "SELECT COUNT(*) FROM users left join account_type on users.account_type_id = account_type.account_type_id WHERE users.email_verified is not null and account_type.type_name <> 'curator'";
+                    $total_rows_result = pg_query($connection, $total_rows_query);
+                    $total_rows = pg_fetch_row($total_rows_result)[0];
+
+                    // Calculate the total number of pages
+                    $total_pages = ceil($total_rows / $items_per_page);
+                    ?>
+
                     <table class="table table-bordered col-md-12">
                         <thead>
                             <tr>
@@ -134,6 +194,18 @@
                         ?>
 
                     </table>
+                    <!-- Add pagination links -->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <ul class="pagination justify-content-center">
+                                <?php for ($page = 1; $page <= $total_pages; $page++) : ?>
+                                    <li class="page-item <?php echo ($current_page == $page) ? 'active' : ''; ?>">
+                                        <a class="page-link" href="?page=<?php echo $page; ?>"><?php echo $page; ?></a>
+                                    </li>
+                                <?php endfor; ?>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -144,45 +216,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
     <!-- font awesome -->
     <script src="https://kit.fontawesome.com/57e83eb6e4.js" crossorigin="anonymous"></script>
-    <!-- script fort access level -->
-    <script>
-        // script for access levels in admin
-        // hide or show based on account type
-        document.addEventListener("DOMContentLoaded", function() {
-            // Use PHP to set the user role dynamically
-            var userRole = "<?php echo $_SESSION['rank']; ?>";
-            var addEntryCard = document.getElementById("add-entry-card");
-
-            // Elements to show/hide based on user role
-            var curatorElements = document.querySelectorAll(".curator-only");
-            var adminElements = document.querySelectorAll(".admin-only");
-            var viewerElements = document.querySelectorAll(".viewer-only");
-
-            // Function to set visibility based on user role
-            function setVisibility(elements, isVisible) {
-                elements.forEach(function(element) {
-                    element.style.display = isVisible ? "block" : "none";
-                });
-            }
-
-            // Check user role and set visibility
-            if (userRole === "curator") {
-                setVisibility(curatorElements, true);
-                setVisibility(adminElements, true);
-                setVisibility(viewerElements, false);
-            } else if (userRole === "admin") {
-                setVisibility(curatorElements, false);
-                setVisibility(adminElements, true);
-                setVisibility(viewerElements, false);
-            } else if (userRole === "user") {
-                setVisibility(curatorElements, false);
-                setVisibility(adminElements, false);
-                setVisibility(viewerElements, true);
-            } else {
-                console.error("Unexpected user role:", userRole);
-            }
-        });
-    </script>
 </body>
 
 </html>

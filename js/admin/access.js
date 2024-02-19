@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Function to set visibility based on user role
     function setVisibility(elements, isVisible) {
         elements.forEach(function (element) {
-            element.style.display = isVisible ? "block" : "none";
+            element.style.display = isVisible ? "" : "none";
         });
     }
 
@@ -29,6 +29,10 @@ document.addEventListener("DOMContentLoaded", function () {
         setVisibility(curatorElements, false);
         setVisibility(adminElements, false);
         setVisibility(viewerElements, true);
+    } else if (userRole === "not_a_user") {
+        setVisibility(curatorElements, false);
+        setVisibility(adminElements, false);
+        setVisibility(viewerElements, false);
     } else {
         console.error("Unexpected user role:", userRole);
     }

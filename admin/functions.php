@@ -142,6 +142,22 @@ function database_run($query, $vars = array())
     }
 }
 
+// Function to generate pagination links
+function generatePaginationLinks($total_pages, $current_page, $pageQueryParam)
+{
+    echo '<ul class="pagination justify-content-center">';
+    for ($page = 1; $page <= $total_pages; $page++) {
+        $activeClass = ($current_page == $page) ? 'active' : '';
+        echo '<li class="page-item ' . $activeClass . '">';
+        echo '<a class="page-link" href="?' . $pageQueryParam . '=' . $page . '">' . $page . '</a>';
+        echo '</li>';
+    }
+    echo '</ul>';
+}
+
+// Kani pababa wala ata ni silay use wala nako ni gi gamit kay dapat man gud ma access basking dili logged in
+// lahi na akong gi gamit gi js nalang nako. kay kung need ni sya gamitun kailangan ni sya ibutang sa side.php
+// kay maguba ang page kay duwa ang gina call na header unya kung ibutang sa side.php kay dili na ma access ku walay acc.
 // Function for comprehensive user check
 function check_user($redirect = true)
 {

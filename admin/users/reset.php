@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
     <!-- cutom css -->
     <link rel="stylesheet" href="../../css/admin/entry.css" />
+    <!-- sidebar custom css -->
+    <link rel="stylesheet" href="../../css/admin/side.css">
     <!-- favicon -->
     <link rel="shortcut icon" href="img/logo/Uma logo.svg" type="image/x-icon" />
     <title>Users</title>
@@ -17,10 +19,13 @@
     session_start();
     require('../sidebar/side.php');
     // include('../login/login-check.php');
-    include '../access.php';
-    access('CURATOR');
     ?>
-
+    <!-- Check access when the page loads -->
+    <script>
+        // Assume you have the userRole variable defined somewhere in your PHP code
+        var userRole = "<?php echo isset($_SESSION['rank']) ? $_SESSION['rank'] : ''; ?>";
+        checkAccess(userRole);
+    </script>
     <!-- script fort access level -->
     <script src="../../js/admin/access.js" defer></script>
 </head>
@@ -49,10 +54,10 @@
             ?>
             <form id="form-panel" name="Form" action="code.php" autocomplete="off" method="POST" enctype="multipart/form-data" class="h-100 py-3 px-5">
                 <!-- back button -->
-                <a href="list.php" class="link-offset-2"><i class="bi bi-chevron-left"></i>Go Back</a>
+                <a href="user.php?user_id=<?= $user_id; ?>" class="link-offset-2"><i class="bi bi-chevron-left"></i>Go Back</a>
 
                 <?php
-                include('../message.php');
+                include('../functions/message.php');
                 ?>
 
                 <!-- main form -->
@@ -87,7 +92,6 @@
         </section>
     </div>
     <!-- scipts -->
-    <!-- custom -->
     <!-- bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
     <!-- font awesome -->

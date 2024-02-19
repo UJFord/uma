@@ -20,7 +20,7 @@ require('../sidebar/side.php');
 	<!-- list custom css -->
 	<link rel="stylesheet" href="../../css/admin/list.css" />
 	<!-- sidebar custom css -->
-	<link rel="stylesheet" href="../../css/admin/side.css"> 
+	<link rel="stylesheet" href="../../css/admin/side.css">
 
 	<!-- favicon -->
 	<link rel="shortcut icon" href="img/logo/Uma logo.svg" type="image/x-icon" />
@@ -47,10 +47,10 @@ require('../sidebar/side.php');
 					<!-- search -->
 					<div id="filter-search" class="col-6 col-md-5 col-lg-3">
 						<div class="input-group">
-							<button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+							<!-- <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
 								<i class="bi bi-funnel"></i>
-							</button>
-							<form action="" method="GET">
+							</button> -->
+							<!-- <form action="" method="GET">
 								<ul class="dropdown-menu">
 									<div class="filter-header">
 										<h5>Filter
@@ -95,83 +95,99 @@ require('../sidebar/side.php');
 										<a class="dropdown-item" href="#">Separated link</a>
 									</li>
 								</ul>
-							</form>
-							<form action="search.php" method="POST">
-								<input type="search" name="search" class="form-control" placeholder="Start typing to filter..." />
-							</form>
+							</form> -->
+
+							<div>
+								<a href="list.php"><i class="fa-regular fa-rectangle-list list-box" aria-hidden="true"></i></a>
+								<a href="list-box.php"><i class="fa-solid fa-table-cells list-box" aria-hidden="true"></i></a>
+							</div>
+							<input type="search" id="searchInput" name="search" class="form-control" placeholder="Start typing to filter..." oninput="filterTable()" />
+						</div>
+					</div>
+					<?php
+					include('../functions/message.php');
+
+					// Set the number of items to display per page
+					$items_per_page = 7;
+
+					// Get the current page number
+					$current_page = isset($_GET['page']) ? $_GET['page'] : 1;
+
+					// Calculate the offset based on the current page and items per page
+					$offset = ($current_page - 1) * $items_per_page;
+
+					// Count the total number of rows for pagination
+					$total_rows_query = "SELECT COUNT(*) FROM crop WHERE status = 'approved'";
+					$total_rows_result = pg_query($connection, $total_rows_query);
+					$total_rows = pg_fetch_row($total_rows_result)[0];
+
+					// Calculate the total number of pages
+					$total_pages = ceil($total_rows / $items_per_page);
+					?>
+				</div>
+				<!-- Add pagination links -->
+				<?php generatePaginationLinks($total_pages, $current_page, 'page'); ?>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="card">
+							<div class="card-header admin-only curator-only">
+								<h4>Crop Details
+									<a href="create.php" class="btn btn-primary float-end">Add Crops</a>
+								</h4>
+							</div>
+							<div class="card-body">
+								<table id="dataTable" class="table table-bordered table-striped col-md-12">
+									<thead>
+										<tr>
+											<th scope="col">Crop Id</th>
+											<th scope="col">Crop Name</th>
+											<th scope="col">Input Date</th>
+											<th scope="col">Lowland or Upland</th>
+											<th scope="col">Category</th>
+											<th scope="col">Description</th>
+											<th scope="col">Status</th>
+										</tr>
+									</thead>
+
+									<?php
+									$query = "SELECT * FROM crop WHERE status = 'approved' ORDER BY crop_id ASC LIMIT $items_per_page OFFSET $offset";
+									$query_run = pg_query($connection, $query);
+
+									if ($query_run) {
+										while ($row = pg_fetch_array($query_run)) {
+									?>
+											<tbody>
+												<tr>
+													<?php
+													// Convert the string to a DateTime object
+													$date = new DateTime($row['input_date']);
+													// Format the date to display up to the minute
+													$formatted_date = $date->format('Y-m-d H:i');
+													?>
+													<th scope="row"><?= $row['crop_id']; ?></th>
+													<td><?= $row['crop_name']; ?></td>
+													<td><?= $formatted_date; ?></td>
+													<td><?= $row['upland_or_lowland']; ?></td>
+													<td><?= $row['category']; ?></td>
+													<td><?= $row['crop_description']; ?></td>
+													<form id="form-panel" action="code.php" method="POST" class="">
+														<td style="text-align: center;">
+															<input type="hidden" name="crop_id" value="<?= $row['crop_id']; ?>">
+															<a href="crop.php?crop_id=<?= $row['crop_id']; ?>" class="btn btn-info btn-sm">View</a>
+														</td>
+													</form>
+												</tr>
+											</tbody>
+									<?php
+										}
+									}
+									?>
+								</table>
+							</div>
 						</div>
 					</div>
 				</div>
 
-				<!-- crop cards -->
-				<div id="crop-cards" class="row">
-					<?php
-					include '../message.php';
-					// add entry button
-					require '../add/add.php';
-					?>
-
-					<?php
-					if (isset($_GET['category'])) {
-						$categoryChecked = array_map('strtolower', $_GET['category']);
-
-						// Convert category names to lowercase in the SQL query
-						$result = pg_query($connection, "SELECT DISTINCT * FROM crop WHERE LOWER(category) IN ('" . implode("','", $categoryChecked) . "') ORDER BY crop_id");
-					} else {
-						$result = pg_query($connection, "SELECT * FROM crop ORDER BY crop_id");
-					}
-
-					$count = pg_num_rows($result);
-
-					if ($count > 0) {
-						while ($row = pg_fetch_assoc($result)) {
-							$crop_id = $row['crop_id'];
-							$crop_image = $row['crop_image'];
-							$crop_name = $row['crop_name'];
-
-					?>
-							<!-- crop -->
-							<div class="card-container col-6 col-md-4 col-lg-2 p-2">
-								<?php
-								if ($crop_image !== null) {
-								?>
-									<a href="crop.php?crop_id=<?php echo $crop_id; ?>" class="crop-card py-3 px-1 d-flex justify-content-center align-items-end" style="
-									background-image: url('<?php echo $crop_image; ?>');
-								">
-										<div class="crop-card-text row w-100 d-flex flex-row justify-content-between align-items-center">
-											<!-- crop name -->
-											<h4 class="crop-name col-6"><?php echo ucfirst($crop_name); ?></h4>
-											<!-- arrow -->
-											<div class="col-2 arrow-container">
-												<i class="position-absolute bi bi-arrow-right-short fs-3"></i>
-											</div>
-										</div>
-									</a>
-								<?php
-								} else {
-								?>
-									<a href="crop.php?crop_id=<?php echo $crop_id; ?>" class="crop-card py-3 px-1 d-flex justify-content-center align-items-end" style="
-									background-image: url('https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image.png');
-								">
-										<div class="crop-card-text row w-100 d-flex flex-row justify-content-between align-items-center">
-											<!-- crop name -->
-											<h4 class="crop-name col-6"><?php echo ucfirst($crop_name); ?></h4>
-											<!-- arrow -->
-											<div class="col-2 arrow-container">
-												<i class="position-absolute bi bi-arrow-right-short fs-3"></i>
-											</div>
-										</div>
-									</a>
-								<?php
-								}
-								?>
-							</div>
-					<?php
-						}
-					}
-
-					?>
-				</div>
 			</div>
 		</section>
 
@@ -179,6 +195,8 @@ require('../sidebar/side.php');
 
 	<!-- scipts -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+	<script src="../../js/admin/access.js"></script>
+
 	<!-- font awesome -->
 	<script src="https://kit.fontawesome.com/57e83eb6e4.js" crossorigin="anonymous"></script>
 

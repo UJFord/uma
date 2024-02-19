@@ -1,8 +1,8 @@
-<!-- get current page -->
 <?php
+// get current page
 $current_page = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 require('../../html/navfoot/connection.php');
-require('../functions.php');
+require('../functions/functions.php');
 
 // sites to make crop highlight
 $atcrop = strpos($current_page, '/uma/admin/crop/list.php') === 0 ||
@@ -14,18 +14,25 @@ $atuser = strpos($current_page, '/uma/admin/users/list.php') === 0 ||
     strpos($current_page, '/uma/admin/users/user.php') === 0 ||
     strpos($current_page, '/uma/admin/users/create.php') === 0;
 
-// sites to make approval highlight
-$atapprove = strpos($current_page, '/uma/admin/approval/approval.php') === 0 ||
-    strpos($current_page, '/uma/admin/approval/approval.php') === 0;
+// sites to make approval crop highlight
+$atapprove_crop = strpos($current_page, '/uma/admin/approval-crop/approval.php') === 0 ||
+    strpos($current_page, '/uma/admin/approval-crop/view.php') === 0;
+
+// sites to make approval users highlight
+$atapprove_users = strpos($current_page, '/uma/admin/approval-users/approval.php') === 0 ||
+strpos($current_page, '/uma/admin/approval-users/view.php') === 0;
 ?>
 <!-- custom css -->
 
 <!-- script for access js -->
+<!-- script for access js -->
 <script>
-    <?php if (isset($_SESSION['LOGGED_IN']) && $_SESSION['LOGGED_IN']) : ?>
-        var userRole = "<?php echo $_SESSION['rank']; ?>";
-    <?php endif; ?>
+    var none_user = "not_a_user";
+    var userRole = <?php echo (isset($_SESSION['LOGGED_IN']) && $_SESSION['LOGGED_IN']) ? '"' . $_SESSION['rank'] . '"' : 'none_user'; ?>;
 </script>
+<script src="../../js/admin/access.js" defer></script>
+<script src="../../js/admin/access-control.js"></script>
+
 
 <!-- JQUERY link -->
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
@@ -36,16 +43,24 @@ $atapprove = strpos($current_page, '/uma/admin/approval/approval.php') === 0 ||
 
         function load_unseen_notification(view = '') {
             $.ajax({
-                url: "/incognito-capstone/admin/sidebar/fetch.php",
+                url: "../sidebar/fetch.php",
                 method: "POST",
                 data: {
                     view: view
                 },
                 dataType: "json",
                 success: function(data) {
-                    $('.count').html(data.notification);
-                    if (data.unseen_notification > 0) {
-                        $('.count').html(data.unseen_notification);
+                    // Access data1 and update HTML accordingly
+                    $('.count').html(data.data1.notification);
+                    if (data.data1.unseen_notification > 0) {
+                        $('.count').html(data.data1.unseen_notification);
+                    }
+
+                    // Access data2 and update HTML accordingly
+                    // Adjust the selectors and HTML update based on your needs
+                    $('.count2').html(data.data2.notification);
+                    if (data.data2.unseen_notification > 0) {
+                        $('.count2').html(data.data2.unseen_notification);
                     }
                 }
             });
@@ -55,10 +70,6 @@ $atapprove = strpos($current_page, '/uma/admin/approval/approval.php') === 0 ||
 
     });
 </script>
-
-<?php if (isset($_SESSION['LOGGED_IN']) && $_SESSION['LOGGED_IN']) : ?>
-    <script src="../../js/admin/access.js" defer></script>
-<?php endif; ?>
 
 <!-- main nav -->
 <nav id="main-nav" class="d-none d-md-block col col-3 col-lg-3 col-xl-2 fixed-top h-100 m-0 p-0 z-3">
@@ -83,7 +94,7 @@ $atapprove = strpos($current_page, '/uma/admin/approval/approval.php') === 0 ||
             </li>
             <!-- users sidebar nav -->
             <?php if (isset($_SESSION['LOGGED_IN']) && $_SESSION['LOGGED_IN']) : ?>
-                <li class="curator-only">
+                <li class="curator-only admin-only">
                     <a href="../users/list.php" <?php echo ($atuser)
                                                     ? 'class="nav-link text-dark fw-semibold rounded-start-pill active-nav"'
                                                     : 'class="nav-link text-white"'; ?>>
@@ -96,7 +107,7 @@ $atapprove = strpos($current_page, '/uma/admin/approval/approval.php') === 0 ||
             <!-- approval crops sidebar nav -->
             <?php if (isset($_SESSION['LOGGED_IN']) && $_SESSION['LOGGED_IN']) : ?>
                 <li class="admin-only curator-only">
-                    <a href="../approval-crop/approval.php" <?php echo ($atapprove)
+                    <a href="../approval-crop/approval.php" <?php echo ($atapprove_crop)
                                                                 ? 'class="nav-link text-dark fw-semibold rounded-start-pill active-nav"'
                                                                 : 'class="nav-link text-white"'; ?>>
                         <i class="fa-solid fa-check" style="width: 1.5rem;"></i>
@@ -108,13 +119,13 @@ $atapprove = strpos($current_page, '/uma/admin/approval/approval.php') === 0 ||
 
             <!-- approval users sidebar nav -->
             <?php if (isset($_SESSION['LOGGED_IN']) && $_SESSION['LOGGED_IN']) : ?>
-                <li class="admin-only curator-only">
-                    <a href="../approval-users/approval.php" <?php echo ($atapprove)
+                <li class="curator-only">
+                    <a href="../approval-users/approval.php" <?php echo ($atapprove_users)
                                                                     ? 'class="nav-link text-dark fw-semibold rounded-start-pill active-nav"'
                                                                     : 'class="nav-link text-white"'; ?>>
                         <i class="fa-solid fa-check" style="width: 1.5rem;"></i>
                         Approval Users
-                        <span class="count" style="color:red;"></span>
+                        <span class="count2" style="color:red;"></span>
                     </a>
                 </li>
             <?php endif; ?>
