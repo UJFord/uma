@@ -30,3 +30,51 @@
 #form-panel {
 	background: var(--lightShades);
 }
+
+.tab_box{
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-bottom: 2px solid rgba(229,229,229);
+	position: relative;
+}
+
+.tab_box .tab_btn{
+	font-size: 18px;
+	font-weight: 600;
+	color: #919191;
+	background: none;
+	border: none;
+	padding: 18px;
+	cursor: pointer;
+}
+
+.tab_box .tab_btn.active{
+	color: #7360ff;
+}
+
+.general_info .gen_info{
+	display: none;
+	animation: moving .5s ease;
+}
+
+@keyframes moving{
+	from{transform: translateX(50px);opacity: 0;}
+	to{transform: translateX(0px);opacity: 1;}
+}
+
+.general_info .gen_info.active{
+	display: block;
+}
+
+.line{
+	position: absolute;
+	top: 62px;
+	left: 186px;
+	width: 90px;
+	height: 5px;
+	background-color: #7360ff;
+	border-radius: 10px;
+	transition: all .3s ease-in-out;
+}
