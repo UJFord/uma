@@ -2,10 +2,10 @@ function checkAccess(userRole) {
     if (userRole === 'viewer') {
         // Customize based on the viewer's access
         console.log('Viewer has access');
-    } else if (userRole === 'admin') {
+    } else if (userRole === 'Admin') {
         // Customize based on the admin's access
         console.log('Admin has access');
-    } else if (userRole === 'curator') {
+    } else if (userRole === 'Curator') {
         // Customize based on the curator's access
         console.log('Curator has access');
     } else {
